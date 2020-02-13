@@ -12,9 +12,14 @@ namespace WebDatTour.Controllers
     public class DonDatTourController
     {
         DonDatTourModel donDatTourModel = new DonDatTourModel();
-        public Boolean themDonDatTour(DonDatTour donDatTour)
+        public int themDonDatTour(DonDatTour donDatTour, int tien)
         {
-            return donDatTourModel.ThemDonDatTour(donDatTour);
+            return donDatTourModel.ThemDonDatTour(donDatTour, tien);
+        }
+        
+             public Boolean updateTrangThaiGiaoDich(long idvnpay, int id, int tt)
+        {
+            return donDatTourModel.updateTrangThaiGiaoDich(idvnpay, id, tt);
         }
     }
 }

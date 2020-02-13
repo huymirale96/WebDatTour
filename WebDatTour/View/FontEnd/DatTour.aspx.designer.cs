@@ -58,13 +58,22 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.WebControls.HiddenField tour;
         
         /// <summary>
-        /// tien control.
+        /// tien_ control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField tien;
+        protected global::System.Web.UI.WebControls.HiddenField tien_;
+        
+        /// <summary>
+        /// tien_tt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField tien_tt;
         
         /// <summary>
         /// txtTen control.
@@ -130,6 +139,15 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.WebControls.DropDownList phanTramDat;
         
         /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
         /// bank control.
         /// </summary>
         /// <remarks>
@@ -137,6 +155,15 @@ namespace WebDatTour.View.FontEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList bank;
+        
+        /// <summary>
+        /// RequiredFieldValidator21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator21;
         
         /// <summary>
         /// txtGhiChu control.

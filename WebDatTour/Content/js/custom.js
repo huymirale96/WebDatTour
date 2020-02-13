@@ -64,4 +64,13 @@ $(document).ready(function () {
     $("#dnn").click(function () {
         $('#myModal1').modal('show');
     });
+    $("#ContentPlaceHolder1_phanTramDat").change(function () {
+        //alert("change");
+        var tien = $("#ContentPlaceHolder1_tien").val();
+        var phanTram = $("#ContentPlaceHolder1_phanTramDat").val();
+        if (phanTram != "none")
+        {
+            $("#tienDC").text("Số TIền Sẽ Thanh Toán ONLINE: &nbsp"+tien * phanTram + "&nbspVND");
+        }
+    });
 });

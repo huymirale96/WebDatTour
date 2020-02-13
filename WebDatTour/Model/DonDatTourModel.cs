@@ -15,7 +15,7 @@ namespace WebDatTour.Model
     public class DonDatTourModel
     {
         Connector cn = new Connector();
-        public Boolean ThemDonDatTour(DonDatTour donDatTour)
+        public int ThemDonDatTour(DonDatTour donDatTour, int tien)
         {
 
             try{
@@ -42,20 +42,19 @@ namespace WebDatTour.Model
 
                 int k1 = cmd2.ExecuteNonQuery();
 
-
+                SqlCommand cmd3= new SqlCommand("themGiaoDich", cn.connect());
+                cmd3.CommandType = CommandType.StoredProcedure;
+                cmd3.Parameters.AddWithValue("@iMaDonTOur", maDonDatTour);
+                cmd3.Parameters.AddWithValue("@trangThai", 0);
+                cmd3.Parameters.AddWithValue("@thoigian", donDatTour.NgayDat);
+                cmd3.Parameters.AddWithValue("@tien", tien);
+                cmd3.Parameters.AddWithValue("@iMaGiaoDich", SqlDbType.Int).Direction = ParameterDirection.Output;
                 //   int k = cmd3.ExecuteNonQuery();
-
-
-                if (k1 > 0)
-                {
-                    //Response.Write("<script language=javascript>alert('OKK');</script>");
-                    return true;
-                }
-                else
-                {
-                    //Response.Write("<script language=javascript>alert('Rrror');</script>");
-                    return false;
-                }
+               int x3 =  cmd3.ExecuteNonQuery();
+                Debug.WriteLine("cmd3 " + x3);
+                int maGiaoDich = Convert.ToInt32(cmd3.Parameters["@iMaGiaoDich"].Value.ToString());
+                 Debug.WriteLine("Ma Giao Dich " + maGiaoDich);
+                return maGiaoDich;
 
 
             }
@@ -64,8 +63,41 @@ namespace WebDatTour.Model
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("messeage: loi " + ex.Message);
+                return 0 ;
+            }
+        }
+        public Boolean updateTrangThaiGiaoDich(long idvnpay, int id, int tt)
+        {
+            Debug.WriteLine("vnpay " + idvnpay + "  id" +  id + "  tt" +tt );
+            try
+            {
+                SqlCommand cmd = new SqlCommand("updateTrangThaiGiaoDich", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@trangthai", tt);
+                cmd.Parameters.AddWithValue("@idvnpay", idvnpay);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                cn.disconnect();
+                if (table.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
                 return false;
             }
         }
+        
+            
     }
 }

@@ -1,4 +1,10 @@
-﻿create database webDatTour;
+﻿9704198526191432198
+
+https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_BankCode=NCB&vnp_Command=pay&vnp_CreateDate=20200213155604&vnp_CurrCode=VND&vnp_IpAddr=%3a%3a1&vnp_Locale=vn&vnp_OrderInfo=Noi+dung+thanh+toan%3a20200213155555&vnp_OrderType=topup&vnp_ReturnUrl=http%3a%2f%2flocalhost%3a49490%2fView%2fBackEnd%2fvnpay_ipn.aspx&vnp_TmnCode=MJ9PCY3L&vnp_TxnRef=637172061641955212&vnp_Version=2.0.0&vnp_SecureHash=4a417c2ff6c35a38859595eb810f32108479d3ec61ff84c542666f663ea4857f
+
+
+
+create database webDatTour;
 use webDatTour;
 
 -- Tạo các bảng
@@ -439,3 +445,71 @@ JOIN
   JOIN
 (select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
   ON c.imatour = a.iMaTour
+
+
+
+  create table tblGiaoDich(
+    iMaThanhToan int identity(1,1) primary key not null,
+	iMaDonTour int,
+	tien int,
+	thoigian date,
+	idGiaoDich int,
+	trangThai int,
+	imaNhanVien int null
+  )
+
+  alter table tblGiaoDich add constraint FK_giaoDich_NhanVien foreign key (imaNhanVien) references tblNhanVien(imaNhanVien);
+
+  create proc themGiaoDich
+  @iMaDonTOur int,
+  @thoigian date,
+  @tien int,
+  @trangThai int,
+  @imagiaodich int out
+  as
+  insert into tblGiaoDich (iMaDonTour, thoigian, tien , trangThai)
+   OUTPUT INSERTED.iMaGiaoDich as id
+   values (@iMaDonTOur, @thoigian, @tien, @trangThai) 
+   set @iMaGiaoDich = SCOPE_IDENTITY()
+return @iMaGiaoDich;
+   
+
+
+
+  
+  create table tblGiaoDich
+  (
+    iMaGiaoDich int identity(1,1) primary key not null,
+	iMaDonTour int,
+	tien int,
+	thoigian date,
+	idGiaoDichVNPAY bigint,
+	trangThai int,
+	imaNhanVien int null
+  )
+
+  alter table tblGiaoDich add constraint FK_giaoDich_NhanVien foreign key (imaNhanVien) references tblNhanVien(imaNhanVien);
+
+  alter proc themGiaoDich
+  @iMaDonTOur int,
+  @thoigian date,
+  @tien int,
+  @trangThai int,
+  @iMaGiaoDich int out
+  as
+  insert into tblGiaoDich (iMaDonTour, thoigian, tien , trangThai)
+   OUTPUT INSERTED.iMaGiaoDich as id
+   values (@iMaDonTOur, @thoigian, @tien, @trangThai) 
+   set @iMaGiaoDich = SCOPE_IDENTITY()
+return @iMaGiaoDich;
+
+select * from tblGiaoDich
+   
+
+create proc updateTrangThaiGiaoDich
+@trangThai int,
+@id int,
+@idvnpay bigint
+as 
+update tblGiaoDich set trangThai = @trangThai, idGiaoDichVNPAY = @idvnpay
+where imagiaodich = @id

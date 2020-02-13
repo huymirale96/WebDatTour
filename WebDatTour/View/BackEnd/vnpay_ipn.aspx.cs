@@ -10,14 +10,15 @@ using System.Web.UI.WebControls;
 using System.Diagnostics;
 using WebDatTour.Model;
 using WebDatTour.Object;
+using WebDatTour.Controllers;
 
 namespace WebDatTour.View.BackEnd
 {
     public partial class vnpay_ipn : System.Web.UI.Page
     {
-      //  private static readonly ILog log =
-         //   LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        //  private static readonly ILog log =
+        //   LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        DonDatTourController donDatTourController = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
             string returnContent = string.Empty;
@@ -42,6 +43,7 @@ namespace WebDatTour.View.BackEnd
 
                 //vnp_TxnRef: Ma don hang merchant gui VNPAY tai command=pay    
                 long orderId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
+                int orderID_ = Convert.ToInt32(vnpay.GetResponseData("vnp_TxnRef"));
                 //vnp_TransactionNo: Ma GD tai he thong VNPAY
                 long vnpayTranId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
                 //vnp_ResponseCode:Response code from VNPAY: 00: Thanh cong, Khac 00: Xem tai lieu
@@ -58,6 +60,7 @@ namespace WebDatTour.View.BackEnd
                     order.OrderId = orderId;
                     order.vnp_TransactionNo = vnpayTranId;
                     order.Status = 0; //0: Cho thanh toan,1: da thanh toan,2: GD loi
+
                     //Kiem tra tinh trang Order
                     if (order != null)
                     {
@@ -69,10 +72,12 @@ namespace WebDatTour.View.BackEnd
                                 Debug.WriteLine("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
                                 //log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
                                 order.Status = 1;
+                                donDatTourController.updateTrangThaiGiaoDich(vnpayTranId, orderID_, 1);
                             }
                             else
                             {
                                 //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
+                                donDatTourController.updateTrangThaiGiaoDich(vnpayTranId, orderID_, 2);
                                 //  displayMsg.InnerText = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
                                 Debug.WriteLine("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId,
                                     vnpayTranId, vnp_ResponseCode);
