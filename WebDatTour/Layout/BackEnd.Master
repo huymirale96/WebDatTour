@@ -1,0 +1,300 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BackEnd.master.cs" Inherits="WebDatTour.Layout.BackEnd" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
+    <meta name="author" content="">
+    <title>Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script  src="../../bower_components/ckeditor/ckeditor.js"></script>
+    <!-- MetisMenu CSS -->
+    <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../bower_components/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+    <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function(b)
+            {
+      return b.preventDefault(), f.settings.doubleTapToGo && f.doubleTapToGo(a(this)) && "#" !== a(this).attr("href") && "" !== a(this).attr("href") ? (b.stopPropagation(), void (c.location = a(this).attr("href"))) : (a(this).parent("li").toggleClass("active").children("ul").collapse("toggle"), void (d && a(this).parent("li").siblings().removeClass("active").children("ul.in").collapse("hide")));
+
+});
+    </script>
+     <style>
+  /* Note: Try to remove the following lines to see the effect of CSS positioning */
+  .affix {
+    top: 20px;
+    z-index: 9999 !important;
+  }
+  </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Trang Admin</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <% Response.Write(Session["tenNV"]); %> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Nhân Viên</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="admin.aspx?chucnang=dangxuat"><i class="fa fa-sign-out fa-fw"></i>Đăng Xuất</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation" data-spy="affix" data-offset-top="205">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="../FontEnd/index.aspx"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Quản Lý Nhân Viên<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="DanhSachNhanVien.aspx">Danh Sách Nhân Viên</a>
+                                </li>
+                                <li>
+                                    <a href="ThemNhanVien.aspx">Thêm Nhân Viên</a>
+                                </li>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Quản Lý Khách Hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="DanhSachKhachHang.aspx">Danh Sách Khách Hàng</a>
+                                </li>
+                                <li>
+                                    <a href="#">Thêm Khách Hàng</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Danh Sách Tour<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="DanhSachTour.aspx">Danh Sách Tour</a>
+                                </li>
+                                <li>
+                                    <a href="ThemTour.aspx">Thêm Tour</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Danh Sách Đơn Đặt Tour<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="DanhSachDatTour">Danh Sách Đơn Đặt Tour</a>
+                                </li>
+                                <li>
+                                    <a href="#">Add User</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>Báo Cáo Thống Kê<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="DoanhThu.aspx">Báo Cáo Doanh Thu</a>
+                                </li>
+                                <li>
+                                    <a href="ThongKe.aspx">Thống Kê Tour</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nhóm Tour<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="danhsachnhomtour.aspx">Danh Sách Nhóm TOur</a>
+                                </li>
+                                <li>
+                                    <a href="#">Add Category</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i>  Chức Năng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">List Product</a>
+                                </li>
+                                <li>
+                                    <a href="#">Add Product</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>  Chức Năng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">List User</a>
+                                </li>
+                                <li>
+                                    <a href="#">Add User</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">            
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <!-- /.row -->
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+         
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+     <script src="../Plugin/ckfinder/ckfinder.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../../bower_components/dist/js/sb-admin-2.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+            $(document).ready(function () {
+              //  alert("đas");
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+
+                  $('#btnThemNT').click(function () {
+                //console.log("btn thme!");
+                     alert("ĐAsa " +  $("#stennhomtour").val());
+                /* $.ajax({
+                type: 'get',
+                     //url: 'DanhSachNhomTour.aspx/themNhomTour',
+                     url: 'test.aspx/up',
+                   // data: { x : $("#stennhomtour").val() },
+                    //  data: { tennt: "45456ádasd" },
+                   contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                     success: function (data) {
+                         alert("okkk them!" + data.d);
+                         alert(JSON.stringify(data));
+                },
+                     error: function ()
+                     {
+                                   alert("fail");
+                        }
+                      });*/
+                      $.ajax({
+                          type: 'post',
+                          url: 'Test.aspx/up',
+                         data:"{ 'x' : '"+ $("#stennhomtour").val() +"' }",                
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (result) {
+            alert("We returned: " + result.d);
+        }
+    });
+                    alert("2");
+
+                  /*  $.ajax({
+                    url : "View/BackEnd/DanhSachNhomTour.aspx/themNhomTour",
+                    type : "get",
+                    dataType:"text",
+                    data : { tennt : "33333"},
+                    success : function (result){
+                        // $('#result').html(result);
+                        alert("ok");
+                          },
+                          error: function () {
+                              alert("errror");
+                          }
+                });*/
+
+
+
+            });
+            });
+        </script>
+</body>
+
+</html>
+

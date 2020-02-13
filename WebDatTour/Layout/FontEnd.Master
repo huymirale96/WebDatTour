@@ -1,0 +1,271 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FontEnd.master.cs" Inherits="WebDatTour.Layout.FontEnd" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Hair salon templates for mens hair cut service provider.">
+    <meta name="keywords" content="hair salon website templates free download, html5 template, free responsive website templates, website layout,html5 website templates, template for website design, beauty HTML5 templates, cosmetics website templates free download">
+    <title>ĐẶT TOUR ONLINE</title>
+    <!-- Bootstrap -->
+    <link href="../../Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i%7cMontserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../Content/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Style -->
+    <link href="../../Content/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js "></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js "></script>
+        <
+<![endif]-->
+    <script>
+        $(document).on('scroll', function() {
+            if ($("#div_1").isInViewport()) {
+                alert("dasd");
+  }
+});
+    </script>
+</head>
+
+<body>
+    <div class="header" style=" height:74px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <a href="index.aspx"><img src="../../Content/images/logo2.png" alt=""></a>
+                </div>
+                <div class="col-lg-8 col-md-4 col-sm-12 col-xs-12">
+                    <div class="navigation">
+                        <div id="navigation">
+                            <ul>
+                                <li class="active"><a href="index.aspx" title="Home">Trang Chủ</a></li>
+                                <li class="active"><a href="../../View/BackEnd/admin.aspx" title="Home">ADMIN</a></li>
+                                
+                                <li class="has-sub"><a href="service-list.html" title="Service List">Chức Năng</a>
+                                    <ul>
+                                        <li><a href="service-list.html" title="Service List">Chức Năngt</a></li>
+                                        <li><a href="service-detail.html" title="Service Detail">Chức Năng</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-sub"><a href="blog-default.html" title="Blog ">Chức Năng</a>
+                                    <ul>
+                                        <li><a href="blog-default.html" title="Blog">Blog Default</a></li>
+                                        <li><a href="XemChiTietTour.aspx" title="Blog Single ">Xem Chi Tiet TOur</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li><a href="contact.html" title="Contact Us">liên Hệ</a> </li>
+                                <li><a href="#" title="Features" runat="server" id="tendn"></a>
+                                    <ul  runat="server" id="dangNhap">                       
+   
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Đăng Nhập</h4>
+        </div>
+        <div class="modal-body">
+          
+                    <h3>Login for Form 1</h3>
+                    <form action="index.aspx" method="get">
+                        <input type="hidden" name="chucNang" value="dangNhap" />
+                          <div class="form-group">
+                            <label>Tên Đăng Nhập</label>
+                           <input type="text" class="form-control" name="txtTenDN" />
+                        </div>
+                          <div class="form-group">
+                            <label>Mật Khẩu</label>
+                          <input type="password" class="form-control" name="txtMKDN" />
+                        </div>
+                        <div class="form-group">
+                           <input type="submit" value="Đăng Nhập"/>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                        </div>
+                    </form>
+               
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+                                         <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Đăng Ký</h4>
+        </div>
+        <div class="modal-body">
+          
+                    <form method="get" action="index.aspx">
+                        <input type="hidden" name="chucNang" value="dangKi" />
+                        <div class="row">
+                            <div class="col-md-5">
+                                  <div class="form-group">
+                            <label>Họ Và Tên</label>
+                             <input type="text" class="form-control" id="txtHTDK" name="txtHTDK" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tên Đăng Nhập</label>
+                             <input type="text" class="form-control" name="txtTenDK" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mật Khẩu</label>
+                            <input type="text" class="form-control" name="txtMKDK" />
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                             <input type="submit" class="form-control btn btn-success" name="Đăng Kí" value="Đăng Ký" />
+                        </div>       
+                            
+                            </div>
+
+                            <div class="col-md-5">
+                                  <div class="form-group">
+                            <label>Email</label>
+                             <input type="text" class="form-control" name="txtEmalDK" />
+                        </div>
+                        <div class="form-group">
+                            <label>Địa Chỉ</label>
+                            <input type="text" class="form-control" name="txtDCDK" />
+                        </div>
+                        <div class="form-group">
+                            <label>Số Điện Thoại</label>
+                            <input type="text" class="form-control" name="txtSDTDK" />
+                        </div>
+                         <div class="form-group">
+                            <label>Ngày Sinh</label>
+                            <input type="date" class="form-control" name="txtNS" />
+                        </div>
+                            </div>
+                        </div>
+                        
+
+                        
+                        
+                    </form>
+               
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+    <!--Begin Body -->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+    <!-- End Body -->
+  
+
+    <div class="footer">
+        <!-- footer-->
+        <div id="div_1"></div>
+        <div class="container">
+            <div class="footer-block">
+                <!-- footer block -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="footer-widget">
+                            <h2 class="widget-title">Địa Chỉ</h2>
+                            <ul class="listnone contact">
+                                
+                                <li><i class="fa fa-map-marker"></i> hà Nội - Việt Nam </li>
+                                <li><i class="fa fa-phone"></i> +0800888888</li>
+                                <li><i class="fa fa-fax"></i> 0800888888</li>
+                                <li><i class="fa fa-envelope-o"></i> info@salon.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="footer-widget footer-social">
+                            <!-- social block -->
+                            <h2 class="widget-title">Mạng Xã Hội</h2>
+                            <ul class="listnone">
+                                <li>
+                                    <a href="#"> <i class="fa fa-facebook"></i> Facebook </a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i> Google Plus</a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i> Linked In</a></li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-youtube"></i>Youtube</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.social block -->
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <div class="footer-widget widget-newsletter">
+                            <!-- newsletter block -->
+                            <h2 class="widget-title">NEWS</h2>
+                            <p>Nhập Email</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email Address">
+                                <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Theo Dõi</button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </div>
+                        <!-- newsletter block -->
+                    </div>
+                </div>
+                <div class="tiny-footer">
+                    <!-- tiny footer block -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="copyright-content">
+                                <p>© TOUR XYZ 2020 | all rights reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tiny footer block -->
+            </div>
+            <!-- /.footer block -->
+        </div>
+    </div>
+    <!-- /.footer-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../../Content/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../Content/js/bootstrap.min.js"></script>
+    <script src="../../Content/js/menumaker.js"></script>
+    <!-- sticky header -->
+    <script src="../../Content/js/jquery.sticky.js"></script>
+    <script src="../../Content/js/sticky-header.js"></script>
+    <script src="../../Content/js/custom.js"></script>
+</body>
+
+</html>

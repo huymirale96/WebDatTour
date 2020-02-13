@@ -1,0 +1,67 @@
+Coding For Body Tag in Default.aspx Page
+-=-------------------------------------
+
+<div>
+        <h1>Hariti Study Hub</h1>
+        <h4>How to Preview and Upload Multiple Images in Asp.Net with Jquery</h4>
+        <hr />
+    </div>
+    <form method="post" enctype="multipart/form-data" runat="server">                
+    Upload Images
+    <input type="file" multiple="multiple" name="File1" id="File1" accept="image/*" />
+    <br /><br />
+    <div id="showimage">
+    </div>
+    <hr />  
+    <asp:Button ID="Button1" runat="server" Text="Upload and Save" OnClick="Button1_Click" />
+</form>
+    
+
+    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+
+---------------------------
+
+Jquery Coding
+--------------
+
+ <script>
+        $(document).ready(function () {
+            $("#File1").change(function () {
+              
+                                              var previewimages = $("#showimage");
+                                              previewimages.html("");
+                                              $($(this)[0].files).each(function () {
+                                                                                     var file = $(this);
+                                                                                     var reader = new FileReader();
+                                                                                     reader.onload = function (e) {
+                                                                                                      var img = $("<img />");
+                                                                                                      img.attr("style", "height:150px;width: 150px;");
+                                                                                                      img.attr("src", e.target.result);
+                                                                                                      previewimages.append(img);
+                                                                                                                  }
+                                                                                       reader.readAsDataURL(file[0]);
+                                                                                    });
+            
+                                           });
+                                      });
+    </script>
+
+----------------------
+
+Upload and Save Button Click Coding
+
+----------------------------------
+
+  for (int i = 0; i < Request.Files.Count; i++)
+        {
+            HttpPostedFile file = Request.Files[i];
+            if (file.ContentLength > 0)
+            {
+                string fname = Path.GetFileName(file.FileName);
+                file.SaveAs(Server.MapPath(Path.Combine("~/SavedImages/", fname)));
+
+            }
+        }
+        Label1.Text = Request.Files.Count + " Images Has Been Saved Successfully";
+
+--------------------------
