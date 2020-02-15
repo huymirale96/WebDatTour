@@ -8,7 +8,7 @@ namespace WebDatTour.Object
     public class DonDatTour
     {
        
-        private string trangThai;
+        private int trangThai;
         
         //private string soDienThoai;
         private int tienDaThanhToan;
@@ -22,7 +22,7 @@ namespace WebDatTour.Object
         private int choTE;
         private int choNL;
 
-        public DonDatTour(string trangThai, int tienDaThanhToan, string ghiChu, DateTime ngayDat, DateTime ngayDuyet, int maDon, int maKH, int maTour, int maNVduyet)
+        public DonDatTour(int trangThai, int tienDaThanhToan, string ghiChu, DateTime ngayDat, DateTime ngayDuyet, int maDon, int maKH, int maTour, int maNVduyet)
         {
             this.TrangThai = trangThai;
             this.TienDaThanhToan = tienDaThanhToan;
@@ -38,7 +38,7 @@ namespace WebDatTour.Object
 
         public DonDatTour()
         {
-            this.TrangThai = "";
+            this.TrangThai = 0;
             this.TienDaThanhToan = 0;
             this.GhiChu = "";
             this.NgayDat = DateTime.Parse("05/05/2005");
@@ -51,7 +51,7 @@ namespace WebDatTour.Object
             this.ChoTE = 0;
         }
 
-        public string TrangThai { get => trangThai; set => trangThai = value; }
+        public int TrangThai { get => trangThai; set => trangThai = value; }
         public int TienDaThanhToan { get => tienDaThanhToan; set => tienDaThanhToan = value; }
         public string GhiChu { get => ghiChu; set => ghiChu = value; }
         public DateTime NgayDat { get => ngayDat; set => ngayDat = value; }

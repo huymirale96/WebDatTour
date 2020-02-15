@@ -185,7 +185,7 @@
                                                             <div class="comment-content">
                                                                 <p><%# Eval("sNoiDung") %></p>
                                                             </div>
-                                                            <div class="reply"><a href="#" class="btn-link">Trả Lời</a></div>
+                                                            <!--<div class="reply"><a href="#" class="btn-link">Trả Lời</a></div> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,6 +196,7 @@
                                         
                                     </div>
                                 </div>
+                                <% if(!HttpContext.Current.Session["maKH"].ToString().Equals("")) { %>
                                 <div class="leave-comments">
                                     <h2 class="reply-title">Bình Luận</h2>
                                     <form class="reply-form" method="post" runat="server">
@@ -217,6 +218,7 @@
                                         </div>
                                     </form>
                                 </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>

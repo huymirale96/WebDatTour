@@ -40,9 +40,7 @@
                                             <asp:ListItem value="0.5" Text="Đặt 50%" ></asp:ListItem>
                                             <asp:ListItem value="1" Text="Trả 100%" ></asp:ListItem>
                                         </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" Text="*" InitialValue="none" ControlToValidate="phanTramDat" ValidationGroup="ValidationButton" CssClass="text-danger">
-
-                            </asp:RequiredFieldValidator>
+                                         <asp:CompareValidator ID="CompareValidator12" runat="server" ControlToValidate="phanTramDat" ErrorMessage="Tiền Thanh Toán Không Được Trống." Operator="NotEqual" ValueToCompare="none"  ForeColor="Red" SetFocusOnError="true" />
 
                                         </div>
                                         </div>
@@ -72,9 +70,13 @@
                             <asp:ListItem Value="OCB" Text="Ngan hang Phuong Dong"></asp:ListItem>
                             <asp:ListItem Value="SCB" Text="Ngan hang SCB"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" Text="*" InitialValue="none" ControlToValidate="bank" ValidationGroup="ValidationButton" CssClass="text-danger">
+                            <asp:CompareValidator
+    ID="val14" runat="server" ControlToValidate="bank"
+    ErrorMessage="Ngân Hàng Thanh Toán Không Được Trống." Operator="NotEqual"
+    ValueToCompare="none"
+    ForeColor="Red" SetFocusOnError="true" />
 
-                            </asp:RequiredFieldValidator>
+                      
                                     </div>    
                                         </div>
                                         

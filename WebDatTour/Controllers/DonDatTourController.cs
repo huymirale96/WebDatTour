@@ -5,6 +5,7 @@ using System.Web;
 using WebDatTour.Model;
 using WebDatTour.Object;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace WebDatTour.Controllers
 {
@@ -20,6 +21,10 @@ namespace WebDatTour.Controllers
              public Boolean updateTrangThaiGiaoDich(long idvnpay, int id, int tt)
         {
             return donDatTourModel.updateTrangThaiGiaoDich(idvnpay, id, tt);
+        }
+      public DataTable donDatTour()
+        {
+           return donDatTourModel.donDatTour();
         }
     }
 }

@@ -109,11 +109,11 @@ namespace WebDatTour.View.FontEnd
         }
         protected void layDanhSachTour()
         {
-            rpt1.DataSource = TourController.layTour(1);
+            rpt1.DataSource = TourController.layTour(18);
             rpt1.DataBind();
-            rpt2.DataSource = TourController.layTour(2);
+            rpt2.DataSource = TourController.layTour(19);
             rpt2.DataBind();
-            rpt3.DataSource = TourController.layTour(3);
+            rpt3.DataSource = TourController.layTour(20);
             rpt3.DataBind();
 
         }

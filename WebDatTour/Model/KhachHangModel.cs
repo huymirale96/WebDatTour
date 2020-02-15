@@ -132,5 +132,23 @@ namespace WebDatTour.Model
                 throw ex;
             }
         }
+
+
+        public SqlDataReader xemKhachHangID(String id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from tblkhachhang where imakhachhang = " + id, cn.connect());
+                cmd.CommandType = CommandType.Text;
+                //cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataReader rd = cmd.ExecuteReader();
+                return rd;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }

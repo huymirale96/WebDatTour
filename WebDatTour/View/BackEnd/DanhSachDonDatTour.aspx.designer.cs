@@ -10,24 +10,15 @@
 namespace WebDatTour.View.BackEnd {
     
     
-    public partial class DanhSachDatTour {
+    public partial class DanhSachDonDatTour {
         
         /// <summary>
-        /// rptdondattour control.
+        /// rptDonDatTour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptdondattour;
-        
-        /// <summary>
-        /// url control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label url;
+        protected global::System.Web.UI.WebControls.Repeater rptDonDatTour;
     }
 }

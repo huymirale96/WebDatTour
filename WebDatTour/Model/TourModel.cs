@@ -69,6 +69,21 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
+        public SqlDataReader layDanhSachDonDatTour()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("layDanhSachDonDatTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+               // cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataReader rd = cmd.ExecuteReader();
+                return rd;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
         public SqlDataReader xemTour(String id)
         {
             try
@@ -79,11 +94,12 @@ namespace WebDatTour.Model
                 SqlDataReader rd = cmd.ExecuteReader();
                 return rd;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
         }
+        
         public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, int giaTE, int GiaTEgiam)
         {
             Debug.WriteLine("them tour: ");

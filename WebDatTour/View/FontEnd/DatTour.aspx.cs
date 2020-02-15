@@ -19,6 +19,7 @@ namespace WebDatTour.View.FontEnd
         TourController tourController = new TourController();
         DonDatTourModel danDatTourModel = new DonDatTourModel();
         DonDatTourController datTourController = new DonDatTourController();
+        KhachHangModel khachHangModel = new KhachHangModel();
        // HiddenField tien_tt = (HiddenField)FindControl("tien_");
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,9 +51,23 @@ namespace WebDatTour.View.FontEnd
         {
             
             iTE.Value = te.ToString();
-            iNL.Value = nl.ToString();
+            iNL.Value = nl.ToString();  
             tour.Value = id;
-            SqlDataReader rd = tourController.xemTour(id);
+            String emailKH = "";
+            String sdtKH = "";
+            SqlDataReader rdkh = khachHangModel.xemKhachHangID(HttpContext.Current.Session["maKH"].ToString());
+            if (rdkh.HasRows)
+            {
+                while (rdkh.Read())
+                {
+                    emailKH = "Email: " + rdkh["sEmail"].ToString();
+                    sdtKH = "Số Điện Thoại: " + rdkh["sSDT"].ToString();
+                    txtEmail.InnerHtml = emailKH;
+                    txtSDT.InnerHtml = sdtKH;
+                    txtTen.InnerHtml = "Khách Hàng " + rdkh["sTenKhachHang"].ToString();
+                }
+            }
+                    SqlDataReader rd = tourController.xemTour(id);
             if (rd.HasRows)
             {
                 while (rd.Read())
@@ -84,10 +99,11 @@ namespace WebDatTour.View.FontEnd
                     {
                         giaTE_ = giaTEgiam;
                     }
-                    txtTen.InnerHtml = "Khách Hàng " + Session["tenKH"].ToString();
-                    txtNL.InnerHtml = "Số Chỗ Người Lớn Là: &nbsp" + nl + "&nbsp chỗ x &nbsp" + giaNL_ + "&nbspVNĐ";
-                    txtTE.InnerHtml = "Số Chỗ Trẻ Em Là: &nbsp" + te + "&nbsp chỗ x &nbsp" + giaTE_ + "&nbspVNĐ";
-                    txtTong.InnerHtml = "Tổng Tiền Là:&nbsp" + (te * giaTE_ + nl * giaNL_) + "&nbspVNĐ";
+                    // + Session["tenKH"].ToString();
+                   
+                    txtNL.InnerHtml = "Số Chỗ Người Lớn Là: &nbsp" + nl + "&nbsp chỗ x &nbsp" + giaNL_.ToString("#,##0") + "&nbspVNĐ";
+                    txtTE.InnerHtml = "Số Chỗ Trẻ Em Là: &nbsp" + te + "&nbsp chỗ x &nbsp" + giaTE_.ToString("#,##0") + "&nbspVNĐ";
+                    txtTong.InnerHtml = "Tổng Tiền Là:&nbsp" + (te * giaTE_ + nl * giaNL_).ToString("#,##0") + "&nbspVNĐ";
                     tien_tt.Value = (te * giaTE_ + nl * giaNL_).ToString();
                 }
             }
@@ -162,13 +178,14 @@ namespace WebDatTour.View.FontEnd
                 donDatTour.GhiChu = txtGhiChu.Text;
                 donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
                 donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
-                donDatTour.TrangThai = "Da thanh toan";
+                donDatTour.TrangThai = 0;
                 donDatTour.MaKH = 1;
                 float phantram = (float)Convert.ToDouble(phanTramDat.SelectedValue);
                 float tien_1 = Convert.ToInt32(tien_tt.Value) * phantram;
                 int tien_ = Convert.ToInt32(tien_1);
                 Debug.WriteLine(Convert.ToInt32(tien_tt.Value) + "  tien "  + tien_1);
-                if (datTourController.themDonDatTour(donDatTour, tien_) != 0)
+                int maThanhToan = datTourController.themDonDatTour(donDatTour, tien_);
+                if (maThanhToan != 0)
                 {
 
                     //Build URL for VNPAY
@@ -179,7 +196,7 @@ namespace WebDatTour.View.FontEnd
                     vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
                     vnpay.AddRequestData("vnp_Locale", "vn");
                     vnpay.AddRequestData("vnp_CurrCode", "VND");
-                    vnpay.AddRequestData("vnp_TxnRef", datTourController.themDonDatTour(donDatTour, tien_).ToString());
+                    vnpay.AddRequestData("vnp_TxnRef", maThanhToan.ToString());
                     vnpay.AddRequestData("vnp_OrderInfo", "ghi chu");
                     vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
                     vnpay.AddRequestData("vnp_Amount", (tien_ * 100).ToString());

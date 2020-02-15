@@ -97,7 +97,26 @@ namespace WebDatTour.Model
                 return false;
             }
         }
-        
-            
+
+        public DataTable donDatTour()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("donDatTour", cn.connect());
+                cmd.CommandType = CommandType.Text;
+                // cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                    dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+
     }
 }

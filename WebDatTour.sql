@@ -513,3 +513,66 @@ create proc updateTrangThaiGiaoDich
 as 
 update tblGiaoDich set trangThai = @trangThai, idGiaoDichVNPAY = @idvnpay
 where imagiaodich = @id
+
+create proc layDanhSachDonDatTour
+as
+select * from tbldondattour a, tbltour b, tblkhachhang c where
+ a.iMaDonDatTour in (select iMaDonTour from tblGiaoDich where trangThai = 1) 
+ and a.iMaTour = b.iMaTour and a.iMaKhachHang = c.iMaKhachHang
+
+select a1.id_, a1.tongTien, b1.thucThu  from
+(select b.iMaDonDatTour as id_,sum(a.soLuongVe * c.iGiaVeGiam) as tongTien  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b
+where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
+and a.iMaDonDatTour = b.iMaDonDatTour and b.iMaDonDatTour in (select iMaDonTour from tblGiaoDich where trangThai = 1) 
+group by b.iMaDonDatTour) a1 join
+(select a.iMaDonDatTour  as id_, SUM(tien) as thucThu from tbldondattour a, tblGiaoDich c where
+ a.iMaDonDatTour in (select iMaDonTour from tblGiaoDich where trangThai = 1) 
+ and a.iMaDonDatTour = c.iMaDonTour 
+ group by a.iMaDonDatTour) b1 on a1.id_ = b1.id_
+
+
+select b.iMaDonDatTour,sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as 'tong tien',sum(a.soLuongVe * c.iGiaVe) as 'tong tien2'  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b
+where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
+and a.iMaDonDatTour = b.iMaDonDatTour 
+group by b.iMaDonDatTour
+
+<asp:CompareValidator
+    ID="val14" runat="server" ControlToValidate="ddlout"
+    ErrorMessage=" Required." Operator="NotEqual"
+    ValueToCompare="Please Select One"
+    ForeColor="Red" SetFocusOnError="true" />
+alter proc donDatTour
+
+as
+select b1.doanhthu , b2.tien as thucthu, b2.imadontour, b1.iMaDonDatTour, 
+b1.sTenKhachHang, b1.iMaKhachHang , b1.itrangthai , b1.imanvduyet , b1.dNgayDatTour , b1.sghichu , b1.dThoiGianDuyet, b1.stieude, b1.itrangthai
+from
+(select b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang, b.itrangthai,b.imanvduyet,b.dNgayDatTour, b.sghichu,
+b.dThoiGianDuyet, e.stieude ,--sum(e.tien)/2 as thucThu, 
+sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b, tblkhachhang d , tbltour e --, tblGiaoDich e
+where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
+and a.iMaDonDatTour = b.iMaDonDatTour and d.iMaKhachHang = b.imakhachhang and e.iMaTour = b.iMaTour
+group by  b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang, b.itrangthai,b.imanvduyet,b.dNgayDatTour, b.sghichu,e.stieude,
+b.dThoiGianDuyet,b.itrangthai) b1 join
+(
+select Sum(tien) as tien, imadontour  from tblGiaoDich where trangThai = 1 group by imadontour
+) b2 on b1.imadondattour = b2.imadontour order by b1.dNgayDatTour DESC
+
+alter proc taoDonHang
+  @idtour int,
+  @ngay date,
+  @idkh int,
+  @tien int,
+  @tt int,
+  @ghichu nvarchar(300),
+  @imadondattour int out
+  as
+  insert into tblDonDatTour (iMaTour, dNgayDatTour, iMaKhachHang, iTienDaThanhToan, itrangthai, sghichu) 
+   OUTPUT INSERTED.iMaDonDatTour as id
+   values (@idtour, @ngay, @idkh, @tien, @tt,@ghichu)
+   set @iMaDonDatTour = SCOPE_IDENTITY()
+return @iMaDonDatTour;
+

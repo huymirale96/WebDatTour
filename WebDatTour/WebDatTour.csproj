@@ -254,6 +254,7 @@
     <Content Include="View\BackEnd\admin.aspx" />
     <Content Include="View\BackEnd\DangNhap.aspx" />
     <Content Include="View\BackEnd\DanhSachDatTour.aspx" />
+    <Content Include="View\BackEnd\DanhSachDonDatTour.aspx" />
     <Content Include="View\BackEnd\DanhSachKhachHang.aspx" />
     <Content Include="View\BackEnd\DanhSachNhanVien.aspx" />
     <Content Include="View\BackEnd\DanhSachNhomTour.aspx" />
@@ -390,6 +391,13 @@
     </Compile>
     <Compile Include="View\BackEnd\DanhSachDatTour.aspx.designer.cs">
       <DependentUpon>DanhSachDatTour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\DanhSachDonDatTour.aspx.cs">
+      <DependentUpon>DanhSachDonDatTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\DanhSachDonDatTour.aspx.designer.cs">
+      <DependentUpon>DanhSachDonDatTour.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\DanhSachKhachHang.aspx.cs">
       <DependentUpon>DanhSachKhachHang.aspx</DependentUpon>

@@ -47,7 +47,7 @@
                         <div class="panel-title pull-left">
                              Nhom 1
                         </div>
-                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=1">Xem Thêm</a></div>
+                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=18">Xem Thêm</a></div>
 
                     </div>
                     <div class="panel-body">
@@ -55,7 +55,7 @@
                     <div class="row" style="padding: 10px;">
                        <asp:Repeater ID="rpt1" runat="server">
                         <ItemTemplate>
-                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 10px;">
+                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">
@@ -98,13 +98,13 @@
                     <div class="panel-heading" style="height:50px;"><div class="panel-title pull-left">
                              Nhom 2
                         </div>
-                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=2">Xem Thêm</a></div></div>
+                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=19">Xem Thêm</a></div></div>
                     <div class="panel-body">
                     <div class="container-fluid">
                     <div class="row" style="padding: 10px;">
                        <asp:Repeater ID="rpt2" runat="server">
                         <ItemTemplate>
-                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 10px;">
+                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">
@@ -146,13 +146,13 @@
                     <div class="panel-heading" style="height:50px;"><div class="panel-title pull-left">
                              Nhom 3
                         </div>
-                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=3">Xem Thêm</a></div></div>
+                    <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=20">Xem Thêm</a></div></div>
                     <div class="panel-body">
                     <div class="container-fluid">
                     <div class="row" style="padding: 10px;">
                        <asp:Repeater ID="rpt3" runat="server">
                         <ItemTemplate>
-                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 10px;">
+                        <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">

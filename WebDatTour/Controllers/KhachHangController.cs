@@ -33,5 +33,11 @@ namespace WebDatTour.Controllers
         {
             return khachHangModel.layDSKH();
         }
+        public SqlDataReader xemKhachHangID(String id)
+        {
+            return khachHangModel.xemKhachHangID(id);
+        }
+
+
     }
 }

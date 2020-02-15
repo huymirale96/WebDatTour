@@ -23,6 +23,11 @@ namespace WebDatTour.Controllers
         {
             return tourModel.xemTour(id);
         }
+        
+             public SqlDataReader layDanhSachDonDatTour(String id)
+        {
+            return tourModel.layDanhSachDonDatTour();
+        }
         public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, int giaTE, int giaTEgiam)
         {
             return tourModel.themTour(tour, giaNL, giaNLgiam, giaTE, giaTEgiam);

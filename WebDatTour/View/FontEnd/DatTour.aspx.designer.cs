@@ -139,13 +139,13 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.WebControls.DropDownList phanTramDat;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// CompareValidator12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator12;
         
         /// <summary>
         /// bank control.
@@ -157,13 +157,13 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.WebControls.DropDownList bank;
         
         /// <summary>
-        /// RequiredFieldValidator21 control.
+        /// val14 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator21;
+        protected global::System.Web.UI.WebControls.CompareValidator val14;
         
         /// <summary>
         /// txtGhiChu control.

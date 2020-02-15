@@ -121,7 +121,7 @@ namespace WebDatTour.View.BackEnd
             //System.Diagnostics.Debug.WriteLine(txtMoTaTour.Text);
             Tour tour = new Tour();
             tour.MaNV = Convert.ToInt32(Session["maNV"]);
-            tour.MaNhomTour = Convert.ToInt32(ddlNhomTour.SelectedValue);   Debug.WriteLine(ddlNhomTour.SelectedItem.Value  + " value: " + ddlNhomTour.SelectedItem);
+            tour.MaNhomTour = Convert.ToInt32(ddlNhomTour.SelectedValue);   Debug.WriteLine(ddlNhomTour.SelectedItem.Value  + " ma nhom tour value: " + ddlNhomTour.SelectedItem);
             tour.MoTa = txtMoTaTour.Text;
             tour.TieuDe = txtTieuDe.Text;
             tour.NgayKhoiHanh = DateTime.Parse("02-02-2020");
