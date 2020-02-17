@@ -23,6 +23,7 @@
                                          <asp:HiddenField ID="tour" runat="server"></asp:HiddenField>
                                          <asp:HiddenField ID="tien_" runat="server" />
                                         <asp:HiddenField ID="tien_tt" runat="server" />
+                                         <asp:HiddenField ID="maTG" runat="server" />
                                     <p id="txtTen" runat="server">Khach Hang: NGO DANG HUY</p>
                                     <p  id="txtSDT" runat="server">SDT: 0902656555</p>
                                     <p  id="txtEmail" runat="server">Email: huydx@xxx.com</p>

@@ -27,10 +27,12 @@ namespace WebDatTour.View.FontEnd
             }
             if (Request.QueryString["id"] != null)
             {
-                // System.Diagnostics.Debug.WriteLine("id khong null");
+                System.Diagnostics.Debug.WriteLine("id khong null");
             
-                    xemTour(Request.QueryString["id"]);
-                    laybinhluan(Convert.ToInt32(Request.QueryString["id"]));
+                    
+                    layNgayDiTour(Convert.ToInt32(Request.QueryString["id"]));
+                xemTour(Request.QueryString["id"]);
+                laybinhluan(Convert.ToInt32(Request.QueryString["id"]));
                 }
                 else
                 {
@@ -45,6 +47,23 @@ namespace WebDatTour.View.FontEnd
             rptBinhLuan.DataSource = binhLuanController.layBinhLuan(id);
             rptBinhLuan.DataBind();
         }
+
+        public void layNgayDiTour(int id)
+        {
+            Debug.WriteLine("id tour cho ngay di: " + id);
+            DataTable table = tourController.layNgayDiTour(id);
+            string x = "Chọn Ngày Khởi Hành: &nbsp<select id='mangaydi' name='mangaydi' class='form-control'>";
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                x += "<option value='" + table.Rows[i]["imathoigian"].ToString() + "'>" + DateTime.Parse(table.Rows[i]["dthoigian"].ToString()).ToString("dd-MM-yyyy") + "</option>";
+            }
+
+              x += "</select>";
+            ngaydi.InnerHtml = x;
+            Debug.WriteLine(x);
+        }
+
+    
         public void xemTour(String id)
         {
             //System.Diagnostics.Debug.WriteLine("3");
@@ -90,7 +109,8 @@ namespace WebDatTour.View.FontEnd
                     int giaTEgiam = Convert.ToInt32(rd["igiategiam"]);
                     int giaNL = Convert.ToInt32(rd["igianl"]);
                     int giaNLgiam = Convert.ToInt32(rd["igianlgiam"]);
-                   // gia.InnerHtml = "<input type='hidden' id='giaNL' value ='" + gianl + "' /><input type='hidden' id ='giaTE' value = '" + giate + "' /> ";
+                    
+                    // gia.InnerHtml = "<input type='hidden' id='giaNL' value ='" + gianl + "' /><input type='hidden' id ='giaTE' value = '" + giate + "' /> ";
                     string htmlGia = "<input type='hidden' id='giaNL' value ='";
                     if (giaNLgiam == 0)
                     {
@@ -111,6 +131,7 @@ namespace WebDatTour.View.FontEnd
                     }
                     gia.InnerHtml = htmlGia + "' /> ";
                     hiddenIdTour.InnerHtml = "<input type='hidden' id='idTour' name='idTour' value='" + rd["iMaTour"].ToString() + "' />";
+                   
                     // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
                     /*
                     txtMaTour.Value = rd["imatour"].ToString();

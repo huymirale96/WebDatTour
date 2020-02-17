@@ -24,7 +24,7 @@ namespace WebDatTour.Layout
                 {
                     //dangNhap.InnerHtml = "<li><a  href='#' >Đăng Nhập</a></li>< li ><a  href='#'  > Đăng Ký </ a ></ li > ";
                     tendn.InnerText = HttpContext.Current.Session["tenKH"].ToString();
-                    dangNhap.InnerHtml = "<li><a href='taikhoan.aspx' >Tài Khoản</a><li><a href='doimatkhau.aspx' >Đổi Mật Khẩu</a></li><li><a href='index.aspx?chucNang=dangxuat' >Đăng Xuất</a></li>";
+                    dangNhap.InnerHtml = "<li><a href='taikhoan.aspx' >Tài Khoản</a></li><li><a href='thongtinkhachhang.aspx'>Thông Tin</a></li><li><a href='doimatkhau.aspx' >Đổi Mật Khẩu</a></li> <li> <a href = 'DanhSachCacTourDaDat.aspx' > Các Đơn Đặt Tour</a ></li ><li><a href='index.aspx?chucNang=dangxuat' >Đăng Xuất</a></li>";
                 }
             }
 

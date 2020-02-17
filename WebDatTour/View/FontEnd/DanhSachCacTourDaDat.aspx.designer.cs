@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebDatTour.View.BackEnd {
+namespace WebDatTour.View.FontEnd {
     
     
-    public partial class DanhSachDatTour {
+    public partial class DanhSachCacTourDaDat {
         
         /// <summary>
         /// rptdondattour control.
@@ -38,14 +38,5 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblnoti;
-        
-        /// <summary>
-        /// pageid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField pageid;
     }
 }

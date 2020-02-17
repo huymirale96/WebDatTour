@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using WebDatTour.Controllers;
 using WebDatTour.Object;
 using System.Diagnostics;
+using System.Web.Services;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -100,8 +101,17 @@ namespace WebDatTour.View.FontEnd
 
             
         }
-
-       
+        [WebMethod]
+       public static string dangnhapkh(string ten, string mk)
+        {
+            KhachHangController khachHangController_ = new KhachHangController();
+            KhachHang khachHang = new KhachHang();
+            khachHang.TenDangNhap = ten;
+            khachHang.MatKhau = mk;
+            string x = khachHangController_.dangNhapKH(khachHang);
+            Debug.WriteLine("TEN Khach Hang: " + x);
+            return x;
+        }
         protected void layTour(int id)
         {
             //rptTour.DataSource = TourController.layTour(1);

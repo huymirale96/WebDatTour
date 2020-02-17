@@ -6,6 +6,7 @@ using WebDatTour.Model;
 using WebDatTour.Object;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace WebDatTour.Controllers
 {
@@ -25,6 +26,29 @@ namespace WebDatTour.Controllers
       public DataTable donDatTour()
         {
            return donDatTourModel.donDatTour();
+        }
+        
+              public DataTable donHanh_khachHang(string id)
+        {
+            return donDatTourModel.donHanh_khachHang(id);
+        }
+        
+              public Boolean khachHangHuyTour_(string id)
+        {
+            return donDatTourModel.khachHangHuyTour(id);
+        }
+        public Boolean khhuy(string id)
+        {
+            return donDatTourModel.khachHangHuyTour(id);
+        }
+        
+            public int themGiaoDich(int id, int tien)
+        {
+            return donDatTourModel.themGiaoDich(id, tien);
+        }
+        public Boolean capNhatTrangThaiDatTour(string id, int tt)
+        {
+            return donDatTourModel.capNhatTrangThaiTour(id, tt);
         }
     }
 }

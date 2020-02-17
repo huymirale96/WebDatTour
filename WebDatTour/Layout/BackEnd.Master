@@ -152,7 +152,7 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i>Báo Cáo Thống Kê<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="DoanhThu.aspx">Thống Kê Tour 1</a>
+                                    <a href="ThongKeSoCho.aspx">Thống Kê Tour - Số Chỗ</a>
                                 </li>
                                 <li>
                                     <a href="ThongKe.aspx">Thống Kê Tour 2</a>
@@ -246,9 +246,42 @@
                     responsive: true
                 });
 
-                  $('#btnThemNT').click(function () {
+                $('#btnThemThoiGian1d').click(function () {
+                    alert("them");
+                    $.ajax({
+                        type: 'post',
+                        url: 'SuaTour.aspx/themThoiGianKhoiHanh',
+                        data: "{ 'id' : '18', 'date' : '02-02-2019' }",
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+                        },
+                        success: function (result) {
+                            alert("We returned: " + result.d);
+                            var x = "";
+                            var stt = 0;
+                            $.each(data.d, function (index, item) {
+                                stt++
+                                x += "<tr><td>" + stt + "</td><td>" + item.dThoiGian + "</td><td><a href='SuaTour.aspx/?chucNang=cn1&tg=10&tour=" + item.iMaTour +
+                                    " ><label class='label label -";
+                                if (item.trangThai == "true") {
+                                    x += "success'>Hiện</label></a></td></tr>";
+                                }
+                                else {
+                                    x += "warning'>Ẩn</label></a></td></tr>";
+                                }
+                            });
+                            alert(x);
+                            $("#bodyThoiGian").html(x);
+                         
+                                            
+                                            1
+                                            02-02-201918"><label class="label label-success">Hiện</label></a></td>
+                    }
+                      });
                 //console.log("btn thme!");
-                     alert("ĐAsa " +  $("#stennhomtour").val());
+                    // alert("ĐAsa " +  $("#stennhomtour").val());themThoiGianKhoiHanh
                 /* $.ajax({
                 type: 'get',
                      //url: 'DanhSachNhomTour.aspx/themNhomTour',
@@ -266,7 +299,7 @@
                                    alert("fail");
                         }
                       });*/
-                      $.ajax({
+                    /*  $.ajax({
                           type: 'post',
                           url: 'Test.aspx/up',
                          data:"{ 'x' : '"+ $("#stennhomtour").val() +"' }",                
@@ -279,7 +312,7 @@
             alert("We returned: " + result.d);
         }
     });
-                    alert("2");
+                    alert("2");*/
 
                   /*  $.ajax({
                     url : "View/BackEnd/DanhSachNhomTour.aspx/themNhomTour",

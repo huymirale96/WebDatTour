@@ -44,6 +44,34 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+        public String dangNhapKH(Object.KhachHang khach)
+        {
+            SqlCommand cmd = new SqlCommand("sp_login_kh", cn.connect());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@user", khach.TenDangNhap);
+            cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(khach.MatKhau));
+            //cnn.Open();
+            SqlDataAdapter dap = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            dap.Fill(table);
+            cn.disconnect();
+           // Debug.WriteLine(khach.TenDangNhap + "ten -  so cot kh: " + table.Rows.Count);
+            if (table.Rows.Count > 0)
+            {
+                string iMaKH = table.Rows[0]["iMaKhachHang"].ToString();
+                string sTenKH = table.Rows[0]["sTenKhachHang"].ToString();
+                //System.Diagnostics.Debug.WriteLine("id: "+x);
+                HttpContext.Current.Session["maKH"] = iMaKH;
+                HttpContext.Current.Session["tenKH"] = sTenKH;
+                // Debug.WriteLine("ten: " + sTenKH + "    "+HttpContext.Current.Session["tenKH"]);
+
+                return sTenKH;
+            }
+            else
+            {
+                return "";
+            }
+        }
         public Boolean kiemTraDangNhap(Object.KhachHang khach)
         {
          //   Debug.WriteLine("ktra dang nahp "+khach.MaKH+khach.MatKhau);

@@ -186,6 +186,7 @@
     <Content Include="Content\js\jquery.sticky.js" />
     <Content Include="Content\js\menumaker.js" />
     <Content Include="Content\js\menumaker.min.js" />
+    <Content Include="Content\js\myBackend.js" />
     <Content Include="Content\js\slider-carousel.js" />
     <Content Include="Content\js\sticky-header.js" />
     <Content Include="Content\Site.css" />
@@ -264,7 +265,11 @@
     <Content Include="View\BackEnd\ThemNhanVien.aspx" />
     <Content Include="View\BackEnd\ThemTour.aspx" />
     <Content Include="View\BackEnd\DanhSachTour.aspx" />
+    <Content Include="View\BackEnd\ThongKeSoCho.aspx" />
+    <Content Include="View\BackEnd\ThongTinKhachHang.aspx" />
     <Content Include="View\BackEnd\vnpay_ipn.aspx" />
+    <Content Include="View\BackEnd\XemDonDatTour.aspx" />
+    <Content Include="View\FontEnd\DanhSachCacTourDaDat.aspx" />
     <Content Include="View\FontEnd\DatTour.aspx" />
     <Content Include="View\FontEnd\DoiMatKhau.aspx" />
     <Content Include="View\FontEnd\index.aspx" />
@@ -462,12 +467,40 @@
     <Compile Include="View\BackEnd\DanhSachTour.aspx.designer.cs">
       <DependentUpon>DanhSachTour.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\BackEnd\ThongKeSoCho.aspx.cs">
+      <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongKeSoCho.aspx.designer.cs">
+      <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongTinKhachHang.aspx.cs">
+      <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongTinKhachHang.aspx.designer.cs">
+      <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\BackEnd\vnpay_ipn.aspx.cs">
       <DependentUpon>vnpay_ipn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\BackEnd\vnpay_ipn.aspx.designer.cs">
       <DependentUpon>vnpay_ipn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\XemDonDatTour.aspx.cs">
+      <DependentUpon>XemDonDatTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\XemDonDatTour.aspx.designer.cs">
+      <DependentUpon>XemDonDatTour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FontEnd\DanhSachCacTourDaDat.aspx.cs">
+      <DependentUpon>DanhSachCacTourDaDat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\FontEnd\DanhSachCacTourDaDat.aspx.designer.cs">
+      <DependentUpon>DanhSachCacTourDaDat.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\FontEnd\DatTour.aspx.cs">
       <DependentUpon>DatTour.aspx</DependentUpon>

@@ -12,6 +12,7 @@ using WebDatTour.Controllers;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using WebDatTour.Model;
+using System.Web.Services;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -58,6 +59,15 @@ namespace WebDatTour.View.BackEnd
 
         protected void btnSuaTour_Click(object sender, EventArgs e)
         {
+            HttpPostedFile file = Request.Files["anh"];
+            System.Diagnostics.Debug.WriteLine("file" + file.FileName );
+            //check file was submitted
+            if (file != null && file.ContentLength > 0)
+            {
+                System.Diagnostics.Debug.WriteLine("anh uo:  " + Path.GetFileName(file.FileName));
+                //  string fname = Path.GetFileName(file.FileName);
+                //file.SaveAs(Server.MapPath(Path.Combine("~/App_Data/", fname)));
+            }
             System.Diagnostics.Debug.WriteLine("BTN SUA " + txtGIaNL.Text);
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
@@ -70,7 +80,7 @@ namespace WebDatTour.View.BackEnd
                 cmd.Parameters.AddWithValue("@thoigian", txtSoNgayDi.Text);
                 cmd.Parameters.AddWithValue("@ngaykhoihanh", txtNgayKhoiHanh1.Text);
 
-                cmd.Parameters.AddWithValue("@nhomtour", 1);
+                cmd.Parameters.AddWithValue("@nhomtour", 19);
                 //cmd.Parameters.AddWithValue("@manv", 1);
                 cmd.Parameters.AddWithValue("@socho", txtSoCho.Text);
                 cmd.Parameters.AddWithValue("@imatour", txtMaTour.Value);
@@ -113,11 +123,12 @@ namespace WebDatTour.View.BackEnd
             DataTable table = tourController.dsThoiGianKhoiHanh(id);
             rpt1.DataSource = table;
             rpt1.DataBind();
-            Debug.WriteLine(JsonConvert.SerializeObject(table));
+          //  Debug.WriteLine(JsonConvert.SerializeObject(table));
         }
         public void xemTour(String id)
         {
             System.Diagnostics.Debug.WriteLine("3");
+            matour.Value = id;
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
@@ -179,6 +190,39 @@ namespace WebDatTour.View.BackEnd
             {
                 return "Ẩn";
             }
+        }
+
+        [WebMethod]
+        public static String themThoiGianKhoiHanh(string id, string date)
+        {
+            TourController tourController1 = new TourController();
+            if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date)))
+            {
+                DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
+                return JsonConvert.SerializeObject(table);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected void themNgay_Click(object sender, EventArgs e)
+        {
+            if (!ngayDi.Text.Equals(""))
+            {
+                bool x = tourController.themThoiGianKhoiHanh(Convert.ToInt32(matour.Value), DateTime.Parse(ngayDi.Text));
+              
+            }
+            else
+            {
+                Response.Redirect("SuaTour.aspx?id=" + matour.Value);
+            }
+            
+        }
+        void cn()
+        {
+          //  a1.;
         }
     }
 }

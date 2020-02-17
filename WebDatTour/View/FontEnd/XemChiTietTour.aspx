@@ -224,7 +224,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div style="position:fixed; right:50px; margin-top:15px;">
+                   <!-- <div style="position:fixed; right:50px; margin-top:15px;"> -->
+                    <div>
                     <div class="widget widget-search">
                         <!-- widget search -->
                         <form>
@@ -247,6 +248,7 @@
                         <div runat="server" name="gia" id="gia"></div>
                         <h3 class="widget-title">Đặt Tour </h3>
                         <form class="form-group" method="get" action="DatTour.aspx">
+                            <div id="ngaydi" runat="server"></div>
                             <div id="hiddenIdTour" runat="server"></div>
                             <div class="form-inline"><span>Người Lớn:</span> &nbsp &nbsp<input class="form-controll" type="text" id="id1" name="inl" value = "1" style = "width: 40px; border-radius: 4px;">&nbsp &nbsp
  <button type="button" onClick="up();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button type="button" onclick="dow();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>

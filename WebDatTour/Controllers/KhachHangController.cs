@@ -5,6 +5,7 @@ using System.Web;
 using WebDatTour.Model;
 using System.Data.SqlClient;
 using System.Data;
+using WebDatTour.Object;
 
 namespace WebDatTour.Controllers
 {
@@ -36,6 +37,11 @@ namespace WebDatTour.Controllers
         public SqlDataReader xemKhachHangID(String id)
         {
             return khachHangModel.xemKhachHangID(id);
+        }
+        
+            public String dangNhapKH(KhachHang khachHang)
+        {
+            return khachHangModel.dangNhapKH(khachHang);
         }
 
 

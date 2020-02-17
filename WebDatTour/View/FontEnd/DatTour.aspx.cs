@@ -23,29 +23,37 @@ namespace WebDatTour.View.FontEnd
        // HiddenField tien_tt = (HiddenField)FindControl("tien_");
         protected void Page_Load(object sender, EventArgs e)
         {
-           // int tt =  tienThanhToan("29", 2, 2);
-           // Debug.WriteLine("Dat Tour "+tt);
-         /*   SqlDataReader rd2 = tourController.xemTour("29");
-           // SqlDataReader rd = tourController.xemTour(id);
-            if (rd2.HasRows)
+            // int tt =  tienThanhToan("29", 2, 2);
+            // Debug.WriteLine("Dat Tour "+tt);
+            /*   SqlDataReader rd2 = tourController.xemTour("29");
+              // SqlDataReader rd = tourController.xemTour(id);
+               if (rd2.HasRows)
+               {
+                   while (rd2.Read())
+                   {
+                       Debug.WriteLine("rd: " + Convert.ToInt32(rd2["igiategiam"]));
+                   }
+               }*/
+            // Debug.WriteLine("rd: " + rd2);
+            Session["maKH"] = "1";
+            if (!HttpContext.Current.Session["maKH"].ToString().Equals(""))
+
             {
-                while (rd2.Read())
+                if (Request.QueryString["ite"] != null && Request.QueryString["inl"] != null && Request.QueryString["idTour"] != null)
                 {
-                    Debug.WriteLine("rd: " + Convert.ToInt32(rd2["igiategiam"]));
+                    Debug.WriteLine("load1");
+                    hienThongTin(Request.QueryString["idTour"].ToString(), Convert.ToInt32(Request.QueryString["ite"]), Convert.ToInt32(Request.QueryString["inl"]));
+                    maTG.Value = Request.QueryString["mangaydi"].ToString();
                 }
-            }*/
-                   // Debug.WriteLine("rd: " + rd2);
-            
-            if (Request.QueryString["ite"] != null && Request.QueryString["inl"] != null && Request.QueryString["idTour"] != null)
-            {
-                Debug.WriteLine("load1");
-                hienThongTin(Request.QueryString["idTour"].ToString(), Convert.ToInt32(Request.QueryString["ite"]), Convert.ToInt32(Request.QueryString["inl"]));
+                else
+                {
+                    Response.Redirect("index.aspx");
+                }
             }
             else
             {
-                Response.Redirect("index.aspx");
+                Response.Redirect("XemChiTietTour.aspx");
             }
-            
         }
         private void hienThongTin(String id, int te, int nl)
         {
@@ -178,12 +186,13 @@ namespace WebDatTour.View.FontEnd
                 donDatTour.GhiChu = txtGhiChu.Text;
                 donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
                 donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
+                donDatTour.MaNgaydi = Convert.ToInt32(maTG.Value);
                 donDatTour.TrangThai = 0;
                 donDatTour.MaKH = 1;
                 float phantram = (float)Convert.ToDouble(phanTramDat.SelectedValue);
                 float tien_1 = Convert.ToInt32(tien_tt.Value) * phantram;
                 int tien_ = Convert.ToInt32(tien_1);
-                Debug.WriteLine(Convert.ToInt32(tien_tt.Value) + "  tien "  + tien_1);
+                Debug.WriteLine(Convert.ToInt32(tien_tt.Value) + "  tien "  + tien_1 + " ma thoi gian : " + maTG.Value);
                 int maThanhToan = datTourController.themDonDatTour(donDatTour, tien_);
                 if (maThanhToan != 0)
                 {

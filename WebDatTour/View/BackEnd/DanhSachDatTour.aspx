@@ -38,19 +38,19 @@
                                             <ItemTemplate>
                                                 <tr>
 										            <td class="text-center"><%# Container.ItemIndex+1 %></td>
-                                                     <td class="text-center"><a href="<%# Eval("iMaDonDatTour") %>"><%# Eval("iMaDonDatTour") %></a></td>
-										            <td class="text-center"><%# Eval("stieude") %></td>
+                                                     <td class="text-center"><a href="xemdondattour.aspx?id=<%# Eval("iMaDonDatTour") %>"><%# Eval("iMaDonDatTour") %></a></td>
+										            <td class="text-center"><a href="../FontEnd/XemChiTietTour.aspx?id=<%# Eval("iMaTour") %>"><%# Eval("stieude") %></a></td>
                                                     <td class="text-center"><%# Eval("dngaydattour", "{0:dd/MM/yyyy}") %></td>
                                                     <td class="text-center"><%# Eval("sTenKhachHang") %></td>
 										            <td class="text-center"><%# toCurruncy(Convert.ToInt32(Eval("doanhthu").ToString())) %>&nbspVND</td>
 										            <td class="text-center"><%# toCurruncy(Convert.ToInt32(Eval("thucthu"))) %>&nbspVND</td>
                                                 
 										            <td class="text-center">
-                                                        <%# Eval("itrangthai").ToString().Equals("0") ? "Đã Đặt" : "Đã Hủy" %>
+                                                        <%# trangThaiDon(Convert.ToInt32(Eval("itrangthai").ToString())) %>
 										            </td>
 											        <td class="left">
-												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server"  CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server"  OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+												        <asp:LinkButton ID="btnXacNhan" CssClass="btn btn-xs btn-success" Onclick="btnXacNhan_Click" ToolTip="Xác Nhận" runat="server" OnClientClick="return confirm('Bạn có chắc chắn Xác Nhận Đơn Đặt Tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnHuy" CssClass="btn btn-xs btn-danger" ToolTip="Hủy" runat="server" Onclick="btnHuy_Click" OnClientClick="return confirm('Bạn có chắc chắn hủy đơn đặt tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
 											        </td>
 									            </tr>
                                             </ItemTemplate>
@@ -63,6 +63,8 @@
                                 <div class="text-center">
                                    
                                      <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblnoti" runat="server" Text=""></asp:Label>
+                                    <asp:HiddenField ID="pageid" runat="server" value="1"/>
                                  </div>     
                             </div>
                         </div>

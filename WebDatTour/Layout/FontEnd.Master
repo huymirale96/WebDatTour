@@ -26,11 +26,7 @@
         <
 <![endif]-->
     <script>
-        $(document).on('scroll', function() {
-            if ($("#div_1").isInViewport()) {
-                alert("dasd");
-  }
-});
+      
     </script>
 </head>
 
@@ -62,7 +58,7 @@
                                 </li>
                                
                                 <li><a href="contact.html" title="Contact Us">liên Hệ</a> </li>
-                                <li><a href="#" title="Features" runat="server" id="tendn"></a>
+                                <li id="daDangNhap"><a href="#" title="Features" runat="server" id="tendn"></a>
                                     <ul  runat="server" id="dangNhap">                       
    
                                         
@@ -88,23 +84,24 @@
         <div class="modal-body">
           
                     <h3>Login for Form 1</h3>
-                    <form action="index.aspx" method="get">
+                    <!--<form action="index.aspx" method="get"> </form>  --> 
                         <input type="hidden" name="chucNang" value="dangNhap" />
                           <div class="form-group">
                             <label>Tên Đăng Nhập</label>
-                           <input type="text" class="form-control" name="txtTenDN" />
+                           <input type="text" class="form-control" name="txtTenDN" id="txtTenDN"/>
                         </div>
                           <div class="form-group">
                             <label>Mật Khẩu</label>
-                          <input type="password" class="form-control" name="txtMKDN" />
+                          <input type="password" class="form-control" name="txtMKDN"  id="txtMKDN"/>
                         </div>
                         <div class="form-group">
-                           <input type="submit" value="Đăng Nhập"/>
+                           <!--<input type="submit" value="Đăng Nhập"/>-->
+                            <button id="btndangnhap" >Đăng Nhập</button>
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                            <a href="#" class="ForgetPwd">--</a>
                         </div>
-                    </form>
+                   
                
         </div>
         <div class="modal-footer">

@@ -62,10 +62,13 @@
                     </div>
                 </div>
                 <div class="row">
+                      <input type="file" runat="server" name="anh" id="anh" />
+
                     <asp:Repeater ID="rptDSanh" runat="server">
                         <ItemTemplate>
-                            <div class="col-md-2" style="padding: 10px;">
+                            <div class="col-md-2" style="padding: 10px; width: 200px; height: 200px;">
                         <image src="../../Upload/<%# Eval("url") %>" class="img-responsive"></image>
+                                
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
@@ -85,29 +88,37 @@
                         <asp:button ID="btnSuaTour" runat="server" CssClass="btn btn-default btn-md" Text="Sửa" OnClick="btnSuaTour_Click"></asp:button>
                         <input type="reset" class="btn btn-default" value="RESET"/>
                     </div>
+                    <asp:HiddenField ID="matour" runat="server" />
                     <div class="col-md-offset-1 col-md-10">
+                         <div class="col-md-4">
+                      <asp:Textbox ID="ngayDi" runat="server" CssClass="form-control" TextMode="Date"></asp:Textbox>
+                             </div>
+                         <div class="col-md-4">
+                        <asp:Button ID="themNgay" runat="server" Text="Thêm Ngày Đi" CssClass="btn btn-success" onclick="themNgay_Click"/>
+                             </div>
+                         </form>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>STT</th><th>Thời Gian Khởi Hành</th><th>Trạng Thái</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="bodyThoiGian">
                                 <asp:Repeater ID="rpt1" runat="server">
                                     <ItemTemplate>
                                         <tr>
                                             
-                                            <td><%# Container.ItemIndex+1 %></td>
-                                            <td><%# Eval("dThoiGian","{0:dd-MM-yyyy}") %></td>
-                                            <td><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"><label class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></a></td>
+                                            <td class="text-center"><%# Container.ItemIndex+1 %></td>
+                                            <td class="text-center"><%# Eval("dThoiGian","{0:dd-MM-yyyy}") %></td>
+                                            <td class="text-center"><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"><label class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></a></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </form>
+               </div>
+           
         </div>
     </div>
 

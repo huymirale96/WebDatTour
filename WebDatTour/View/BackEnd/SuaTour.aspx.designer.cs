@@ -103,6 +103,15 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtGiaTEgiam;
         
         /// <summary>
+        /// anh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile anh;
+        
+        /// <summary>
         /// rptDSanh control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,33 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSuaTour;
+        
+        /// <summary>
+        /// matour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField matour;
+        
+        /// <summary>
+        /// ngayDi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ngayDi;
+        
+        /// <summary>
+        /// themNgay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button themNgay;
         
         /// <summary>
         /// rpt1 control.

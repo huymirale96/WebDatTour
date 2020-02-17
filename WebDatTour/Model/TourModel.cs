@@ -18,7 +18,7 @@ namespace WebDatTour.Model
         {
             System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
             //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-           // using (SqlConnection cnn = new SqlConnection(ck))
+            // using (SqlConnection cnn = new SqlConnection(ck))
             {
                 SqlCommand cmd = new SqlCommand("sp_dstour1", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -27,14 +27,14 @@ namespace WebDatTour.Model
                 DataTable table = new DataTable();
                 dap.Fill(table);
                 return table;
-               // rptTour.DataSource = table;
-               // rptTour.DataBind();
+                // rptTour.DataSource = table;
+                // rptTour.DataBind();
             }
         }
-        
-            public DataTable layTour(int id)
+
+        public DataTable layTour(int id)
         {
-         //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
+            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
             //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             // using (SqlConnection cnn = new SqlConnection(ck))
             {
@@ -50,8 +50,8 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
-        
-             public DataTable layTourTheoNhom(int id)
+
+        public DataTable layTourTheoNhom(int id)
         {
             //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
             //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
@@ -75,22 +75,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("layDanhSachDonDatTour", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-               // cmd.Parameters.AddWithValue("@idTour", id);
-                SqlDataReader rd = cmd.ExecuteReader();
-                return rd;
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
-        }
-        public SqlDataReader xemTour(String id)
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("sp_xemTourId", cn.connect());
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idTour", id);
+                // cmd.Parameters.AddWithValue("@idTour", id);
                 SqlDataReader rd = cmd.ExecuteReader();
                 return rd;
             }
@@ -99,7 +84,26 @@ namespace WebDatTour.Model
                 return null;
             }
         }
-        
+        public SqlDataReader xemTour(String id)
+        {
+            Debug.WriteLine("Xem tourr");
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_xemTourId", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataReader rd = cmd.ExecuteReader();
+                /// cn.disconnect();
+                return rd;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, int giaTE, int GiaTEgiam)
         {
             Debug.WriteLine("them tour: ");
@@ -119,7 +123,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@imatour", SqlDbType.Int).Direction = ParameterDirection.Output;
                 //cnn.Open();
                 cmd.ExecuteNonQuery();
-                String idMaTour = cmd.Parameters["@imatour"].Value.ToString(); Debug.WriteLine("id tour: "+ idMaTour);
+                String idMaTour = cmd.Parameters["@imatour"].Value.ToString(); Debug.WriteLine("id tour: " + idMaTour);
                 SqlCommand cmd2 = new SqlCommand("sp_themGiave", cn.connect());
                 cmd2.CommandType = CommandType.StoredProcedure;
                 cmd2.Parameters.AddWithValue("@matour", idMaTour);
@@ -139,18 +143,18 @@ namespace WebDatTour.Model
                         cmd3.Parameters.AddWithValue("@ngay", tour.DsNgayKhoiHanh[i]);
                         cmd3.ExecuteNonQuery();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        Debug.WriteLine("Error "+ex.Message);
+                        Debug.WriteLine("Error " + ex.Message);
                     }
                 }
-             //   int k = cmd3.ExecuteNonQuery();
+                //   int k = cmd3.ExecuteNonQuery();
 
 
                 if (k1 > 0)
                 {
                     //Response.Write("<script language=javascript>alert('OKK');</script>");
-                   return true;
+                    return true;
                 }
                 else
                 {
@@ -160,7 +164,7 @@ namespace WebDatTour.Model
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("messeage: loi " + ex.Message);
                 return false;
@@ -180,16 +184,16 @@ namespace WebDatTour.Model
         public Boolean upDateTrangThaiThoiGian(int id)
         {
             Debug.WriteLine("id: " + id);
-              SqlCommand cmd = new SqlCommand("sp_trangThaiThoiGianKH", cn.connect());
+            SqlCommand cmd = new SqlCommand("sp_trangThaiThoiGianKH", cn.connect());
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", id);
-           
+
             //cnn.Open();
             int i = cmd.ExecuteNonQuery();
             if (i > 0)
             {
-                
-                Debug.WriteLine("id: ok");
+
+
                 return true;
 
             }
@@ -199,5 +203,127 @@ namespace WebDatTour.Model
             }
 
         }
+
+        public DataTable layNgayDiTour(int id)
+        {
+            Debug.WriteLine("lay ngay di tour");
+            try
+            {
+                string sqlStr = "select * from tblThoiGianKhoiHanh where imatour = " + id + " order by dthoigian ASC ";
+
+                SqlCommand cmd2 = new SqlCommand(sqlStr, cn.connect());
+                SqlDataAdapter da = new SqlDataAdapter(cmd2);
+                //SqlDataReader rd2 = cmd2.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                da.Fill(dataTable);
+                cn.disconnect();
+                return dataTable;
+
+
+
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public Boolean themThoiGianKhoiHanh(int id, DateTime date)
+        {
+
+
+            Debug.WriteLine("id: " + id);
+            SqlCommand cmd = new SqlCommand("themThoiGianKhoiHanh", cn.connect());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@imatour", id);
+            cmd.Parameters.AddWithValue("@thoigian", date);
+
+            //cnn.Open();
+            int i = cmd.ExecuteNonQuery();
+            if (i > 0)
+            {
+
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
+        public DataTable thongKeTour_soCho()
+        {
+            // Debug.WriteLine("lay ngay di tour");
+            try
+            {
+                // string sqlStr = "select * from tblThoiGianKhoiHanh where imatour = " + id + " order by dthoigian ASC ";
+
+                SqlCommand cmd2 = new SqlCommand("sp_soCho_Tour", cn.connect());
+                SqlDataAdapter da = new SqlDataAdapter(cmd2);
+                //SqlDataReader rd2 = cmd2.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                da.Fill(dataTable);
+                cn.disconnect();
+                return dataTable;
+
+
+
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public DataTable timSoCHo_Tour(string tour)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_timsoCho_Tour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tour", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+        }
+
+        public DataTable xemDonDatTour(string tour)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("xemDonDatTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+        
+           
     }
+
 }

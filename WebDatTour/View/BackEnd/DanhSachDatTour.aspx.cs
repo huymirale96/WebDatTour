@@ -6,14 +6,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebDatTour.Model;
+using System.Diagnostics;
+using WebDatTour.Controllers;
 
 namespace WebDatTour.View.BackEnd
 {
     public partial class DanhSachDatTour : System.Web.UI.Page
     {
         DonDatTourModel donDatTourModel = new DonDatTourModel();
+        DonDatTourController donDatTourController = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             layDonDatTour();
             Paging();
         }
@@ -40,6 +44,7 @@ namespace WebDatTour.View.BackEnd
             if (Request.QueryString["page"] != null)
             {
                 currentPage = Int32.Parse(Request.QueryString["page"]);
+                pageid.Value = currentPage.ToString();
             }
             else
             {
@@ -75,6 +80,57 @@ namespace WebDatTour.View.BackEnd
         protected String toCurruncy(int x)
         {
             return x.ToString("#,##0");
+        }
+
+        protected void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            LinkButton linkButton = (LinkButton)sender;
+            string id = linkButton.CommandArgument.ToString();
+            //Debug.WriteLine("id " + id);
+            if(donDatTourController.capNhatTrangThaiDatTour(id, 1))
+            {
+                lblnoti.CssClass = "text-success";
+                lblnoti.Text = "Xác Nhận Đơn Đặt Tour Thành Công.";
+                Response.Redirect("danhsachdattour.aspx?page="+ pageid.Value);
+            }
+            else
+            {
+                lblnoti.CssClass = "text-danger";
+                lblnoti.Text = "Xác Nhận Đơn Đặt Tour Thất Bại.";
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+        //    Response.
+        }
+        public string trangThaiDon(int id)
+        {
+            switch(id)
+            {
+                case 0: return "<label class='label label-warning'>Chờ Xác Nhận</label>";
+                case 1: return "<label class='label label-success'>Đã Xác Nhận</label>";
+                case 2: return  "<label class='label label-danger'>KH Đã Hủy</label>";
+                case 3: return  "<label class='label label-danger'>NV Đã Hủy</label>";
+                default: return "";
+
+            }
+        }
+
+        protected void btnHuy_Click(object sender, EventArgs e)
+        {
+            LinkButton linkButton = (LinkButton)sender;
+            string id = linkButton.CommandArgument.ToString();
+            //Debug.WriteLine("id " + id);
+            if (donDatTourController.capNhatTrangThaiDatTour(id, 3))
+            {
+                lblnoti.CssClass = "text-success";
+                lblnoti.Text = "Hủy Đơn Đặt Tour Thành Công.";
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+            else
+            {
+                lblnoti.CssClass = "text-danger";
+                lblnoti.Text = "Hủy Đơn Đặt Tour Thất Bại.";
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
         }
     }
 }

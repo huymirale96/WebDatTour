@@ -53,5 +53,29 @@ namespace WebDatTour.Controllers
         {
             return tourModel.layTourTheoNhom(id);
         }
+         public DataTable layNgayDiTour(int id)
+        {
+            return tourModel.layNgayDiTour(id);
+        }
+        
+            public Boolean themThoiGianKhoiHanh(int id, DateTime date)
+        {
+            return tourModel.themThoiGianKhoiHanh(id, date);
+        }
+        
+             public DataTable thongKeTour_soCho()
+        {
+            return tourModel.thongKeTour_soCho();
+        }
+        
+                public DataTable timSoCHo_Tour(string tour)
+        {
+            return tourModel.timSoCHo_Tour(tour);
+        }
+        
+            public DataTable xemDonDatTour(string tour)
+        {
+            return tourModel.xemDonDatTour(tour);
+        }
     }
 }

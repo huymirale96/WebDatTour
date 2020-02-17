@@ -21,35 +21,42 @@ namespace WebDatTour.Object
         private int maNVduyet;
         private int choTE;
         private int choNL;
+        private int maNgaydi;
 
-        public DonDatTour(int trangThai, int tienDaThanhToan, string ghiChu, DateTime ngayDat, DateTime ngayDuyet, int maDon, int maKH, int maTour, int maNVduyet)
-        {
-            this.TrangThai = trangThai;
-            this.TienDaThanhToan = tienDaThanhToan;
-            this.GhiChu = ghiChu;
-            this.NgayDat = ngayDat;
-            this.NgayDuyet = ngayDuyet;
-            this.MaDon = maDon;
-            this.MaKH = maKH;
-            this.MaTour = maTour;
-            this.MaNVduyet = maNVduyet;
-        }
 
 
         public DonDatTour()
         {
-            this.TrangThai = 0;
-            this.TienDaThanhToan = 0;
-            this.GhiChu = "";
-            this.NgayDat = DateTime.Parse("05/05/2005");
-            this.NgayDuyet = DateTime.Parse("05/05/2005");
-            this.MaDon = 0;
-            this.MaKH = 0;
-            this.MaTour = 0;
-            this.MaNVduyet = 0;
-            this.ChoNL = 0;
-            this.ChoTE = 0;
+            this.trangThai = 0;
+            this.tienDaThanhToan = 0;
+            this.ghiChu = "";
+            this.ngayDat = DateTime.Parse("05/05/2005");
+            this.ngayDuyet = DateTime.Parse("05/05/2005");
+            this.maDon = 0;
+            this.maKH = 0;
+            this.maTour = 0;
+            this.maNVduyet = 0;
+            this.choTE = 0;
+            this.choNL = 0;
+            this.maNgaydi = 0;
         }
+
+        public DonDatTour(int trangThai, int tienDaThanhToan, string ghiChu, DateTime ngayDat, DateTime ngayDuyet, int maDon, int maKH, int maTour, int maNVduyet, int choTE, int choNL, int maNgaydi)
+        {
+            this.trangThai = trangThai;
+            this.tienDaThanhToan = tienDaThanhToan;
+            this.ghiChu = ghiChu;
+            this.ngayDat = ngayDat;
+            this.ngayDuyet = ngayDuyet;
+            this.maDon = maDon;
+            this.maKH = maKH;
+            this.maTour = maTour;
+            this.maNVduyet = maNVduyet;
+            this.choTE = choTE;
+            this.choNL = choNL;
+            this.maNgaydi = maNgaydi;
+        }
+
 
         public int TrangThai { get => trangThai; set => trangThai = value; }
         public int TienDaThanhToan { get => tienDaThanhToan; set => tienDaThanhToan = value; }
@@ -62,5 +69,6 @@ namespace WebDatTour.Object
         public int MaNVduyet { get => maNVduyet; set => maNVduyet = value; }
         public int ChoTE { get => choTE; set => choTE = value; }
         public int ChoNL { get => choNL; set => choNL = value; }
+        public int MaNgaydi { get => maNgaydi; set => maNgaydi = value; }
     }
 }
