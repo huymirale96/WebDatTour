@@ -46,7 +46,7 @@
 										            <td class="text-center"><%# toCurruncy(Convert.ToInt32(Eval("thucthu"))) %>&nbspVND</td>
                                                     
 										            <td class="text-center">
-                                                        <%# Eval("itrangthai").ToString().Equals("0") ? "Đã Đặt" : "Đã Hủy" %>
+                                                        <%# trangThai(Eval("itrangthai").ToString()) %>
 										            </td>
 											        <td class="text-center">
                                                         <button class="btn btn-xs btn-success" <%# (Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu"))) == 0 ? "style='display: none;'" : "" %> onclick ="thanhToan(<%# Eval("iMaDonDatTour") %>,<%# Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu")) %>)">Thanh Toán Nốt<br /></button>

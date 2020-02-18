@@ -265,8 +265,9 @@
     <Content Include="View\BackEnd\ThemNhanVien.aspx" />
     <Content Include="View\BackEnd\ThemTour.aspx" />
     <Content Include="View\BackEnd\DanhSachTour.aspx" />
+    <Content Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx" />
     <Content Include="View\BackEnd\ThongKeSoCho.aspx" />
-    <Content Include="View\BackEnd\ThongTinKhachHang.aspx" />
+    <Content Include="View\FontEnd\ThongTinKhachHang.aspx" />
     <Content Include="View\BackEnd\vnpay_ipn.aspx" />
     <Content Include="View\BackEnd\XemDonDatTour.aspx" />
     <Content Include="View\FontEnd\DanhSachCacTourDaDat.aspx" />
@@ -467,6 +468,13 @@
     <Compile Include="View\BackEnd\DanhSachTour.aspx.designer.cs">
       <DependentUpon>DanhSachTour.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx.cs">
+      <DependentUpon>ThongKeDoanhThuTheoNgay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx.designer.cs">
+      <DependentUpon>ThongKeDoanhThuTheoNgay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\BackEnd\ThongKeSoCho.aspx.cs">
       <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,11 +482,11 @@
     <Compile Include="View\BackEnd\ThongKeSoCho.aspx.designer.cs">
       <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\BackEnd\ThongTinKhachHang.aspx.cs">
+    <Compile Include="View\FontEnd\ThongTinKhachHang.aspx.cs">
       <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\BackEnd\ThongTinKhachHang.aspx.designer.cs">
+    <Compile Include="View\FontEnd\ThongTinKhachHang.aspx.designer.cs">
       <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\vnpay_ipn.aspx.cs">

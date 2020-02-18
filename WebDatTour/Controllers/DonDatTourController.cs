@@ -46,9 +46,19 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.themGiaoDich(id, tien);
         }
-        public Boolean capNhatTrangThaiDatTour(string id, int tt)
+        public Boolean capNhatTrangThaiDatTour(string id, int tt, string nv)
         {
-            return donDatTourModel.capNhatTrangThaiTour(id, tt);
+            return donDatTourModel.capNhatTrangThaiTour(id, tt,  nv);
         }
+        public DataTable thongKeDoanhThu(string batdau, string ketthuc)
+        {
+            return donDatTourModel.thongKeDoanhThu(batdau,ketthuc);
+        }
+        
+              public Boolean nhanVienthanhToan(string madon, string tien)
+        {
+            return donDatTourModel.nhanVienthanhToan(madon, tien);
+        }
+
     }
 }

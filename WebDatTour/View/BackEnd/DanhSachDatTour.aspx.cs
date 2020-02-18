@@ -17,7 +17,8 @@ namespace WebDatTour.View.BackEnd
         DonDatTourController donDatTourController = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+           // ItemMenuBtn.DataBind();
+
             layDonDatTour();
             Paging();
         }
@@ -87,7 +88,7 @@ namespace WebDatTour.View.BackEnd
             LinkButton linkButton = (LinkButton)sender;
             string id = linkButton.CommandArgument.ToString();
             //Debug.WriteLine("id " + id);
-            if(donDatTourController.capNhatTrangThaiDatTour(id, 1))
+            if(donDatTourController.capNhatTrangThaiDatTour(id, 1, Session["manv"].ToString()))
             {
                 lblnoti.CssClass = "text-success";
                 lblnoti.Text = "Xác Nhận Đơn Đặt Tour Thành Công.";
@@ -119,7 +120,7 @@ namespace WebDatTour.View.BackEnd
             LinkButton linkButton = (LinkButton)sender;
             string id = linkButton.CommandArgument.ToString();
             //Debug.WriteLine("id " + id);
-            if (donDatTourController.capNhatTrangThaiDatTour(id, 3))
+            if (donDatTourController.capNhatTrangThaiDatTour(id, 3,Session["manv"].ToString()))
             {
                 lblnoti.CssClass = "text-success";
                 lblnoti.Text = "Hủy Đơn Đặt Tour Thành Công.";
@@ -130,6 +131,23 @@ namespace WebDatTour.View.BackEnd
                 lblnoti.CssClass = "text-danger";
                 lblnoti.Text = "Hủy Đơn Đặt Tour Thất Bại.";
                 Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+        }
+
+        protected void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            string[] agru = new string[2];
+            LinkButton link = (LinkButton)sender;
+            agru = link.CommandArgument.ToString().Split(';');
+           // Debug.WriteLine("agrument : " + agru[0] +"  "+ agru[1]);
+           if(donDatTourController.nhanVienthanhToan(agru[0],agru[1]))
+            {
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+           else
+            {
+                lblnoti.CssClass = "text-danger";
+                lblnoti.Text = "Thanh Toán "+ agru[1] + " Thất Bại.";
             }
         }
     }

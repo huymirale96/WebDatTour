@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace WebDatTour.Model
 {
@@ -160,6 +161,26 @@ namespace WebDatTour.Model
                 throw ex;
             }
         }
+        
+             /* public DataTable xemKhachHangID(string id)
+        {
+            try
+            {
+                string sqlStr = "select * from tblkhachhang where imakhachhang = "+id;
+
+                SqlCommand cmd = new SqlCommand(sqlStr, cn.connect());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable ds = new DataTable();
+
+                da.Fill(ds);
+                cn.disconnect();
+                return ds;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }*/
 
 
         public SqlDataReader xemKhachHangID(String id)
@@ -178,5 +199,55 @@ namespace WebDatTour.Model
                 return null;
             }
         }
+
+        public DataTable xemKhachHangbyID(String id)
+        {
+          //  Debug.Write(id + "id1  khach hang : ");
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from tblkhachhang where imakhachhang = " + id, cn.connect());
+                cmd.CommandType = CommandType.Text;
+                //cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+               // Debug.Write(id + "id  khach hang : " + table.Rows.Count);
+                return table;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean capNhapKhachHang(Object.KhachHang khach)
+        {
+            Debug.WriteLine("kachh hant : " + JsonConvert.SerializeObject(khach));
+            using (SqlCommand cmd = new SqlCommand("capNhapKhachHang", cn.connect()))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", khach.MaKH);
+                cmd.Parameters.AddWithValue("@ten", khach.TenKhachHang);
+                cmd.Parameters.AddWithValue("@ngay", khach.NgaySinh);
+                cmd.Parameters.AddWithValue("@dicchi", khach.DiaChi);
+                cmd.Parameters.AddWithValue("@sdt", khach.SoDienThoai);
+                cmd.Parameters.AddWithValue("@mail", khach.Email);
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

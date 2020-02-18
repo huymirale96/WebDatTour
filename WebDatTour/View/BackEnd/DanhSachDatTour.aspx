@@ -48,10 +48,12 @@
 										            <td class="text-center">
                                                         <%# trangThaiDon(Convert.ToInt32(Eval("itrangthai").ToString())) %>
 										            </td>
-											        <td class="left">
+											        <td class="text-center">
 												        <asp:LinkButton ID="btnXacNhan" CssClass="btn btn-xs btn-success" Onclick="btnXacNhan_Click" ToolTip="Xác Nhận" runat="server" OnClientClick="return confirm('Bạn có chắc chắn Xác Nhận Đơn Đặt Tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
                                                         <asp:LinkButton ID="btnHuy" CssClass="btn btn-xs btn-danger" ToolTip="Hủy" runat="server" Onclick="btnHuy_Click" OnClientClick="return confirm('Bạn có chắc chắn hủy đơn đặt tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
-											        </td>
+											             <asp:LinkButton ID="btnThanhToan"  CssClass="btn btn-xs btn-info" Onclick="btnThanhToan_Click" ToolTip="Thanh Toán Tiền Còn Lại" runat="server" OnClientClick='<%# Eval("conLai", "return confirm(\"Bạn Có Muốn Thanh Toán Nốt {0} VND?\");") %>'   CommandArgument='<%# Eval("iMaDonDatTour")  + ";" + Eval("conLai")   %>'><i class="fa fa-credit-card" aria-hidden="true"></i></asp:LinkButton>
+                                                      
+                                                        </td>
 									            </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>

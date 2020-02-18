@@ -202,7 +202,7 @@ namespace WebDatTour.Model
             }
         }
         
-               public Boolean capNhatTrangThaiTour(string id, int trangThai)
+               public Boolean capNhatTrangThaiTour(string id, int trangThai, string nv)
         {
             //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
             try
@@ -211,6 +211,61 @@ namespace WebDatTour.Model
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@tt", trangThai);
+                cmd.Parameters.AddWithValue("@ngay", DateTime.Now);
+                cmd.Parameters.AddWithValue("@manv", nv);
+
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                cn.disconnect();
+                if (i > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+
+        public DataTable thongKeDoanhThu(string batdau, string ketthuc)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("thongKeDoanhThuTheoNgay", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@batdau", batdau);
+                cmd.Parameters.AddWithValue("@ketthuc", ketthuc);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        
+            public Boolean nhanVienthanhToan(string madon, string tien)
+        {
+            //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("nhanVienthanhToan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@madon", madon);
+                cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["manv"]);
+                cmd.Parameters.AddWithValue("@trangthai", 1);
+                cmd.Parameters.AddWithValue("@tien", tien);
+                cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
 
                 //cnn.Open();
                 int i = cmd.ExecuteNonQuery();

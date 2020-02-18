@@ -43,7 +43,16 @@ namespace WebDatTour.Controllers
         {
             return khachHangModel.dangNhapKH(khachHang);
         }
-
+        
+             public Boolean capNhapKhachHang(Object.KhachHang khachHang)
+        {
+            return khachHangModel.capNhapKhachHang(khachHang);
+        }
+        
+            public DataTable xemKhachHangbyID(string id)
+        {
+            return khachHangModel.xemKhachHangbyID(id);
+        }
 
     }
 }

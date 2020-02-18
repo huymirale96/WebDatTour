@@ -208,5 +208,19 @@ namespace WebDatTour.View.FontEnd
                 }
             
         }
+
+
+        public string trangThai(string id)
+        {
+            switch (id)
+            {
+                case "0": return "<label class='label label-warning'>Chờ Xác Nhận</label>";
+                case "1": return "<label class='label label-success'>Đã Xác Nhận</label>";
+                case "2": return "<label class='label label-danger'> Đã Hủy</label>";
+                case "3": return "<label class='label label-danger'> Đã Bị Hủy</label>";
+                default: return "";
+
+            }
+        }
     }
 }

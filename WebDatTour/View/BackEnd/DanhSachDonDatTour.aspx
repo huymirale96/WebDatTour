@@ -40,10 +40,14 @@
 										            <td class="text-center">
                                                         <%# Eval("iMaQuyen").ToString().Equals("2") ? "ADMIN" : "MEMBER" %>
 										            </td>
-											        <td class="left">
+											        <td class="text-center">
 												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server" OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
-											        </td>
+                                                    
+                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá_" runat="server" OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+											            
+                                                        <asp:LinkButton ID="btnThanhToan" CssClass="btn btn-xs btn-info" ToolTip="Xoá" runat="server" OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-credit-card" aria-hidden="true"></i></asp:LinkButton>
+                                                    </td>
+
 									            </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
