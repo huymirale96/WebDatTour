@@ -7,37 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebDatTour.View.BackEnd {
+namespace WebDatTour.View.FontEnd {
     
     
-    public partial class DanhSachKhachHang {
+    public partial class TimKiemTour {
         
         /// <summary>
-        /// txtTuKhoa control.
+        /// txttuKhoa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTuKhoa;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txttuKhoa;
         
         /// <summary>
-        /// btnTimKiem control.
+        /// rptTour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTimKiem;
-        
-        /// <summary>
-        /// rptdskh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptdskh;
+        protected global::System.Web.UI.WebControls.Repeater rptTour;
         
         /// <summary>
         /// url control.

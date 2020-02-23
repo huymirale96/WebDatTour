@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using WebDatTour.Model;
 using System.Diagnostics;
 using WebDatTour.Controllers;
+using Newtonsoft.Json;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -88,7 +89,7 @@ namespace WebDatTour.View.BackEnd
             LinkButton linkButton = (LinkButton)sender;
             string id = linkButton.CommandArgument.ToString();
             //Debug.WriteLine("id " + id);
-            if(donDatTourController.capNhatTrangThaiDatTour(id, 1, Session["manv"].ToString()))
+            if(donDatTourController.sp_capNhatTrangThaiDonHang(id, "", 1))
             {
                 lblnoti.CssClass = "text-success";
                 lblnoti.Text = "Xác Nhận Đơn Đặt Tour Thành Công.";
@@ -119,8 +120,9 @@ namespace WebDatTour.View.BackEnd
         {
             LinkButton linkButton = (LinkButton)sender;
             string id = linkButton.CommandArgument.ToString();
-            //Debug.WriteLine("id " + id);
-            if (donDatTourController.capNhatTrangThaiDatTour(id, 3,Session["manv"].ToString()))
+            //Debug.WriteLine("id " + id); 
+            //if (donDatTourController.capNhatTrangThaiDatTour(id, 3,Session["manv"].ToString()))
+            if (donDatTourController.sp_capNhatTrangThaiDonHangNV(id, "", 3))
             {
                 lblnoti.CssClass = "text-success";
                 lblnoti.Text = "Hủy Đơn Đặt Tour Thành Công.";
@@ -148,6 +150,24 @@ namespace WebDatTour.View.BackEnd
             {
                 lblnoti.CssClass = "text-danger";
                 lblnoti.Text = "Thanh Toán "+ agru[1] + " Thất Bại.";
+            }
+        }
+
+        protected void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            if(!txtTuKhoa.Text.Equals(""))
+            {
+                if (rdDon.Checked)
+                {
+                    //Debug.WriteLine(txtTuKhoa.Text + " kq tim theo don" + JsonConvert.SerializeObject(donDatTourController.timDonDatTour(txtTuKhoa.Text)));
+                    rptdondattour.DataSource = donDatTourController.timDonDatTour(txtTuKhoa.Text);
+                    rptdondattour.DataBind();
+                }
+                else
+                {
+                    rptdondattour.DataSource = donDatTourController.timDonDatTourKH(txtTuKhoa.Text);
+                    rptdondattour.DataBind();
+                }
             }
         }
     }

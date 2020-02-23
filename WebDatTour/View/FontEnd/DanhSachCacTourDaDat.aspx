@@ -91,6 +91,7 @@
                  
                 
              </div>
+                <input type="text" placeholder="Lý Do Hủy" class="form-control" name ="ghichu" />
                 <input type="submit" value="Hủy" class="btn btn-default"/>
                 </form>
         </div>

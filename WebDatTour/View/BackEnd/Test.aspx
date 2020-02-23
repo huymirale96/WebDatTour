@@ -36,6 +36,7 @@
     <hr />  
     <asp:Button ID="Button1" runat="server" Text="Upload and Save" OnClick="Button1_Click" />
         <asp:Button ID="Button2" runat="server" Text="BTN" OnClick="Button2_Click" />
+        <asp:Button ID="mail" runat="server" Text="Mail" OnClick="mail_Click" />
         
 
 </form>

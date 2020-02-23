@@ -70,6 +70,8 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Nhân Viên</a>
                         </li>
+                        <li><a href="doimatkhau.aspx"><i class="fa fa-user fa-fw"></i> Đổi Mật Khẩu</a>
+                        </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
@@ -233,7 +235,7 @@
      <script src="../Plugin/ckfinder/ckfinder.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="../../bower_components/dist/js/sb-admin-2.js"></script>
-
+        <script src="../../Content/js/myBackend.js"></script>
     <!-- DataTables JavaScript -->
     <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
@@ -246,7 +248,7 @@
                     responsive: true
                 });
 
-                $('#btnThemThoiGian1d').click(function () {
+                $('#btnThemThoiGian1dd').click(function () {
                     alert("them");
                     $.ajax({
                         type: 'post',

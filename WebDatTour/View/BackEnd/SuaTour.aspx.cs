@@ -25,7 +25,7 @@ namespace WebDatTour.View.BackEnd
         {
             System.Diagnostics.Debug.WriteLine("đâs");
 
-            if (Request.QueryString["id"] != null )
+            if (Request.QueryString["id"] != null ) 
             {
                 // System.Diagnostics.Debug.WriteLine("id khong null");
                 if (!IsPostBack)
@@ -140,6 +140,7 @@ namespace WebDatTour.View.BackEnd
                 {
                     while (rd.Read())
                     {
+                        idt_.InnerHtml = "<input type='hidden' id='matour_' value='"+ rd["imatour"].ToString() + "'>";
                         txtMaTour.Value = rd["imatour"].ToString();
                       //  txtTieuDe.Text = rd["sTieuDe"].ToString();
                         txtMoTaTour.Text = rd["sMoTa"].ToString();
@@ -195,10 +196,12 @@ namespace WebDatTour.View.BackEnd
         [WebMethod]
         public static String themThoiGianKhoiHanh(string id, string date)
         {
+            //Debug.WriteLine("id ajax : " + id + " date " + date);
             TourController tourController1 = new TourController();
             if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date)))
             {
                 DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
+               // Debug.WriteLine(JsonConvert.SerializeObject(table));
                 return JsonConvert.SerializeObject(table);
             }
             else
@@ -206,19 +209,45 @@ namespace WebDatTour.View.BackEnd
                 return null;
             }
         }
+      
 
+            [WebMethod]
+        public static String cntttg(string id, string idtour)
+        {
+            Debug.WriteLine("id ajax : " + id);
+            TourController tourController1 = new TourController();
+            try
+            {
+                if (tourController1.upDateTrangThaiThoiGian(Convert.ToInt32(id)))
+                {
+                    DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(idtour));
+                  //  Debug.WriteLine(JsonConvert.SerializeObject(table));
+                    return JsonConvert.SerializeObject(table);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
         protected void themNgay_Click(object sender, EventArgs e)
         {
-            if (!ngayDi.Text.Equals(""))
+          /*  if (!ngayDi.Text.Equals(""))
             {
                 bool x = tourController.themThoiGianKhoiHanh(Convert.ToInt32(matour.Value), DateTime.Parse(ngayDi.Text));
-              
+                Response.Redirect("SuaTour.aspx?id=" + matour.Value);
+
             }
             else
             {
                 Response.Redirect("SuaTour.aspx?id=" + matour.Value);
             }
-            
+            */
         }
         void cn()
         {

@@ -14,6 +14,7 @@ namespace WebDatTour.Controllers
     {
         string conn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
         NhanVienModel nvModel = new NhanVienModel();
+        XuLy xuLy = new XuLy();
         public void xoaNhanVienC(int ID)
         {
             nvModel.xoaNV(ID);
@@ -27,7 +28,7 @@ namespace WebDatTour.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@tendn", nhanVien.StenDangNhap);
                 cmd.Parameters.AddWithValue("@tennv", nhanVien.TenNhanVien);
-                cmd.Parameters.AddWithValue("@mk", nhanVien.MatKhau);
+                cmd.Parameters.AddWithValue("@mk", xuLy.GetMD5(nhanVien.MatKhau));
                 cmd.Parameters.AddWithValue("@gt", nhanVien.GioiTinh);
                 cmd.Parameters.AddWithValue("@sdt", nhanVien.SoDienThoai);
                 cmd.Parameters.AddWithValue("@ngaysinh", nhanVien.NgaySinh);
@@ -58,6 +59,16 @@ namespace WebDatTour.Controllers
         public Boolean dangNhap(string tk, string mk)
         {
             return nvModel.dangNhap(tk, mk);
+        }
+        
+             public Boolean kiemTraDangNhap(NhanVien nhanVien)
+        {
+            return nvModel.kiemTraDangNhap(nhanVien);
+        }
+
+        public Boolean doiMatKhau(NhanVien nhanVien)
+        {
+            return nvModel.doiMatKhau(nhanVien);
         }
     }
 }

@@ -161,12 +161,13 @@ namespace WebDatTour.Model
                 throw ex;
             }
         }
-        
-             /* public DataTable xemKhachHangID(string id)
+
+
+        public DataTable timKhachHang(string tuKhoa)
         {
             try
             {
-                string sqlStr = "select * from tblkhachhang where imakhachhang = "+id;
+                string sqlStr = "select * from tblkhachhang where stenkhachhang like '%" + tuKhoa + "%' or semail like '%" + tuKhoa + "%'";
 
                 SqlCommand cmd = new SqlCommand(sqlStr, cn.connect());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -178,9 +179,29 @@ namespace WebDatTour.Model
             }
             catch (SqlException ex)
             {
-                throw ex;
+                Debug.WriteLine(ex.Message);
+                return null;
             }
-        }*/
+        }
+        /* public DataTable xemKhachHangID(string id)
+   {
+       try
+       {
+           string sqlStr = "select * from tblkhachhang where imakhachhang = "+id;
+
+           SqlCommand cmd = new SqlCommand(sqlStr, cn.connect());
+           SqlDataAdapter da = new SqlDataAdapter(cmd);
+           DataTable ds = new DataTable();
+
+           da.Fill(ds);
+           cn.disconnect();
+           return ds;
+       }
+       catch (SqlException ex)
+       {
+           throw ex;
+       }
+   }*/
 
 
         public SqlDataReader xemKhachHangID(String id)
@@ -248,6 +269,39 @@ namespace WebDatTour.Model
                 }
             }
         }
+        public Boolean kiemTraTen(string ten)
+        {
+            try
+            {
+                //  Debug.WriteLine("kachh hant : " + JsonConvert.SerializeObject(khach));
+                using (SqlCommand cmd = new SqlCommand("select * from tblkhachhang where susername = '" + ten + "'", cn.connect()))
+                {
+
+                    cmd.CommandType = CommandType.Text;
+                    //cmd.Parameters.AddWithValue("@idTour", id);
+                    SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                    DataTable table = new DataTable();
+                    dap.Fill(table);
+
+                    if (table.Rows.Count > 0)
+                    {
+
+
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
 
     }
 }

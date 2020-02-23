@@ -15,6 +15,7 @@ namespace WebDatTour.Object
         private DateTime ngaySinh;
         private bool gioiTinh;
         private int quyen;
+        private int maNV;
 
         public NhanVien(string tenNhanVien, string matKhau, string soDienThoai, string queQuan, string stenDangNhap, DateTime ngaySinh, bool gioiTinh, int quyen)
         {
@@ -37,6 +38,7 @@ namespace WebDatTour.Object
             this.ngaySinh = DateTime.Parse("05/05/2005");
             this.gioiTinh = false;
             this.quyen = 0;
+            this.MaNV = 0;
         }
 
         public string TenNhanVien { get => tenNhanVien; set => tenNhanVien = value; }
@@ -47,5 +49,6 @@ namespace WebDatTour.Object
         public DateTime NgaySinh { get => ngaySinh; set => ngaySinh = value; }
         public bool GioiTinh { get => gioiTinh; set => gioiTinh = value; }
         public int Quyen { get => quyen; set => quyen = value; }
+        public int MaNV { get => maNV; set => maNV = value; }
     }
 }

@@ -259,7 +259,9 @@
     <Content Include="View\BackEnd\DanhSachKhachHang.aspx" />
     <Content Include="View\BackEnd\DanhSachNhanVien.aspx" />
     <Content Include="View\BackEnd\DanhSachNhomTour.aspx" />
+    <Content Include="View\BackEnd\DoiMatKhau.aspx" />
     <Content Include="View\BackEnd\GetUrl.aspx" />
+    <Content Include="View\BackEnd\khongCoQuyen.aspx" />
     <Content Include="View\BackEnd\SuaTour.aspx" />
     <Content Include="View\BackEnd\Test.aspx" />
     <Content Include="View\BackEnd\ThemNhanVien.aspx" />
@@ -267,6 +269,7 @@
     <Content Include="View\BackEnd\DanhSachTour.aspx" />
     <Content Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx" />
     <Content Include="View\BackEnd\ThongKeSoCho.aspx" />
+    <Content Include="View\BackEnd\XemDonDatCuaKhachHang.aspx" />
     <Content Include="View\FontEnd\ThongTinKhachHang.aspx" />
     <Content Include="View\BackEnd\vnpay_ipn.aspx" />
     <Content Include="View\BackEnd\XemDonDatTour.aspx" />
@@ -275,6 +278,8 @@
     <Content Include="View\FontEnd\DoiMatKhau.aspx" />
     <Content Include="View\FontEnd\index.aspx" />
     <Content Include="View\FontEnd\ThanhToan.aspx" />
+    <Content Include="View\FontEnd\TimKiemTour.aspx" />
+    <Content Include="View\FontEnd\ToanThanhThanhToan.aspx" />
     <Content Include="View\FontEnd\XemChiTietTour.aspx" />
     <Content Include="View\FontEnd\xemTourTheoNhom.aspx" />
     <Content Include="View\FontEnd\XemTour.aspx" />
@@ -426,12 +431,26 @@
     <Compile Include="View\BackEnd\DanhSachNhomTour.aspx.designer.cs">
       <DependentUpon>DanhSachNhomTour.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\BackEnd\DoiMatKhau.aspx.cs">
+      <DependentUpon>DoiMatKhau.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\DoiMatKhau.aspx.designer.cs">
+      <DependentUpon>DoiMatKhau.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\BackEnd\GetUrl.aspx.cs">
       <DependentUpon>GetUrl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\BackEnd\GetUrl.aspx.designer.cs">
       <DependentUpon>GetUrl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\khongCoQuyen.aspx.cs">
+      <DependentUpon>khongCoQuyen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\khongCoQuyen.aspx.designer.cs">
+      <DependentUpon>khongCoQuyen.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\SuaTour.aspx.cs">
       <DependentUpon>SuaTour.aspx</DependentUpon>
@@ -481,6 +500,13 @@
     </Compile>
     <Compile Include="View\BackEnd\ThongKeSoCho.aspx.designer.cs">
       <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\XemDonDatCuaKhachHang.aspx.cs">
+      <DependentUpon>XemDonDatCuaKhachHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\XemDonDatCuaKhachHang.aspx.designer.cs">
+      <DependentUpon>XemDonDatCuaKhachHang.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\FontEnd\ThongTinKhachHang.aspx.cs">
       <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
@@ -537,6 +563,20 @@
     </Compile>
     <Compile Include="View\FontEnd\ThanhToan.aspx.designer.cs">
       <DependentUpon>ThanhToan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FontEnd\TimKiemTour.aspx.cs">
+      <DependentUpon>TimKiemTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\FontEnd\TimKiemTour.aspx.designer.cs">
+      <DependentUpon>TimKiemTour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FontEnd\ToanThanhThanhToan.aspx.cs">
+      <DependentUpon>ToanThanhThanhToan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\FontEnd\ToanThanhThanhToan.aspx.designer.cs">
+      <DependentUpon>ToanThanhThanhToan.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\FontEnd\XemChiTietTour.aspx.cs">
       <DependentUpon>XemChiTietTour.aspx</DependentUpon>

@@ -73,5 +73,11 @@ namespace WebDatTour.View.BackEnd
             rptdskh.DataBind();
 
         }
+        protected void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            rptdskh.DataSource = khachHangController.timKhachHang(txtTuKhoa.Text);
+            rptdskh.DataBind();
+           
+        }
     }
 }

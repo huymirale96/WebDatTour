@@ -10,34 +10,16 @@
 namespace WebDatTour.View.BackEnd {
     
     
-    public partial class DanhSachKhachHang {
+    public partial class XemDonDatCuaKhachHang {
         
         /// <summary>
-        /// txtTuKhoa control.
+        /// rptdondattour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTuKhoa;
-        
-        /// <summary>
-        /// btnTimKiem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTimKiem;
-        
-        /// <summary>
-        /// rptdskh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptdskh;
+        protected global::System.Web.UI.WebControls.Repeater rptdondattour;
         
         /// <summary>
         /// url control.
@@ -47,5 +29,14 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label url;
+        
+        /// <summary>
+        /// lblnoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblnoti;
     }
 }

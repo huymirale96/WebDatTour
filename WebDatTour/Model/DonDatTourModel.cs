@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using WebDatTour.Object;
+using Newtonsoft.Json;
 
 namespace WebDatTour.Model
 {
@@ -26,7 +27,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@ngay", donDatTour.NgayDat);
                 cmd.Parameters.AddWithValue("@idkh", donDatTour.MaKH);
                 cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
-                cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
+              //  cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
                 cmd.Parameters.AddWithValue("@ghichu", donDatTour.GhiChu);
                 cmd.Parameters.AddWithValue("@maThoiGian", donDatTour.MaNgaydi);
                 
@@ -43,6 +44,9 @@ namespace WebDatTour.Model
                 cmd2.Parameters.AddWithValue("@te", donDatTour.ChoTE);
 
                 int k1 = cmd2.ExecuteNonQuery();
+
+                sp_capNhatTrangThaiDonHang(maDonDatTour, "", 0);
+
 
                 SqlCommand cmd3= new SqlCommand("themGiaoDich", cn.connect());
                 cmd3.CommandType = CommandType.StoredProcedure;
@@ -137,7 +141,7 @@ namespace WebDatTour.Model
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("donDatTour", cn.connect());
+                SqlCommand cmd = new SqlCommand("donDatTour_", cn.connect());
                 cmd.CommandType = CommandType.Text;
                 // cmd.Parameters.AddWithValue("@idTour", id);
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
@@ -151,6 +155,46 @@ namespace WebDatTour.Model
                 return null;
             }
         }
+
+        public DataTable timDonDatTour(string id)
+        {
+          //  Debug.WriteLine("ma don : " + id);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("timDonDatTour_", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tuKhoa", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public DataTable timDonDatTourKH(string id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("timDonDatTourKH", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tuKhoa", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        
+
         public DataTable donHanh_khachHang(string id)
         {
             try
@@ -253,8 +297,8 @@ namespace WebDatTour.Model
                 return null;
             }
         }
-        
-            public Boolean nhanVienthanhToan(string madon, string tien)
+
+        public Boolean nhanVienthanhToan(string madon, string tien)
         {
             //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
             try
@@ -286,5 +330,113 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+                 public DataTable xemgiaodich(string id)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("xemgiaodich", cn.connect());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    
+                    SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                    DataTable table = new DataTable();
+                    dap.Fill(table);
+               // Debug.WriteLine(id + "id  -- data: " + JsonConvert.SerializeObject(table));
+                    return table;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+        
+             public DataTable xemTrangThaiNV(string id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("xemTrangThaiNV", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                // Debug.WriteLine(id + "id  -- data: " + JsonConvert.SerializeObject(table));
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean sp_capNhatTrangThaiDonHang(string madon, string ghichu, int tt)
+        {
+            //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_capNhatTrangThaiDonHang", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@madon", madon);
+                cmd.Parameters.AddWithValue("@ghichu", ghichu);
+                cmd.Parameters.AddWithValue("@trangthai", tt);
+               // cmd.Parameters.AddWithValue("@tien", tien);
+                cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
+
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                cn.disconnect();
+                if (i > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+        
+             public Boolean sp_capNhatTrangThaiDonHangNV(string madon, string ghichu, int tt)
+        {
+            //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_capNhatTrangThaiDonHangNV", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@madon", madon);
+                cmd.Parameters.AddWithValue("@ghichu", ghichu);
+                cmd.Parameters.AddWithValue("@trangthai", tt);
+                cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["manv"]);
+                cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
+
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                cn.disconnect();
+                if (i > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+
     }
 }

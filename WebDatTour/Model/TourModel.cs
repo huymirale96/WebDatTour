@@ -69,6 +69,25 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
+        public DataTable timKiemTour(string ten)
+        {
+            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
+            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            // using (SqlConnection cnn = new SqlConnection(ck))
+            {
+                SqlCommand cmd = new SqlCommand("sp_timKiemTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ten", ten);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+                // rptTour.DataSource = table;
+                // rptTour.DataBind();
+            }
+        }
+        
         public SqlDataReader layDanhSachDonDatTour()
         {
             try

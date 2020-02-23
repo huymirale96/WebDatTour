@@ -73,6 +73,7 @@ namespace WebDatTour.View.BackEnd
                                 //log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
                                 order.Status = 1;
                                 donDatTourController.updateTrangThaiGiaoDich(vnpayTranId, orderID_, 1);
+                                Response.Redirect("../fontend/toanthanhthanhtoan.aspx?id=1");
                             }
                             else
                             {
@@ -84,6 +85,7 @@ namespace WebDatTour.View.BackEnd
                                // log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId,
                                    // vnpayTranId, vnp_ResponseCode);
                                 order.Status = 2;
+                                Response.Redirect("../fontend/toanthanhthanhtoan.aspx?id=2");
                             }
                             returnContent = "{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}";
                             //Thêm code Thực hiện cập nhật vào Database 

@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using WebDatTour.Controllers;
 using System.Diagnostics;
 using WebDatTour.Object;
+using System.Web.Services;
+using Newtonsoft.Json;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -44,6 +46,7 @@ namespace WebDatTour.View.FontEnd
         }
         public void laybinhluan(int id)
         {
+            //Debug.WriteLine(JsonConvert.SerializeObject(binhLuanController.layBinhLuan(id)));
             rptBinhLuan.DataSource = binhLuanController.layBinhLuan(id);
             rptBinhLuan.DataBind();
         }
@@ -63,11 +66,17 @@ namespace WebDatTour.View.FontEnd
             Debug.WriteLine(x);
         }
 
+       public string test(string id)
+        {
+           // Debug.WriteLine("tt " + id);
+            return "";
+        }
     
         public void xemTour(String id)
         {
             //System.Diagnostics.Debug.WriteLine("3");
             maTour_.Value = id;
+            matourhidden.InnerHtml = "<input type='hidden' id='txtMaTour_' value = '"+ id + "'>";
             SqlDataReader rd = tourController.xemTour(id);
                 if (rd.HasRows)
                 {
@@ -181,5 +190,44 @@ namespace WebDatTour.View.FontEnd
             binhLuanController.binhLuan(binhLuan);
             Response.Redirect("XemChiTietTour.aspx?id="+ maTour_.Value);
         }
+        [WebMethod]
+        public static string taoBinhLuan(string idtour, string binhluan)
+        {
+            if(!HttpContext.Current.Session["maKH"].ToString().Equals(""))
+            {
+                BinhLuanController binhLuanController_ = new BinhLuanController();
+                BinhLuan binhLuan = new BinhLuan();
+                binhLuan.MaTour = Convert.ToInt32(idtour);
+                binhLuan.ThoiGian = DateTime.Now;
+                binhLuan.MaKH = Convert.ToInt32(HttpContext.Current.Session["maKH"]);
+                binhLuan.NoiDung = binhluan;
+                binhLuanController_.binhLuan(binhLuan);
+                return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        [WebMethod]
+        public static string anBinhLuan(string id, string idtour)
+        {
+            Debug.WriteLine("id " + id + idtour);
+            //return id+idtour;
+           if (!HttpContext.Current.Session["maNV"].ToString().Equals(""))
+            {
+                BinhLuanController binhLuanController_ = new BinhLuanController();
+                if (binhLuanController_.capNhatTrangThaiBinhLuan(id))
+                {
+                    return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
+                }
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
     }
 }

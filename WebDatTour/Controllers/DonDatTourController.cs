@@ -59,6 +59,38 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.nhanVienthanhToan(madon, tien);
         }
+        
+             public DataTable xemgiaodich(string id)
+        {
+            return donDatTourModel.xemgiaodich(id);
+        }
+        
+              public DataTable timDonDatTour(string id)
+        {
+            return donDatTourModel.timDonDatTour(id);
+
+        }
+        
+                 public DataTable timDonDatTourKH(string id)
+        {
+            return donDatTourModel.timDonDatTourKH(id);
+
+        }
+        public Boolean sp_capNhatTrangThaiDonHangNV(string madon, string ghiChu, int tt)
+        {
+            return donDatTourModel.sp_capNhatTrangThaiDonHangNV(madon, ghiChu, tt);
+        }
+        
+             public Boolean sp_capNhatTrangThaiDonHang(string madon, string ghiChu, int tt)
+        {
+            return donDatTourModel.sp_capNhatTrangThaiDonHang(madon, ghiChu, tt);
+        }
+        
+             public DataTable xemTrangThaiNV(string id)
+        {
+            return donDatTourModel.xemTrangThaiNV(id);
+
+        }
 
     }
 }

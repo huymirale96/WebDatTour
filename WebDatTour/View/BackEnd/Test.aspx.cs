@@ -10,6 +10,7 @@ using System.Web.Services;
 using WebDatTour.Controllers;
 using System.Diagnostics;
 using WebDatTour.Object;
+using System.Net.Mail;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -78,6 +79,29 @@ namespace WebDatTour.View.BackEnd
                 }
             }
             return str;
+        }
+
+        protected void mail_Click(object sender, EventArgs e)
+        {
+            MailMessage mail= new MailMessage();
+            mail.To.Add("huymin96@gmail.com");
+
+            mail.From = new MailAddress("ngohuyhnn@gmail.com");
+            mail.Subject = "Email using Gmail";
+            
+            string Body = "Noi dung Email";
+            mail.Body = Body;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential
+            ("ngohuyhnn@gmail.com", "huydepzai");
+
+            //Or your Smtp Email ID and Password
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+            Debug.WriteLine("GUi MAIL XONG");
         }
     }
 }

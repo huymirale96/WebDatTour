@@ -8,13 +8,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using WebDatTour.Object;
 
 namespace WebDatTour.Model
 {
     public class NhanVienModel
     {
         Connector cn = new Connector();
-
+        XuLy xuLy = new XuLy();
         public DataSet layDanhSachNhanVienM()
         {
             try
@@ -90,7 +91,7 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("sp_login_nv", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@user", user);
-                cmd.Parameters.AddWithValue("@pw", pw);
+                cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(pw));
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -104,6 +105,7 @@ namespace WebDatTour.Model
                     //System.Diagnostics.Debug.WriteLine("id: "+x);
                     HttpContext.Current.Session["maNV"] = iMaKH;
                     HttpContext.Current.Session["tenNV"] = sTenKH;
+                    HttpContext.Current.Session["quyen"] = quyen;
                     // Debug.WriteLine("ten: " + sTenKH + "    "+HttpContext.Current.Session["tenKH"]);
 
                     return true;
@@ -119,7 +121,68 @@ namespace WebDatTour.Model
                 return false;
             }
         }
-       
+        
+             public Boolean kiemTraDangNhap(NhanVien nhanVien)
+        {
+           // Debug.WriteLine("kiem tra nhan vien " + nhanVien.MatKhau );
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from tblnhanvien where imanhanvien = "+nhanVien.MaNV + " and spassword = "+ xuLy.GetMD5(nhanVien.MatKhau), cn.connect());
+                cmd.CommandType = CommandType.Text;
+                //cmd.Parameters.AddWithValue("@user", user);
+               // cmd.Parameters.AddWithValue("@pw", pw);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                cn.disconnect();
+                if (table.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+        
+             public Boolean doiMatKhau(NhanVien nhanVien)
+        {
+            Debug.WriteLine("dang nhap nhan vien ");
+            try
+            {
+                SqlCommand cmd = new SqlCommand("update tblnhanvien set spassword = " + xuLy.GetMD5(nhanVien.MatKhau) +" where imanhanvien = " + nhanVien.MaNV , cn.connect());
+                cmd.CommandType = CommandType.Text;
+                //cmd.Parameters.AddWithValue("@user", user);
+                // cmd.Parameters.AddWithValue("@pw", pw);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                cn.disconnect();
+                if (table.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
 
     }
 }

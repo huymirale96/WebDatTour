@@ -21,80 +21,86 @@ namespace WebDatTour.View.FontEnd
         KhachHangController khachHangController = new KhachHangController();
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            layDanhSachTour();
-            if (Request.QueryString["chucNang"] != null)
+            try
             {
-                if(Request.QueryString["chucNang"].ToString().Equals("dangxuat"))
+                //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                layDanhSachTour();
+                if (Request.QueryString["chucNang"] != null)
                 {
-                    HttpContext.Current.Session["tenKH"] = "";
-                    Response.Redirect("index.aspx");
-                }
+                    if (Request.QueryString["chucNang"].ToString().Equals("dangxuat"))
+                    {
+                        HttpContext.Current.Session["tenKH"] = "";
+                        Response.Redirect("index.aspx");
+                    }
 
-                if (Request.QueryString["chucNang"].ToString().Equals("dangKi"))
-                {
-
-                    //Response.Write("đâsdas");
-                    
-                    
-                    //Response.Write("đâsdas");
-                    KhachHang khachHang = new KhachHang();
-                    khachHang.DiaChi = Request.QueryString["txtDCDK"];
-                    khachHang.Email = Request.QueryString["txtEmalDK"];
-                    khachHang.MatKhau = Request.QueryString["txtMKDK"];
-                    khachHang.SoDienThoai = Request.QueryString["txtSDTDK"];
-                    khachHang.TenDangNhap = Request.QueryString["txtTenDK"];
-                    khachHang.TenKhachHang = Request.QueryString["txtHTDK"];
-                    khachHang.NgaySinh = DateTime.Parse(Request.QueryString["txtNS"]);
-                    if(khachHangController.dangKy(khachHang))
+                    if (Request.QueryString["chucNang"].ToString().Equals("dangKi"))
                     {
 
-                    }
-                    }
-                else
-                {
-                    if(Request.QueryString["chucNang"].ToString().Equals("dangNhap"))
-                    {
+                        //Response.Write("đâsdas");
+
+
+                        //Response.Write("đâsdas");
                         KhachHang khachHang = new KhachHang();
-                        khachHang.TenDangNhap = Request.QueryString["txtTenDN"];
-                        khachHang.MatKhau = Request.QueryString["txtMKDN"];
-                        if(khachHangController.dangNhap(khachHang))
+                        khachHang.DiaChi = Request.QueryString["txtDCDK"];
+                        khachHang.Email = Request.QueryString["txtEmalDK"];
+                        khachHang.MatKhau = Request.QueryString["txtMKDK"];
+                        khachHang.SoDienThoai = Request.QueryString["txtSDTDK"];
+                        khachHang.TenDangNhap = Request.QueryString["txtTenDK"];
+                        khachHang.TenKhachHang = Request.QueryString["txtHTDK"];
+                        khachHang.NgaySinh = DateTime.Parse(Request.QueryString["txtNS"]);
+                        if (khachHangController.dangKy(khachHang))
                         {
-                          //  lb1.Text = "DA DANG NHAP";
-                          //  Debug.WriteLine("Logined..." + HttpContext.Current.Session["tenKH"]);
 
-                            
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (Request.QueryString["chucNang"].ToString().Equals("dangNhap"))
                         {
-                          //  lb1.Text = "Chua DANG NHAP";
-                            Debug.WriteLine("Logined Faile...");
-                            // Session["maNV"] = "";
-                        }
-                        /*using (SqlConnection cnn = new SqlConnection(cnnString))
-                        {
-                            SqlCommand cmd = new SqlCommand("sp_login_kh", cnn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@user", Request.QueryString["txtTenDN"]);
-                            cmd.Parameters.AddWithValue("@pw", GetMD5(Request.QueryString["txtMKDN"]));
-                            cnn.Open();
-                            SqlDataAdapter dap = new SqlDataAdapter(cmd);
-                            DataTable table = new DataTable();
-                            dap.Fill(table);
-                            if (table.Rows.Count > 0)
+                            KhachHang khachHang = new KhachHang();
+                            khachHang.TenDangNhap = Request.QueryString["txtTenDN"];
+                            khachHang.MatKhau = Request.QueryString["txtMKDN"];
+                            if (khachHangController.dangNhap(khachHang))
                             {
-                                lb1.Text = "DA DANG NHAP";
+                                //  lb1.Text = "DA DANG NHAP";
+                                //  Debug.WriteLine("Logined..." + HttpContext.Current.Session["tenKH"]);
+
+
                             }
                             else
                             {
-                                lb1.Text = "Chua DANG NHAP";
+                                //  lb1.Text = "Chua DANG NHAP";
+                                Debug.WriteLine("Logined Faile...");
+                                // Session["maNV"] = "";
                             }
-                            
-                        }*/
-                    }
-                }
+                            /*using (SqlConnection cnn = new SqlConnection(cnnString))
+                            {
+                                SqlCommand cmd = new SqlCommand("sp_login_kh", cnn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@user", Request.QueryString["txtTenDN"]);
+                                cmd.Parameters.AddWithValue("@pw", GetMD5(Request.QueryString["txtMKDN"]));
+                                cnn.Open();
+                                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                                DataTable table = new DataTable();
+                                dap.Fill(table);
+                                if (table.Rows.Count > 0)
+                                {
+                                    lb1.Text = "DA DANG NHAP";
+                                }
+                                else
+                                {
+                                    lb1.Text = "Chua DANG NHAP";
+                                }
 
+                            }*/
+                        }
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
 
             
@@ -111,6 +117,14 @@ namespace WebDatTour.View.FontEnd
             string x = khachHangController_.dangNhapKH(khachHang);
             Debug.WriteLine("TEN Khach Hang: " + x);
             return x;
+        }
+        [WebMethod]
+        public static Boolean kiemTraTen(string ten)
+        {
+            Debug.WriteLine("ten dki ajax :" +ten);
+            KhachHangController khachHangController = new KhachHangController();
+            Debug.WriteLine("ten dki ajax ket qua :" + khachHangController.kiemTraTen(ten));
+            return khachHangController.kiemTraTen(ten);
         }
         protected void layTour(int id)
         {

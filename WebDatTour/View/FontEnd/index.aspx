@@ -45,7 +45,7 @@
                     <div class="panel panel-default" style="background-color: #e0e7ee; margin:5px;">
                     <div class="panel-heading" style="height:50px;">
                         <div class="panel-title pull-left">
-                             Nhom 1
+                             <h4>MIỀN BẮC</h4>
                         </div>
                     <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=18">Xem Thêm</a></div>
 
@@ -96,7 +96,7 @@
                         <div class="col-md-12">
                     <div class="panel panel-default" style="background-color: #e0e7ee; margin:5px;">
                     <div class="panel-heading" style="height:50px;"><div class="panel-title pull-left">
-                             Nhom 2
+                            <h4>MIỀN TRUNG</h4>
                         </div>
                     <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=19">Xem Thêm</a></div></div>
                     <div class="panel-body">
@@ -144,7 +144,7 @@
                         <div class="col-md-12">
                     <div class="panel panel-default" style="background-color: #e0e7ee; margin:5px;">
                     <div class="panel-heading" style="height:50px;"><div class="panel-title pull-left">
-                             Nhom 3
+                            <h4>MIỀN NAM</h4>
                         </div>
                     <div class="panel-title pull-right"><a href="xemTourTheoNhom.aspx?id=20">Xem Thêm</a></div></div>
                     <div class="panel-body">
@@ -197,22 +197,22 @@
 
 
                   
-               <div class="col-lg-2 col-md-2"  style="position:fixed; right:0px; top:140px; width:225px;">
+               <div class="col-lg-2 col-md-2"  style="">
                 <br>
-                    <h4 class="text-center">This is high light</h4>
+                    <h4 class="text-center">Tìm Kiếm Tour</h4>
                     
                    <div class="widgetd widget-searchd">
                         <!-- widget search -->
-                        <form>
+                        <form method="get" action="TimKiemTour.aspx">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search Here" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="Tìm Kiếm" aria-describedby="basic-addon2" name="ten" id="ten">
                                 <span class="input-group-addon" id="basic-addon2">
-                                <i class="fa fa-search"></i></span>
+                                <button type="submit" class=""><i class="fa fa-search"></i></button></span>
                             </div>
                             <!-- /input-group -->
                         </form>
 
-                       <ul>
+                       <ul style="list-style-type: none;">
                            <li>Nhom 1 </li>
                            <li>Nhom 1 </li>
                            <li>Nhom 1 </li>

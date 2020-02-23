@@ -54,5 +54,15 @@ namespace WebDatTour.Controllers
             return khachHangModel.xemKhachHangbyID(id);
         }
 
+        
+                 public DataTable timKhachHang(string tuKhoa)
+        {
+            return khachHangModel.timKhachHang(tuKhoa);
+        }
+        
+            public Boolean kiemTraTen(string ten)
+        {
+            return khachHangModel.kiemTraTen(ten);
+        }
     }
 }

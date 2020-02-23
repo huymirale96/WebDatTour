@@ -65,5 +65,35 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+        
+             public Boolean capNhatTrangThaiBinhLuan(string id)
+        {
+           // Debug.WriteLine("ma toyrur " + binhLuan.MaTour);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("capNhatTrangThaiBinhLuan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id",id);
+            
+
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                //Debug.WriteLine("i dang nhap" + i);
+                if (i > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

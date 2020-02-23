@@ -74,6 +74,31 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/pineapple-96.png" class="img-responsive"></a></div>
+    </div>
+    
+    <div class="item">
+      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/onion-96.png" class="img-responsive"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Food/asparagus-96.png" class="img-responsive"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/watermelon-96.png" class="img-responsive"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Food/eggplant-96.png" class="img-responsive"></a></div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+</div>
+
                                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                                 <div class="related-post">
                                                     <!-- related post -->
@@ -134,7 +159,7 @@
                                     <!-- /.post author -->
                                     <div class="comments-area">
                                         <h2 class="comments-title"> Bình Luận_</h2>
-                                        <ul class="comment-list">
+                                      <!--  <ul class="comment-list">
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <div class="comment-author"><img src="../../Content/images/user-pic-1.jpg" alt="" class="img-circle"> </div>
@@ -168,9 +193,9 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                        </ul>
+                                        </ul>-->
                                         
-                                        <ul class="comment-list">
+                                        <ul class="comment-list" id="listCommnent_">
                                             <asp:Repeater ID="rptBinhLuan" runat="server">
                                                 <ItemTemplate>
                                                    <li class="comment">
@@ -180,7 +205,7 @@
                                                         <div class="comment-info">
                                                             <div class="comment-header">
                                                                 <div class="comment-meta"><span class="comment-meta-date pull-right"><%# Eval("dThoiGian") %> </span></div>
-                                                                <h4 class="user-title"><%# Eval("sTenKhachHang") %></h4>
+                                                                <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anbinhluan(<%# Eval("iMaBinhLuan") %>,<%# Eval("iMaTour") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("itrangthai").ToString().Equals("False") ? "success" : "warning" %> "><%# Eval("itrangthai").ToString().Equals("True") ? "Ẩn" : "Hiện" %></label> 
                                                             </div>
                                                             <div class="comment-content">
                                                                 <p><%# Eval("sNoiDung") %></p>
@@ -197,6 +222,7 @@
                                     </div>
                                 </div>
                                 <% if(!HttpContext.Current.Session["maKH"].ToString().Equals("")) { %>
+                                <div id="matourhidden" runat="server"></div>
                                 <div class="leave-comments">
                                     <h2 class="reply-title">Bình Luận</h2>
                                     <form class="reply-form" method="post" runat="server">
@@ -206,13 +232,16 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label class="control-label" for="textarea">Comment</label>
-                                                    <asp:TextBox ID="txtBinhLuan" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control"></asp:TextBox>
+                                                    <textarea class="form-control" id="txtBinhLuan_" name="textarea" rows="3"></textarea>
+                                                   <!-- <asp:TextBox ID="txtBinhLuan" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control"></asp:TextBox>-->
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <!-- Button -->
                                                 <div class="form-group">
-                                                    <asp:Button ID="binhLuan" runat="server" Text="Bình Luận" OnClick="binhLuan_Click" />
+                                                   <!-- <asp:Button ID="binhLuan" runat="server" Text="Bình Luận" OnClick="binhLuan_Click" />-->
+                                                <label id="btnBinhLuan_" class="label label-default">Bình Luận</label>
+                                                    <div id="notiCmt"></div>
                                                 </div>
                                             </div>
                                         </div>

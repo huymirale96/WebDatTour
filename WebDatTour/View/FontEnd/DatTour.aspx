@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-md-6">
                         <div class="form-group">
-                        <label>Ngân hàng</label>
+                        <label onclick="copyATM()">Ngân hàng</label>
                         <asp:DropDownList ID="bank" runat="server" CssClass="form-control">
                             <asp:ListItem Value="none" Text="Không chọn"></asp:ListItem>
                             <asp:ListItem Value="NCB" Text="Ngan hang NCB"></asp:ListItem>

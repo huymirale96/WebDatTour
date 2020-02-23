@@ -10,78 +10,60 @@
 namespace WebDatTour.View.BackEnd {
     
     
-    public partial class DanhSachDatTour {
+    public partial class DoiMatKhau {
         
         /// <summary>
-        /// txtTuKhoa control.
+        /// tenDangNhap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTuKhoa;
+        protected global::System.Web.UI.WebControls.TextBox tenDangNhap;
         
         /// <summary>
-        /// btnTimKiem control.
+        /// txtMatKhauCu_ control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTimKiem;
+        protected global::System.Web.UI.WebControls.TextBox txtMatKhauCu_;
         
         /// <summary>
-        /// rdDon control.
+        /// txtMatKhauMoi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdDon;
+        protected global::System.Web.UI.WebControls.TextBox txtMatKhauMoi;
         
         /// <summary>
-        /// rdKH control.
+        /// txtNhapLai control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdKH;
+        protected global::System.Web.UI.WebControls.TextBox txtNhapLai;
         
         /// <summary>
-        /// rptdondattour control.
+        /// lblNoti control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptdondattour;
+        protected global::System.Web.UI.WebControls.Label lblNoti;
         
         /// <summary>
-        /// url control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label url;
-        
-        /// <summary>
-        /// lblnoti control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblnoti;
-        
-        /// <summary>
-        /// pageid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField pageid;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
     }
 }

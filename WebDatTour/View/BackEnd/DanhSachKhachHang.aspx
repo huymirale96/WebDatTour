@@ -7,9 +7,16 @@
                             Danh Sách Khách Hàng
                         </div>
                         <div class="panel-body">
-                            <div class="text-center">
+                            <div class="text-center" >
                                 <span id="MainContent_lblNoti"></span>
                             </div>
+                       
+                            <form method ="get" runat="server">
+                                <div class="col-md-offset-1 col-md-4"><asp:TextBox ID="txtTuKhoa" runat="server" CssClass="form-control" Placeholder="Tim Kiem"></asp:TextBox></div>
+                                <div class="col-md-2" style="margin-left:50px; margin-bottom:15px;"><asp:Button ID="btnTimKiem" runat="server" Text="Tìm Kiếm" CssClass="btn btn-default" onclick="btnTimKiem_Click"/></div>
+                            
+                            </form>
+                            <br />
                             <div class="col-md-12">
                                 <table class="table table-bordered table-stripped">
                                     <thead>
@@ -30,7 +37,7 @@
 
                                                 <tr>
                                                     <td class="text-center"><%# Container.ItemIndex+1 %></td>
-                                                    <td class="left"><%# Eval("sTenKhachHang") %></td>
+                                                    <td class="left"><a href="xemdondatcuakhachhang.aspx?id= <%# Eval("imakhachhang") %>"><%# Eval("sTenKhachHang") %></a></td>
                                                     <td class="text-center"><%# Eval("dNgaySinh", "{0:dd/MM/yyyy}") %></td>
                                                     <td class="text-center"><%# Eval("sdiachi") %></td>
                                                     <td class="left"><%# Eval("sSDT") %></td>

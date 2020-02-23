@@ -28,7 +28,8 @@ namespace WebDatTour.View.BackEnd
             }
             else
             {
-                Response.Redirect("dangnhap.aspx");
+                lblNoti.Text = "Thông Tin Đăng Nhập Không Chính Xác.";
+               // Response.Redirect("dangnhap.aspx");
             }
         }
     }

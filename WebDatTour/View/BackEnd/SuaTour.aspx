@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="SuaTour.aspx.cs" Inherits="WebDatTour.View.BackEnd.SuaTour" %>
+﻿<%@ Page Title="" Language="C#" MaintainScrollPositionOnPostBack="true" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="SuaTour.aspx.cs" Inherits="WebDatTour.View.BackEnd.SuaTour" %>
 <%@ Register Namespace="CKEditor.NET" Assembly="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="cotent1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
@@ -10,7 +10,7 @@
     <!-- /.col-lg-12 -->
     <div class="col-md-12">
         <div class="container-fluid">
-            <form action="" enctype="multipart/form-data" method="POST" runat="server">
+            <form method="POST" runat="server">
                 <asp:HiddenField ID="txtMaTour" runat="server" />
                 <div class="row">
                     <div class="col-md-5 col-md-offset-1">
@@ -89,14 +89,16 @@
                         <input type="reset" class="btn btn-default" value="RESET"/>
                     </div>
                     <asp:HiddenField ID="matour" runat="server" />
+                     </form>
                     <div class="col-md-offset-1 col-md-10">
                          <div class="col-md-4">
-                      <asp:Textbox ID="ngayDi" runat="server" CssClass="form-control" TextMode="Date"></asp:Textbox>
+                     <!---->
+                             <div id="idt_" runat="server"></div>
+                             <input type="date" class="form-control" id="txtNgayDiThem" style="display: inline; margin-right:20px;"/>
+                             <label class="label label-default" id="btnThemNgay">Thêm Ngày </label>
+                            
                              </div>
-                         <div class="col-md-4">
-                        <asp:Button ID="themNgay" runat="server" Text="Thêm Ngày Đi" CssClass="btn btn-success" onclick="themNgay_Click"/>
-                             </div>
-                         </form>
+                        
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -110,17 +112,18 @@
                                             
                                             <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                             <td class="text-center"><%# Eval("dThoiGian","{0:dd-MM-yyyy}") %></td>
-                                            <td class="text-center"><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"><label class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></a></td>
+                                            <td class="text-center"><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"></a><label onclick="anhienthoigian(<%# Eval("iMaThoiGian") %>,<%# Eval("iMaTour") %>)" class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </tbody>
                         </table>
+                         
                     </div>
                </div>
-           
+         
         </div>
     </div>
 
-</div>
+
 </asp:Content>

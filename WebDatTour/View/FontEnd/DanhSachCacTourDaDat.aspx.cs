@@ -24,6 +24,11 @@ namespace WebDatTour.View.FontEnd
                 Debug.WriteLine("mk : " + Request.Form["id"] +" - " +Request.Form["pw"]);
                 if (Request.Form["cn"].ToString().Equals("huy"))
                 {
+                    string ghiChu = "";
+                    if(Request.Form["ghichu"] != null)
+                    {
+                        ghiChu = Request.Form["ghichu"].ToString();
+                    }
                     KhachHang khachHang = new KhachHang();
                     khachHang.MaKH = Convert.ToInt32(HttpContext.Current.Session["maKH"].ToString());
                     khachHang.MatKhau = Request.Form["pw"].ToString();
@@ -31,7 +36,7 @@ namespace WebDatTour.View.FontEnd
                     {
 
 
-                        if (donDatTourController.khhuy(Request.Form["id"].ToString()))
+                        if (donDatTourController.sp_capNhatTrangThaiDonHang(Request.Form["id"].ToString(),ghiChu,2))
                         {
 
                             Debug.WriteLine("okkkk");
