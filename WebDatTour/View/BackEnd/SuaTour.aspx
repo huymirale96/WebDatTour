@@ -62,22 +62,26 @@
                     </div>
                 </div>
                 <div class="row">
-                      <input type="file" runat="server" name="anh" id="anh" />
-
-                    <asp:Repeater ID="rptDSanh" runat="server">
-                        <ItemTemplate>
-                            <div class="col-md-2" style="padding: 10px; width: 200px; height: 200px;">
-                        <image src="../../Upload/<%# Eval("url") %>" class="img-responsive"></image>
-                                
-                            </div>
+                     
+                    <asp:HiddenField ID="anhtour" runat="server" />
+                    <asp:Repeater ID="rptDSanh" runat="server" OnItemDataBound="rptDSanh_ItemDataBound" OnItemCommand="rptDSanh_ItemCommand">
+                        <ItemTemplate> 
+                            <div class="col-md-2" style="padding: 10px;">
+                                <div style="width: 100%; height: 200px;">
+                        <image src="../../Upload/<%# Eval("url") %>" class="img-responsive" ></image>
+                                    </div>
+                             <div class="text-center" style="margin-bottom:15px; margin-top: 15px;">
+                                  <asp:FileUpload ID="FileAnh" runat="server" CssClass="MakeButtonHidden" />
+                             </div>
+                            </div>   
+                            
+                           
                         </ItemTemplate>
                     </asp:Repeater>
                     
-
                     
-                    <div class="col-md-2" style="padding: 10px;">
-                        <image src="../../Upload/3e132bae0256a99c2a0159629beec3c1.jpg" class="img-responsive"></image>
-                    </div>
+                   
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-offset-1 col-md-10">

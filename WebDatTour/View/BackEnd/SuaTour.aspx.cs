@@ -13,6 +13,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using WebDatTour.Model;
 using System.Web.Services;
+using System.Web.UI.HtmlControls;
+using WebDatTour.Object;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -56,10 +58,10 @@ namespace WebDatTour.View.BackEnd
                 }
             }
         }
-
+        
         protected void btnSuaTour_Click(object sender, EventArgs e)
         {
-            HttpPostedFile file = Request.Files["anh"];
+            /*HttpPostedFile file = Request.Files["anh"];
             System.Diagnostics.Debug.WriteLine("file" + file.FileName );
             //check file was submitted
             if (file != null && file.ContentLength > 0)
@@ -67,8 +69,9 @@ namespace WebDatTour.View.BackEnd
                 System.Diagnostics.Debug.WriteLine("anh uo:  " + Path.GetFileName(file.FileName));
                 //  string fname = Path.GetFileName(file.FileName);
                 //file.SaveAs(Server.MapPath(Path.Combine("~/App_Data/", fname)));
-            }
-            System.Diagnostics.Debug.WriteLine("BTN SUA " + txtGIaNL.Text);
+            }*/
+           // System.Diagnostics.Debug.WriteLine("BTN SUA " + txtGIaNL.Text);
+            ///Label Label1 = FindControlRecursive(Page, "lab1") as Label;
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
@@ -76,9 +79,9 @@ namespace WebDatTour.View.BackEnd
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@tieude", txtTieuDe.Text);
                 cmd.Parameters.AddWithValue("@mota", txtMoTaTour.Text);
-                cmd.Parameters.AddWithValue("@urlanh", "  ");
+                cmd.Parameters.AddWithValue("@urlanh", suaAnh());
                 cmd.Parameters.AddWithValue("@thoigian", txtSoNgayDi.Text);
-                cmd.Parameters.AddWithValue("@ngaykhoihanh", txtNgayKhoiHanh1.Text);
+               // cmd.Parameters.AddWithValue("@ngaykhoihanh", txtNgayKhoiHanh1.Text);
 
                 cmd.Parameters.AddWithValue("@nhomtour", 19);
                 //cmd.Parameters.AddWithValue("@manv", 1);
@@ -102,7 +105,8 @@ namespace WebDatTour.View.BackEnd
                 if (i > 0)
                 {
                     System.Diagnostics.Debug.WriteLine("succcccc");
-                    Console.WriteLine("Updated Success!");
+                    Response.Redirect("suatour.aspx?id="+ txtMaTour.Value);
+
                     /// Response.Write("<script language=javascript>alert('OKK');</script>");
                 }
                 else
@@ -144,8 +148,8 @@ namespace WebDatTour.View.BackEnd
                         txtMaTour.Value = rd["imatour"].ToString();
                       //  txtTieuDe.Text = rd["sTieuDe"].ToString();
                         txtMoTaTour.Text = rd["sMoTa"].ToString();
-                        String date = String.Format("{0:yyyy-MM-dd}", rd["dNgayKhoiHanh"]);
-                        txtNgayKhoiHanh1.Text = date;
+                        //String date = String.Format("{0:yyyy-MM-dd}", rd["dNgayKhoiHanh"]);
+                       // txtNgayKhoiHanh1.Text = date;
                         txtSoNgayDi.Text = rd["sTongThoiGian"].ToString();
                         txtSoCho.Text = rd["iSoCho"].ToString();
                         txtGiaNLgiam.Text = rd["igianlgiam"].ToString();
@@ -157,6 +161,8 @@ namespace WebDatTour.View.BackEnd
                         string[] tokens = rd["sUrlAnh"].ToString().Split('/');
                         // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
                         // Label2.Text = tokens[0];
+                        //soAnh.Value = tokens.Length.ToString();
+                        anhtour.Value = rd["sUrlAnh"].ToString();
                         DataTable dt = new DataTable();
                         dt.Clear();
                         dt.Columns.Add("url");
@@ -173,7 +179,7 @@ namespace WebDatTour.View.BackEnd
 
                         rptDSanh.DataSource = dt;
                         rptDSanh.DataBind();
-                        //
+                       
                     }
                 }
             }
@@ -209,6 +215,7 @@ namespace WebDatTour.View.BackEnd
                 return null;
             }
         }
+        
       
 
             [WebMethod]
@@ -249,9 +256,77 @@ namespace WebDatTour.View.BackEnd
             }
             */
         }
-        void cn()
+        
+       
+        protected void rptDSanh_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-          //  a1.;
+            /*Control aa = (Control)e.Item.FindControl("div1");
+            int i = 1;
+            if (i == 1)
+            {
+             //   Debug.WriteLine("i === " + i);
+                i++;
+                //FileUpload tb = new FileUpload();
+                //t//b.ID = "name" + 2;
+                // HtmlControl anhh = (HtmlControl)Page.FindControl("anh");
+                // HtmlGenericControl divdav = rptDSanh.FindControl("name1") as HtmlGenericControl;
+                //Control anhh = (Control)FindControl("anh");
+                //aa.Controls.Add(tb);
+            }*/
         }
+
+        protected void rptDSanh_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+        }
+
+        private string suaAnh()
+        {
+            int i = 0;
+            List<anh> listAnh = new List<anh>();
+            foreach (RepeaterItem item in rptDSanh.Items)
+            {
+
+                FileUpload file = item.FindControl("FileAnh") as FileUpload;
+
+                if (file.HasFile)
+                {
+
+                    anh anh = new anh(i, file.FileName);
+                    listAnh.Add(anh);
+                  //  Debug.WriteLine(i + " co ifle " + file.FileName);
+                    //process file here
+                    /* if (file.FileName.EndsWith(".jpeg") || file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png"))
+                     {
+                         file.SaveAs(Server.MapPath(Path.Combine("~/Upload/", file.FileName)));// "~~/Upload/" + fAnhBia.FileName));
+                         anh += "-" + file.FileName;
+                     }
+                     */
+                }
+                i++;
+
+            }
+            string anhTour = anhtour.Value.ToString();
+            string[] anh1 = anhTour.Split('/');
+            foreach (anh anh_ in listAnh)
+            {
+                anh1[anh_.Stt] = anh_.Url;
+            }
+            string url = "";
+            for (int k = 0; k < anh1.Length; k++)
+            {
+                if (k == anh1.Length - 1)
+                {
+                    url += anh1[k];
+                }
+                else
+                {
+                    url += anh1[k] + "/";
+                }
+            }
+            
+            return url;
+        }
+        
+      
     }
 }

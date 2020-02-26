@@ -24,5 +24,10 @@ namespace WebDatTour.Controllers
         {
             return binhLuanModel.capNhatTrangThaiBinhLuan(binhLuan);
         }
+        
+                public Boolean kiemTraQuyenBinhLuan(string i1, string i2)  // kh  - tour
+        {
+            return binhLuanModel.kiemTraQuyenBinhLuan(i1,i2);
+        }
     }
 }

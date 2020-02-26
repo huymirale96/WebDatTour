@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using WebDatTour.Object;
+using Newtonsoft.Json;
 
 namespace WebDatTour.Model
 {
@@ -16,15 +17,15 @@ namespace WebDatTour.Model
     {
         Connector cn = new Connector();
         XuLy xuLy = new XuLy();
-        public DataSet layDanhSachNhanVienM()
+        public DataTable layThongTinNhanVienM(string id)
         {
             try
             {
-                string sqlStr = "select * from TBLNHANVIEN";
+                string sqlStr = "select * from TBLNHANVIEN where imanhanvien = " +id;
 
                 SqlCommand cmd = new SqlCommand(sqlStr, cn.connect());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
+                DataTable ds = new DataTable();
 
                 da.Fill(ds);
                 cn.disconnect();
@@ -120,9 +121,44 @@ namespace WebDatTour.Model
                 Debug.WriteLine("Loi " + ex.Message);
                 return false;
             }
+
         }
         
-             public Boolean kiemTraDangNhap(NhanVien nhanVien)
+            public Boolean updateNhanVien(NhanVien nhanVien)
+        {
+            //Debug.WriteLine("dang nhap nhan vien " + JsonConvert.SerializeObject(nhanVien));
+            try
+            {
+                SqlCommand cmd = new SqlCommand("updateNhanVien", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id",  HttpContext.Current.Session["maNV"].ToString());
+                cmd.Parameters.AddWithValue("@dc", nhanVien.QueQuan);
+                cmd.Parameters.AddWithValue("@ns",  nhanVien.NgaySinh);
+                cmd.Parameters.AddWithValue("@dt",nhanVien.SoDienThoai);
+                cmd.Parameters.AddWithValue("@ten", nhanVien.TenNhanVien);
+                cmd.Parameters.AddWithValue("@gt", nhanVien.GioiTinh);
+                //cnn.Open();
+                int i = cmd.ExecuteNonQuery();
+                cn.disconnect();
+                if (i > 0)
+                {
+                   
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean kiemTraDangNhap(NhanVien nhanVien)
         {
            // Debug.WriteLine("kiem tra nhan vien " + nhanVien.MatKhau );
             try

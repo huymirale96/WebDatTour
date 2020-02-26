@@ -55,15 +55,16 @@ namespace WebDatTour.View.FontEnd
         {
             Debug.WriteLine("id tour cho ngay di: " + id);
             DataTable table = tourController.layNgayDiTour(id);
-            string x = "Chọn Ngày Khởi Hành: &nbsp<select id='mangaydi' name='mangaydi' class='form-control'>";
+            string x = "";
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 x += "<option value='" + table.Rows[i]["imathoigian"].ToString() + "'>" + DateTime.Parse(table.Rows[i]["dthoigian"].ToString()).ToString("dd-MM-yyyy") + "</option>";
             }
 
               x += "</select>";
-            ngaydi.InnerHtml = x;
-            Debug.WriteLine(x);
+            ngaydi.InnerHtml = "Chọn Ngày Khởi Hành: &nbsp<select id='mangaydi' name='mangaydi' class='form-control'>" + x;
+            txtNgay.InnerHtml = "<select >" + x;
+            // Debug.WriteLine(x);
         }
 
        public string test(string id)
@@ -82,11 +83,14 @@ namespace WebDatTour.View.FontEnd
                 {
                     while (rd.Read())
                     {
-                      
 
-                        string[] urls = rd["sUrlAnh"].ToString().Split('/');
-                        //System.Diagnostics.Debug.WriteLine("url: " + urls[0]);
-
+                    txtNKH.InnerHtml = rd["sNoiKhoiHanh"]+ "";
+                    txtTG.InnerHtml = rd["stongthoigian"] + "";
+                    txtTE.InnerHtml = "<p style='color: red; display: inline;'>"+rd["igiate"] + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + rd["igiategiam"] + "</b>VND";
+                    txtNL.InnerHtml = "<p style='color: red;display: inline;'>" + rd["igianl"] + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + rd["igiategiam"] + "</b>VND";
+                        string[] urls = rd["sUrlAnh"].ToString().Split('/');  
+                    //System.Diagnostics.Debug.WriteLine("url: " + urls[0]);
+                    anhDD.InnerHtml = "<img src='../../Content/images/"+ urls[0] + "' alt=' 'class='alignleft img-responsive'>";
                         List<string> urlrpt = new List<string>();
                         List<string> idrpt = new List<string>(); // idrpt.Add(i.ToString());
                         DataTable dt1 = new DataTable();
@@ -227,6 +231,23 @@ namespace WebDatTour.View.FontEnd
             {
                 return null;
             }
+        }
+        public Boolean kiemTraQuyenBinhLuan()
+        {
+          //  Debug.WriteLine(Request.QueryString["id"].ToString() +"  " + Session["maKH"].ToString());
+            if (Request.QueryString["id"] != null)
+            {
+                Debug.WriteLine(Request.QueryString["id"].ToString() + "  " + Session["maKH"].ToString());
+                if (!Session["maKH"].ToString().Equals("") && binhLuanController.kiemTraQuyenBinhLuan(Session["maKH"].ToString(), Request.QueryString["id"].ToString()))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
         
     }

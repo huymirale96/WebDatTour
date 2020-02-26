@@ -200,7 +200,6 @@ alter proc sp_themTour
 @mota nvarchar(4000),
 @urlanh varchar(300),
 @thoigian nvarchar(20),
-@ngaykhoihanh date,
 @nhomtour int,
 @socho int,
 @manv int,
@@ -209,7 +208,7 @@ alter proc sp_themTour
 as
 insert into tblTour (iMaNhanVien,sTieuDe,sMoTa,sUrlAnh,sTongThoiGian,dNgayKhoiHanh,iMaNhomTour,iSoCho,dNgayTao)
 OUTPUT INSERTED.iMaTour as id
-values (@manv,@tieude,@mota,@urlanh,@thoigian,@ngaykhoihanh,@nhomtour,@socho,@ngaytao) set @imatour = SCOPE_IDENTITY()
+values (@manv,@tieude,@mota,@urlanh,@thoigian,@nhomtour,@socho,@ngaytao) set @imatour = SCOPE_IDENTITY()
 return @imatour;
 
 create proc sp_themThoiGianKhoiHanh
@@ -229,10 +228,11 @@ as
 insert into tblNhomVeGia(iMaTour,iMaNhomVe,iGiaVe,iGiaVeGiam) 
 values (@matour,1,@gianl,@giagiamnl),(@matour,2,@giate,@giagiamte);
 
-alter proc sp_xemTourId
+
+  alter proc sp_xemTourId
 @idtour int
 as
-select a.iMaTour,a.sTieuDe,a.dNgayKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+select a.iMaTour,a.sTieuDe,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
 from
 (
 select * from tblTour where tblTour.iMaTour = @idtour) as a
@@ -246,14 +246,13 @@ JOIN
 alter proc sp_updatetourID
 @tieude nvarchar(250),
 @mota nvarchar(900),
-@urlanh varchar(300),
+@urlanh varchar(1000),
 @thoigian nvarchar(20),
-@ngaykhoihanh date,
 @nhomtour int,
 @socho int,
 @imatour int
 as
-update tblTour set stieude = @tieude, sMoTa = @mota, sTongThoiGian = @thoigian, sUrlAnh = @urlanh, iSoCho = @socho,dNgayKhoiHanh = @ngaykhoihanh, iMaNhomTour = @nhomtour
+update tblTour set stieude = @tieude, sMoTa = @mota, sTongThoiGian = @thoigian, sUrlAnh = @urlanh, iSoCho = @socho, iMaNhomTour = @nhomtour
 where iMaTour = @imatour
 
 create proc sp_updateGiaVe
@@ -280,9 +279,9 @@ create proc sp_xoaKhachHang
 as delete from tblKhachHang where imakhachhang = @id
 
 
-create proc sp_dstour1
+ alter proc sp_dstour1
 as
-select a.iMaTour,a.sTieuDe,a.dNgayKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+select a.iMaTour,a.sTieuDe,d.dNgayKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
 from
 (
 select * from tblTour) as a
@@ -292,6 +291,10 @@ JOIN
   JOIN
 (select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
   ON c.imatour = a.iMaTour
+  join
+ (select imatour, min(dthoigian) as dNgayKhoiHanh from tblThoiGianKhoiHanh where --iMaTour = 36 and 
+ getdate() < dthoigian and trangThai = 1
+ group by iMaTour) as d on d.iMaTour= a.iMaTour 
 
 
 alter table tbldondattour add sghichu nvarchar(300) null
@@ -540,6 +543,23 @@ group by b.iMaDonDatTour) a1 join
  and a.iMaDonDatTour = c.iMaDonTour 
  group by a.iMaDonDatTour) b1 on a1.id_ = b1.id_
 
+alter proc sp_dsnhomtourbyid
+@id int
+as
+select top 6 a.iMaTour,a.sTieuDe,d.dngaykhoihanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+from
+(
+select * from tblTour where tblTour.iMaNhomTour = @id) as a
+JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a.iMaTour
+  join
+ (select imatour, min(dthoigian) as dngaykhoihanh from tblThoiGianKhoiHanh where --iMaTour = 36 and 
+ getdate() < dthoigian and trangThai = 1
+ group by iMaTour) as d on d.iMaTour= a.iMaTour 
 
 select b.iMaDonDatTour,sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as 'tong tien',sum(a.soLuongVe * c.iGiaVe) as 'tong tien2'  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
 from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b
@@ -571,12 +591,6 @@ and a.iMaDonDatTour = b.iMaDonDatTour
 group by b.iMaDonDatTour
 
 
-
-<asp:CompareValidator
-    ID="val14" runat="server" ControlToValidate="ddlout"
-    ErrorMessage=" Required." Operator="NotEqual"
-    ValueToCompare="Please Select One"
-    ForeColor="Red" SetFocusOnError="true" />
 
 
  alter proc donDatTour_
@@ -773,10 +787,11 @@ update tblKhachHang set sTenKhachHang = @ten, dNgaySinh = @ngay, sDiaChi = @dicc
 where iMaKhachHang = @id
 
 
-alter proc sp_tourTheoNhom
+
+ alter proc sp_tourTheoNhom
 @id int
 as
-select a.iMaTour,a.sTieuDe,a.dNgayKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl,
+select a.iMaTour,a.sTieuDe,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl,
  b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam , d.dThoiGian
 from
 (
@@ -816,6 +831,31 @@ FROM   (SELECT iMaDon, iTrangThai, dthoigian,imatrangthai, sghichu, imanhanvien,
                RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
         FROM   tblTrangThaiDonDatTour) t
 WHERE  rk = 1 and iTrangThai != 3 and iTrangThai !=2) b3 on b3.iMaDon = b2.iMaDonTour
+
+alter proc thongKeDoanhThuTheoNgay_danhSach
+@batdau datetime,
+@ketthuc datetime
+as
+ select b1.ngay,ISNULL(sum(b1.doanhthu),0) as doanhthu  ,ISNULL(sum(b2.tien),0) as thucthu, count(b1.iMaDonDatTour) as soDon
+from
+(select b.iMaDonDatTour,e.iMaTour,convert(varchar(10),b.dNgayDatTour,103) as ngay,--sum(e.tien)/2 as thucThu, 
+sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b, tblkhachhang d , tbltour e --, tblGiaoDich e
+where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
+and a.iMaDonDatTour = b.iMaDonDatTour and d.iMaKhachHang = b.imakhachhang and e.iMaTour = b.iMaTour
+ --and b.dNgayDatTour >= @batdau and b.dNgayDatTour <= @ketthuc
+group by  b.iMaDonDatTour, e.iMaTour,convert(varchar(10),b.dNgayDatTour,103)) b1 join
+(
+select Sum(tien) as tien, imadontour  from tblGiaoDich where trangThai = 1 group by imadontour
+) b2 on b1.imadondattour = b2.imadontour 
+join
+(SELECT iMaDon, iTrangThai, dthoigian, imatrangthai, sghichu,imanhanvien
+FROM   (SELECT iMaDon, iTrangThai, dthoigian,imatrangthai, sghichu, imanhanvien,
+               RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
+        FROM   tblTrangThaiDonDatTour) t
+WHERE  rk = 1 and iTrangThai != 3 and iTrangThai !=2) b3 on b3.iMaDon = b2.iMaDonTour
+group by b1.ngay
+
 
 
 alter proc nhanVienthanhToan
@@ -985,3 +1025,73 @@ where a.iMaDonDatTour = b.iMaDonDatTour and a.imatour = c.iMaTour and a.iMaDonDa
 and a.iMaDonDatTour not in (select iMaDon from tblTrangThaiDonDatTour where iMaTrangThai = 3 or iMaTrangThai = 2)
 group by c.sTieuDe, c.iMaTour 
 order by soLuong DESC
+
+alter table tbltour add bTrangThai bit default 1
+
+alter proc toutMoiNhat 
+as 
+select top 8 a.sTongThoiGian,a1.thoiGianDI,a.dNgayTao, a.iMaTour, a.sTieuDe,sNoiKhoiHanh,a.sUrlAnh, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+ from
+(select * from tblTour where btrangthai = 1
+) as a 
+join
+ (select imatour, min(dThoiGian) as thoiGianDI from tblThoiGianKhoiHanh where trangthai = 1 and dthoigian > GETDATE() group by iMaTour) as a1 
+ on a.imatour = a1.imatour
+ JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a.iMaTour
+ order by a.dNgayTao DESC
+
+
+
+alter proc tourhotTuan--7ngay
+as
+DECLARE @ngay date
+set @ngay = (SELECT DATEADD(DAY, -7, getdate()))
+select top 8 a1.sTongThoiGian,a2.thoiGianDI, a1.iMaTour, a1.sTieuDe,a1.sNoiKhoiHanh,a1.sUrlAnh, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+ from
+(select top 8 SUM(b.soLuongVe) as soLuong, c.sTieuDe , c.iMaTour ,c.sTongThoiGian, c.sUrlAnh, c.sNoiKhoiHanh
+from tbldondattour a, tblChiTietDonDatTour b , tblTour c
+where a.iMaDonDatTour = b.iMaDonDatTour and a.imatour = c.iMaTour and a.iMaDonDatTour in (select iMaDonTour from tblGiaoDich where trangThai = 1)
+and a.iMaDonDatTour not in (select iMaDon from tblTrangThaiDonDatTour where iMaTrangThai = 3 or iMaTrangThai = 2)
+and c.bTrangThai = 1 and a.dNgayDatTour >= @ngay
+group by c.sTieuDe, c.iMaTour ,c.sTongThoiGian, c.sUrlAnh, c.sNoiKhoiHanh
+order by soLuong DESC ) a1
+join
+ (select imatour, min(dThoiGian) as thoiGianDI from tblThoiGianKhoiHanh where trangthai = 1 and dthoigian > GETDATE() group by iMaTour) as a2
+ on a2.imatour = a1.imatour
+ JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a1.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a1.iMaTour
+
+create proc updateNhanVien
+ @ten nvarchar(50),
+ @gt bit,
+ @ns date,
+ @dc nvarchar(50),
+ @dt varchar(16),
+ @id int
+ as
+ update tblNhanVien set sTenNhanVien = @ten, bGioiTinh = @gt, dNgaySinh =  @ns, sDiaChi = @dc, ssdt= @dt
+ where iMaNhanVien = @id 
+
+
+
+create proc kiemTraQuyenBinhLuan
+@makh int,
+@idtour int
+as
+select a.iMaTour, a.iMaDonDatTour,a.iMaKhachHang
+from tblDonDatTour a ,tblThoiGianKhoiHanh b where a.iMaTour = @idtour and a.iMaKhachHang = @makh and 
+a.imathoigian = b.iMaThoiGian and b.dThoiGian < GETDATE()
+and a.iMaDonDatTour in (SELECT iMaDon
+FROM   (SELECT iMaDon, iTrangThai, dthoigian,
+               RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
+        FROM   tblTrangThaiDonDatTour where itrangthai = 1) t
+WHERE  rk = 1)

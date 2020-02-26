@@ -134,7 +134,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@mota", tour.MoTa);
                 cmd.Parameters.AddWithValue("@urlanh", tour.UrlAnh);
                 cmd.Parameters.AddWithValue("@thoigian", tour.TongThoiGian);
-                cmd.Parameters.AddWithValue("@ngaykhoihanh", tour.NgayKhoiHanh);
+              //  cmd.Parameters.AddWithValue("@ngaykhoihanh", tour.NgayKhoiHanh);
                 cmd.Parameters.AddWithValue("@nhomtour", tour.MaNhomTour);
                 cmd.Parameters.AddWithValue("@manv", tour.MaNV);
                 cmd.Parameters.AddWithValue("@socho", tour.SoCho);
@@ -342,7 +342,71 @@ namespace WebDatTour.Model
 
         }
         
-           
+              public DataTable toutMoiNhat()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("toutMoiNhat", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+               // cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+        public DataTable tourMoiNhat_()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("toutMoiNhat", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+               // cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+        public DataTable tourhotTuan()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("tourhotTuan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                // cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+        
+
     }
 
 }

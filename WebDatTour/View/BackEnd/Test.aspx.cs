@@ -11,13 +11,28 @@ using WebDatTour.Controllers;
 using System.Diagnostics;
 using WebDatTour.Object;
 using System.Net.Mail;
+using System.Web.UI.HtmlControls;
+using Newtonsoft.Json;
 
 namespace WebDatTour.View.BackEnd
 {
     public partial class Test : System.Web.UI.Page
     {
+        string x1 = "dasd";
+        NhanVienController nhanVienController = new NhanVienController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            test2();
+            /*
+            //// Label lab11 = (Label)FindControl("lab1") as Label;
+            // lab11.Text = "1111";
+            Label Label1 = FindControlRecursive(Page, "lab1") as Label;
+            Label1.Text = "huydasd";
+            FileUpload file = FindControlRecursive(Page, "FileAnh_") as FileUpload;
+            if(file != null)
+            {
+                Debug.WriteLine("name: " + file.FileName);
+            }
             String x = "00b0e98455c00a36507707ea638b2d7e.jpg/4d06fda30454472551758157b65dc6dd.jpg";
             string[] tokens = x.Split('/');
             //Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>"  ;//;;tokens[0] + tokens.Length.ToString();
@@ -30,9 +45,31 @@ namespace WebDatTour.View.BackEnd
             OrderInfo order = new OrderInfo();
             order.Amount = 8;
             Label2.Text = DateTime.Now.ToString("dd/MM/yyyy H:mm");
+            FileUpload tb = new FileUpload();
+            tb.ID = "name" + 2;
+            // HtmlControl anhh = (HtmlControl)Page.FindControl("anh");
+             Control anhh = (Control)FindControl("anh");
+            ///Control anhh = Page.FindControl("anh");  Control myDiv = (Control)FindControl("myDiv");
+            //anhh.Controls.Add(tb);
+            if (anh != null)
+            {
+               
+
+            }*/
 
 
 
+        }
+
+        private Control FindControlRecursive(Control root, string id)
+        {
+            if (root.ID == id) return root;
+            foreach (Control c in root.Controls)
+            {
+                Control t = FindControlRecursive(c, id);
+                if (t != null) return t;
+            }
+            return null;
         }
         [WebMethod]
         public static String up(String x)
@@ -87,7 +124,7 @@ namespace WebDatTour.View.BackEnd
             mail.To.Add("huymin96@gmail.com");
 
             mail.From = new MailAddress("ngohuyhnn@gmail.com");
-            mail.Subject = "Email using Gmail";
+            mail.Subject = "Khat Vong Viet - Gmail Auto";
             
             string Body = "Noi dung Email";
             mail.Body = Body;
@@ -102,6 +139,15 @@ namespace WebDatTour.View.BackEnd
             smtp.EnableSsl = true;
             smtp.Send(mail);
             Debug.WriteLine("GUi MAIL XONG");
+        }
+        public void test2()
+        {
+            ThongKeDoanhThu thongKe = new ThongKeDoanhThu();
+            thongKe.Data = nhanVienController.layDSNV();
+            thongKe.DoanhThu = "123";
+            thongKe.ThucThu = "123";
+            thongKe.SoDon = "123";
+            Debug.WriteLine("josn: " + JsonConvert.SerializeObject(thongKe));
         }
     }
 }

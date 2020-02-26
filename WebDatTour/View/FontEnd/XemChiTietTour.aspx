@@ -27,7 +27,7 @@
                                 <ItemTemplate>
                                      <div class="post-img item <%# Container.ItemIndex == 0 ? "active" : "" %>">
 
-                                         <img style="width:100%; height: 400px;" src="../../Upload/<%# Eval("url") %> " />
+                                         <img  style="width:100%; height: 400px;" src="../../Upload/<%# Eval("url") %> " />
       </div>
                                 </ItemTemplate>
                                 </asp:Repeater>
@@ -58,8 +58,39 @@
                                     </div>
                                     <p>----- <a href="https://easetemplate.com/downloads/category/free-website-template/">website-</a> -</p>
                                     <p> </p>
-                                    <img src="../../Content/images/ba-na-hill-ivivu.jpg" class="alignleft img-responsive" alt="">
-                                    <p</p>
+                                    <div id="anhDD" runat="server" style="margin-bottom:15px; margin-top:15px;"></div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label>Thông Tin Tour</label>
+                                            <table class="table table-border" style="margin:15px;">
+                                                <tr>
+                                                    <td>Nơi Khởi Hành: </td>
+                                                    <td runat="server" id="txtNKH"></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>Tổng Thời Gian Của Tour: </td>
+                                                    <td runat="server" id="txtTG"></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày Khởi Hành: </td>
+                                                    <td runat="server" id="txtNgay"><select></select></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>Giá Người Lớn(từ 16T trở lên): </td>
+                                                    <td runat="server" id="txtNL"></td>
+                                                    
+                                                </tr>
+                                                 <tr>
+                                                    <td>Giá Trẻ Em: (từ 16T trở xuống): </td>
+                                                    <td runat="server" id="txtTE"></td>
+                                                    
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                     <p></p>
                                     <p></p>
                                     <asp:Label ID="txtNoiDung" runat="server"></asp:Label>
@@ -78,53 +109,50 @@
                                                 <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
   <div class="carousel-inner">
     <div class="item active">
-      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/pineapple-96.png" class="img-responsive"></a></div>
+  <div class="related-post col-md-5">
+                                                    <!-- related post -->
+                                                    <div class="related-post-img">
+                                                        <a href="#"><img src="../../Content/images/ngu-hanh-son-ivivu.jpg" alt="" class="img-responsive"></a>
+                                                    </div>
+                                                    <div class="related-post-content">
+                                                        <h3 class="related-title"><a href="#" class="title">Tour Du Lịch 1</a></h3>
+                                                        <div class="post-meta"><span class="meta-cat">in <a href="#" class="">abc</a> </span></div>
+                                                    </div>
+                                                </div>
     </div>
     
     <div class="item">
-      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/onion-96.png" class="img-responsive"></a></div>
+      <div class="related-post col-md-5">
+                                                    <!-- related post -->
+                                                    <div class="related-post-img">
+                                                        <a href="#"><img class="img1" src="../../Content/images/ngu-hanh-son-ivivu.jpg" alt="" class="img-responsive"></a>
+                                                    </div>
+                                                    <div class="related-post-content">
+                                                        <h3 class="related-title"><a href="#" class="title">Tour Du Lịch 1</a></h3>
+                                                        <div class="post-meta"><span class="meta-cat">in <a href="#" class="">abc</a> </span></div>
+                                                    </div>
+                                                </div>
     </div>
-    <div class="item">
-      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Food/asparagus-96.png" class="img-responsive"></a></div>
+
+       <div class="item">
+      <div class="related-post col-md-5">
+                                                    <!-- related post -->
+                                                    <div class="related-post-img">
+                                                        <a href="#"><img class="img1" src="../../Content/images/ngu-hanh-son-ivivu.jpg" alt="" class="img-responsive"></a>
+                                                    </div>
+                                                    <div class="related-post-content">
+                                                        <h3 class="related-title"><a href="#" class="title">Tour Du Lịch 1</a></h3>
+                                                        <div class="post-meta"><span class="meta-cat">in <a href="#" class="">abc</a> </span></div>
+                                                    </div>
+                                                </div>
     </div>
-    <div class="item">
-      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Plants/watermelon-96.png" class="img-responsive"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-5">ádsdsdadsad<a href="#"><img src="https://maxcdn.icons8.com/Color/PNG/96/Food/eggplant-96.png" class="img-responsive"></a></div>
-    </div>
+   
   </div>
   <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
   <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>
 
-                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                                <div class="related-post">
-                                                    <!-- related post -->
-                                                    <div class="related-post-img">
-                                                        <a href="#"><img src="../../Content/images/ngu-hanh-son-ivivu.jpg" alt="" class="img-responsive"></a>
-                                                    </div>
-                                                    <div class="related-post-content">
-                                                        <h3 class="related-title"><a href="#" class="title">Tour Du Lịch 1</a></h3>
-                                                        <div class="post-meta"><span class="meta-cat">in <a href="#" class="">abc</a> </span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- /.related post -->
-                                            </div>
-                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                                <div class="related-post">
-                                                    <!-- related post -->
-                                                    <div class="related-post-img">
-                                                        <a href="#"><img src="../../Content/images/ngu-hanh-son-ivivu.jpg" alt="" class="img-responsive"></a>
-                                                    </div>
-                                                    <div class="related-post-content">
-                                                        <h3 class="related-title"><a href="#" class="title">Tour Du Lịch 1</a></h3>
-                                                        <div class="post-meta"><span class="meta-cat">in <a href="#" class="">abc</a> </span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- /.related post -->
-                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.related post block -->
@@ -221,7 +249,8 @@
                                         
                                     </div>
                                 </div>
-                                <% if(!HttpContext.Current.Session["maKH"].ToString().Equals("")) { %>
+                              <!--  <-% if(!HttpContext.Current.Session["maKH"].ToString().Equals("")) { %->    -->
+                                <% if(kiemTraQuyenBinhLuan()) { %>
                                 <div id="matourhidden" runat="server"></div>
                                 <div class="leave-comments">
                                     <h2 class="reply-title">Bình Luận</h2>

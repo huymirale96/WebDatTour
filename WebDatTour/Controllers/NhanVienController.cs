@@ -52,6 +52,11 @@ namespace WebDatTour.Controllers
         {
             return nvModel.layDSNV();
         }
+        
+               public DataTable layThongTinNhanVienM(string id)
+        {
+            return nvModel.layThongTinNhanVienM(id);
+        }
         public Boolean xoaNhanVien(String id)
         {
             return nvModel.xoaNhanVien(id);
@@ -69,6 +74,11 @@ namespace WebDatTour.Controllers
         public Boolean doiMatKhau(NhanVien nhanVien)
         {
             return nvModel.doiMatKhau(nhanVien);
+        }
+        
+            public Boolean updateNhanVien(NhanVien nhanVien)
+        {
+            return nvModel.updateNhanVien(nhanVien);
         }
     }
 }

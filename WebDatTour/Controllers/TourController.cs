@@ -82,5 +82,15 @@ namespace WebDatTour.Controllers
         {
             return tourModel.xemDonDatTour(tour);
         }
+        
+                public DataTable toutMoiNhat()
+        {
+            return tourModel.toutMoiNhat();
+        }
+        
+              public DataTable tourhotTuan()
+        {
+            return tourModel.tourhotTuan();
+        }
     }
 }

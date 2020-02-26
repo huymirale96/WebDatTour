@@ -437,6 +437,27 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+        
+                 public DataTable thongKeDoanhThuTheoNgay_danhSach(string bd, string kt)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("thongKeDoanhThuTheoNgay_danhSach", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@batdau", bd);
+                cmd.Parameters.AddWithValue("@ketthuc", kt);
 
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                // Debug.WriteLine(id + "id  -- data: " + JsonConvert.SerializeObject(table));
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }

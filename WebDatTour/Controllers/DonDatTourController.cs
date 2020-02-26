@@ -91,6 +91,11 @@ namespace WebDatTour.Controllers
             return donDatTourModel.xemTrangThaiNV(id);
 
         }
+        public DataTable thongKeDoanhThuTheoNgay_danhSach(string bd, string kt)
+        {
+            return donDatTourModel.thongKeDoanhThuTheoNgay_danhSach(bd, kt);
+
+        }
 
     }
 }

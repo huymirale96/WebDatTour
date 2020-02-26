@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="Test.aspx.cs" Inherits="WebDatTour.View.BackEnd.Test" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeFile="Test.aspx.cs" Inherits="WebDatTour.View.BackEnd.Test" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- row  -->
     <script>
@@ -27,8 +27,15 @@
         <h4>How to Preview and Upload Multiple Images in Asp.Net with Jquery</h4>
         <hr />
     </div>
-    <form method="post" enctype="multipart/form-data" runat="server">                
+    <form method="post" enctype="multipart/form-data" runat="server" id="form1">   
+        <div id="anh" runat="server"></div>
+        -------------------------------------
+        <div>
+<asp:PlaceHolder ID="anh1" runat="server" />
+</div>
     Upload Images
+        <asp:FileUpload ID="FileAnh_" runat="server" />
+        <asp:label ID="lab1" runat="server" Text ="change"></asp:label>
     <input type="file" multiple="multiple" name="File1" id="File1" accept="image/*" />
     <br /><br />
     <div id="showimage">
@@ -37,7 +44,7 @@
     <asp:Button ID="Button1" runat="server" Text="Upload and Save" OnClick="Button1_Click" />
         <asp:Button ID="Button2" runat="server" Text="BTN" OnClick="Button2_Click" />
         <asp:Button ID="mail" runat="server" Text="Mail" OnClick="mail_Click" />
-        
+         <input type="file" name="File2" id="File2" runat="server" />
 
 </form>
     

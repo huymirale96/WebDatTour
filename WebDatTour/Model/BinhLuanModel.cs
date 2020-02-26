@@ -95,5 +95,36 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+        public Boolean kiemTraQuyenBinhLuan(string makh, string idtour)
+        {
+            // Debug.WriteLine("ma toyrur " + binhLuan.MaTour);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("kiemTraQuyenBinhLuan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idtour", idtour);
+                cmd.Parameters.AddWithValue("@makh", makh);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                dap.Fill(dataTable);
+
+                //cnn.Open();
+               
+                if (dataTable.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }
