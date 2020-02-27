@@ -28,7 +28,7 @@ namespace WebDatTour.Controllers
 
           public Boolean doiMatKhau(Object.KhachHang khachHang)
         {
-            return khachHangModel.dangNhap(khachHang);
+            return khachHangModel.doiMatKhau(khachHang);
         }
         public DataTable layDSKH()
         {

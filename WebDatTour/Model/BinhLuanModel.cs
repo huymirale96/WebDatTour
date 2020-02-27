@@ -126,5 +126,66 @@ namespace WebDatTour.Model
                 return false;
             }
         }
+
+        public Boolean kiemTraBinhLuanKH(string makh, string id)
+        {
+            // Debug.WriteLine("ma toyrur " + binhLuan.MaTour);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from tblbinhluan where imakhachhang = "+makh+" and imabinhluan = "+id, cn.connect());
+                cmd.CommandType = CommandType.Text;
+                
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                dap.Fill(dataTable);
+
+                //cnn.Open();
+
+                if (dataTable.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+        }
+        
+             public Boolean suaBinhLuan(string id, string nd)
+        {
+            // Debug.WriteLine("ma toyrur " + binhLuan.MaTour);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("suaBinhLuan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@nd", nd);
+                int i = cmd.ExecuteNonQuery();
+
+                //cnn.Open();
+
+                if (i > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

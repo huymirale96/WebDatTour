@@ -222,7 +222,27 @@
                                                 </ul>
                                             </li>
                                         </ul>-->
-                                        
+                                       
+                                         <!-- Modal -->
+  <div class="modal fade" id="modalSuaBinhLuan" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sửa Bình Luận</h4>
+        </div>
+        <div class="modal-body" id="suablDiv">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
                                         <ul class="comment-list" id="listCommnent_">
                                             <asp:Repeater ID="rptBinhLuan" runat="server">
                                                 <ItemTemplate>
@@ -236,8 +256,9 @@
                                                                 <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anbinhluan(<%# Eval("iMaBinhLuan") %>,<%# Eval("iMaTour") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("itrangthai").ToString().Equals("False") ? "success" : "warning" %> "><%# Eval("itrangthai").ToString().Equals("True") ? "Ẩn" : "Hiện" %></label> 
                                                             </div>
                                                             <div class="comment-content">
-                                                                <p><%# Eval("sNoiDung") %></p>
+                                                                <p id="bl_<%# Eval("iMaBinhLuan") %>"><%# Eval("sNoiDung") %></p>
                                                             </div>
+                                                            <div style="margin: 20px;"><%# suaBinhluan(Eval("iMaBinhLuan").ToString(),Eval("iMaTour").ToString()) %></div>
                                                             <!--<div class="reply"><a href="#" class="btn-link">Trả Lời</a></div> -->
                                                         </div>
                                                     </div>

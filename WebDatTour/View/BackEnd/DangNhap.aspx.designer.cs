@@ -22,6 +22,15 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtTaiKhoan;
         
         /// <summary>
+        /// a1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator a1;
+        
+        /// <summary>
         /// txtMatKhau control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMatKhau;
+        
+        /// <summary>
+        /// txtMatKhaus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator txtMatKhaus;
+        
+        /// <summary>
+        /// regex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regex;
         
         /// <summary>
         /// lblNoti control.

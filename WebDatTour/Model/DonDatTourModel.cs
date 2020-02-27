@@ -26,7 +26,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@idtour", donDatTour.MaTour);
                 cmd.Parameters.AddWithValue("@ngay", donDatTour.NgayDat);
                 cmd.Parameters.AddWithValue("@idkh", donDatTour.MaKH);
-                cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
+               // cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
               //  cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
                 cmd.Parameters.AddWithValue("@ghichu", donDatTour.GhiChu);
                 cmd.Parameters.AddWithValue("@maThoiGian", donDatTour.MaNgaydi);
@@ -72,6 +72,72 @@ namespace WebDatTour.Model
                 return 0 ;
             }
         }
+
+        public Boolean ThemDonDatTour_chuaThanhToan(DonDatTour donDatTour)
+        {
+            Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("taoDonHang", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idtour", donDatTour.MaTour);
+                cmd.Parameters.AddWithValue("@ngay", donDatTour.NgayDat);
+                cmd.Parameters.AddWithValue("@idkh", donDatTour.MaKH);
+               // cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
+                //  cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
+                cmd.Parameters.AddWithValue("@ghichu", donDatTour.GhiChu);
+                cmd.Parameters.AddWithValue("@maThoiGian", donDatTour.MaNgaydi);
+
+                cmd.Parameters.AddWithValue("@iMaDonDatTour", SqlDbType.Int).Direction = ParameterDirection.Output;
+                //cnn.Open();
+                int c = cmd.ExecuteNonQuery();
+                // Debug.WriteLine("cmd1 " + c);
+                String maDonDatTour = cmd.Parameters["@iMaDonDatTour"].Value.ToString();
+                //    Debug.WriteLine("id don dat tour: " + maDonDatTour);
+                SqlCommand cmd2 = new SqlCommand("taoChiTietDonHang", cn.connect());
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@madon", maDonDatTour);
+                cmd2.Parameters.AddWithValue("@nl", donDatTour.ChoNL);
+                cmd2.Parameters.AddWithValue("@te", donDatTour.ChoTE);
+
+                int k1 = cmd2.ExecuteNonQuery();
+
+                sp_capNhatTrangThaiDonHang(maDonDatTour, "", 0);
+
+
+                SqlCommand cmd3 = new SqlCommand("themGiaoDich", cn.connect());
+                cmd3.CommandType = CommandType.StoredProcedure;
+                cmd3.Parameters.AddWithValue("@iMaDonTOur", maDonDatTour);
+                cmd3.Parameters.AddWithValue("@trangThai", 1);
+                cmd3.Parameters.AddWithValue("@thoigian", donDatTour.NgayDat);
+                cmd3.Parameters.AddWithValue("@tien", 0);
+                cmd3.Parameters.AddWithValue("@iMaGiaoDich", SqlDbType.Int).Direction = ParameterDirection.Output;
+                //   int k = cmd3.ExecuteNonQuery();
+                int x3 = cmd3.ExecuteNonQuery();
+               // Debug.WriteLine("cmd3 " + x3);
+                //int maGiaoDich = Convert.ToInt32(cmd3.Parameters["@iMaGiaoDich"].Value.ToString());
+              //  Debug.WriteLine("Ma Giao Dich " + maGiaoDich);
+               // return maGiaoDich;
+               if(x3 > 0)
+                {
+                    return true;
+                }
+               else
+                {
+                    return false;
+                }
+
+
+            }
+
+
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("messeage: loi xxx " + ex.Message);
+                return false;
+            }
+        }
+
 
 
         public int themGiaoDich(int id, int tien)

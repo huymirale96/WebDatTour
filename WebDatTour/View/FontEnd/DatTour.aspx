@@ -89,7 +89,7 @@
                                             
                                         </asp:TextBox>
                                   
-                                    <asp:Button ID="btnDatVe" runat="server" Text="Đặt Vé" CssClass="btn btn-default" OnClick="btnDatVe_Click"/>
+                                    <asp:Button ID="btnDatVe" runat="server" Text="Thanh Toán" CssClass="btn btn-default" OnClick="btnDatVe_Click"/>
                                
                                 </div>
                             </div>

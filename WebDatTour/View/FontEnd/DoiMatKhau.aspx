@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeBehind="DoiMatKhau.aspx.cs" Inherits="WebDatTour.View.FontEnd.DoiMatKhau" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeFile="DoiMatKhau.aspx.cs" Inherits="WebDatTour.View.FontEnd.DoiMatKhau" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
                 <div class="col-md-4 col-md-offset-2">
@@ -48,7 +48,7 @@
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
                                     <div class="col-md-6">
-                                        <asp:Button ID="btnLogin" runat="server" Text="Đổi Mật Khẩu" OnClick="btnLogin_Click" CssClass="btn btn-md btn-success btn-block" />
+                                        <asp:Button ID="btnDoiMK" runat="server" Text="Đổi Mật Khẩu" OnClick="btnDoiMK_Click" CssClass="btn btn-md btn-success btn-block" />
                                     </div>
                                     <div class="col-md-6 text-center">
                                         

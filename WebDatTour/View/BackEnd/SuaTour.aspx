@@ -17,15 +17,19 @@
                         <div class="form-group">
                             <label>Tiêu Đề Tour:</label>
                             <asp:TextBox ID="txtTieuDe" runat="server" CssClass="form-control" placeholder="Tiêu Đề"></asp:TextBox>
+                            
                         </div>
                         <div class="form-group">
                             <label>Số Ngày Đi:</label>
                             <asp:TextBox ID="txtSoNgayDi" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"  ControlToValidate="txtSoNgayDi" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Số Chỗ</label>
                            <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control" placeholder="" TextMode="number" ></asp:TextBox>
-                        </div>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="txtSoCho" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                       <asp:RangeValidator ID="da" runat="server" MinimumValue="1" ControlToValidate="txtSoCho" ErrorMessage="*"></asp:RangeValidator>
+                            </div>
                         <div class="form-group">
                             <label>Hình Ảnh Bìa</label>
                             <asp:FileUpload ID="fAnhBia" runat="server" ></asp:FileUpload>
@@ -39,25 +43,32 @@
                     <div class="col-md-5 col-md-offset-0">
                         <div class="form-group">
                             <label>Ngày Khởi Hành</label>
-                            <asp:TextBox ID="txtNgayKhoiHanh1" runat="server" CssClass="form-control" placeholder="" TextMode="Date" ></asp:TextBox>
-                        </div>
+                            <asp:TextBox ID="txtNgayKhoiHanh1" runat="server" CssClass="form-control" placeholder="" TextMode="Date" Visible="false"></asp:TextBox>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6"  ControlToValidate="txtNgayKhoiHanh1" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+
+                            </div>
                         
                         
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá vé Người Lớn</label>
                             <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
-                        </div>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="txtGIaNL" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator1" runat="server" MinimumValue="2" ControlToValidate="txtGIaNL" ErrorMessage="*"></asp:RangeValidator>            
+                            </div>
                         <div class="form-group"  style="width: 180px; float: right">
                             <label>Giá vé Giảm</label>
                             <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
-                        </div>
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" MinimumValue="2" ControlToValidate="txtGiaNLgiam" ErrorMessage="*"></asp:RangeValidator>
+                            </div>
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá Vé Trẻ Em</label>
                             <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4"  ControlToValidate="txtGiaTE" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group" style="width: 180px; float: right">
                             <label>Giá Vé Trẻ Em Giảm</label>
                             <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5"  ControlToValidate="txtGiaTEgiam" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </div>

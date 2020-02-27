@@ -123,13 +123,15 @@ namespace WebDatTour.Model
 
         
             public Boolean doiMatKhau(Object.KhachHang khach)
-        {
+           {
+          //  Debug.WriteLine("doi mat khau idkh mk : " + khach.MatKhau);
             SqlCommand cmd = new SqlCommand("sp_doiMatKhauKH", cn.connect());
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", khach.MaKH);
             cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(khach.MatKhau));
             //cnn.Open();
             int i = cmd.ExecuteNonQuery();
+          ///  Debug.WriteLine("doi mat khau i : " + i);
             if (i > 0)
             {
                
@@ -140,7 +142,7 @@ namespace WebDatTour.Model
             {
                 return false;
             }
-        }
+       }
 
         public DataTable layDSKH()
         {

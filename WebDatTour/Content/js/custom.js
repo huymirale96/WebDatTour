@@ -5,6 +5,45 @@
     document.execCommand("copy");
     $temp.remove();
 }
+
+function suaBinhLuan(id, idtour) {
+    //alert("id : " + id + "  " + $("#bl_" + id).text());
+    var binhLuan = "<label for='txtBinhLuanSua'>Nội Dung</label><input type='text' class='form-control' id='txtBinhLuanSua' value='" + $("#bl_" + id).text() + "'/><label id='btnSua' class='label label-default' onclick='hoanThanhSuaBL(" + id + "," + idtour+")'>Chỉnh Sửa</label>";
+    $("#suablDiv").html(binhLuan);
+    $("#modalSuaBinhLuan").modal();
+}
+function hoanThanhSuaBL(id,idtour)
+{
+    alert("id : " + id + "  " + $("#txtBinhLuanSua").val());
+    $.ajax({
+        type: 'post',
+        url: 'xemchitiettour.aspx/suaBinhLuan',
+        data: "{ 'id' : '" + id + "', 'noidung' : '" + $("#txtBinhLuanSua").val() + "', 'idtour' : '" + idtour +  "' }",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (result) {
+            // alert("We returned: " + result.d);
+            //alert("dnag nhap " + result.d);
+            var cmt = "";
+            $.each(JSON.parse(result.d), function (index, item) {
+                cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p>" + item.sNoiDung + "</p>" + "<label  class='label label-info' onclick = 'suaBinhLuan(" + item.iMaBinhLuan + "," + item.iMaTour + ")' > Chỉnh Sửa</label>" + "</div></div></div></div></li>";
+            });
+            // alert(cmt);
+
+            $("#listCommnent_").html(cmt);
+            $("#txtBinhLuan_").val("");
+            $("#modalSuaBinhLuan").modal('hide');
+            // var string = "<a href='#' id='tendn' title='Features'>" + result.d + "</a><ul id='dangNhap' > <li><a href='taikhoan.aspx'>Tài Khoản</a></li> <li><a href='thongtinkhachhang.aspx'>Thông Tin</a></li><li> <a href = 'DanhSachCacTourDaDat.aspx' > Các Đơn Đặt Tour</a ></li > <li><a href='doimatkhau.aspx'>Đổi Mật Khẩu</a></li><li><a href='index.aspx?chucNang=dangxuat'>Đăng Xuất</a></li></ul >";
+            //$('#daDangNhap').html(string);
+            //$('#myModal1').modal('hide');
+
+        }
+    });
+    
+}
     function up()
 {
         var x = $('#id1').val();
@@ -132,11 +171,20 @@ $("#formdk").submit(function (e) {
         alert('Bạn chưa nhập email.');
         return false;
     }
+   
+    if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/i.test(mail))
+    {
+      //  alert('Bạn nhập đunhgs email.');
+    }
+    else {
+        alert('Bạn nhập sai email.');
+        return false;
+    }
     var self = this;
         var id = $("#txtTenDK").val();
-        alert("Ten: " + id);
+       // alert("Ten: " + id);
         if (id != '') {
-            alert("khach ''");
+           // alert("khach ''");
             $.ajax({
                 type: 'post',
                 url: 'index.aspx/kiemTraTen',
@@ -148,7 +196,7 @@ $("#formdk").submit(function (e) {
                     return false;
                 },
                 success: function (result) {
-                    alert("We returned: " + result.d);
+                  //  alert("We returned: " + result.d);
                     if (result.d == true) {
                         alert("We true: ");
                         $("#noTi").html("Tên Đăng Nhập đúng.");
@@ -169,6 +217,11 @@ $("#formdk").submit(function (e) {
 
     
 $(document).ready(function () {
+
+  /*  $.validator.addMethod("txtMKDN", function (value, element) {
+        return this.optional(element) || /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(value);
+    }, "Mật Khẩu Nhất 8 kí tự bao gồm cả số và chữ.");*/
+
    // alert(kiemTraTen("aada"));
     $('.carousel[data-type="multi"] .item').each(function () {
         var next = $(this).next();
@@ -224,6 +277,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     $("#formdk").validate({
         rules: {
             txtHTDK: "required",
@@ -231,7 +286,16 @@ $(document).ready(function () {
             txtSDTDK: {
                 required: true,
                 minlength: 2
+            },
+            txtMKDK: "required",
+               // : "required",
+            txtSDTDK: "required",
+            txtDCDK: "required",
+            txtEmalDK: {
+                required: true,
+                regex: '/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/'
             }
+
         },
         messages: {
             txtHTDK: "Vui lòng nhập họ tên. ",
@@ -239,7 +303,15 @@ $(document).ready(function () {
             txtSDTDK: {
                 required: "Vui lòng nhập sdt",
                 minlength: "Ngắn vậy, chém gió ah?"
-            }
+            },
+            txtMKDK: "Vui lòng nhập mật khẩu. ",
+            txtDCDK: "Vui lòng địa chỉ. ",
+            txtSDTDK: "Vui lòng nhập sdt",
+            txtEmalDK: {
+                required: "Vui lòng nhập email. ",
+                regex: "Vui lòng nhập đúng email. "
+            },
+
         }
     });
 
@@ -264,26 +336,42 @@ $(document).ready(function () {
 
     $('#btndangnhap').click(function () {
        // alert("btndangnhap");
-        console.log("btn dnag nhap");
-        $.ajax({
-            type: 'post',
-            url: 'index.aspx/dangnhapkh',
-            data: "{ 'ten' : '" + $("#txtTenDN").val() + "', 'mk' : '" + $("#txtMKDN").val() + "' }", 
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
-            },
-            success: function (result) {
-                // alert("We returned: " + result.d);
-                console.log(  "dnag nhap " + result.d);
-                // $("#bodyThoiGian").html(x);
-                var string = "<a href='#' id='tendn' title='Features'>" + result.d + "</a><ul id='dangNhap' > <li><a href='#'>Tài Khoản</a></li> <li><a href='thongtinkhachhang.aspx'>Thông Tin</a></li><li> <a href = 'DanhSachCacTourDaDat.aspx' > Các Đơn Đặt Tour</a ></li > <li><a href='doimatkhau.aspx'>Đổi Mật Khẩu</a></li><li><a href='index.aspx?chucNang=dangxuat'>Đăng Xuất</a></li></ul >";
-                $('#daDangNhap').html(string);
-                $('#myModal1').modal('hide');
+        console.log("btn dnag nhap" + $("#txtMKDN").val());
+        var mk = $("#txtMKDN").val();
+        //alert('ok1s' + mk);
+        if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(mk))  //huyhuy123
+        {
+            
+           // alert('ok');
+            $.ajax({
+                type: 'post',
+                url: 'index.aspx/dangnhapkh',
+                data: "{ 'ten' : '" + $("#txtTenDN").val() + "', 'mk' : '" + $("#txtMKDN").val() + "' }",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+                },
+                success: function (result) {
+                    // alert("We returned: " + result.d);
+                    console.log("dnag nhap " + result.d);
+                    // $("#bodyThoiGian").html(x);
+                    if (result.d != "") {
+                        var string = "<a href='#' id='tendn' title='Features'>" + result.d + "</a><ul id='dangNhap' > <li><a href='#'>Tài Khoản</a></li> <li><a href='thongtinkhachhang.aspx'>Thông Tin</a></li><li> <a href = 'DanhSachCacTourDaDat.aspx' > Các Đơn Đặt Tour</a ></li > <li><a href='doimatkhau.aspx'>Đổi Mật Khẩu</a></li><li><a href='index.aspx?chucNang=dangxuat'>Đăng Xuất</a></li></ul >";
+                        $('#daDangNhap').html(string);
+                        $('#myModal1').modal('hide');
+                    }
+                    else {
+                        $("#thongBaoDangNhap").html("Đăng Nhập Sai.");
+                    }
 
-            }
-        });
+                }
+            });
+        }
+        else {
+            $("#thongBaoDangNhap").html("Mật Khẩu Không Đúng");
+        }
+        
     });
 
 

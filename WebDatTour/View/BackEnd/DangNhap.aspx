@@ -40,10 +40,13 @@
                                 <fieldset>
                                     <div class="form-group">
                                         <asp:TextBox ID="txtTaiKhoan" CssClass="form-control" runat="server" placeholder="Tài khoản"></asp:TextBox>
+                                         <asp:RequiredFieldValidator ID="a1"  ControlToValidate="txtTaiKhoan" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="form-group">
-                                        <asp:TextBox ID="txtMatKhau" TextMode="Password" CssClass="form-control" runat="server" placeholder="Mật khẩu"></asp:TextBox>
-                                    </div>
+                                        <asp:TextBox ID="txtMatKhau" TextMode="Password" CssClass="form-control" runat="server" placeholder="Mật khẩu"></asp:TextBox> <!--Tối thiểu tám ký tự, ít nhất một chữ cái và một số:-->
+                                         <asp:RequiredFieldValidator ID="txtMatKhaus"  ControlToValidate="txtMatKhau" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="regex" runat="server" ControlToValidate="txtMatKhau" ErrorMessage="*" ForeColor="Red"  ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"></asp:RegularExpressionValidator>
+                                    </div>   
                                     <div class="col-md-12 text-center">
                                         <asp:Label ID="lblNoti" runat="server" Text="" CssClass="text-danger"></asp:Label>
                                     </div>

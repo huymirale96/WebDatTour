@@ -15,6 +15,7 @@
                         <div class="form-group">
                             <label>Họ Và Tên</label>
                             <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="NguyenVanA"></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator1"  ControlToValidate="txtName" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Tên Đăng Nhập</label>
@@ -23,10 +24,12 @@
                         <div class="form-group">
                             <label>Mật Khẩu</label>
                            <asp:TextBox ID="txtMK" runat="server" CssClass="form-control" placeholder="" TextMode="Password" ></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator4"  ControlToValidate="txtMK" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Quê Quán</label>
                             <asp:TextBox ID="queQuan" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="txtMK" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>User Level</label>
@@ -45,6 +48,7 @@
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
                             <asp:TextBox ID="txtSDT" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="txtSDT" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Ngày Sinh</label>

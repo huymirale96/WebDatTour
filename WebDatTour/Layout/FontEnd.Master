@@ -95,6 +95,7 @@
                           <input type="password" class="form-control" name="txtMKDN"  id="txtMKDN"/>
                         </div>
                         <div class="form-group">
+                            <p id="thongBaoDangNhap" class="text-info"></p>
                            <!--<input type="submit" value="Đăng Nhập"/>-->
                             <button id="btndangnhap" >Đăng Nhập</button>
                         </div>
@@ -153,7 +154,7 @@
                         </div>
                         <div class="form-group">
                             <label>Địa Chỉ</label>
-                            <input type="text" class="form-control" name="txtDCDK" />
+                            <input type="text" class="form-control" name="txtDCDK" id="txtDCDK" />
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using WebDatTour.Object;
 using System.Web.Services;
 using Newtonsoft.Json;
+using WebDatTour.Model;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -19,6 +20,7 @@ namespace WebDatTour.View.FontEnd
     {
         TourController tourController = new TourController();
         BinhLuanController binhLuanController = new BinhLuanController();
+        BinhLuanModel binhLuanModel = new BinhLuanModel();
         protected void Page_Load(object sender, EventArgs e)
         {
            if(HttpContext.Current.Session["maKH"].ToString().Equals(""))
@@ -249,6 +251,31 @@ namespace WebDatTour.View.FontEnd
             }
             return false;
         }
-        
+        public string suaBinhluan(string id, string tour)
+        {
+            if(binhLuanModel.kiemTraBinhLuanKH(Session["maKH"].ToString(), id))
+            {
+                return " <label  class='label label-info' onclick='suaBinhLuan(" + id +"," + tour+")'>Chỉnh Sửa</label>";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        [WebMethod]
+        public static string suaBinhLuan(string id, string noidung, string idtour)
+        {
+            BinhLuanController binhLuanController_ = new BinhLuanController();
+            BinhLuanModel binhLuanModel = new BinhLuanModel();
+            if(binhLuanModel.suaBinhLuan(id,noidung))
+            {
+                return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
+            }
+            else
+            {
+                return null;
+            }
+
+        }
     }
 }
