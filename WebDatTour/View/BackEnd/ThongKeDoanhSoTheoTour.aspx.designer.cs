@@ -10,7 +10,7 @@
 namespace WebDatTour.View.BackEnd {
     
     
-    public partial class ThongKeSoCho {
+    public partial class ThongKeDoanhSoTheoTour {
         
         /// <summary>
         /// txtTieuDe control.

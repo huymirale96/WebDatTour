@@ -57,7 +57,7 @@ namespace WebDatTour.View.FontEnd
         {
             Debug.WriteLine("id tour cho ngay di: " + id);
             DataTable table = tourController.layNgayDiTour(id);
-            string x = "";
+            string x = "<option value='none'>Thời Gian Khởi Hành</option>";
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 x += "<option value='" + table.Rows[i]["imathoigian"].ToString() + "'>" + DateTime.Parse(table.Rows[i]["dthoigian"].ToString()).ToString("dd-MM-yyyy") + "</option>";
@@ -88,8 +88,8 @@ namespace WebDatTour.View.FontEnd
 
                     txtNKH.InnerHtml = rd["sNoiKhoiHanh"]+ "";
                     txtTG.InnerHtml = rd["stongthoigian"] + "";
-                    txtTE.InnerHtml = "<p style='color: red; display: inline;'>"+rd["igiate"] + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + rd["igiategiam"] + "</b>VND";
-                    txtNL.InnerHtml = "<p style='color: red;display: inline;'>" + rd["igianl"] + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + rd["igiategiam"] + "</b>VND";
+                    txtTE.InnerHtml = "<strike style='color: red; display: inline;'>"+Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
+                    txtNL.InnerHtml = "<strike style='color: red;display: inline;'>" + Convert.ToInt32(rd["igianl"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
                         string[] urls = rd["sUrlAnh"].ToString().Split('/');  
                     //System.Diagnostics.Debug.WriteLine("url: " + urls[0]);
                     anhDD.InnerHtml = "<img src='../../Content/images/"+ urls[0] + "' alt=' 'class='alignleft img-responsive'>";
@@ -234,21 +234,60 @@ namespace WebDatTour.View.FontEnd
                 return null;
             }
         }
+        
+            [WebMethod]
+        public static string kiemTraSoChoCon(string idtour, string idthoigian)
+        {
+          //   Debug.WriteLine("idkt " + idthoigian + idtour);
+            //return id+idtour;
+
+            TourController tourController = new TourController();
+           string i = tourController.kiemTraSoChoCon(idtour, idthoigian);
+            //.Debug.WriteLine("idso " + i);
+            if ( i!= null)
+                {
+                return i;
+                }
+            
+            else
+            {
+                return null;
+            }
+        }
         public Boolean kiemTraQuyenBinhLuan()
         {
-          //  Debug.WriteLine(Request.QueryString["id"].ToString() +"  " + Session["maKH"].ToString());
+            //Debug.WriteLine("ktea quyen " + Session["maKH"].ToString());
+            // Debug.WriteLine(Request.QueryString["id"].ToString() +"  " + Session["maKH"].ToString() + " ktra quen" );
             if (Request.QueryString["id"] != null)
             {
-                Debug.WriteLine(Request.QueryString["id"].ToString() + "  " + Session["maKH"].ToString());
+               // Debug.WriteLine(Request.QueryString["id"].ToString() + "  " + Session["maKH"].ToString());
                 if (!Session["maKH"].ToString().Equals("") && binhLuanController.kiemTraQuyenBinhLuan(Session["maKH"].ToString(), Request.QueryString["id"].ToString()))
                 {
+                    Debug.WriteLine("cos quyen ");
                     return true;
                 }
                 else
                 {
+                    Debug.WriteLine("k cos quyen ");
                     return false;
                 }
             }
+            else
+            {
+                if(maTour_.Value != null)
+                {
+                    if(binhLuanController.kiemTraQuyenBinhLuan(Session["maKH"].ToString(), maTour_.Value))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+            }
+
             return false;
         }
         public string suaBinhluan(string id, string tour)
@@ -267,9 +306,24 @@ namespace WebDatTour.View.FontEnd
         {
             BinhLuanController binhLuanController_ = new BinhLuanController();
             BinhLuanModel binhLuanModel = new BinhLuanModel();
+            string makh = HttpContext.Current.Session["maKH"].ToString();
             if(binhLuanModel.suaBinhLuan(id,noidung))
             {
-                return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
+                DataTable dataTable = binhLuanController_.layBinhLuan(Convert.ToInt32(idtour));
+                dataTable.Columns.Add("check", typeof(System.Int32));
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    //need to set value to NewColumn column
+                    if (row["iMaKhachHang"].ToString().Equals(makh))
+                    {
+                        row["check"] = 1;   // or set it to some other value
+                    }
+                    else
+                    {
+                        row["check"] = 0;
+                    }
+                }
+                return JsonConvert.SerializeObject(dataTable);
             }
             else
             {

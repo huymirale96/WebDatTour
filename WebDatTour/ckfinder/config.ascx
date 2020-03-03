@@ -35,7 +35,7 @@
 
 		// The phisical directory in the server where the file will end up. If
 		// blank, CKFinder attempts to resolve BaseUrl.
-		BaseDir = "D:\Do an\WebDatTour\WebDatTour\Upload";
+		//BaseDir = "D:\Do an\WebDatTour\WebDatTour\Upload";
 
 		// Optional: enable extra plugins (remember to copy .dll files first).
 		Plugins = new string[] {

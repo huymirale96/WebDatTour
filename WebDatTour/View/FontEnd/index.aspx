@@ -38,7 +38,7 @@
         </style>
                     <div class="container-fluid">
                     <div class="row" >
-                    <div class="col-lg-10 col-md-10">
+                    <div class="col-lg-10 col-md-10" style="margin-top: 24px;">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -62,7 +62,7 @@
                             <div class="zoom">                       
                                 <img src="../../Upload/<%# anhDaiDien(Eval("sUrlAnh").ToString()) %>" width="320px" height="200px" >
                                 </div>
-                                  <div style="height:45px; margin-top: 5x;">
+                                  <div style="height:45px; margin-top: 5px;">
                         <p class="text-left" style="font-family: 'Roboto', sans-serif; line-height:20px; color: #18150d"><b><%# Eval("sTieuDe").ToString() %></b></p>
                             </a>
                                 </div>
@@ -212,13 +212,8 @@
                             <!-- /input-group -->
                         </form>
 
-                       <ul style="list-style-type: none;">
-                           <li>Nhom 1 </li>
-                           <li>Nhom 1 </li>
-                           <li>Nhom 1 </li>
-                           <li>Nhom 1 </li>
-                           <li>Nhom 1 </li>
-                       </ul>
+                       
+
                     </div>
                           <!--  <div class="row" style="border-bottom: 1px solid #f4f1ec; margin: 10px;">
                             <div class="col-md-10 col-lg-10 col-md-offset-1">
@@ -258,6 +253,19 @@
                         
                                     
                </div>
+                         <div class="col-md-2">
+            <nav class="nav-sidebar">
+                <ul class="nav mt20 text-center" style="color:#18150d;">
+                    <li class="active"><a href="javascript:;"><h2>Danh Mục</h2></a></li>
+                    <li ><a style="color:#18150d;" href="tourmoinhat.aspx">Tour Mới Nhất</a></li>
+                    <li ><a style="color:#18150d;" href="tournoibattrongtuan.aspx">Tour Nổi Bật</a></li>
+                    <li ><a style="color:#18150d;" href="tournoibatthang.aspx">Tour Mua Nhiều Trong Tháng</a></li>
+                    <li><a href="javascript:;">FAQ</a></li>
+                    <li class="nav-divider"></li>
+                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> xxx</a></li>
+                </ul>
+            </nav>
+        </div>
         
     <div class="space-medium">
         <div class="container">

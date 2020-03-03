@@ -51,7 +51,7 @@
 											        <td class="text-center">
                                                         <button class="btn btn-xs btn-success" <%# (Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu"))) == 0 ? "style='display: none;'" : "" %> onclick ="thanhToan(<%# Eval("iMaDonDatTour") %>,<%# Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu")) %>)">Thanh Toán Nốt<br /></button>
                                                          <br />
-                                                        <button class="btn btn-xs btn-warning" onclick="huyTour(<%# Eval("iMaDonDatTour") %>)">Hủy Tour</button>
+                                                        <button class="btn btn-xs btn-warning"  <%# hienHuyTour(Eval("itrangthai").ToString()) %> onclick="huyTour(<%# Eval("iMaDonDatTour") %>)">Hủy Tour</button>
 												        
 											        </td>
 									            </tr>

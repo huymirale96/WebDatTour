@@ -26,11 +26,16 @@ function hoanThanhSuaBL(id,idtour)
         },
         success: function (result) {
             // alert("We returned: " + result.d);
-            //alert("dnag nhap " + result.d);
+            alert("dnag nhap " + result.d);
             var cmt = "";
             $.each(JSON.parse(result.d), function (index, item) {
-                cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p>" + item.sNoiDung + "</p>" + "<label  class='label label-info' onclick = 'suaBinhLuan(" + item.iMaBinhLuan + "," + item.iMaTour + ")' > Chỉnh Sửa</label>" + "</div></div></div></div></li>";
-            });
+                if (item.check == 1) {
+                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p id='bl_" + item.iMaBinhLuan + "'>" + item.sNoiDung + "</p>" + "<label  class='label label-info' onclick = 'suaBinhLuan(" + item.iMaBinhLuan + "," + item.iMaTour + ")' > Chỉnh Sửa</label>" + "</div></div></div></div></li>";
+                }
+                else {
+                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p id='bl_" + item.iMaBinhLuan + "'s>" + item.sNoiDung + "</p>" + "" + "</div></div></div></div></li>";
+                }
+                });
             // alert(cmt);
 
             $("#listCommnent_").html(cmt);
@@ -45,21 +50,31 @@ function hoanThanhSuaBL(id,idtour)
     
 }
     function up()
-{
-        var x = $('#id1').val();
-        x++; 
-        $('#id1').val(x);
-        var giaNL = $('#giaNL').val();
-        var giaTE = $('#giaTE').val();
-        var y = $('#id2').val();
+    {
+       // alert($('#id1').val() + "  " +  $('#id2').val() + "  " + $('#soChoToiDa').val());
+        var soCho1 = parseInt($('#id1').val());
+        var soCho2 = parseInt($('#id2').val());
+        var tongcho = soCho1 + soCho2;
+        var toida = parseInt($('#soChoToiDa').val());
+       // alert(toida + "  " + tongcho);
+        if (tongcho < toida)
+        {
+            var x = $('#id1').val();
+            x++;
+            $('#id1').val(x);
+            var giaNL = $('#giaNL').val();
+            var giaTE = $('#giaTE').val();
+            var y = $('#id2').val();
         var tong = x * giaNL + y * giaTE;
-        $('#tongTien').html( tong.toLocaleString() + " &nbspVNĐ");
+       // alert(tong);
+            $('#tongTien').html("Tổng Tiền: " + tong.toLocaleString() + " &nbspVNĐ");
+       }
     //alert(x);
     }
     function dow()
 {
 var x = $('#id1').val();
-    if(x != 1)
+    if(x != 1 && x !=0 )
 {
         x--;
         $('#id1').val(x);
@@ -68,22 +83,29 @@ var x = $('#id1').val();
         var giaTE = $('#giaTE').val();
         var y = $('#id2').val();
         var tong = x * giaNL + y * giaTE;
-        $('#tongTien').html( tong.toLocaleString() + " &nbspVNĐ");
+        $('#tongTien').html("Tổng Tiền: " +  tong.toLocaleString() + " &nbspVNĐ");
     }
     }
     
     function up2()
-{
-var y = $('#id2').val();
-    //alert(x);
-    y++;
-       // $('#id2').val(x);
-        $('#id2').val(y);
-        var giaNL = $('#giaNL').val();
-        var giaTE = $('#giaTE').val();
-        var x = $('#id1').val();
-        var tong = x * giaNL + y * giaTE;
-        $('#tongTien').html( tong.toLocaleString() + " &nbspVNĐ");
+    {
+        var soCho1 = parseInt($('#id1').val());
+        var soCho2 = parseInt($('#id2').val());
+        var tongcho = soCho1 + soCho2;
+        var toida = parseInt($('#soChoToiDa').val());
+        // alert(toida + "  " + tongcho);
+        if (tongcho < toida) {
+            var y = $('#id2').val();
+            //alert(x);
+            y++;
+            // $('#id2').val(x);
+            $('#id2').val(y);
+            var giaNL = $('#giaNL').val();
+            var giaTE = $('#giaTE').val();
+            var x = $('#id1').val();
+            var tong = x * giaNL + y * giaTE;
+            $('#tongTien').html("Tổng Tiền: " + tong.toLocaleString() + " &nbspVNĐ");
+        }
     }
     function dow2()
 {
@@ -96,7 +118,7 @@ var y = $('#id2').val();
         var giaTE = $('#giaTE').val();
         var x = $('#id1').val();
         var tong = x * giaNL + y * giaTE;
-        $('#tongTien').html( tong.toLocaleString() + " &nbspVNĐ");
+        $('#tongTien').html("Tổng Tiền: " +  tong.toLocaleString() + " &nbspVNĐ");
    // $('#id2').val(x);
     }
 }
@@ -223,6 +245,35 @@ $(document).ready(function () {
     }, "Mật Khẩu Nhất 8 kí tự bao gồm cả số và chữ.");*/
 
    // alert(kiemTraTen("aada"));
+    $('#mangaydi').on('change', function () {
+      // alert(this.value);
+        $('#id1').val("0");
+        $('#id2').val("0");
+        
+        if (this.value != "none") {
+            $.ajax({
+                type: 'post',
+                url: 'xemchitiettour.aspx/kiemTraSoChoCon',
+                data: "{ 'idtour' : '" + $("#idTour").val() + "', 'idthoigian' : '" + this.value + "' }",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+                },
+                success: function (result) {
+                   // alert("We returned: " + result.d);
+                    // alert("dnag nhap " + result.d);thongBaoSoCho
+                    $("#thongBaoSoCho").html("Số Chỗ Còn Là: "+result.d);
+                    $("#soChoToiDa").val(result.d);
+                   // $("#btnUpDow").removeProp("disabled", true);
+
+
+                }
+            });
+        }
+    });
+
+
     $('.carousel[data-type="multi"] .item').each(function () {
         var next = $(this).next();
         if (!next.length) {

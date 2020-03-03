@@ -115,13 +115,14 @@
   
     $("#btnThemNgay").click(function () {
         var ngay = $("#txtNgayDiThem").val();
+        var hanDat = $("#txtHanDat").val(); 
        // alert(ngay + "   " + $("#matour_").val());
        // console.log("ngay: " + ngay);
         if (ngay != '') {
             $.ajax({
                 type: 'post',
                 url: 'suatour.aspx/themThoiGianKhoiHanh',
-                data: "{ 'id' : '" + $("#matour_").val() + "', 'date' : '" + ngay + "' }",
+                data: "{ 'id' : '" + $("#matour_").val() + "', 'date' : '" + ngay + "', 'hanDat' : '" + hanDat + "' }",
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -138,7 +139,7 @@
 
                     $.each(a, function (index, item) {
 
-                        xx += "<tr><td class='text-center'>" + (index + 1) + "</td><td class='text-center'>" + item.dThoiGian + "</td><td class='text-center'><a href='SuaTour.aspx/?chucNang=cn1&amp;tg=" + item.iMaThoiGian + "&amp;tour=" + item.iMaTour + "'></a><label onclick='anhienthoigian(" + item.iMaThoiGian +")' ";
+                        xx += "<tr><td class='text-center'>" + (index + 1) + "</td><td class='text-center'>" + moment(item.dThoiGian).format('DD-MM-YYYY') + "</td><td class='text-center'>" + moment(item.dHanDatTour).format('DD-MM-YYYY')  + "</td><td class='text-center'><a href='SuaTour.aspx/?chucNang=cn1&amp;tg=" + item.iMaThoiGian + "&amp;tour=" + item.iMaTour + "'></a><label onclick='anhienthoigian(" + item.iMaThoiGian +")' ";
 
                         if (item.trangThai == false) {
                             xx += "class='label label-warning'>Ẩn </label></td></tr>";
@@ -194,7 +195,7 @@ function anhienthoigian(id, idtour)
             var a = JSON.parse(data.d);
             $.each(a, function (index, item) {
 
-                xx += "<tr><td class='text-center'>" + (index + 1) + "</td><td class='text-center'>" + item.dThoiGian + "</td><td class='text-center'><a href='SuaTour.aspx/?chucNang=cn1&amp;tg=" + item.iMaThoiGian + "&amp;tour=" + item.iMaTour + "'></a><label onclick='anhienthoigian(" + item.iMaThoiGian + "," + item.iMaTour + ")' ";
+                xx += "<tr><td class='text-center'>" + (index + 1) + "</td><td class='text-center'>" + moment(item.dThoiGian).format('DD-MM-YYYY') + "</td><td class='text-center'>" + moment(item.dHanDatTour).format('DD-MM-YYYY') +  "</td><td class='text-center'><a href='SuaTour.aspx/?chucNang=cn1&amp;tg=" + item.iMaThoiGian + "&amp;tour=" + item.iMaTour + "'></a><label onclick='anhienthoigian(" + item.iMaThoiGian + "," + item.iMaTour + ")' ";
 
                 if (item.trangThai === false) {
                     xx += "class='label label-warning'>Ẩn </label></td></tr>";

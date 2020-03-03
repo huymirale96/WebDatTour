@@ -16,12 +16,12 @@ namespace WebDatTour.Model
         Connector cn = new Connector();
         public DataTable layDanhSachTour()
         {
-            System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
+            //System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
             //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             // using (SqlConnection cnn = new SqlConnection(ck))
             {
-                SqlCommand cmd = new SqlCommand("sp_dstour1", cn.connect());
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("select * from tbltour order by dngaytao DESC", cn.connect());
+                cmd.CommandType = CommandType.Text;
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -114,6 +114,26 @@ namespace WebDatTour.Model
                 SqlDataReader rd = cmd.ExecuteReader();
                 /// cn.disconnect();
                 return rd;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public DataTable xemTour3(String id)
+        {
+            Debug.WriteLine("Xem tourr");
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_xemTourId", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
 
             }
             catch (Exception ex)
@@ -228,7 +248,7 @@ namespace WebDatTour.Model
             Debug.WriteLine("lay ngay di tour");
             try
             {
-                string sqlStr = "select * from tblThoiGianKhoiHanh where imatour = " + id + " order by dthoigian ASC ";
+                string sqlStr = "select * from tblThoiGianKhoiHanh where trangThai = 1 and dthoigian > getdate() and imatour = " + id + " order by dthoigian ASC ";
 
                 SqlCommand cmd2 = new SqlCommand(sqlStr, cn.connect());
                 SqlDataAdapter da = new SqlDataAdapter(cmd2);
@@ -247,7 +267,36 @@ namespace WebDatTour.Model
                 return null;
             }
         }
-        public Boolean themThoiGianKhoiHanh(int id, DateTime date)
+        
+            public string kiemTraSoChoCon(string idtour, string idtg)
+        {
+            Debug.WriteLine("lay ngay di tour");
+            try
+            {
+                //string sqlStr = "select * from tblThoiGianKhoiHanh where imatour = " + id + " order by dthoigian ASC ";
+
+                SqlCommand cmd2 = new SqlCommand("sp_layChoChoCon", cn.connect());
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@idtour", idtour);
+                cmd2.Parameters.AddWithValue("@idtg", idtg);
+                SqlDataAdapter da = new SqlDataAdapter(cmd2);
+                //SqlDataReader rd2 = cmd2.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                da.Fill(dataTable);
+                cn.disconnect();
+               // Debug.Write("return : " + dataTable.Rows[0]["sochocon"].ToString());
+                return dataTable.Rows[0]["sochocon"].ToString();
+
+
+
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public Boolean themThoiGianKhoiHanh(int id, DateTime date, DateTime hanDat)
         {
 
 
@@ -256,6 +305,8 @@ namespace WebDatTour.Model
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@imatour", id);
             cmd.Parameters.AddWithValue("@thoigian", date);
+            cmd.Parameters.AddWithValue("@hanDat", hanDat);
+             
 
             //cnn.Open();
             int i = cmd.ExecuteNonQuery();
@@ -273,7 +324,32 @@ namespace WebDatTour.Model
 
         }
 
+        
+              public Boolean capNhatTrangThaiTour(string id)
+        {
 
+
+         //   Debug.WriteLine("id: " + id);
+            SqlCommand cmd = new SqlCommand("sp_trangThaiTour", cn.connect());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+           // cmd.Parameters.AddWithValue("@thoigian", date);
+
+            //cnn.Open();
+            int i = cmd.ExecuteNonQuery();
+            if (i > 0)
+            {
+
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         public DataTable thongKeTour_soCho()
         {
             // Debug.WriteLine("lay ngay di tour");
@@ -406,6 +482,28 @@ namespace WebDatTour.Model
 
         }
         
+             public DataTable tourhotThang()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("tourhotThang", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                // cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+
 
     }
 

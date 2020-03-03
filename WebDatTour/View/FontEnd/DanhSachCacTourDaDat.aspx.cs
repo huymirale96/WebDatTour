@@ -227,5 +227,18 @@ namespace WebDatTour.View.FontEnd
 
             }
         }
+        
+            public string hienHuyTour(string id)
+        {
+            switch (id)
+            {
+                case "0": return "";
+                case "1": return "";
+                case "2": return "style='display: none'";
+                case "3": return "style='display: none'";
+                default: return "";
+
+            }
+        }
     }
 }

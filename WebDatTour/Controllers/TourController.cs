@@ -58,12 +58,17 @@ namespace WebDatTour.Controllers
             return tourModel.layNgayDiTour(id);
         }
         
-            public Boolean themThoiGianKhoiHanh(int id, DateTime date)
+            public Boolean themThoiGianKhoiHanh(int id, DateTime date, DateTime hanDat)
         {
-            return tourModel.themThoiGianKhoiHanh(id, date);
+            return tourModel.themThoiGianKhoiHanh(id, date,hanDat);
         }
         
-             public DataTable thongKeTour_soCho()
+            public Boolean capNhatTrangThaiTour(string id)
+        {
+            return tourModel.capNhatTrangThaiTour(id);
+        }
+
+        public DataTable thongKeTour_soCho()
         {
             return tourModel.thongKeTour_soCho();
         }
@@ -72,7 +77,10 @@ namespace WebDatTour.Controllers
         {
             return tourModel.timKiemTour(ten);
         }
-
+        public string kiemTraSoChoCon(string idtour, string tdtg)
+        {
+            return tourModel.kiemTraSoChoCon(idtour, tdtg);
+        }
         public DataTable timSoCHo_Tour(string tour)
         {
             return tourModel.timSoCHo_Tour(tour);
@@ -91,6 +99,11 @@ namespace WebDatTour.Controllers
               public DataTable tourhotTuan()
         {
             return tourModel.tourhotTuan();
+        }
+        
+            public DataTable tourhotThang()
+        {
+            return tourModel.tourhotThang();
         }
     }
 }

@@ -2,6 +2,7 @@
 <asp:Content ID="content" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <form method="POST" class="form-horizontal" runat="server" enctype="multipart/form-data">
+        <asp:HiddenField ID="page_" runat="server" Value="1"/>
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -19,10 +20,9 @@
                                             <th class="text-center">Tiêu Đề</th>
                                             <th class="text-center">Ảnh Bìa</th>
                                             <th class="text-center">Tổng Thời Gian</th>
-                                            <th class="text-center">Ngày Khởi Hành</th>
+                                            <th class="text-center">Nơi Khởi Hành</th>
                                             <th class="text-center">Số Chỗ</th>
-                                            <th class="text-center">Giá Vé Người Lớn</th>
-                                            <th class="text-center">Giá Vé Trẻ Em</th>
+                                            
                                             <th class="text-center">Thao Tác</th>
                                         </tr>
                                     </thead>
@@ -35,17 +35,11 @@
 										            <td class="left"><%# Eval("sTieuDe") %></td>
                                                     <td class="text-center"><img style="width: 200px;" src="../../Upload/<%# urlAnhh( Eval("sUrlAnh").ToString() ) %>" ></td>
                                                     <td class="left"><%# Eval("sTongThoiGian") %></td>
-										            <td class="text-center"><%# Eval("dNgayKhoiHanh", "{0:dd/MM/yyyy}") %></td>
+										            <td class="text-center"><%# Eval("snoikhoihanh") %></td>
 										            <td class="text-center"><%# Eval("iSoCho") %></td>
-                                                       
-                                                   <td class="text-center">
-                                                       gia 2
-										            </td>
-										            <td class="text-center">
-                                                       gia 1
-										            </td>
+                                                  
 											        <td class="left">
-                                                       
+                                                   <asp:LinkButton ID="btnTrangThai" CssClass="btn btn-xs btn-default" ToolTip="TrangThai" onClick="btnTrangThai_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><%# Eval("btrangthai").ToString().Equals("True") ? "Hiện" : "Ẩn"  %></asp:LinkButton>
 												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-info" ToolTip="Sửa" onClick="btnFix_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
                                                         <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xóa" runat="server" OnClick="btnDelete_Click" OnClientClick="return confirm('Bạn có chắc chắn xoá tour?')" CommandArgument='<%# Eval("iMaTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
 											        </td>

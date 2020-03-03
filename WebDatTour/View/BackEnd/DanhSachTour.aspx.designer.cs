@@ -13,6 +13,15 @@ namespace WebDatTour.View.FontEnd {
     public partial class DanhSachTour {
         
         /// <summary>
+        /// page_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField page_;
+        
+        /// <summary>
         /// rptDanhSachTour control.
         /// </summary>
         /// <remarks>

@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeBehind="TourNoiBatTrongTuan.aspx.cs" Inherits="WebDatTour.View.FontEnd.TourNoiBatTrongTuan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeBehind="TourNoiBatThang.aspx.cs" Inherits="WebDatTour.View.FontEnd.TourNoiBatThang" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div class="row">
         <div  style="margin: 10px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12"> 
-            <h2 style="margin:12px;">DANH SÁCH TOUR NỔI BẬT TRONG TUẦN</h2>
+            <h2 style="margin:12px;">DANH SÁCH TOUR MUA NHIỀU TRONG THÁNG</h2>
         <asp:Repeater ID="rptTour" runat="server">
             <ItemTemplate>
             
@@ -35,7 +35,6 @@
             <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
         </div>
         </div>
-
           <div class="col-lg-2 col-md-2"  style="">
                 <br>
                     <h4 class="text-center">Tìm Kiếm Tour</h4>

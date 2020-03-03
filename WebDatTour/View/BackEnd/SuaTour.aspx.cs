@@ -23,6 +23,7 @@ namespace WebDatTour.View.BackEnd
         String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
         TourController tourController = new TourController();
         TourModel tourModel = new TourModel();
+        NhomTourController nhomTourController = new NhomTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("đâs");
@@ -34,6 +35,7 @@ namespace WebDatTour.View.BackEnd
                 {
                     xemTour(Request.QueryString["id"]);
                     danhSachThoiGianKhoiHanh(Convert.ToInt32(Request.QueryString["id"]));
+                    layNhomTour();
                 }
 
 
@@ -81,9 +83,9 @@ namespace WebDatTour.View.BackEnd
                 cmd.Parameters.AddWithValue("@mota", txtMoTaTour.Text);
                 cmd.Parameters.AddWithValue("@urlanh", suaAnh());
                 cmd.Parameters.AddWithValue("@thoigian", txtSoNgayDi.Text);
-               // cmd.Parameters.AddWithValue("@ngaykhoihanh", txtNgayKhoiHanh1.Text);
+                cmd.Parameters.AddWithValue("@noikhoihanh", txtNoiKhoiHanh.Text);
 
-                cmd.Parameters.AddWithValue("@nhomtour", 19);
+                cmd.Parameters.AddWithValue("@nhomtour", ddlNhomtour.SelectedValue);
                 //cmd.Parameters.AddWithValue("@manv", 1);
                 cmd.Parameters.AddWithValue("@socho", txtSoCho.Text);
                 cmd.Parameters.AddWithValue("@imatour", txtMaTour.Value);
@@ -119,6 +121,13 @@ namespace WebDatTour.View.BackEnd
 
 
         }
+        public void layNhomTour()
+        {
+            ddlNhomtour.DataSource = nhomTourController.danhSachNT();
+            ddlNhomtour.DataTextField = "stennhomtour";
+            ddlNhomtour.DataValueField = "imanhomtour";
+            ddlNhomtour.DataBind();
+        }
         public void danhSachThoiGianKhoiHanh(int id)
         {
             //Repeater rptTG1 = (Repeater)Master.FindControl("MainContent").FindControl("rptTG1");
@@ -146,7 +155,7 @@ namespace WebDatTour.View.BackEnd
                     {
                         idt_.InnerHtml = "<input type='hidden' id='matour_' value='"+ rd["imatour"].ToString() + "'>";
                         txtMaTour.Value = rd["imatour"].ToString();
-                      //  txtTieuDe.Text = rd["sTieuDe"].ToString();
+                         txtTieuDe.Text = rd["sTieuDe"].ToString();
                         txtMoTaTour.Text = rd["sMoTa"].ToString();
                         //String date = String.Format("{0:yyyy-MM-dd}", rd["dNgayKhoiHanh"]);
                        // txtNgayKhoiHanh1.Text = date;
@@ -156,6 +165,8 @@ namespace WebDatTour.View.BackEnd
                         txtGIaNL.Text = rd["igianl"].ToString();
                         txtGiaTE.Text = rd["igiate"].ToString();
                         txtGiaTEgiam.Text = rd["igiategiam"].ToString();
+                        txtNoiKhoiHanh.Text = rd["snoikhoihanh"].ToString();
+                        ddlNhomtour.SelectedValue = rd["iMaNhomTour"].ToString();
 
 
                         string[] tokens = rd["sUrlAnh"].ToString().Split('/');
@@ -200,11 +211,11 @@ namespace WebDatTour.View.BackEnd
         }
 
         [WebMethod]
-        public static String themThoiGianKhoiHanh(string id, string date)
+        public static String themThoiGianKhoiHanh(string id, string date, string hanDat)
         {
             //Debug.WriteLine("id ajax : " + id + " date " + date);
             TourController tourController1 = new TourController();
-            if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date)))
+            if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date), DateTime.Parse(hanDat)))
             {
                 DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
                // Debug.WriteLine(JsonConvert.SerializeObject(table));

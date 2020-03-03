@@ -85,22 +85,22 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.FileUpload fAnhBia;
         
         /// <summary>
-        /// txtNgayKhoiHanh1 control.
+        /// txtNoiKhoiHanh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNgayKhoiHanh1;
+        protected global::System.Web.UI.WebControls.TextBox txtNoiKhoiHanh;
         
         /// <summary>
-        /// RequiredFieldValidator6 control.
+        /// ddlNhomtour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNhomtour;
         
         /// <summary>
         /// txtGIaNL control.

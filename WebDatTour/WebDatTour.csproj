@@ -267,10 +267,12 @@
     <Content Include="View\BackEnd\ThemNhanVien.aspx" />
     <Content Include="View\BackEnd\ThemTour.aspx" />
     <Content Include="View\BackEnd\DanhSachTour.aspx" />
+    <Content Include="View\BackEnd\ThongKeDoanhSoTheoTour.aspx" />
     <Content Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx" />
     <Content Include="View\BackEnd\ThongKeSoCho.aspx" />
     <Content Include="View\BackEnd\ThongTinNhanVien.aspx" />
     <Content Include="View\BackEnd\XemDonDatCuaKhachHang.aspx" />
+    <Content Include="View\FontEnd\loi.aspx" />
     <Content Include="View\FontEnd\ThongTinKhachHang.aspx" />
     <Content Include="View\BackEnd\vnpay_ipn.aspx" />
     <Content Include="View\BackEnd\XemDonDatTour.aspx" />
@@ -282,6 +284,7 @@
     <Content Include="View\FontEnd\TimKiemTour.aspx" />
     <Content Include="View\FontEnd\ToanThanhThanhToan.aspx" />
     <Content Include="View\FontEnd\TourMoiNhat.aspx" />
+    <Content Include="View\FontEnd\TourNoiBatThang.aspx" />
     <Content Include="View\FontEnd\TourNoiBatTrongTuan.aspx" />
     <Content Include="View\FontEnd\XemChiTietTour.aspx" />
     <Content Include="View\FontEnd\xemTourTheoNhom.aspx" />
@@ -492,6 +495,13 @@
     <Compile Include="View\BackEnd\DanhSachTour.aspx.designer.cs">
       <DependentUpon>DanhSachTour.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\BackEnd\ThongKeDoanhSoTheoTour.aspx.cs">
+      <DependentUpon>ThongKeDoanhSoTheoTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongKeDoanhSoTheoTour.aspx.designer.cs">
+      <DependentUpon>ThongKeDoanhSoTheoTour.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx.cs">
       <DependentUpon>ThongKeDoanhThuTheoNgay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -519,6 +529,13 @@
     </Compile>
     <Compile Include="View\BackEnd\XemDonDatCuaKhachHang.aspx.designer.cs">
       <DependentUpon>XemDonDatCuaKhachHang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FontEnd\loi.aspx.cs">
+      <DependentUpon>loi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\FontEnd\loi.aspx.designer.cs">
+      <DependentUpon>loi.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\FontEnd\ThongTinKhachHang.aspx.cs">
       <DependentUpon>ThongTinKhachHang.aspx</DependentUpon>
@@ -596,6 +613,13 @@
     </Compile>
     <Compile Include="View\FontEnd\TourMoiNhat.aspx.designer.cs">
       <DependentUpon>TourMoiNhat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FontEnd\TourNoiBatThang.aspx.cs">
+      <DependentUpon>TourNoiBatThang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\FontEnd\TourNoiBatThang.aspx.designer.cs">
+      <DependentUpon>TourNoiBatThang.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\FontEnd\TourNoiBatTrongTuan.aspx.cs">
       <DependentUpon>TourNoiBatTrongTuan.aspx</DependentUpon>

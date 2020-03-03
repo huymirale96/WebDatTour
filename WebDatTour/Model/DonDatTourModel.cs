@@ -525,5 +525,49 @@ namespace WebDatTour.Model
                 return null;
             }
         }
+        
+              public DataTable thongKeDoanhSoTheoTour(string tour)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_thongkedoanhsotheotour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tour", tour);
+              //  cmd.Parameters.AddWithValue("@ketthuc", kt);
+
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                // Debug.WriteLine(id + "id  -- data: " + JsonConvert.SerializeObject(table));
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        
+             public DataTable thongKeDoanhSoTheoTour_()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_thongkedoanhsotheotatcatour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+               // cmd.Parameters.AddWithValue("@tour", tour);
+                //  cmd.Parameters.AddWithValue("@ketthuc", kt);
+
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                // Debug.WriteLine(id + "id  -- data: " + JsonConvert.SerializeObject(table));
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }

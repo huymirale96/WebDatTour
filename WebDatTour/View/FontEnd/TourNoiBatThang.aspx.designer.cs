@@ -7,28 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebDatTour.View.BackEnd {
+namespace WebDatTour.View.FontEnd {
     
     
-    public partial class ThongKeSoCho {
-        
-        /// <summary>
-        /// txtTieuDe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTieuDe;
-        
-        /// <summary>
-        /// timKiem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button timKiem;
+    public partial class TourNoiBatThang {
         
         /// <summary>
         /// rptTour control.

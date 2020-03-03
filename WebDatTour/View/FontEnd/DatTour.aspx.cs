@@ -20,6 +20,7 @@ namespace WebDatTour.View.FontEnd
         DonDatTourModel danDatTourModel = new DonDatTourModel();
         DonDatTourController datTourController = new DonDatTourController();
         KhachHangModel khachHangModel = new KhachHangModel();
+        TourModel tourModel = new TourModel();
        // HiddenField tien_tt = (HiddenField)FindControl("tien_");
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -168,70 +169,110 @@ namespace WebDatTour.View.FontEnd
 
         protected void btnDatVe_Click(object sender, EventArgs e)
         {
-            //Get Config Info
-            string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
-            string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"]; //URL thanh toan cua VNPAY 
-            string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"]; //Ma website
-            string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"]; //Chuoi bi mat
-
-
-            if (!phanTramDat.Text.Equals("none"))
-            
-               { 
-                // Debug.WriteLine(Convert.ToInt32(tienThanhToan_));
-                DonDatTour donDatTour = new DonDatTour();
-                donDatTour.ChoNL = Convert.ToInt32(iNL.Value);
-                donDatTour.ChoTE = Convert.ToInt32(iTE.Value);
-                donDatTour.MaTour = Convert.ToInt32(tour.Value);
-                donDatTour.GhiChu = txtGhiChu.Text;
-                donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
-                donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
-                donDatTour.MaNgaydi = Convert.ToInt32(maTG.Value);
-                donDatTour.TrangThai = 0;
-                donDatTour.MaKH = 1;
-                float phantram = (float)Convert.ToDouble(phanTramDat.SelectedValue);
-                float tien_1 = Convert.ToInt32(tien_tt.Value) * phantram;
-                int tien_ = Convert.ToInt32(tien_1);
-                Debug.WriteLine(Convert.ToInt32(tien_tt.Value) + "  tien "  + tien_1 + " ma thoi gian : " + maTG.Value);
-                int maThanhToan = datTourController.themDonDatTour(donDatTour, tien_);
-                if (maThanhToan != 0)
+             if (tour.Value != null && maTG.Value != null && iNL.Value != null && iTE.Value != null)
+            {
+                int i = Convert.ToInt32(tourController.kiemTraSoChoCon(tour.Value, maTG.Value));
+                int s = Convert.ToInt32(iTE.Value);
+                Debug.WriteLine("idso " + i + "  " + (Convert.ToInt32(iNL.Value) + Convert.ToInt32(iTE.Value)));
+                if (i >= (Convert.ToInt32(iNL.Value) + Convert.ToInt32(iTE.Value)))
                 {
+                    //Get Config Info
+                    string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
+                    string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"]; //URL thanh toan cua VNPAY 
+                    string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"]; //Ma website
+                    string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"]; //Chuoi bi mat
 
-                    //Build URL for VNPAY
-                    VnPayLibrary vnpay = new VnPayLibrary();
 
-                    vnpay.AddRequestData("vnp_Version", "2.0.0");
-                    vnpay.AddRequestData("vnp_Command", "pay");
-                    vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
-                    vnpay.AddRequestData("vnp_Locale", "vn");
-                    vnpay.AddRequestData("vnp_CurrCode", "VND");
-                    vnpay.AddRequestData("vnp_TxnRef", maThanhToan.ToString());
-                    vnpay.AddRequestData("vnp_OrderInfo", "ghi chu");
-                    vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
-                    vnpay.AddRequestData("vnp_Amount", (tien_ * 100).ToString());
-                    vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
-                    vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress());
-                    vnpay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    if (!phanTramDat.Text.Equals("none"))
 
-                    if (bank.SelectedItem != null && !string.IsNullOrEmpty(bank.SelectedItem.Value))
                     {
-                        vnpay.AddRequestData("vnp_BankCode", bank.SelectedItem.Value);
-                        Debug.WriteLine("bank " + bank.SelectedItem.Value);
+                        // Debug.WriteLine(Convert.ToInt32(tienThanhToan_));
+                        DonDatTour donDatTour = new DonDatTour();
+                        donDatTour.ChoNL = Convert.ToInt32(iNL.Value);
+                        donDatTour.ChoTE = Convert.ToInt32(iTE.Value);
+                        donDatTour.MaTour = Convert.ToInt32(tour.Value);
+                        donDatTour.GhiChu = txtGhiChu.Text;
+                        donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
+                        donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
+                        donDatTour.MaNgaydi = Convert.ToInt32(maTG.Value);
+                        donDatTour.TrangThai = 0;
+                        donDatTour.MaKH = 1;
+                        float phantram = (float)Convert.ToDouble(phanTramDat.SelectedValue);
+                        float tien_1 = Convert.ToInt32(tien_tt.Value) * phantram;
+                        int tien_ = Convert.ToInt32(tien_1);
+                        Debug.WriteLine(Convert.ToInt32(tien_tt.Value) + "  tien " + tien_1 + " ma thoi gian : " + maTG.Value);
+                        int maThanhToan = datTourController.themDonDatTour(donDatTour, tien_);
+                        if (maThanhToan != 0)
+                        {
 
+                            //Build URL for VNPAY
+                            VnPayLibrary vnpay = new VnPayLibrary();
+
+                            vnpay.AddRequestData("vnp_Version", "2.0.0");
+                            vnpay.AddRequestData("vnp_Command", "pay");
+                            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+                            vnpay.AddRequestData("vnp_Locale", "vn");
+                            vnpay.AddRequestData("vnp_CurrCode", "VND");
+                            vnpay.AddRequestData("vnp_TxnRef", maThanhToan.ToString());
+                            vnpay.AddRequestData("vnp_OrderInfo", "ghi chu");
+                            vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
+                            vnpay.AddRequestData("vnp_Amount", (tien_ * 100).ToString());
+                            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+                            vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress());
+                            vnpay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+
+                            if (bank.SelectedItem != null && !string.IsNullOrEmpty(bank.SelectedItem.Value))
+                            {
+                                vnpay.AddRequestData("vnp_BankCode", bank.SelectedItem.Value);
+                                Debug.WriteLine("bank " + bank.SelectedItem.Value);
+
+                            }
+
+                            string paymentUrl = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+                            //  log.InfoFormat("VNPAY URL: {0}", paymentUrl);
+                            Debug.WriteLine(paymentUrl);
+                            Response.Redirect(paymentUrl);
+
+                            Debug.WriteLine("Dat TOur thanh Cong.");
+
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Dat Tour THat Bai");
+                        }
                     }
-
-                    string paymentUrl = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
-                    //  log.InfoFormat("VNPAY URL: {0}", paymentUrl);
-                    Debug.WriteLine(paymentUrl);
-                    Response.Redirect(paymentUrl);
-
-                    Debug.WriteLine("Dat TOur thanh Cong.");
-
                 }
                 else
                 {
-                    Debug.WriteLine("Dat Tour THat Bai");
+                    Response.Redirect("loi.aspx?id=0");
                 }
+            }
+            else
+            {
+                Response.Redirect("loi.aspx?id=1");
+            }
+        }
+
+        protected void btnDatChuaThanhToan_Click(object sender, EventArgs e)
+        {
+            DonDatTour donDatTour = new DonDatTour();
+            donDatTour.ChoNL = Convert.ToInt32(iNL.Value);
+            donDatTour.ChoTE = Convert.ToInt32(iTE.Value);
+            donDatTour.MaTour = Convert.ToInt32(tour.Value);
+            Debug.WriteLine("ma tour" + tour.Value);
+            donDatTour.GhiChu = txtGhiChu.Text;
+            donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
+            donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
+            donDatTour.MaNgaydi = Convert.ToInt32(maTG.Value);
+            donDatTour.TrangThai = 0;
+            donDatTour.MaKH = 1;
+            if(datTourController.ThemDonDatTour_chuaThanhToan(donDatTour))
+            {
+                Response.Redirect("toanthanhthanhtoan.aspx?id=1");
+            }
+            else
+            {
+                Response.Redirect("toanthanhthanhtoan.aspx?id=0");
             }
         }
     }

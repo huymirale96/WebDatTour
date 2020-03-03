@@ -115,6 +115,19 @@ namespace WebDatTour.View.BackEnd
 
             }
         }
+        
+             public int anThanhToan(int id)
+        {
+            switch (id)
+            {
+                case 0: return 0;
+                case 1: return 1;
+                case 2: return 0;
+                case 3: return 0;
+                default: return 0;
+
+            }
+        }
 
         protected void btnHuy_Click(object sender, EventArgs e)
         {

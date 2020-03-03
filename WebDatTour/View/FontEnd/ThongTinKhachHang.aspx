@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="form-group">
                                                  <asp:button ID="btnCapNhat" runat="server" Text="Cập Nhật" OnClick="btnCapNhat_Click"/>
-                                                 <button id="cannelAddInventory" type="button" class="btn btn-danger">Hủy</button>
+                                                 <button id="cannelAddInventory" type="button" class="">Hủy</button>
                                             </div>
                                             
                                         </div>

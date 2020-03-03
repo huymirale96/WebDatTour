@@ -160,7 +160,7 @@
                                     <a href="ThongKeDoanhThuTheoNgay.aspx">Thống Kê Doanh Thu</a>
                                 </li>
                                 <li>
-                                    <a href="DoanhThu.aspx">Thống Kê Tour 3</a>
+                                    <a href="ThongKeDoanhSoTheoTour.aspx">Thống Kê Doanh Thu - Tour</a>
                                 </li>
                                 <li>
                                     <a href="ThongKe.aspx">Thống Kê Tour 4</a>
@@ -236,7 +236,8 @@
     <!-- Custom Theme JavaScript -->
         
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../../bower_components/dist/js/sb-admin-2.js"></script>
+    <script src="../../bower_components/dist/js/sb-admin-2.js"></script>\
+        <script src="../../Content/js/moment.min.js"></script>
         <script src="../../Content/js/myBackend.js"></script>
     <!-- DataTables JavaScript -->
     <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>

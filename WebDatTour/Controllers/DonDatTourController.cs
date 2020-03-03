@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace WebDatTour.Controllers
 {
-   
+
     public class DonDatTourController
     {
         DonDatTourModel donDatTourModel = new DonDatTourModel();
@@ -18,22 +18,22 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.ThemDonDatTour(donDatTour, tien);
         }
-        
-             public Boolean updateTrangThaiGiaoDich(long idvnpay, int id, int tt)
+
+        public Boolean updateTrangThaiGiaoDich(long idvnpay, int id, int tt)
         {
             return donDatTourModel.updateTrangThaiGiaoDich(idvnpay, id, tt);
         }
-      public DataTable donDatTour()
+        public DataTable donDatTour()
         {
-           return donDatTourModel.donDatTour();
+            return donDatTourModel.donDatTour();
         }
-        
-              public DataTable donHanh_khachHang(string id)
+
+        public DataTable donHanh_khachHang(string id)
         {
             return donDatTourModel.donHanh_khachHang(id);
         }
-        
-              public Boolean khachHangHuyTour_(string id)
+
+        public Boolean khachHangHuyTour_(string id)
         {
             return donDatTourModel.khachHangHuyTour(id);
         }
@@ -41,37 +41,37 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.khachHangHuyTour(id);
         }
-        
-            public int themGiaoDich(int id, int tien)
+
+        public int themGiaoDich(int id, int tien)
         {
             return donDatTourModel.themGiaoDich(id, tien);
         }
         public Boolean capNhatTrangThaiDatTour(string id, int tt, string nv)
         {
-            return donDatTourModel.capNhatTrangThaiTour(id, tt,  nv);
+            return donDatTourModel.capNhatTrangThaiTour(id, tt, nv);
         }
         public DataTable thongKeDoanhThu(string batdau, string ketthuc)
         {
-            return donDatTourModel.thongKeDoanhThu(batdau,ketthuc);
+            return donDatTourModel.thongKeDoanhThu(batdau, ketthuc);
         }
-        
-              public Boolean nhanVienthanhToan(string madon, string tien)
+
+        public Boolean nhanVienthanhToan(string madon, string tien)
         {
             return donDatTourModel.nhanVienthanhToan(madon, tien);
         }
-        
-             public DataTable xemgiaodich(string id)
+
+        public DataTable xemgiaodich(string id)
         {
             return donDatTourModel.xemgiaodich(id);
         }
-        
-              public DataTable timDonDatTour(string id)
+
+        public DataTable timDonDatTour(string id)
         {
             return donDatTourModel.timDonDatTour(id);
 
         }
-        
-                 public DataTable timDonDatTourKH(string id)
+
+        public DataTable timDonDatTourKH(string id)
         {
             return donDatTourModel.timDonDatTourKH(id);
 
@@ -80,13 +80,13 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.sp_capNhatTrangThaiDonHangNV(madon, ghiChu, tt);
         }
-        
-             public Boolean sp_capNhatTrangThaiDonHang(string madon, string ghiChu, int tt)
+
+        public Boolean sp_capNhatTrangThaiDonHang(string madon, string ghiChu, int tt)
         {
             return donDatTourModel.sp_capNhatTrangThaiDonHang(madon, ghiChu, tt);
         }
-        
-             public DataTable xemTrangThaiNV(string id)
+
+        public DataTable xemTrangThaiNV(string id)
         {
             return donDatTourModel.xemTrangThaiNV(id);
 
@@ -96,6 +96,18 @@ namespace WebDatTour.Controllers
             return donDatTourModel.thongKeDoanhThuTheoNgay_danhSach(bd, kt);
 
         }
-
+        public Boolean ThemDonDatTour_chuaThanhToan(DonDatTour donDatTour)
+        {
+            return donDatTourModel.ThemDonDatTour_chuaThanhToan(donDatTour);
+        }
+        public DataTable thongKeDoanhSoTheoTour(string tour)
+        {
+            return donDatTourModel.thongKeDoanhSoTheoTour(tour);
+        }
+        public DataTable thongKeDoanhSoTheoTour_()
+        {
+            return donDatTourModel.thongKeDoanhSoTheoTour_();
+        }
+        
     }
 }

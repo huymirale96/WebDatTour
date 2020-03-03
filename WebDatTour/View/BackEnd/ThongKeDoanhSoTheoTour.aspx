@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="ThongKeSoCho.aspx.cs" Inherits="WebDatTour.View.BackEnd.ThongKeSoCho" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="ThongKeDoanhSoTheoTour.aspx.cs" Inherits="WebDatTour.View.BackEnd.ThongKeDoanhSoTheoTour" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <form method="POST" class="form-horizontal" runat="server" enctype="multipart/form-data">
     <div class="row">
      <div class="col-md-12">
-        <h1 class="page-header">Danh Sách Tour - Số Chỗ
+        <h1 class="page-header">Thống Kê Doanh Số Theo Tour
                             <small>---</small>
         </h1>
     </div>
@@ -35,11 +35,10 @@
                                             <th class="text-center">STT</th>
                                              <th class="text-center">Tour</th>
                                             <th class="text-center">Ngày Đi</th>
-                                            <th class="text-center">Tổng Số Chỗ</th>
-                                            <th class="text-center">Chỗ Người Lớn Đã Đặt</th>
-                                            <th class="text-center">Chỗ Trẻ Em Đã Đặt</th>
-                                            <th class="text-center">Số Chỗ Còn Lại</th>                                         
-                                            <th class="text-center">Trạng Thái</th>
+                                            <th class="text-center">Doanh Thu</th>
+                                            <th class="text-center">Thực Thu</th>
+                                            <th class="text-center">Còn Lại</th>
+                                            
                                             <th class="text-center">Thao Tác</th>
                                         </tr>
                                     </thead>
@@ -49,14 +48,11 @@
                                                 <tr>
 										            <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                                      <td class="text-center"><a href="../FontEnd/XemChiTietTour?id=<%# Eval("iMaTour") %>"><%# Eval("sTieuDe") %></a></td>									            
-                                                    <td class="text-center"><%# Eval("dThoiGian", "{0:dd/MM/yyyy}") %></td>
-                                                    <td class="text-center"><%# Eval("iSoCho") %></td>
-                                                    <td class="text-center"><%# Eval("veNguoiLon") %></td>
-										            <td class="text-center"><%# Eval("veTreEm") %></td>
-										            <td class="text-center"><label class="label label-<%# (Convert.ToInt32(Eval("iSoCho")) -(Convert.ToInt32(Eval("veTreEm"))+Convert.ToInt32(Eval("venguoilon")))) <= 0 ? "warning" : "success" %>"><%# Convert.ToInt32(Eval("iSoCho")) -(Convert.ToInt32(Eval("veTreEm"))+Convert.ToInt32(Eval("venguoilon"))) %></label></td>
-										            <td class="text-center">
-                                                       
-										            </td>
+                                                    <td class="text-center"><%# Eval("thoigiandi", "{0:dd/MM/yyyy}") %></td>
+                                                    <td class="text-center"><%# Eval("doanhthu") %></td>
+                                                    <td class="text-center"><%# Eval("thucthu") %></td>
+										            <td class="text-center"><%# Eval("conlai") %></td>
+
 											        <td class="left">
 												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server"  CommandArgument=''><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
                                                         <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server"  OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument=''><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
@@ -83,3 +79,4 @@
         </form>
         </div>
 </asp:Content>
+

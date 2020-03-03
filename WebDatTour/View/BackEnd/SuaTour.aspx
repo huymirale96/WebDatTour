@@ -28,7 +28,7 @@
                             <label>Số Chỗ</label>
                            <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control" placeholder="" TextMode="number" ></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="txtSoCho" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
-                       <asp:RangeValidator ID="da" runat="server" MinimumValue="1" ControlToValidate="txtSoCho" ErrorMessage="*"></asp:RangeValidator>
+                       <asp:RangeValidator ID="da" runat="server" MaximumValue="999999999"  MinimumValue="1"  Type="Integer" ControlToValidate="txtSoCho" ErrorMessage="*"></asp:RangeValidator>
                             </div>
                         <div class="form-group">
                             <label>Hình Ảnh Bìa</label>
@@ -42,9 +42,12 @@
                     </div>
                     <div class="col-md-5 col-md-offset-0">
                         <div class="form-group">
-                            <label>Ngày Khởi Hành</label>
-                            <asp:TextBox ID="txtNgayKhoiHanh1" runat="server" CssClass="form-control" placeholder="" TextMode="Date" Visible="false"></asp:TextBox>
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6"  ControlToValidate="txtNgayKhoiHanh1" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                            <label>Nơi Khởi Hành: </label>
+                          <asp:TextBox ID="txtNoiKhoiHanh" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
+                            </div>
+                        <div class="form-group">
+                            <label>Nhóm Tour: </label>
+                           <asp:DropDownList ID="ddlNhomtour" runat="server" CssClass="form-control"></asp:DropDownList>
 
                             </div>
                         
@@ -53,12 +56,12 @@
                             <label>Giá vé Người Lớn</label>
                             <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="txtGIaNL" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
-                            <asp:RangeValidator ID="RangeValidator1" runat="server" MinimumValue="2" ControlToValidate="txtGIaNL" ErrorMessage="*"></asp:RangeValidator>            
+                            <asp:RangeValidator ID="RangeValidator1" runat="server" MaximumValue="999999999"  MinimumValue="2"  Type="Integer" ControlToValidate="txtGIaNL" ErrorMessage="*"></asp:RangeValidator>            
                             </div>
                         <div class="form-group"  style="width: 180px; float: right">
                             <label>Giá vé Giảm</label>
                             <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
-                        <asp:RangeValidator ID="RangeValidator2" runat="server" MinimumValue="2" ControlToValidate="txtGiaNLgiam" ErrorMessage="*"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" MaximumValue="999999999"  MinimumValue="2"  Type="Integer" ControlToValidate="txtGiaNLgiam" ErrorMessage="*"></asp:RangeValidator>
                             </div>
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá Vé Trẻ Em</label>
@@ -106,18 +109,29 @@
                     <asp:HiddenField ID="matour" runat="server" />
                      </form>
                     <div class="col-md-offset-1 col-md-10">
-                         <div class="col-md-4">
+                        <h3 style="margin: 20px;">Thêm Ngày Khởi Hành</h3>
+                         <div class="col-md-3">
                      <!---->
                              <div id="idt_" runat="server"></div>
-                             <input type="date" class="form-control" id="txtNgayDiThem" style="display: inline; margin-right:20px;"/>
-                             <label class="label label-default" id="btnThemNgay">Thêm Ngày </label>
+                             <label for="txtNgayDiThem">Ngày Khởi Hành: </label>
+                             <input type="date" class="form-control" id="txtNgayDiThem" style="display: inline; margin-right:20px;" value="2020-03-04"/>
+                             
+                           
                             
                              </div>
+                        <div class="col-md-3">
+                            <label for="txtNgayDiThem">Hạn Đặt Vé: </label>
+                             <input type="date" class="form-control" id="txtHanDat" style="display: inline; margin-right:20px;"  value="2020-03-04"/>
+                        </div>
+                        <div class="col-md-3">
+                            <br />
+                              <label class="label label-default" id="btnThemNgay">Thêm Ngày </label>
+                        </div>
                         
-                        <table class="table table-hover">
+                        <table class="table table-hover" style="margin-top:25px">
                             <thead>
                                 <tr>
-                                    <th>STT</th><th>Thời Gian Khởi Hành</th><th>Trạng Thái</th>
+                                    <th>STT</th><th>Thời Gian Khởi Hành</th><th>Hạn Đặt Tour</th><th>Trạng Thái</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyThoiGian">
@@ -127,6 +141,7 @@
                                             
                                             <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                             <td class="text-center"><%# Eval("dThoiGian","{0:dd-MM-yyyy}") %></td>
+                                            <td class="text-center"><%# Eval("dHanDatTour","{0:dd-MM-yyyy}") %></td>
                                             <td class="text-center"><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"></a><label onclick="anhienthoigian(<%# Eval("iMaThoiGian") %>,<%# Eval("iMaTour") %>)" class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></td>
                                         </tr>
                                     </ItemTemplate>

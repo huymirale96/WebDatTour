@@ -55,11 +55,13 @@ namespace WebDatTour.View.FontEnd
             if (Request.QueryString["page"] != null)
             {
                 currentPage = Int32.Parse(Request.QueryString["page"]);
+                page_.Value = currentPage.ToString();
             }
             else
             {
                 currentPage = 1;
             }
+            System.Diagnostics.Debug.WriteLine("page : " + page_.Value);
             // Because paging always start at 0.
             pds.CurrentPageIndex = currentPage - 1;
             // Show
@@ -155,5 +157,37 @@ namespace WebDatTour.View.FontEnd
             }
             return urlAnh1[0];
         }
+        /*
+        public string stt(int i)
+        {
+
+            if (page_.Value != null)
+            {
+                return (i + (Convert.ToInt32(page_.Value) - 1) * 5).ToString();
+            }
+            else
+            {
+                return i.ToString();
+            }
+        }*/
+
+        protected void btnTrangThai_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)(sender);
+            string id = btn.CommandArgument;
+            string pageCurrent = "";
+            if(page_.Value != null)
+            {
+                pageCurrent = page_.Value;
+               
+            }
+            else
+            {
+                pageCurrent = "1";
+            }
+            tourController.capNhatTrangThaiTour(id);
+            Response.Redirect("danhsachtour.aspx?page="+pageCurrent);
+        }
+       
     }
 }

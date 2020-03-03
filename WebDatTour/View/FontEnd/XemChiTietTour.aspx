@@ -48,15 +48,9 @@
                                     <!-- post content -->
                                     <div class="post-header">
                                         <h1>-----------------------------</h1>
-                                        <div class="meta">
-                                            <!-- post meta -->
-                                            <span class="meta-date">Ngay Thang </span>
-                                            <span class="meta-comment"> <a href="#" class="meta-link">05 Comment </a></span>
-                                            <span class="meta-user">by <a href="#"> Admin </a></span>
-                                            <span class="meta-cat"> Danh Muc</span>
-                                        </div>
+                                       
                                     </div>
-                                    <p>----- <a href="https://easetemplate.com/downloads/category/free-website-template/">website-</a> -</p>
+                                   
                                     <p> </p>
                                     <div id="anhDD" runat="server" style="margin-bottom:15px; margin-top:15px;"></div>
                                     <div class="row">
@@ -326,15 +320,17 @@
                     <asp:Label ID="lableGia" runat="server"></asp:Label>
                         <div runat="server" name="gia" id="gia"></div>
                         <h3 class="widget-title">Đặt Tour </h3>
+                        <input type="hidden" id="soChoToiDa"/>
                         <form class="form-group" method="get" action="DatTour.aspx">
                             <div id="ngaydi" runat="server"></div>
                             <div id="hiddenIdTour" runat="server"></div>
                             <div class="form-inline"><span>Người Lớn:</span> &nbsp &nbsp<input class="form-controll" type="text" id="id1" name="inl" value = "1" style = "width: 40px; border-radius: 4px;">&nbsp &nbsp
- <button type="button" onClick="up();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button type="button" onclick="dow();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>
+ <button class="btnUpDow" type="button" onClick="up();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button type="button" class="btnUpDow" onclick="dow();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>
  <br />
                             <div class="form-inline"><span>Trẻ Em:</span> &nbsp &nbsp &nbsp &nbsp &nbsp<input type="text" id="id2" name="ite" value = "0" style = "width: 40px; border-radius: 4px;" class="form-controll">&nbsp &nbsp
- <button type="button" onClick="up2();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button type="button" onclick="dow2();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>
+ <button type="button" class="btnUpDow" onClick="up2();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button class="btnUpDow" type="button" onclick="dow2();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>
                             <div id="tongTien" style="color:red; font-size:25px; margin: 10px;"></div>
+                            <div id="thongBaoSoCho" class="text-success"></div>
  <input type="submit" name="" value="Đặt Vé" style="">
                     
                         </form>
