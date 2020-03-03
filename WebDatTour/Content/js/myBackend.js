@@ -1,6 +1,17 @@
 ﻿$(document).ready(function () {
     //   alert("đas");
+    var date = new Date();
 
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+    $("#nbd").attr("value", today);
+    $("#nkt").attr("value", today);
 
     ////////////rating bar
     $(".btnrating").on('click', (function (e) {
@@ -28,9 +39,11 @@
 /////////////rating bar
     $("#thongKe_").click(function () {
       var ngay = $("#nbd").val();
-        alert(ngay + " ok  ");
+      //  alert(ngay + " ok  ");
+        var d1 = Date.parse($("#nbd").val());
+        var d2 = Date.parse($("#nkt").val());
         // console.log("ngay: " + ngay);
-        if (ngay != '') {
+        if (d1 < d2) {
             $.ajax({
                 type: 'post',
                 url: 'thongkedoanhthutheongay.aspx/thongkedoanhthu',
@@ -43,7 +56,7 @@
                 success: function (data_) {
                     //alert(data_.d);
                     var x = JSON.parse(data_.d);
-                    $("#txtDoanhSo").html("Tổng Doanh Số Là: " + x.DoanhThu );
+                    $("#txtDoanhSo").html("Tổng Doanh Số Là: " + x.DoanhThu);
                     $("#txtThucThu").html("Tổng Thực Thu là: " + x.ThucThu);
                     $("#txtSoDon").html("Tổng Số Đơn Là:     " + x.SoDon);
                     /*var xx = "";
@@ -76,12 +89,12 @@
                         data.addColumn('number', 'Thực Thu');
                         //data.addColumn('number', 'Số Đơn');
                         // data.addColumn('number', 'Transformers: Age of Extinction');
-                       // alert(JSON.stringify(JSON.parse(data_.d).Data));
+                        // alert(JSON.stringify(JSON.parse(data_.d).Data));
                         $.each(JSON.parse(data_.d).Data, function (index, item) {
-                        //    alert(item.ngay);
+                            //    alert(item.ngay);
                             data.addRow([item.ngay, item.doanhthu, item.thucthu]);
                         });
-                      
+
                         var options = {
                             chart: {
                                 title: 'Thống Kê Doanh Thu',
@@ -97,6 +110,9 @@
                     }
                 }
             });
+        }
+        else {
+            $("#thongBaoNgay").html("Ngày Không Hợp Lệ");
         }
     });
 
@@ -117,8 +133,12 @@
         var ngay = $("#txtNgayDiThem").val();
         var hanDat = $("#txtHanDat").val(); 
        // alert(ngay + "   " + $("#matour_").val());
-       // console.log("ngay: " + ngay);
-        if (ngay != '') {
+        // console.log("ngay: " + ngay);
+        var d1 = Date.parse(ngay);
+        var d2 = Date.parse(hanDat);
+        // console.log("ngay: " + ngay);
+      
+        if (d1 > d2) {
             $.ajax({
                 type: 'post',
                 url: 'suatour.aspx/themThoiGianKhoiHanh',
@@ -161,6 +181,9 @@
 
 
             });
+        }
+        else {
+            $("#thongBaoNgay").html("Ngày Không Hợp Lệ");
         }
     });
 

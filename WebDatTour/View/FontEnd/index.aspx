@@ -211,6 +211,7 @@
                             </div>
                             <!-- /input-group -->
                         </form>
+                       <p  class="nav-divider"></p>
 
                        
 
@@ -260,12 +261,24 @@
                     <li ><a style="color:#18150d;" href="tourmoinhat.aspx">Tour Mới Nhất</a></li>
                     <li ><a style="color:#18150d;" href="tournoibattrongtuan.aspx">Tour Nổi Bật</a></li>
                     <li ><a style="color:#18150d;" href="tournoibatthang.aspx">Tour Mua Nhiều Trong Tháng</a></li>
-                    <li><a href="javascript:;">FAQ</a></li>
+                    
                     <li class="nav-divider"></li>
-                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> xxx</a></li>
+                    
                 </ul>
             </nav>
         </div>
+                        <div class="col-md-2">
+                         <div class="widgetd widget-searchd">
+                             <form method="get" action="timkiemtour.aspx">
+                                 <h3>TÌM THEO NGÀY ĐI</h3>
+                                 <input type="hidden" name="chucNang" value="timtheongay"/>
+                                 <label>Ngày Bắt Đầu: </label><input type="date" id="ngaybd" name="ngaybd" class="form-control" value="2020-03-03"/>
+                                 <label>Ngày Kết Thúc: </label><input type="date" id="ngaykt" name="ngaykt" class="form-control" value="2020-04-03"/>
+                                 <input type="submit" value="Tìm Kiếm"/>
+                             </form>
+                         </div>
+                              </div>
+
         
     <div class="space-medium">
         <div class="container">

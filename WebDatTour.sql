@@ -1282,3 +1282,26 @@ WHERE  rk = 1 and t.iTrangThai != 2 and t.iTrangThai != 3
     and tblDonDatTour.iMaDonDatTour in (select imadontour from tblGiaoDich where tblGiaoDich.trangThai = 1)
 group by  tblThoiGianKhoiHanh.imathoigian    ) b2 
 on b2.iMaThoiGian = b3.iMaThoiGian
+
+
+create proc sp_timKiemTourTheoNgay
+@batDau date,
+@ketThuc date
+as
+select a.iMaTour,a.sTieuDe,d.dNgayKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,a.sUrlAnh , b.imatour, b.iGiaVe as igianl,
+ b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam , d.dNgayKhoiHanh as dThoiGian
+from
+(
+select * from tblTour where imatour in 
+( select iMaTour from tblThoiGianKhoiHanh where @batDau <= dHanDatTour and dHanDatTour <= @ketThuc)  ) as a
+JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a.iMaTour
+join
+ (select imatour, min(dthoigian) as dNgayKhoiHanh from tblThoiGianKhoiHanh where --iMaTour = 36 and 
+ getdate() < dthoigian and trangThai = 1
+ group by iMaTour) as d on d.iMaTour= a.iMaTour 
+  

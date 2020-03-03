@@ -32,6 +32,7 @@ namespace WebDatTour.View.FontEnd
                         HttpContext.Current.Session["tenKH"] = "";
                         Response.Redirect("index.aspx");
                     }
+                    
 
                     if (Request.QueryString["chucNang"].ToString().Equals("dangKi"))
                     {

@@ -126,6 +126,7 @@
                         <div class="col-md-3">
                             <br />
                               <label class="label label-default" id="btnThemNgay">Thêm Ngày </label>
+                            <div id="thongBaoNgay"></div>
                         </div>
                         
                         <table class="table table-hover" style="margin-top:25px">

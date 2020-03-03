@@ -214,12 +214,19 @@ namespace WebDatTour.View.BackEnd
         public static String themThoiGianKhoiHanh(string id, string date, string hanDat)
         {
             //Debug.WriteLine("id ajax : " + id + " date " + date);
-            TourController tourController1 = new TourController();
-            if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date), DateTime.Parse(hanDat)))
+            if (id != null && date != null && hanDat != null)
             {
-                DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
-               // Debug.WriteLine(JsonConvert.SerializeObject(table));
-                return JsonConvert.SerializeObject(table);
+                TourController tourController1 = new TourController();
+                if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date), DateTime.Parse(hanDat)))
+                {
+                    DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
+                    // Debug.WriteLine(JsonConvert.SerializeObject(table));
+                    return JsonConvert.SerializeObject(table);
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

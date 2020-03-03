@@ -87,7 +87,26 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
-        
+
+        public DataTable timKiemTourTheoNgay(string ngaybd, string ngaykt)
+        {
+            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
+            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            // using (SqlConnection cnn = new SqlConnection(ck))
+            {
+                SqlCommand cmd = new SqlCommand("sp_timKiemTourTheoNgay", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@batdau", ngaybd);
+                cmd.Parameters.AddWithValue("@ketthuc", ngaykt);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+                // rptTour.DataSource = table;
+                // rptTour.DataBind();
+            }
+        }
         public SqlDataReader layDanhSachDonDatTour()
         {
             try
@@ -154,7 +173,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@mota", tour.MoTa);
                 cmd.Parameters.AddWithValue("@urlanh", tour.UrlAnh);
                 cmd.Parameters.AddWithValue("@thoigian", tour.TongThoiGian);
-              //  cmd.Parameters.AddWithValue("@ngaykhoihanh", tour.NgayKhoiHanh);
+                //  cmd.Parameters.AddWithValue("@ngaykhoihanh", tour.NgayKhoiHanh);
                 cmd.Parameters.AddWithValue("@nhomtour", tour.MaNhomTour);
                 cmd.Parameters.AddWithValue("@manv", tour.MaNV);
                 cmd.Parameters.AddWithValue("@socho", tour.SoCho);
@@ -267,8 +286,8 @@ namespace WebDatTour.Model
                 return null;
             }
         }
-        
-            public string kiemTraSoChoCon(string idtour, string idtg)
+
+        public string kiemTraSoChoCon(string idtour, string idtg)
         {
             Debug.WriteLine("lay ngay di tour");
             try
@@ -284,7 +303,7 @@ namespace WebDatTour.Model
                 DataTable dataTable = new DataTable();
                 da.Fill(dataTable);
                 cn.disconnect();
-               // Debug.Write("return : " + dataTable.Rows[0]["sochocon"].ToString());
+                // Debug.Write("return : " + dataTable.Rows[0]["sochocon"].ToString());
                 return dataTable.Rows[0]["sochocon"].ToString();
 
 
@@ -306,11 +325,10 @@ namespace WebDatTour.Model
             cmd.Parameters.AddWithValue("@imatour", id);
             cmd.Parameters.AddWithValue("@thoigian", date);
             cmd.Parameters.AddWithValue("@hanDat", hanDat);
-             
 
-            //cnn.Open();
             int i = cmd.ExecuteNonQuery();
-            if (i > 0)
+            if(i > 0)
+            //cnn.Open();timKiemTour            if (i > 0)
             {
 
 
@@ -324,16 +342,16 @@ namespace WebDatTour.Model
 
         }
 
-        
-              public Boolean capNhatTrangThaiTour(string id)
+
+        public Boolean capNhatTrangThaiTour(string id)
         {
 
 
-         //   Debug.WriteLine("id: " + id);
+            //   Debug.WriteLine("id: " + id);
             SqlCommand cmd = new SqlCommand("sp_trangThaiTour", cn.connect());
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", id);
-           // cmd.Parameters.AddWithValue("@thoigian", date);
+            // cmd.Parameters.AddWithValue("@thoigian", date);
 
             //cnn.Open();
             int i = cmd.ExecuteNonQuery();
@@ -417,14 +435,14 @@ namespace WebDatTour.Model
             }
 
         }
-        
-              public DataTable toutMoiNhat()
+
+        public DataTable toutMoiNhat()
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("toutMoiNhat", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-               // cmd.Parameters.AddWithValue("@id", tour);
+                // cmd.Parameters.AddWithValue("@id", tour);
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -445,7 +463,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("toutMoiNhat", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-               // cmd.Parameters.AddWithValue("@id", tour);
+                // cmd.Parameters.AddWithValue("@id", tour);
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -481,8 +499,8 @@ namespace WebDatTour.Model
             }
 
         }
-        
-             public DataTable tourhotThang()
+
+        public DataTable tourhotThang()
         {
             try
             {

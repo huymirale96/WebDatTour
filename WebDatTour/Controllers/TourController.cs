@@ -85,8 +85,12 @@ namespace WebDatTour.Controllers
         {
             return tourModel.timSoCHo_Tour(tour);
         }
-        
-            public DataTable xemDonDatTour(string tour)
+        public DataTable timKiemTourTheoNgay(string ngaybd, string ngaykt)
+        {
+            return tourModel.timKiemTourTheoNgay(ngaybd,ngaykt);
+        }
+
+        public DataTable xemDonDatTour(string tour)
         {
             return tourModel.xemDonDatTour(tour);
         }

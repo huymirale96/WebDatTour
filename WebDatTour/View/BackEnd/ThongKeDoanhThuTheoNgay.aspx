@@ -22,6 +22,7 @@
                        
                     <!--<label class="label label-primary" id="">Thống Kê</label> -->
                          <button id="thongKe_" class="btn btn-info">Thống Kê</button>
+                         <div id="thongBaoNgay" class="text-info"></div>
                      </div>
                     <br />  
                    <div class="col-md-9">

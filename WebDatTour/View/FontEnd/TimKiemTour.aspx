@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeFile="TimKiemTour.aspx.cs" Inherits="WebDatTour.View.FontEnd.TimKiemTour" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeBehind="TimKiemTour.aspx.cs" Inherits="WebDatTour.View.FontEnd.TimKiemTour" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
         <div class="col-md-12 text-center">
