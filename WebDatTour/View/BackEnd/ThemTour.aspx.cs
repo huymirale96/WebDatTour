@@ -73,12 +73,14 @@ namespace WebDatTour.View.BackEnd
             //Debug.WriteLine("nagy" + txtNKH1.Text);
 
             string urlanh = "";
+            List<String> dsAnh = new List<string>();
             if (fAnhBia.FileContent.Length > 0)
             {
                 if (fAnhBia.FileName.EndsWith(".jpeg") || fAnhBia.FileName.EndsWith(".jpg") || fAnhBia.FileName.EndsWith(".png"))
                 {
                     fAnhBia.SaveAs(Server.MapPath(Path.Combine("~/Upload/", fAnhBia.FileName)));// "~~/Upload/" + fAnhBia.FileName));
                     urlanh += fAnhBia.FileName;
+                    dsAnh.Add(fAnhBia.FileName);
                 }
             }
 
@@ -90,6 +92,7 @@ namespace WebDatTour.View.BackEnd
                     string fname = Path.GetFileName(file.FileName);
                     file.SaveAs(Server.MapPath(Path.Combine("~/Upload/", fname)));
                     urlanh += "/" + fname;
+                    dsAnh.Add(fname);
                 }
             }
             
@@ -131,10 +134,12 @@ namespace WebDatTour.View.BackEnd
             tour.UrlAnh = urlanh;
             tour.NgayTao = DateTime.Now;
             tour.DsNgayKhoiHanh = ngayKhoihanh;
+            tour.DsAnh = dsAnh;
             if (tourController.themTour(tour, Convert.ToInt32(txtGIaNL.Text), Convert.ToInt32(txtGiaNLgiam.Text), Convert.ToInt32(txtGiaTE.Text), Convert.ToInt32(txtGiaTEgiam.Text)))
                 {
                 // Response.Write("<script language=javascript>alert('OKK');</script>");
                 Debug.WriteLine("Them Tour Thanh Cong");
+                Session["mess"] = "themtourthanhcong";
                 Response.Redirect("Danhsachtour.aspx");
                 }
             else

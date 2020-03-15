@@ -10,6 +10,7 @@ using System.Diagnostics;
 using WebDatTour.Object;
 using System.Configuration;
 using WebDatTour.Model;
+using System.Web.Services;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -17,6 +18,7 @@ namespace WebDatTour.View.FontEnd
     {
         DonDatTourController donDatTourController = new DonDatTourController();
         KhachHangController khachHangController = new KhachHangController();
+        DanhGiaController danhGiaController = new DanhGiaController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Form["cn"] != null && Request.Form["id"] != null)
@@ -153,6 +155,49 @@ namespace WebDatTour.View.FontEnd
 
             rptdondattour.DataSource = pds;
             rptdondattour.DataBind();
+
+        }
+        public string kiemTraDonCoDanhGia(string id)
+        {
+            Debug.WriteLine(danhGiaController.kiemTraDonCoDanhGia(id).ToString() + danhGiaController.kiemTraQuyenDanhGia(id).ToString());
+            if(danhGiaController.kiemTraDonCoDanhGia(id) && danhGiaController.kiemTraQuyenDanhGia(id))
+            {
+                return " <label class='label label-default btn-danhGia' id='btn-danhGiakh"+ id +"' data-imadon='" + id + "'>Đánh Giá Tour</label><br />";
+            }
+            else
+
+            {
+
+                return "";
+            }
+        }
+
+
+        [WebMethod]
+        public static Boolean danhgiatour(string maDon, string soSao, string noiDung)
+        {
+            int temp;
+            if (int.TryParse(soSao, out temp) && int.TryParse(maDon, out temp) && noiDung != null)
+            {
+                DanhGiaController danhGiaSaoController = new DanhGiaController();
+                DanhGia danhGia = new DanhGia();
+                danhGia.MaDonDatTour = Convert.ToInt32(maDon);
+                danhGia.NoiDung = noiDung;
+                danhGia.SoSao = Convert.ToInt32(soSao);
+                danhGia.ThoiGian = DateTime.Now;
+                if (danhGiaSaoController.danhGia(danhGia))
+                {
+                    return true;
+                }
+                else
+                   Debug.WriteLine(maDon + " " + soSao + " " + noiDung);
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+               
 
         }
         protected String toCurruncy(int x)

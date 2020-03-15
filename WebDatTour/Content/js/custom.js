@@ -6,19 +6,109 @@
     $temp.remove();
 }
 
-function suaBinhLuan(id, idtour) {
-    //alert("id : " + id + "  " + $("#bl_" + id).text());
-    var binhLuan = "<label for='txtBinhLuanSua'>Nội Dung</label><input type='text' class='form-control' id='txtBinhLuanSua' value='" + $("#bl_" + id).text() + "'/><label id='btnSua' class='label label-default' onclick='hoanThanhSuaBL(" + id + "," + idtour+")'>Chỉnh Sửa</label>";
-    $("#suablDiv").html(binhLuan);
-    $("#modalSuaBinhLuan").modal();
-}
-function hoanThanhSuaBL(id,idtour)
-{
-    alert("id : " + id + "  " + $("#txtBinhLuanSua").val());
+
+function kiemTraDangNhap() {
+    
     $.ajax({
         type: 'post',
-        url: 'xemchitiettour.aspx/suaBinhLuan',
-        data: "{ 'id' : '" + id + "', 'noidung' : '" + $("#txtBinhLuanSua").val() + "', 'idtour' : '" + idtour +  "' }",
+        url: 'DatTour.aspx/kiemTraDangNhap',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (result) {
+            //alert(result.d);
+            if (result.d == true) {
+
+                toastr.success("Da Dang Nhap");
+                $('#formDatTour').submit();
+            }
+            else
+            {
+                toastr.warning("Chua Dang Nhap");
+                $('#myModal1').modal('show');
+            }
+        }
+    });
+   return false;
+   
+   
+}
+
+function danhGiaTour(id) {
+    $("#divbtndanhgia").html("<button id='btnDanhGia' onclick='danhGiaBTN(" + id + ")'>Đánh Giá</button>");
+    $("#modalDanhGiaSao").modal();
+ 
+}
+
+function danhGiaBTN(id) {
+    //alert($("#modalDanhGiaSao #txtDanhGiaTour").val() + "  id : " + id);
+    var soSao = $("input[name='rating']:checked").val();
+    var idDon = id;
+    var noiDungDanhGia = $("#modalDanhGiaSao #txtDanhGiaTour").val();
+
+    if (soSao != null && noiDungDanhGia != '' && idDon != null)
+    {
+       // alert(soSao + "  " +  noiDungDanhGia+"  " + id);
+        $.ajax({
+            type: 'post',
+            url: 'DanhSachCacTourDaDat.aspx/danhgiatour',
+            data: "{ 'maDon' : '" + id + "','soSao': '" + soSao + "','noiDung': '" + noiDungDanhGia +"'}",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                // alert("We returned: " + result.d);
+              //  alert("Ket Qua " + result.d);
+                $("#modalDanhGiaSao").modal('hide');
+                if (result.d == true) {
+                    $("#btn-danhGiakh" + id).hide();
+                    toastr.success('Bạn Đã Gửi Đánh Giá Thành Công.');
+                }
+                else {
+                    toastr.warning('Đánh Giá Không Thành Công.');
+                }
+
+
+            }
+        });
+    }
+    
+}
+function hienThiSao(soSao)
+{
+    var sSaoVang = "<i class='fa fa-star' style='font - size: 18px; color: #ffca08;'></i>";
+    var sSaoDen = "<i class='fa fa-star' style='font - size: 18px; '></i>"; 4
+    var sSao = "";
+    var isoSao = parseInt(soSao);
+    for (var i = 0; i < isoSao; i++) {
+        sSao += sSaoVang;
+    }
+    for (var i = 0; i < 5 - isoSao; i++) {
+        sSao += sSaoDen;
+    }
+    return sSao;
+}
+
+function suaDanhGia(danhGia, soSao) {
+    //alert("id : " + id + "  " + $("#bl_" + id).text());
+
+    $("#modalSuaBinhLuan #txtDanhGiaTour").val($("#bl_" + danhGia).text());
+    $("#modalSuaBinhLuan #txtMaDanhGia").val(danhGia);
+    $('#modalSuaBinhLuan #star' + soSao).prop('checked', true);
+    $("#divbtndanhgia").html("<button onclick='hoanThanhSuaBL(" + danhGia+")'>SỬA</button>");
+    $("#modalSuaBinhLuan").modal();
+}
+function hoanThanhSuaBL(id)
+{
+   // alert("id : " + id + "  " + $("#txtDanhGiaTour").val());
+    $.ajax({
+        type: 'post',
+        url: 'xemchitiettour.aspx/suaDanhGia',
+        data: "{ 'id' : '" + id + "', 'noiDung' : '" + $("#modalSuaBinhLuan #txtDanhGiaTour").val() + "', 'soSao' : '" + $("#modalSuaBinhLuan input[name = 'rating']:checked").val()  +  "' }",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -26,14 +116,14 @@ function hoanThanhSuaBL(id,idtour)
         },
         success: function (result) {
             // alert("We returned: " + result.d);
-            alert("dnag nhap " + result.d);
+           // alert("dnag nhap " + result.d);
             var cmt = "";
             $.each(JSON.parse(result.d), function (index, item) {
                 if (item.check == 1) {
-                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p id='bl_" + item.iMaBinhLuan + "'>" + item.sNoiDung + "</p>" + "<label  class='label label-info' onclick = 'suaBinhLuan(" + item.iMaBinhLuan + "," + item.iMaTour + ")' > Chỉnh Sửa</label>" + "</div></div></div></div></li>";
+                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'>" + hienThiSao(item.iSoSao) + "<br><p id='bl_" + item.iMaDanhGia + "'>" + item.sNoiDung + "</p>" + "<label  class='label label-info' onclick = 'suaDanhGia(" + item.iMaDanhGia + "," + item.iSoSao + ")' > Chỉnh Sửa</label>" + "</div></div></div></div></li>";
                 }
                 else {
-                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'><p id='bl_" + item.iMaBinhLuan + "'s>" + item.sNoiDung + "</p>" + "" + "</div></div></div></div></li>";
+                    cmt += "<li class='comment'><div class='comment-body'><divclass=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 class='user-title'>" + item.sTenKhachHang + "</h4></div><div class='comment-content'>" + hienThiSao(item.iSoSao) + "<p id='bl_" + item.iMaBinhLuan + "'s>" + item.sNoiDung + "</p>" + "" + "</div></div></div></div></li>";
                 }
                 });
             // alert(cmt);
@@ -136,12 +226,12 @@ function thanhToan(id, tien) {
     $("#modalThanhToan").modal("show");
 }
 
-function anbinhluan(idc, idt) {
+function anDanhGia(id) {
   //  alert("id : " + idc + idt);
     $.ajax({
                 type: 'post',
-                url: 'xemchitiettour.aspx/anBinhLuan',
-                 data: "{ 'id' : '" + idc + "', 'idtour' : '" + idt + "' }",
+                url: 'xemchitiettour.aspx/anDanhGia',
+                data: "{ 'id' : '" + id + "' }",
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -153,12 +243,12 @@ function anbinhluan(idc, idt) {
                         //alert("dnag nhap " + result.d);
                         var cmt = "";
                         $.each(JSON.parse(result.d), function (index, item) {
-                            cmt += "<li class='comment'><div class='comment-body'><div class=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 style='display:inline;' class='user-title'>" + item.sTenKhachHang + "</h4><label onclick='anbinhluan(" + item.iMaBinhLuan + "," + item.iMaTour + ")' style='display: ' class='label label-";
-                            if (item.itrangthai == false) {
-                                cmt +=  "success '>Hiện</label></div><div class='comment-content'><p>" + item.sNoiDung + "</p></div><!--<div class='reply'><a href='#' class='btn-link'>TrảLời</a></div>--></div></div></div></li>";
+                            cmt += "<li class='comment'><div class='comment-body'><div class=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 style='display:inline;' class='user-title'>" + item.sTenKhachHang + "</h4><label onclick='anDanhGia(" + item.iMaDanhGia + ")' style='display: ' class='label label-";
+                            if (item.btrangthai == false) {
+                                cmt += "success '>Hiện</label></div><div class='comment-content'>" + hienThiSao(item.iSoSao) + "<br><p>" + item.sNoiDung + "</p></div><!--<div class='reply'><a href='#' class='btn-link'>TrảLời</a></div>--></div></div></div></li>";
                             }
                             else {
-                                cmt +=  "warning '>Ẩn</label></div><div class='comment-content'><p>" + item.sNoiDung + "</p></div><!--<div class='reply'><a href='#' class='btn-link'>TrảLời</a></div>--></div></div></div></li>";
+                                cmt += "warning '>Ẩn</label></div><div class='comment-content'>" + hienThiSao(item.iSoSao) + "<br><p>" + item.sNoiDung + "</p></div><!--<div class='reply'><a href='#' class='btn-link'>TrảLời</a></div>--></div></div></div></li>";
                             }
                         });
                       //  alert(cmt);
@@ -245,6 +335,39 @@ $(document).ready(function () {
     }, "Mật Khẩu Nhất 8 kí tự bao gồm cả số và chữ.");*/
 
    // alert(kiemTraTen("aada"));
+
+    toastr.options = {
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': false,
+        'progressBar': true,
+        'positionClass': 'toast-top-right',
+        'preventDuplicates': false,
+        'showDuration': '1000',
+        'hideDuration': '1000',
+        'timeOut': '3000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut',
+    }
+   // toastr.success('Bạn Đã Gửi Đánh Giá Thành Công.');
+    $(".btn-danhGia").click(function () {
+      //  alert("ma don: " + $(this).data('imadon'));
+        $("#divbtndanhgia").html("<button id='btnDanhGia' onclick='danhGiaBTN(" + $(this).data('imadon') + ")'>Đánh Giá</button>");
+        $("#modalDanhGiaSao").modal();
+       /// alert("ok");
+
+    });
+    $("#btnDanhGia_").click(function () {
+        
+        var danhGia = $("input[name='rating']:checked").val();
+    if (danhGia != null) {
+        alert(danhGia);
+    }
+    });
+    
     $('#mangaydi').on('change', function () {
       // alert(this.value);
         $('#id1').val("0");
@@ -411,6 +534,7 @@ $(document).ready(function () {
                         var string = "<a href='#' id='tendn' title='Features'>" + result.d + "</a><ul id='dangNhap' > <li><a href='#'>Tài Khoản</a></li> <li><a href='thongtinkhachhang.aspx'>Thông Tin</a></li><li> <a href = 'DanhSachCacTourDaDat.aspx' > Các Đơn Đặt Tour</a ></li > <li><a href='doimatkhau.aspx'>Đổi Mật Khẩu</a></li><li><a href='index.aspx?chucNang=dangxuat'>Đăng Xuất</a></li></ul >";
                         $('#daDangNhap').html(string);
                         $('#myModal1').modal('hide');
+                        toastr.success("Đăng Nhập Thành Công.");
                     }
                     else {
                         $("#thongBaoDangNhap").html("Đăng Nhập Sai.");

@@ -28,7 +28,7 @@
                                             <th class="text-center">Số Điện Thoại</th>
                                             <th class="text-center">Email</th>
                                            <th class="text-center">Tên Đăng Nhập</th>
-                                            <th class="text-center">Thao Tác</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,10 +45,7 @@
                                                     <td class="left"><%# Eval("susername") %></td>
                                                     
                                                     
-                                                    <td class="left">
-                                                        <a id="MainContent_rptLyLich_btnFix_0" title="Sửa lý lịch" class="btn btn-xs btn-warning" href="javascript:__doPostBack('ctl00$MainContent$rptLyLich$ctl00$btnFix','')"><i class="fa fa-pencil-square-o" aria-hidden="false"></i></a>
-                                                        <a onclick="return confirm('Bạn có chắc chắn xoá lý lịch?');" id="MainContent_rptLyLich_btnDelete_0" title="Xoá lý lịch" class="btn btn-xs btn-danger" href="javascript:__doPostBack('ctl00$MainContent$rptLyLich$ctl00$btnDelete','')"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                                    </td>
+                                                    
                                                 </tr>
                                             
                                               

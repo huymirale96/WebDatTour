@@ -13,9 +13,9 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="post-content--">
+                               
                                    
-                                    <form runat="server" method="post">
+                                    <form runat="server" method="post" >
                                     <h2><a href="#" class="title" target="_blank" id="tieuDe" runat="server"></a></h2>
                                         
                                         <asp:HiddenField ID="iTE" runat="server"></asp:HiddenField>
@@ -84,13 +84,15 @@
                                   
                                     
                                   
-                    </div>
+                    <div class="col-md-12">
+                          <label ">GHi Chú: &nbsp </label>
                                         <asp:TextBox ID="txtGhiChu" runat="server" TextMode="MultiLine" Rows="2" Placeholder="Ghi Chú" CssClass="form-control">
                                             
                                         </asp:TextBox>
                                   
-                                    <asp:Button ID="btnDatVe" runat="server" Text="Thanh Toán" CssClass="btn btn-default" OnClick="btnDatVe_Click"/>
+                                    <asp:Button ID="btnDatVe" runat="server" Text="Thanh Toán" CssClass="btn btn-info" OnClick="btnDatVe_Click"/>
                                <asp:Button ID="btnDatChuaThanhToan" runat="server" Text="Đặt Vé_" OnClick="btnDatChuaThanhToan_Click"/>
+                                </div>
                                 </div>
                             </div>
                         </div>

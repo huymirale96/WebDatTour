@@ -316,8 +316,8 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\BinhLuanController.cs" />
     <Compile Include="Controllers\ChiTietDatTourController.cs" />
+    <Compile Include="Controllers\DanhGiaController.cs" />
     <Compile Include="Controllers\DonDatTourController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
@@ -347,9 +347,9 @@
     <Compile Include="Layout\FontEnd.Master.designer.cs">
       <DependentUpon>FontEnd.Master</DependentUpon>
     </Compile>
-    <Compile Include="Model\BinhLuanModel.cs" />
     <Compile Include="Model\ChiTietDonDatTourModel.cs" />
     <Compile Include="Model\Connector.cs" />
+    <Compile Include="Model\DanhGiaModel.cs" />
     <Compile Include="Model\DonDatTourModel.cs" />
     <Compile Include="Model\KhachHangModel.cs" />
     <Compile Include="Model\NhanVienModel.cs" />
@@ -358,8 +358,8 @@
     <Compile Include="Model\VnPayLibrary.cs" />
     <Compile Include="Model\XuLy.cs" />
     <Compile Include="Object\anh.cs" />
-    <Compile Include="Object\BinhLuan.cs" />
     <Compile Include="Object\ChiTietDonHang.cs" />
+    <Compile Include="Object\DanhGia.cs" />
     <Compile Include="Object\DonDatTour.cs" />
     <Compile Include="Object\DonDatVe.cs" />
     <Compile Include="Object\KhachHang.cs" />

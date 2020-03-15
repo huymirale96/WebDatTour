@@ -20,8 +20,8 @@ namespace WebDatTour.Model
             //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             // using (SqlConnection cnn = new SqlConnection(ck))
             {
-                SqlCommand cmd = new SqlCommand("select * from tbltour order by dngaytao DESC", cn.connect());
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("sp_layDanhSachTOur", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
@@ -31,7 +31,7 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
-
+         
         public DataTable layTour(int id)
         {
             //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
@@ -50,12 +50,33 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
+        
 
+
+            public DataTable timKiemTour_tieuDe(string tieuDe)
+        {
+        try
+            {
+                SqlCommand cmd = new SqlCommand("sp_timKiemTour_ds", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ten", tieuDe);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+              
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error " + ex.Message);
+                
+                return null;
+            }
+        }
         public DataTable layTourTheoNhom(int id)
         {
-            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
-            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            // using (SqlConnection cnn = new SqlConnection(ck))
+
             {
                 SqlCommand cmd = new SqlCommand("sp_tourTheoNhom", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -65,15 +86,11 @@ namespace WebDatTour.Model
                 DataTable table = new DataTable();
                 dap.Fill(table);
                 return table;
-                // rptTour.DataSource = table;
-                // rptTour.DataBind();
             }
         }
         public DataTable timKiemTour(string ten)
         {
-            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
-            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            // using (SqlConnection cnn = new SqlConnection(ck))
+            
             {
                 SqlCommand cmd = new SqlCommand("sp_timKiemTour", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -83,16 +100,13 @@ namespace WebDatTour.Model
                 DataTable table = new DataTable();
                 dap.Fill(table);
                 return table;
-                // rptTour.DataSource = table;
-                // rptTour.DataBind();
+           
             }
         }
 
         public DataTable timKiemTourTheoNgay(string ngaybd, string ngaykt)
         {
-            //   System.Diagnostics.Debug.WriteLine("lay danh sahc tiuru");
-            //String cnnString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            // using (SqlConnection cnn = new SqlConnection(ck))
+            
             {
                 SqlCommand cmd = new SqlCommand("sp_timKiemTourTheoNgay", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -103,8 +117,7 @@ namespace WebDatTour.Model
                 DataTable table = new DataTable();
                 dap.Fill(table);
                 return table;
-                // rptTour.DataSource = table;
-                // rptTour.DataBind();
+              
             }
         }
         public SqlDataReader layDanhSachDonDatTour()
@@ -171,7 +184,7 @@ namespace WebDatTour.Model
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@tieude", tour.TieuDe);
                 cmd.Parameters.AddWithValue("@mota", tour.MoTa);
-                cmd.Parameters.AddWithValue("@urlanh", tour.UrlAnh);
+               
                 cmd.Parameters.AddWithValue("@thoigian", tour.TongThoiGian);
                 //  cmd.Parameters.AddWithValue("@ngaykhoihanh", tour.NgayKhoiHanh);
                 cmd.Parameters.AddWithValue("@nhomtour", tour.MaNhomTour);
@@ -206,6 +219,31 @@ namespace WebDatTour.Model
                         Debug.WriteLine("Error " + ex.Message);
                     }
                 }
+                string query = "insert into tblhinhanh(iMaTour,sDuongDan) values (";
+                for (int i = 0; i < tour.DsAnh.Count(); i++)
+                {
+                    if((i+1) == tour.DsAnh.Count())
+                    {
+                        query += idMaTour + ",'" + tour.DsAnh[i] + "')";
+                    }
+                    else
+                    {
+                        query +=  idMaTour + ",'" + tour.DsAnh[i] + "'),(";
+                    }
+                   
+                }
+                Debug.WriteLine("Query : "+query);
+                    try
+                    {
+                        SqlCommand cmdAnh = new SqlCommand(query, cn.connect());
+                        cmdAnh.CommandType = CommandType.Text;
+                        cmdAnh.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Error " + ex.Message);
+                    }
+                
                 //   int k = cmd3.ExecuteNonQuery();
 
 
@@ -341,6 +379,32 @@ namespace WebDatTour.Model
             }
 
         }
+        public Boolean updatehinhanh(string id, string duongDan)
+        {
+
+
+           // Debug.WriteLine("id: " + id);
+            SqlCommand cmd = new SqlCommand("updatehinhanh", cn.connect());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@duongDan", duongDan);
+           
+
+            int i = cmd.ExecuteNonQuery();
+            if (i > 0)
+            //cnn.Open();timKiemTour            if (i > 0)
+            {
+
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
 
         public Boolean capNhatTrangThaiTour(string id)
@@ -443,6 +507,28 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("toutMoiNhat", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 // cmd.Parameters.AddWithValue("@id", tour);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+
+            }
+
+        }
+        
+             public DataTable layHinhAnh(string id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_layHinhAnhCuaTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();

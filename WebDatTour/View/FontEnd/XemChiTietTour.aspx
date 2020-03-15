@@ -15,7 +15,7 @@
     <ol class="carousel-indicators">
                                 <asp:Repeater ID="rpt1" runat="server">
                                 <ItemTemplate>
-                                    <li data-target="#myCarousel2" data-slide-to="<%# Eval("id")%>"></li>
+                                    <li data-target="#myCarousel2" data-slide-to="<%# Container.ItemIndex %>"></li>
                                 
                                 </ItemTemplate>
                                 </asp:Repeater>
@@ -27,7 +27,7 @@
                                 <ItemTemplate>
                                      <div class="post-img item <%# Container.ItemIndex == 0 ? "active" : "" %>">
 
-                                         <img  style="width:100%; height: 400px;" src="../../Upload/<%# Eval("url") %> " />
+                                         <img  style="width:100%; height: 400px;" src="../../Upload/<%# Eval("sDuongDan") %> " />
       </div>
                                 </ItemTemplate>
                                 </asp:Repeater>
@@ -180,7 +180,7 @@
                                    
                                     <!-- /.post author -->
                                     <div class="comments-area">
-                                        <h2 class="comments-title"> Bình Luận_</h2>
+                                        <h2 class="comments-title"> Đánh Giá_</h2>
                                       <!--  <ul class="comment-list">
                                             <li class="comment">
                                                 <div class="comment-body">
@@ -225,10 +225,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Sửa Bình Luận</h4>
+          <h4 class="modal-title" style="margin-top: 30px;">Sửa Bình Luận</h4>
         </div>
         <div class="modal-body" id="suablDiv">
+          <div class="container">
+                <div class="row">
+                    <div class="col-md-11">
+
+        <div class="starrating risingstar d-flex justify-content-center flex-row-reverse" style="display:inline; margin-right: 50px;">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star">5</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star">4</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star">3</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star">2</label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">1</label>
           
+        </div>
+                        <textarea  placeholder="Đánh Giá Về Tour" id="txtDanhGiaTour" rows="3" class="form-control" style="width: auto;" cols="50"></textarea>
+                          <div id="divbtndanhgia"></div>
+  </div>
+
+        </div>
+          
+                    </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -246,13 +264,15 @@
                                                         <div class="comment-author"><img src="../../Content/images/user-pic-3.jpg" alt="" class="img-circle"> </div>
                                                         <div class="comment-info">
                                                             <div class="comment-header">
-                                                                <div class="comment-meta"><span class="comment-meta-date pull-right"><%# Eval("dThoiGian") %> </span></div>
-                                                                <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anbinhluan(<%# Eval("iMaBinhLuan") %>,<%# Eval("iMaTour") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("itrangthai").ToString().Equals("False") ? "success" : "warning" %> "><%# Eval("itrangthai").ToString().Equals("True") ? "Ẩn" : "Hiện" %></label> 
+                                                                <div class="comment-meta"><span class="comment-meta-date pull-right"><%# Eval("dThoiGian", "{0:dd/MM/yyyy HH:mm:ss}") %> </span></div>
+                                                                <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anDanhGia(<%# Eval("iMaDanhGia") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("btrangthai").ToString().Equals("False") ? "success" : "warning" %> "><%# Eval("btrangthai").ToString().Equals("True") ? "Ẩn" : "Hiện" %></label> 
                                                             </div>
                                                             <div class="comment-content">
-                                                                <p id="bl_<%# Eval("iMaBinhLuan") %>"><%# Eval("sNoiDung") %></p>
+                                                                <%# hienSao(Eval("isosao").ToString()) %>
+                                                                <br />
+                                                                <p id="bl_<%# Eval("iMaDanhGia") %>"><%# Eval("sNoiDung") %></p>
                                                             </div>
-                                                            <div style="margin: 20px;"><%# suaBinhluan(Eval("iMaBinhLuan").ToString(),Eval("iMaTour").ToString()) %></div>
+                                                            <div style="margin: 20px;"><%# ktrasuaDanhGia(Eval("iMaDanhGia").ToString(),Eval("imadondattour").ToString(),Eval("isosao").ToString()) %></div>
                                                             <!--<div class="reply"><a href="#" class="btn-link">Trả Lời</a></div> -->
                                                         </div>
                                                     </div>
@@ -265,7 +285,7 @@
                                     </div>
                                 </div>
                               <!--  <-% if(!HttpContext.Current.Session["maKH"].ToString().Equals("")) { %->    -->
-                                <% if(kiemTraQuyenBinhLuan()) { %>
+                                <% if(1 ==2 ) { %>
                                 <div id="matourhidden" runat="server"></div>
                                 <div class="leave-comments">
                                     <h2 class="reply-title">Bình Luận</h2>
@@ -284,7 +304,7 @@
                                                 <!-- Button -->
                                                 <div class="form-group">
                                                    <!-- <asp:Button ID="binhLuan" runat="server" Text="Bình Luận" OnClick="binhLuan_Click" />-->
-                                                <label id="btnBinhLuan_" class="label label-default">Bình Luận</label>
+                                                <label id="btnBinhLuan_" class="label label-default">Đánh Giá</label>
                                                     <div id="notiCmt"></div>
                                                 </div>
                                             </div>
@@ -321,7 +341,7 @@
                         <div runat="server" name="gia" id="gia"></div>
                         <h3 class="widget-title">Đặt Tour </h3>
                         <input type="hidden" id="soChoToiDa"/>
-                        <form class="form-group" method="get" action="DatTour.aspx">
+                        <form class="form-group" method="get" action="DatTour.aspx"  id="formDatTour">
                             <div id="ngaydi" runat="server"></div>
                             <div id="hiddenIdTour" runat="server"></div>
                             <div class="form-inline"><span>Người Lớn:</span> &nbsp &nbsp<input class="form-controll" type="text" id="id1" name="inl" value = "1" style = "width: 40px; border-radius: 4px;">&nbsp &nbsp
@@ -331,7 +351,7 @@
  <button type="button" class="btnUpDow" onClick="up2();" style="width: 35px; background-color: #ccc; border-radius: 4px;">+</button> <button class="btnUpDow" type="button" onclick="dow2();"  style="width: 35px; background-color: #ccc; border-radius: 4px;">-</button></div>
                             <div id="tongTien" style="color:red; font-size:25px; margin: 10px;"></div>
                             <div id="thongBaoSoCho" class="text-success"></div>
- <input type="submit" name="" value="Đặt Vé" style="">
+ <input type="button" onclick=" kiemTraDangNhap();" name="" value="Đặt Vé" style="">
                     
                         </form>
                         

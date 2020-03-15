@@ -7,23 +7,61 @@
         </h1>
     </div>
     <br />
-    <ul style="list-style-type: none; color:blue;">
-        <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server" id="txtMa">Mã Đơn Đặt Tour:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;"  id="txtNgayD" runat="server">Ngày Đặt:</li>
-        <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"  id="txtTen">Khách Hàng</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"  id="txtsdt">Số Điện Thoại:</li>
-         <li runat="server"  style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" id="txtEmail">Email:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtNL">Số Chỗ Người Lớn:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtTE">Số Chỗ Trẻ Em:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txttientt">Tổng Tiền Đã Thanh Toán:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtTien">Tổng Đơn Đặt Tour:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtTieuDe">Tour:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtNgaykhoiHnah">Ngày Khởi Hành:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtNoiKhoiHanh">Nơi Khởi Hành:</li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txttgtong">Tổng Thời Gian: </li>
-         <li style="font-size:25px; font-family: Arial, Helvetica, sans-serif;" runat="server"   id="txtGhiChu">Ghi chú</li>
-       
-    </ul>
+    
+    <div class="col-md-12" style="padding: 37px;">
+    <table class="table table-hover" >
+        <thead>
+            
+        </thead>
+        <tbody>
+            <asp:Repeater ID="Repeater2" runat="server">
+                                            <ItemTemplate>
+            <tr>
+            <th class="text-left">Mã Đơn Đặt Tour:</th>
+                <th class="text-left"><%# Eval("imadontour") %></th>
+                <th class="text-left">Ngày Đặt:</th>
+                <th class="text-left"><%# Eval("dngaydattour", "{0:dd/MM/yyyy HH:mm}") %></th>
+            </tr>
+             <tr>
+            <th class="text-left">Khách Hàng</th>
+                <th class="text-left"><%# Eval("sTenKhachHang") %></th>
+                <th class="text-left">Số Điện Thoại:</th>
+                <th class="text-left"><%# Eval("sSDT") %></th>
+            </tr>
+ <tr>
+            <th class="text-left">Email:</th>
+                <th class="text-left"><%# Eval("sEmail") %></th>
+                 <th class="text-left">Ngày Khởi Hành:</th>
+                <th class="text-left"><%# Eval("dthoigian", "{0:dd/MM/yyyy HH:mm}") %></th>
+            </tr>
+ <tr>
+     <th class="text-left">Số Chỗ Người Lớn:</th>
+                <th class="text-left"><%# Eval("veNL") %></th>
+            <th class="text-left">Số Chỗ Trẻ Em:</th>
+                <th class="text-left"><%# Eval("veTE") %></th>
+                
+            </tr>
+ <tr>
+            <th class="text-left">Tổng Đơn Đặt Tour:</th>
+                <th class="text-left"><%# toCurruncy(Convert.ToInt32(Eval("doanhthu")))  %></th>
+     <th class="text-left">Tổng Tiền Đã Thanh Toán:</th>
+                <th class="text-left"><%# toCurruncy(Convert.ToInt32(Eval("thucthu"))) %></th>
+               
+            </tr>
+ <tr>
+            <th class="text-left">Nơi Khởi Hành:</th>
+                <th class="text-left"><%# Eval("snoikhoihanh") %></th>
+                <th class="text-left">Tổng Thời Gian:</th>
+                <th class="text-left"><%# Eval("stongthoigian") %></th>
+            </tr>
+ <tr>
+       </ItemTemplate>
+                                        </asp:Repeater>
+           
+        </tbody>
+
+    </table>
+        </div>
 </div>
      <br />
     <form method="POST" class="form-horizontal" runat="server" enctype="multipart/form-data">
@@ -76,7 +114,7 @@
                                 </table>
                                 <div class="text-center">
                                    
-                                     <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
+                                     <asp:Label ID="url" runat="server" Text=""></asp:Label>
                                     
                                  </div>     
                             </div>
@@ -130,7 +168,7 @@
                                 </table>
                                 <div class="text-center">
                                    
-                                     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                     <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                     
                                  </div>     
                             </div>

@@ -82,10 +82,10 @@
                         <ItemTemplate> 
                             <div class="col-md-2" style="padding: 10px;">
                                 <div style="width: 100%; height: 200px;">
-                        <image src="../../Upload/<%# Eval("url") %>" class="img-responsive" ></image>
+                        <image src="../../Upload/<%# Eval("sDuongDan") %>" class="img-responsive" ></image>
                                     </div>
                              <div class="text-center" style="margin-bottom:15px; margin-top: 15px;">
-                                  <asp:FileUpload ID="FileAnh" runat="server" CssClass="MakeButtonHidden" />
+                                  <asp:FileUpload ID="FileAnh" runat="server" CssClass="MakeButtonHidden"/>
                              </div>
                             </div>   
                             
@@ -158,3 +158,7 @@
 
 
 </asp:Content>
+<asp:Content ID="cnt2" ContentPlaceHolderID="script" runat="server" >
+    <div id="notification" runat="server"></div>
+</asp:Content>
+

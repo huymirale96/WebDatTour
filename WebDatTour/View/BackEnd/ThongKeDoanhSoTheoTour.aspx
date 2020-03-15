@@ -39,7 +39,7 @@
                                             <th class="text-center">Thực Thu</th>
                                             <th class="text-center">Còn Lại</th>
                                             
-                                            <th class="text-center">Thao Tác</th>
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,10 +53,7 @@
                                                     <td class="text-center"><%# Eval("thucthu") %></td>
 										            <td class="text-center"><%# Eval("conlai") %></td>
 
-											        <td class="left">
-												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server"  CommandArgument=''><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server"  OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument=''><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
-											        </td>
+											        
 									            </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>

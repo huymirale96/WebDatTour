@@ -39,8 +39,7 @@
                                             <th class="text-center">Chỗ Người Lớn Đã Đặt</th>
                                             <th class="text-center">Chỗ Trẻ Em Đã Đặt</th>
                                             <th class="text-center">Số Chỗ Còn Lại</th>                                         
-                                            <th class="text-center">Trạng Thái</th>
-                                            <th class="text-center">Thao Tác</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,13 +53,7 @@
                                                     <td class="text-center"><%# Eval("veNguoiLon") %></td>
 										            <td class="text-center"><%# Eval("veTreEm") %></td>
 										            <td class="text-center"><label class="label label-<%# (Convert.ToInt32(Eval("iSoCho")) -(Convert.ToInt32(Eval("veTreEm"))+Convert.ToInt32(Eval("venguoilon")))) <= 0 ? "warning" : "success" %>"><%# Convert.ToInt32(Eval("iSoCho")) -(Convert.ToInt32(Eval("veTreEm"))+Convert.ToInt32(Eval("venguoilon"))) %></label></td>
-										            <td class="text-center">
-                                                       
-										            </td>
-											        <td class="left">
-												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server"  CommandArgument=''><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server"  OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument=''><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
-											        </td>
+										            
 									            </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>

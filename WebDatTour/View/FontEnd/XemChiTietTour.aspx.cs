@@ -19,8 +19,9 @@ namespace WebDatTour.View.FontEnd
     public partial class XemChiTietTour : System.Web.UI.Page
     {
         TourController tourController = new TourController();
-        BinhLuanController binhLuanController = new BinhLuanController();
-        BinhLuanModel binhLuanModel = new BinhLuanModel();
+        DanhGiaController danhGiaController = new DanhGiaController();
+        //BinhLuanController binhLuanController = new BinhLuanController();
+        ///BinhLuanModel binhLuanModel = new BinhLuanModel();
         protected void Page_Load(object sender, EventArgs e)
         {
            if(HttpContext.Current.Session["maKH"].ToString().Equals(""))
@@ -41,7 +42,7 @@ namespace WebDatTour.View.FontEnd
                 else
                 {
                     xemTour("18");
-                    laybinhluan(18);
+                  //  laybinhluan(18);
 
                 }
             
@@ -49,10 +50,23 @@ namespace WebDatTour.View.FontEnd
         public void laybinhluan(int id)
         {
             //Debug.WriteLine(JsonConvert.SerializeObject(binhLuanController.layBinhLuan(id)));
-            rptBinhLuan.DataSource = binhLuanController.layBinhLuan(id);
+            rptBinhLuan.DataSource = danhGiaController.layDanhGia(id);
             rptBinhLuan.DataBind();
         }
-
+        public string hienSao(string sosao)
+        {
+            string x = "";
+            int soSao = Convert.ToInt32(sosao);
+            for(int i = 0; i < soSao; i++)
+            {
+                x += "<i class='fa fa-star'  style='font - size:18px; color: #ffca08 ;'></i>";
+            }
+            for (int i = 0; i < 5 - soSao; i++)
+            {
+                x += "<i class='fa fa-star'  style='font - size:18px; '></i>";
+            }
+            return x;
+        }
         public void layNgayDiTour(int id)
         {
             Debug.WriteLine("id tour cho ngay di: " + id);
@@ -71,7 +85,7 @@ namespace WebDatTour.View.FontEnd
 
        public string test(string id)
         {
-           // Debug.WriteLine("tt " + id);
+         
             return "";
         }
     
@@ -90,31 +104,14 @@ namespace WebDatTour.View.FontEnd
                     txtTG.InnerHtml = rd["stongthoigian"] + "";
                     txtTE.InnerHtml = "<strike style='color: red; display: inline;'>"+Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
                     txtNL.InnerHtml = "<strike style='color: red;display: inline;'>" + Convert.ToInt32(rd["igianl"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
-                        string[] urls = rd["sUrlAnh"].ToString().Split('/');  
-                    //System.Diagnostics.Debug.WriteLine("url: " + urls[0]);
-                    anhDD.InnerHtml = "<img src='../../Content/images/"+ urls[0] + "' alt=' 'class='alignleft img-responsive'>";
-                        List<string> urlrpt = new List<string>();
-                        List<string> idrpt = new List<string>(); // idrpt.Add(i.ToString());
-                        DataTable dt1 = new DataTable();
-                        dt1.Clear();
-                        dt1.Columns.Add("id");
-                        DataTable dt2 = new DataTable();
-                        dt2.Clear();
-                        dt2.Columns.Add("url");
-                        for (int i = 1; i < urls.Length; i++)
-                        {
-                            DataRow row1 = dt1.NewRow();
-                            DataRow row2 = dt2.NewRow();
-                            row1["id"] =  i - 1;
-                            row2["url"] = urls[i];
-                            dt1.Rows.Add(row1);
-                            dt2.Rows.Add(row2);
-                          //  System.Diagnostics.Debug.WriteLine("id:  "+ (i-1).ToString() + "  " + urls[i] );
+                  
+                    DataTable dataTable = tourController.layHinhAnh(id);
+                    anhDD.InnerHtml = "<img src='../../Upload/" + dataTable.Rows[0]["sDuongDan"] + "' alt=' 'class='alignleft img-responsive'>";
 
-                        }
-                        rpt1.DataSource = dt1;
+                    dataTable.Rows[0].Delete();
+                        rpt1.DataSource = dataTable;
                         rpt1.DataBind();
-                        rpt2.DataSource = dt2;
+                        rpt2.DataSource = dataTable;
                         rpt2.DataBind();
 
                         txtNoiDung.Text = rd["sMoTa"].ToString();
@@ -125,7 +122,7 @@ namespace WebDatTour.View.FontEnd
                     int giaNL = Convert.ToInt32(rd["igianl"]);
                     int giaNLgiam = Convert.ToInt32(rd["igianlgiam"]);
                     
-                    // gia.InnerHtml = "<input type='hidden' id='giaNL' value ='" + gianl + "' /><input type='hidden' id ='giaTE' value = '" + giate + "' /> ";
+                    
                     string htmlGia = "<input type='hidden' id='giaNL' value ='";
                     if (giaNLgiam == 0)
                     {
@@ -146,41 +143,7 @@ namespace WebDatTour.View.FontEnd
                     }
                     gia.InnerHtml = htmlGia + "' /> ";
                     hiddenIdTour.InnerHtml = "<input type='hidden' id='idTour' name='idTour' value='" + rd["iMaTour"].ToString() + "' />";
-                   
-                    // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
-                    /*
-                    txtMaTour.Value = rd["imatour"].ToString();
-                    txtTieuDe.Text = rd["sTieuDe"].ToString();
-                    txtMoTaTour.Text = rd["sMoTa"].ToString();
-                    String date = String.Format("{0:yyyy-MM-dd}", rd["dNgayKhoiHanh"]);
-                    txtNgayKhoiHanh.Text = date;
-                    txtSoNgayDi.Text = rd["sTongThoiGian"].ToString();
-                    txtSoCho.Text = rd["iSoCho"].ToString();
-                    txtGiaNLgiam.Text = rd["igianlgiam"].ToString();
-                    txtGIaNL.Text = rd["igianl"].ToString();
-                    txtGiaTE.Text = rd["igiate"].ToString();
-                    txtGiaTEgiam.Text = rd["igiategiam"].ToString();
-
-
-                    string[] tokens = rd["sUrlAnh"].ToString().Split('/');
-                    // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
-                    // Label2.Text = tokens[0];
-                    DataTable dt = new DataTable();
-                    dt.Clear();
-                    dt.Columns.Add("url");
-                    dt.Columns.Add("id");
-
-                    for (int i = 0; i < tokens.Length; i++)
-                    {
-                        DataRow row = dt.NewRow();
-                        row["url"] = tokens[i];
-                        row["id"] = i;
-                        dt.Rows.Add(row);
-                    }
-                    // rptDSanh.DataSource = dt;
-                    //rptDSanh.DataBind();
-                    //
-                }*/
+                  
 
                 }
             }
@@ -188,44 +151,19 @@ namespace WebDatTour.View.FontEnd
 
         protected void binhLuan_Click(object sender, EventArgs e)
         {
-            BinhLuan binhLuan = new BinhLuan();
-            binhLuan.MaTour = Convert.ToInt32(maTour_.Value);
-            binhLuan.ThoiGian = DateTime.Now;
-            binhLuan.MaKH = Convert.ToInt32(HttpContext.Current.Session["maKH"]);
-            binhLuan.NoiDung = txtBinhLuan.Text;
-            binhLuanController.binhLuan(binhLuan);
-            Response.Redirect("XemChiTietTour.aspx?id="+ maTour_.Value);
         }
+           
         [WebMethod]
-        public static string taoBinhLuan(string idtour, string binhluan)
+        public static string anDanhGia(string id)
         {
-            if(!HttpContext.Current.Session["maKH"].ToString().Equals(""))
-            {
-                BinhLuanController binhLuanController_ = new BinhLuanController();
-                BinhLuan binhLuan = new BinhLuan();
-                binhLuan.MaTour = Convert.ToInt32(idtour);
-                binhLuan.ThoiGian = DateTime.Now;
-                binhLuan.MaKH = Convert.ToInt32(HttpContext.Current.Session["maKH"]);
-                binhLuan.NoiDung = binhluan;
-                binhLuanController_.binhLuan(binhLuan);
-                return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
-            }
-            else
-            {
-                return null;
-            }
-        }
-        [WebMethod]
-        public static string anBinhLuan(string id, string idtour)
-        {
-            Debug.WriteLine("id " + id + idtour);
+            Debug.WriteLine("id " + id );
             //return id+idtour;
            if (!HttpContext.Current.Session["maNV"].ToString().Equals(""))
             {
-                BinhLuanController binhLuanController_ = new BinhLuanController();
-                if (binhLuanController_.capNhatTrangThaiBinhLuan(id))
+                 DanhGiaController danhGiaController_ = new DanhGiaController();
+                if (danhGiaController_.capNhatTrangThaiDanhGia(id))
                 {
-                    return JsonConvert.SerializeObject(binhLuanController_.layBinhLuan(Convert.ToInt32(idtour)));
+                    return JsonConvert.SerializeObject(danhGiaController_.layDanhGia_DanhGIa(Convert.ToInt32(id)));
                 }
                 return null;
             }
@@ -235,12 +173,9 @@ namespace WebDatTour.View.FontEnd
             }
         }
         
-            [WebMethod]
+         [WebMethod]
         public static string kiemTraSoChoCon(string idtour, string idthoigian)
         {
-          //   Debug.WriteLine("idkt " + idthoigian + idtour);
-            //return id+idtour;
-
             TourController tourController = new TourController();
            string i = tourController.kiemTraSoChoCon(idtour, idthoigian);
             //.Debug.WriteLine("idso " + i);
@@ -254,47 +189,12 @@ namespace WebDatTour.View.FontEnd
                 return null;
             }
         }
-        public Boolean kiemTraQuyenBinhLuan()
+       
+      public string ktrasuaDanhGia(string maDanhGia, string maDonDatTour, string soSao)
         {
-            //Debug.WriteLine("ktea quyen " + Session["maKH"].ToString());
-            // Debug.WriteLine(Request.QueryString["id"].ToString() +"  " + Session["maKH"].ToString() + " ktra quen" );
-            if (Request.QueryString["id"] != null)
+            if (danhGiaController.kiemTraDanhGiaKH(Session["maKH"].ToString(), maDonDatTour))
             {
-               // Debug.WriteLine(Request.QueryString["id"].ToString() + "  " + Session["maKH"].ToString());
-                if (!Session["maKH"].ToString().Equals("") && binhLuanController.kiemTraQuyenBinhLuan(Session["maKH"].ToString(), Request.QueryString["id"].ToString()))
-                {
-                    Debug.WriteLine("cos quyen ");
-                    return true;
-                }
-                else
-                {
-                    Debug.WriteLine("k cos quyen ");
-                    return false;
-                }
-            }
-            else
-            {
-                if(maTour_.Value != null)
-                {
-                    if(binhLuanController.kiemTraQuyenBinhLuan(Session["maKH"].ToString(), maTour_.Value))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-            }
-
-            return false;
-        }
-        public string suaBinhluan(string id, string tour)
-        {
-            if(binhLuanModel.kiemTraBinhLuanKH(Session["maKH"].ToString(), id))
-            {
-                return " <label  class='label label-info' onclick='suaBinhLuan(" + id +"," + tour+")'>Chỉnh Sửa</label>";
+                return " <label  class='label label-info' onclick='suaDanhGia(" + maDanhGia + "," + soSao +  ")'>Chỉnh Sửa</label>";
             }
             else
             {
@@ -302,14 +202,15 @@ namespace WebDatTour.View.FontEnd
             }
         }
         [WebMethod]
-        public static string suaBinhLuan(string id, string noidung, string idtour)
+        public static string suaDanhGia(string id, string noiDung, string soSao)
         {
-            BinhLuanController binhLuanController_ = new BinhLuanController();
-            BinhLuanModel binhLuanModel = new BinhLuanModel();
+            Debug.Write(id + "  " + noiDung + "  " + soSao + "  ");
+            DanhGiaController danhGiaController = new DanhGiaController();
+
             string makh = HttpContext.Current.Session["maKH"].ToString();
-            if(binhLuanModel.suaBinhLuan(id,noidung))
+            if(danhGiaController.suaDanhGia(id, noiDung, soSao))
             {
-                DataTable dataTable = binhLuanController_.layBinhLuan(Convert.ToInt32(idtour));
+                DataTable dataTable = danhGiaController.layDanhGia_DanhGIa(Convert.ToInt32(id));
                 dataTable.Columns.Add("check", typeof(System.Int32));
                 foreach (DataRow row in dataTable.Rows)
                 {

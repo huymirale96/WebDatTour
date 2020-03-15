@@ -21,6 +21,8 @@ namespace WebDatTour.Object
         private int soCho;
         private DateTime ngayTao;
         private List<DateTime> dsNgayKhoiHanh;
+        private List<String> dsAnh;
+
 
 
         public Tour(int maNhomTour, string tongThoiGian, string urlAnh, string moTa,  string tieuDe, string noiKhoiHanh, DateTime ngayKhoiHanh, int maTour)
@@ -67,5 +69,6 @@ namespace WebDatTour.Object
         public int SoCho { get => soCho; set => soCho = value; }
         public DateTime NgayTao { get => ngayTao; set => ngayTao = value; }
         public List<DateTime> DsNgayKhoiHanh { get => dsNgayKhoiHanh; set => dsNgayKhoiHanh = value; }
+        public List<string> DsAnh { get => dsAnh; set => dsAnh = value; }
     }
 }

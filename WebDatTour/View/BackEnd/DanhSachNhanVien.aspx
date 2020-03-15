@@ -40,9 +40,10 @@
 										            <td class="text-center">
                                                         <%# Eval("iMaQuyen").ToString().Equals("2") ? "ADMIN" : "MEMBER" %>
 										            </td>
-											        <td class="left">
-												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-warning" ToolTip="Sửa" runat="server" OnClick="btnFix_Click" CommandArgument='<%# Eval("iMaNhanVien") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xoá" runat="server" OnClick="btnDelete_Click" OnClientClick="return confirm('Bạn có chắc chắn xoá ?')" CommandArgument='<%# Eval("iMaNhanVien") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+											        <td class="text-center">
+                                                       
+												       <input type="checkbox" hidden="hidden" id="trangThaiNV" data-id="" checked="checked">
+                                                        <label class="switch_btn" for="trangThaiNV"></label>
 											        </td>
 									            </tr>
                                             </ItemTemplate>

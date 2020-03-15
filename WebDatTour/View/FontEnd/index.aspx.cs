@@ -116,15 +116,15 @@ namespace WebDatTour.View.FontEnd
             khachHang.TenDangNhap = ten;
             khachHang.MatKhau = mk;
             string x = khachHangController_.dangNhapKH(khachHang);
-            Debug.WriteLine("TEN Khach Hang: " + x);
+          //  Debug.WriteLine("TEN Khach Hang: " + x);
             return x;
         }
         [WebMethod]
         public static Boolean kiemTraTen(string ten)
         {
-            Debug.WriteLine("ten dki ajax :" +ten);
+           // Debug.WriteLine("ten dki ajax :" +ten);
             KhachHangController khachHangController = new KhachHangController();
-            Debug.WriteLine("ten dki ajax ket qua :" + khachHangController.kiemTraTen(ten));
+           // Debug.WriteLine("ten dki ajax ket qua :" + khachHangController.kiemTraTen(ten));
             return khachHangController.kiemTraTen(ten);
         }
         protected void layTour(int id)

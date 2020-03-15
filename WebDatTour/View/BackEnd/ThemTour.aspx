@@ -102,3 +102,6 @@
 
 </div>
 </asp:Content>
+<asp:Content ID="cnt2" ContentPlaceHolderID="script" runat="server" >
+    <div id="notification" runat="server"></div>
+</asp:Content>

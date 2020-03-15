@@ -19,16 +19,30 @@ namespace WebDatTour.View.FontEnd
         {
             xemDanhSachTour();
             Paging();
+            if(Session["mess"].ToString().Equals("capnhattrangthaithanhcong"))
+            {
+                Session["mess"] = "";
+                string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
+                myScript += "toastr.success(\"Cập Nhật Trạng Thái Tour Thành Công\",\"Thông Báo\");";
+                myScript += "\n\n </script>";
+               
+                script.InnerHtml = myScript;
+               
+            }
+            if (Session["mess"].ToString().Equals("themtourthanhcong"))
+            {
+                Session["mess"] = "";
+                string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
+                myScript += "toastr.success(\"Thêm Tour Thành Công\",\"Thông Báo\");";
+                myScript += "\n\n </script>";
+                
+                script.InnerHtml = myScript;
+
+            }
+
         }
         public DataTable danhSachTour()
         {
-            /* using (SqlConnection cnn = new SqlConnection(cnnString))
-             {
-                 SqlDataAdapter dap = new SqlDataAdapter("sp_danhSachTour", cnn);
-                 DataTable ta = new DataTable();
-                 dap.Fill(ta);
-                 return ta;
-             }*/
             return tourController.layDanhSachTour();
         }
 
@@ -186,8 +200,14 @@ namespace WebDatTour.View.FontEnd
                 pageCurrent = "1";
             }
             tourController.capNhatTrangThaiTour(id);
+            Session["mess"] = "capnhattrangthaithanhcong";
             Response.Redirect("danhsachtour.aspx?page="+pageCurrent);
         }
-       
+
+        protected void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            rptDanhSachTour.DataSource = tourController.timKiemTour_tieuDe(txtTuKhoa.Text);
+            rptDanhSachTour.DataBind();
+        }
     }
 }

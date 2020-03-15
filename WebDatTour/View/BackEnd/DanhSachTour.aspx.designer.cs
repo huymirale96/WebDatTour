@@ -22,6 +22,33 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.WebControls.HiddenField page_;
         
         /// <summary>
+        /// txtTuKhoa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTuKhoa;
+        
+        /// <summary>
+        /// reqyiretxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqyiretxt;
+        
+        /// <summary>
+        /// btnTimKiem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTimKiem;
+        
+        /// <summary>
         /// rptDanhSachTour control.
         /// </summary>
         /// <remarks>
@@ -83,5 +110,14 @@ namespace WebDatTour.View.FontEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label url;
+        
+        /// <summary>
+        /// script control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl script;
     }
 }

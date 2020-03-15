@@ -18,6 +18,7 @@
 
     <!-- Custom CSS -->
     <link href="../../bower_components/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../../Content/css/toastr.min.css" rel="stylesheet" />  <!--https://codepen.io/riyos94/pen/NXgXdp--->
 
     <!-- Custom Fonts -->
     <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -234,6 +235,7 @@
     <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
      <script src="../Plugin/ckfinder/ckfinder.js"></script>
     <!-- Custom Theme JavaScript -->
+            <script src="../../Content/js/toastr.min.js"></script>
         
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../../bower_components/dist/js/sb-admin-2.js"></script>\
@@ -242,7 +244,7 @@
     <!-- DataTables JavaScript -->
     <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
+    <asp:ContentPlaceHolder ID="script" runat="server"></asp:ContentPlaceHolder>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
             $(document).ready(function () {

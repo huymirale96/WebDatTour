@@ -18,6 +18,7 @@
     <link href="../../Content/css/font-awesome.min.css" rel="stylesheet">
     <!-- Style -->
     <link href="../../Content/css/style.css" rel="stylesheet">
+    <link href="../../Content/css/toastr.min.css" rel="stylesheet" />  <!--https://codepen.io/riyos94/pen/NXgXdp--->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,7 +84,7 @@
         </div>
         <div class="modal-body">
           
-                    <h3>Login for Form 1</h3>
+                    <h3>THÔNG TIN ĐĂNG NHẬP</h3>
                     <!--<form action="index.aspx" method="get"> </form>  --> 
                         <input type="hidden" name="chucNang" value="dangNhap" />
                           <div class="form-group">
@@ -257,6 +258,7 @@
     <!-- /.footer-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../../Content/js/jquery.min.js"></script>
+    <script src="../../Content/js/toastr.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../../Content/js/bootstrap.min.js"></script>
     <script src="../../Content/js/menumaker.js"></script>

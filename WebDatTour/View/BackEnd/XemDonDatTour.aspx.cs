@@ -33,7 +33,10 @@ namespace WebDatTour.View.BackEnd
                 DataTable datatable = new DataTable();
                 datatable = tourController.xemDonDatTour(id);
 
-                txtEmail.InnerText = "Email :" + datatable.Rows[0]["sEmail"].ToString();
+                Repeater2.DataSource = datatable;
+                Repeater2.DataBind();
+
+                /*txtEmail.InnerText = "Email :" + datatable.Rows[0]["sEmail"].ToString();
                 txtMa.InnerText = "Mã Đơn Đặt TOur: " + datatable.Rows[0]["imadontour"].ToString();
                 txtNgaykhoiHnah.InnerText = "Thời Gian Đi: " + DateTime.Parse(datatable.Rows[0]["dthoigian"].ToString()).ToString("dd/MM/yyyy");
                 txtNL.InnerText = "Số Vé Người Lớn" + datatable.Rows[0]["veNL"].ToString();
@@ -48,7 +51,7 @@ namespace WebDatTour.View.BackEnd
                 txttientt.InnerText = "Tiền Đã Thanh Toán : " + datatable.Rows[0]["thucthu"].ToString() + " VND";
                 txtTieuDe.InnerText = "Tour: " + datatable.Rows[0]["stieude"].ToString();
                 txttgtong.InnerText = "Tổng Thời Gian" + datatable.Rows[0]["stongthoigian"].ToString();
-                txtGhiChu.InnerText = "Ghi Chú" + datatable.Rows[0]["sghichu"].ToString();
+                txtGhiChu.InnerText = "Ghi Chú" + datatable.Rows[0]["sghichu"].ToString();*/
             }
             catch (Exception ex)
             {
@@ -58,7 +61,7 @@ namespace WebDatTour.View.BackEnd
         }
         protected String toCurruncy(int x)
         {
-            return x.ToString("#,##0");
+            return x.ToString("#,##0")+" VNĐ";
         }
         public string trangThai(string id)
         {

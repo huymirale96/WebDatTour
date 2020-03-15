@@ -11,7 +11,11 @@
                         <div class="panel-body">
                             <div class="text-center">
                                 <span id="MainContent_lblNoti"></span>
+                                <div class="col-md-offset-1 col-md-4"><asp:TextBox ID="txtTuKhoa" Text="." runat="server" CssClass="form-control" Placeholder="Tim Kiem"></asp:TextBox></div>
+                                <asp:RequiredFieldValidator ID="reqyiretxt" runat="server" ControlToValidate="txtTuKhoa" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <div class="col-md-2" style="margin-left:50px; margin-bottom:15px;"><asp:Button ID="btnTimKiem" runat="server" Text="Tìm Kiếm" CssClass="btn btn-default" onclick="btnTimKiem_Click"/></div>
                             </div>
+                            <br />
                             <div class="col-md-12">
                                 <table class="table table-bordered table-stripped">
                                     <thead>
@@ -33,7 +37,7 @@
                                                 <tr>
 										            <td class="text-center"><%# Container.ItemIndex+1 %></td>
 										            <td class="left"><%# Eval("sTieuDe") %></td>
-                                                    <td class="text-center"><img style="width: 200px;" src="../../Upload/<%# urlAnhh( Eval("sUrlAnh").ToString() ) %>" ></td>
+                                                    <td class="text-center"><img style="width: 200px;" src="../../Upload/<%#  Eval("sDuongDan")  %>" ></td>
                                                     <td class="left"><%# Eval("sTongThoiGian") %></td>
 										            <td class="text-center"><%# Eval("snoikhoihanh") %></td>
 										            <td class="text-center"><%# Eval("iSoCho") %></td>
@@ -66,4 +70,7 @@
                 <!-- /.row -->
         </form>
 
+</asp:Content>
+<asp:Content ID="conetnt2" runat="server" ContentPlaceHolderID="script">
+    <div runat="server" id="script"></div>
 </asp:Content>

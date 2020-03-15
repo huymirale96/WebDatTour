@@ -32,6 +32,11 @@ namespace WebDatTour.Controllers
         {
             return tourModel.themTour(tour, giaNL, giaNLgiam, giaTE, giaTEgiam);
         }
+        
+             public DataTable timKiemTour_tieuDe(string id)
+        {
+            return tourModel.timKiemTour_tieuDe(id);
+        }
         public DataTable dsThoiGianKhoiHanh(int id)
         {
             return tourModel.dsThoiGianKhoiHanh(id);
@@ -66,6 +71,11 @@ namespace WebDatTour.Controllers
             public Boolean capNhatTrangThaiTour(string id)
         {
             return tourModel.capNhatTrangThaiTour(id);
+        }
+        
+                public Boolean upDateHinhAnh(string id, string duongDan)
+        {
+            return tourModel.updatehinhanh(id, duongDan);
         }
 
         public DataTable thongKeTour_soCho()
@@ -105,7 +115,12 @@ namespace WebDatTour.Controllers
             return tourModel.tourhotTuan();
         }
         
-            public DataTable tourhotThang()
+               public DataTable layHinhAnh(string id)
+        {
+            return tourModel.layHinhAnh(id);
+        }
+
+        public DataTable tourhotThang()
         {
             return tourModel.tourhotThang();
         }

@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using WebDatTour.Model;
 using WebDatTour.Object;
 using System.Configuration;
+using System.Web.Services;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -21,22 +22,11 @@ namespace WebDatTour.View.FontEnd
         DonDatTourController datTourController = new DonDatTourController();
         KhachHangModel khachHangModel = new KhachHangModel();
         TourModel tourModel = new TourModel();
-       // HiddenField tien_tt = (HiddenField)FindControl("tien_");
+       
         protected void Page_Load(object sender, EventArgs e)
         {
-            // int tt =  tienThanhToan("29", 2, 2);
-            // Debug.WriteLine("Dat Tour "+tt);
-            /*   SqlDataReader rd2 = tourController.xemTour("29");
-              // SqlDataReader rd = tourController.xemTour(id);
-               if (rd2.HasRows)
-               {
-                   while (rd2.Read())
-                   {
-                       Debug.WriteLine("rd: " + Convert.ToInt32(rd2["igiategiam"]));
-                   }
-               }*/
-            // Debug.WriteLine("rd: " + rd2);
-            Session["maKH"] = "1";
+            
+           // Session["maKH"] = "1";
             if (!HttpContext.Current.Session["maKH"].ToString().Equals(""))
 
             {
@@ -54,6 +44,21 @@ namespace WebDatTour.View.FontEnd
             else
             {
                 Response.Redirect("XemChiTietTour.aspx");
+            }
+        }
+
+
+        [WebMethod]
+        public static Boolean kiemTraDangNhap()
+        {
+            Debug.WriteLine("ktra " + HttpContext.Current.Session["maKH"].ToString());
+            if(!HttpContext.Current.Session["maKH"].ToString().Equals(""))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         private void hienThongTin(String id, int te, int nl)
@@ -81,9 +86,8 @@ namespace WebDatTour.View.FontEnd
             {
                 while (rd.Read())
                 {
-                    string[] urls = rd["sUrlAnh"].ToString().Split('/');
-                    //System.Diagnostics.Debug.WriteLine("url: " + urls[0]);
-                    linkAnh.InnerHtml = "<img src='../../Upload/" + urls[0]+ "' alt='' class='img-responsive'>";
+                    
+                    linkAnh.InnerHtml = "<img src='../../Upload/" + rd["surlanh"].ToString() + "' alt='' class='img-responsive'>";
                     tieuDe.InnerHtml = "Đặt Tour: &nbsp" + rd["sTieuDe"].ToString();
                     int giaTE = Convert.ToInt32(rd["igiate"]);//.ToString();
                     int giaTEgiam = Convert.ToInt32(rd["igiategiam"]);

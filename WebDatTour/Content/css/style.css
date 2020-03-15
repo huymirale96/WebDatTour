@@ -218,7 +218,7 @@ label { }
 /*-----------------------------------
     3. Buttons 
 -----------------------------------*/
-.btn { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; 
+/*.btn { display: inline-block; padding: 14px 30px; margin-bottom: 0; font-size: 13px; font-weight: 800; 
     letter-spacing: 1px; line-height: 1.42857143; text-align: center; border: none; 
     text-transform: uppercase; border-radius: 100px;font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;}
 .btn-default { color: #fff; background-color: #aa9144; }
@@ -234,7 +234,7 @@ label { }
 .btn-link:hover { color: #aa9144; font-weight: 700; text-decoration: none; border-bottom: 1px solid #aa9144; }
 .btn-lg { font-size: 14px; padding: 20px 30px; }
 .btn-sm { font-size: 12px; padding: 5px 10px; }
-.btn-xs { font-size: 12px; padding: 5px 7px; }
+.btn-xs { font-size: 12px; padding: 5px 7px; }*/
 
 /*-----------------------------------
     4. General / Elements 
@@ -463,6 +463,80 @@ label { }
  background: #dddddd;
  content: '';
 }*/
+
+/**
+ * Simple HTML/CSS switch_btn
+ */
+.switch_btn {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    border-radius: 20px;
+    background: #dfd9ea;
+    transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+    .switch_btn::before {
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: 2px;
+        width: 22px;
+        height: 22px;
+        background: #fafafa;
+        border-radius: 50%;
+        transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .switch_btn:active::before {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(128,128,128,0.1);
+    }
+
+input:checked + .switch_btn {
+    background: #72da67;
+}
+
+    input:checked + .switch_btn::before {
+        left: 27px;
+        background: #fff;
+    }
+
+    input:checked + .switch_btn:active::before {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
+    }
+/* SWITCH */
+
+
+.starrating > input {
+    display: none;
+}
+/* Remove radio buttons */
+
+.starrating > label:before {
+    content: "\f005"; /* Star */
+    margin: 2px;
+    font-size: 3em;
+    font-family: FontAwesome;
+    display: inline-block;
+}
+
+.starrating > label {
+    color: #222222; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label {
+    color: #ffca08;
+}
+/* Set yellow color when star checked */
+
+.starrating > input:hover ~ label {
+    color: #ffca08;
+}
+/* Set yellow color when star hover */
+
 #navigation > ul > li.has-sub > a:before { position: absolute; right: 14px; font-family: FontAwesome; content: "\f107"; -webkit-transition: all .25s ease; -moz-transition: all .25s ease; -ms-transition: all .25s ease; -o-transition: all .25s ease; transition: all .25s ease; }
 
 /*#navigation > ul > li.has-sub:hover > a:before {

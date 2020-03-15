@@ -30,6 +30,16 @@ namespace WebDatTour.View.BackEnd
 
             if (Request.QueryString["id"] != null ) 
             {
+                if (Session["mess"].ToString().Equals("suatourthanhcong"))
+                {
+                    Session["mess"] = "";
+                    string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
+                    myScript += "toastr.success(\"Sửa Tour Thành Công\",\"Thông Báo\");";
+                    myScript += "\n\n </script>";
+                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "myKey", myScript, false);
+                    notification.InnerHtml = myScript;
+
+                }
                 // System.Diagnostics.Debug.WriteLine("id khong null");
                 if (!IsPostBack)
                 {
@@ -81,7 +91,7 @@ namespace WebDatTour.View.BackEnd
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@tieude", txtTieuDe.Text);
                 cmd.Parameters.AddWithValue("@mota", txtMoTaTour.Text);
-                cmd.Parameters.AddWithValue("@urlanh", suaAnh());
+              
                 cmd.Parameters.AddWithValue("@thoigian", txtSoNgayDi.Text);
                 cmd.Parameters.AddWithValue("@noikhoihanh", txtNoiKhoiHanh.Text);
 
@@ -103,10 +113,11 @@ namespace WebDatTour.View.BackEnd
                 int i = cmd2.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("cmd 2 " + txtMaTour.Value + "  " + txtGIaNL.Text + "  " + txtGiaNLgiam.Text + "  " + txtGiaTE.Text + "  " + txtGiaTEgiam.Text);
 
-
+                suaAnhh(txtMaTour.Value);
                 if (i > 0)
                 {
                     System.Diagnostics.Debug.WriteLine("succcccc");
+                    Session["mess"] = "suatourthanhcong";
                     Response.Redirect("suatour.aspx?id="+ txtMaTour.Value);
 
                     /// Response.Write("<script language=javascript>alert('OKK');</script>");
@@ -168,12 +179,12 @@ namespace WebDatTour.View.BackEnd
                         txtNoiKhoiHanh.Text = rd["snoikhoihanh"].ToString();
                         ddlNhomtour.SelectedValue = rd["iMaNhomTour"].ToString();
 
-
-                        string[] tokens = rd["sUrlAnh"].ToString().Split('/');
+                       // anhtour.Value = rd["sUrlAnh"].ToString();
+                        /*string[] tokens = rd["sUrlAnh"].ToString().Split('/');
                         // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
                         // Label2.Text = tokens[0];
                         //soAnh.Value = tokens.Length.ToString();
-                        anhtour.Value = rd["sUrlAnh"].ToString();
+                       
                         DataTable dt = new DataTable();
                         dt.Clear();
                         dt.Columns.Add("url");
@@ -186,9 +197,10 @@ namespace WebDatTour.View.BackEnd
                             row["id"] = i;
                             dt.Rows.Add(row);
                         }
-                        //Repeater Rpt1 = Page.FindControl("rptDSanh") as Repeater;
+                        //Repeater Rpt1 = Page.FindControl("rptDSanh") as Repeater;*/
+                        DataTable dataHinHAnh = tourController.layHinhAnh(id);
 
-                        rptDSanh.DataSource = dt;
+                        rptDSanh.DataSource = dataHinHAnh;
                         rptDSanh.DataBind();
                        
                     }
@@ -262,42 +274,22 @@ namespace WebDatTour.View.BackEnd
         }
         protected void themNgay_Click(object sender, EventArgs e)
         {
-          /*  if (!ngayDi.Text.Equals(""))
-            {
-                bool x = tourController.themThoiGianKhoiHanh(Convert.ToInt32(matour.Value), DateTime.Parse(ngayDi.Text));
-                Response.Redirect("SuaTour.aspx?id=" + matour.Value);
-
-            }
-            else
-            {
-                Response.Redirect("SuaTour.aspx?id=" + matour.Value);
-            }
-            */
+          
         }
         
        
         protected void rptDSanh_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            /*Control aa = (Control)e.Item.FindControl("div1");
-            int i = 1;
-            if (i == 1)
-            {
-             //   Debug.WriteLine("i === " + i);
-                i++;
-                //FileUpload tb = new FileUpload();
-                //t//b.ID = "name" + 2;
-                // HtmlControl anhh = (HtmlControl)Page.FindControl("anh");
-                // HtmlGenericControl divdav = rptDSanh.FindControl("name1") as HtmlGenericControl;
-                //Control anhh = (Control)FindControl("anh");
-                //aa.Controls.Add(tb);
-            }*/
+          
         }
 
         protected void rptDSanh_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
         }
 
-        private string suaAnh()
+       
+
+        private void suaAnhh(string id)
         {
             int i = 0;
             List<anh> listAnh = new List<anh>();
@@ -308,43 +300,20 @@ namespace WebDatTour.View.BackEnd
 
                 if (file.HasFile)
                 {
-
                     anh anh = new anh(i, file.FileName);
                     listAnh.Add(anh);
-                  //  Debug.WriteLine(i + " co ifle " + file.FileName);
-                    //process file here
-                    /* if (file.FileName.EndsWith(".jpeg") || file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png"))
-                     {
-                         file.SaveAs(Server.MapPath(Path.Combine("~/Upload/", file.FileName)));// "~~/Upload/" + fAnhBia.FileName));
-                         anh += "-" + file.FileName;
-                     }
-                     */
+
                 }
                 i++;
 
             }
-            string anhTour = anhtour.Value.ToString();
-            string[] anh1 = anhTour.Split('/');
-            foreach (anh anh_ in listAnh)
+            DataTable dataHinHAnh = tourController.layHinhAnh(id);
+            foreach (anh anh in listAnh)
             {
-                anh1[anh_.Stt] = anh_.Url;
+                tourController.upDateHinhAnh(dataHinHAnh.Rows[anh.Stt]["iMaHinhAnh"].ToString(), anh.Url);
             }
-            string url = "";
-            for (int k = 0; k < anh1.Length; k++)
-            {
-                if (k == anh1.Length - 1)
-                {
-                    url += anh1[k];
-                }
-                else
-                {
-                    url += anh1[k] + "/";
-                }
-            }
-            
-            return url;
         }
         
-      
+
     }
 }

@@ -18,7 +18,7 @@ namespace WebDatTour.Model
         Connector cn = new Connector();
         public int ThemDonDatTour(DonDatTour donDatTour, int tien)
         {
-            Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
+//Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
             try
             {
                 SqlCommand cmd = new SqlCommand("taoDonHang", cn.connect());
@@ -57,9 +57,9 @@ namespace WebDatTour.Model
                 cmd3.Parameters.AddWithValue("@iMaGiaoDich", SqlDbType.Int).Direction = ParameterDirection.Output;
                 //   int k = cmd3.ExecuteNonQuery();
                int x3 =  cmd3.ExecuteNonQuery();
-                Debug.WriteLine("cmd3 " + x3);
+              //  Debug.WriteLine("cmd3 " + x3);
                 int maGiaoDich = Convert.ToInt32(cmd3.Parameters["@iMaGiaoDich"].Value.ToString());
-                 Debug.WriteLine("Ma Giao Dich " + maGiaoDich);
+                // Debug.WriteLine("Ma Giao Dich " + maGiaoDich);
                 return maGiaoDich;
 
 
@@ -75,7 +75,7 @@ namespace WebDatTour.Model
 
         public Boolean ThemDonDatTour_chuaThanhToan(DonDatTour donDatTour)
         {
-            Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
+          //  Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
             try
             {
                 SqlCommand cmd = new SqlCommand("taoDonHang", cn.connect());

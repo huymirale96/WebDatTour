@@ -12,7 +12,7 @@ namespace WebDatTour.Layout
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine(Session["tenTK"].ToString());
+            //Debug.WriteLine(Session["tenTK"].ToString());
             if(!IsPostBack)
             {
                 if (HttpContext.Current.Session["tenKH"].ToString().Equals(""))

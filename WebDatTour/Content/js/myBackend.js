@@ -1,4 +1,22 @@
 ﻿$(document).ready(function () {
+    toastr.options = {
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': true,
+        'progressBar': true,
+        'positionClass': 'toast-top-right',
+        'preventDuplicates': true,
+        'showDuration': '1000',
+        'hideDuration': '1000',
+        'timeOut': '3000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut',
+    }
+
+
     //   alert("đas");
     var date = new Date();
 
@@ -167,6 +185,7 @@
                         else {
                             xx += "class='label label-success'>Hiện </label></td></tr>";
                         }
+                        toastr.success("Thêm Ngày " + ngay +"Thành Công.", "Thông Báo.");
                     });
                     
 
@@ -196,9 +215,7 @@
     
 });
 
-
-
-
+ 
 function anhienthoigian(id, idtour)
 {
     $.ajax({
@@ -226,6 +243,7 @@ function anhienthoigian(id, idtour)
                 else {
                     xx += "class='label label-success'>Hiện </label></td></tr>";
                 }
+              //  toastr.success("Thay ĐÔ.", "Thông Báo.");
             });
 
 

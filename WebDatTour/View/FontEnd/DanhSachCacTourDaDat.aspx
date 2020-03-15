@@ -49,9 +49,10 @@
                                                         <%# trangThai(Eval("itrangthai").ToString()) %>
 										            </td>
 											        <td class="text-center">
-                                                        <button class="btn btn-xs btn-success" <%# (Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu"))) == 0 ? "style='display: none;'" : "" %> onclick ="thanhToan(<%# Eval("iMaDonDatTour") %>,<%# Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu")) %>)">Thanh Toán Nốt<br /></button>
+                                                       <%# kiemTraDonCoDanhGia(Eval("iMaDonDatTour").ToString()) %>
+                                                        <label class="label label-success" <%# (Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu"))) == 0 ? "style='display: none;'" : "" %> onclick ="thanhToan(<%# Eval("iMaDonDatTour") %>,<%# Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu")) %>)">Thanh Toán Nốt</label>
                                                          <br />
-                                                        <button class="btn btn-xs btn-warning"  <%# hienHuyTour(Eval("itrangthai").ToString()) %> onclick="huyTour(<%# Eval("iMaDonDatTour") %>)">Hủy Tour</button>
+                                                        <label class="label label-warning"  <%# hienHuyTour(Eval("itrangthai").ToString()) %> onclick="huyTour(<%# Eval("iMaDonDatTour") %>)">Hủy Tour</label>
 												        
 											        </td>
 									            </tr>
@@ -157,6 +158,48 @@
           <!-- Modal Thanh Toan-->
             
                 <!-- /.row  </form> -->
+
+        <!-- Modal Thanh Toan-->
+  <div class="modal fade" id="modalDanhGiaSao" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center" style="margin-top:80px;" >Đánh Giá Tour</h4>
+        </div>
+        <div class="modal-body">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11">
+
+        <div class="starrating risingstar d-flex justify-content-center flex-row-reverse" style="display:inline; margin-right: 50px;">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star">5</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star">4</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star">3</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star">2</label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">1</label>
+          
+        </div>
+                        <textarea  placeholder="Đánh Giá Về Tour" id="txtDanhGiaTour" rows="3" class="form-control" style="width: auto;" cols="50"></textarea>
+                          <div id="divbtndanhgia"></div>
+  </div>
+
+        </div>
+          
+                    </div>
+
+                </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+          <!-- Modal Thanh Toan-->
 
        
         </div>
