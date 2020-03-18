@@ -45,13 +45,18 @@
                                 <li class="active"><a href="index.aspx" title="Home">Trang Chủ</a></li>
                                 <li class="active"><a href="../../View/BackEnd/admin.aspx" title="Home">ADMIN</a></li>
                                 
-                               <!-- <li class="has-sub"><a href="service-list.html" title="Service List">Chức Năng</a>
+                                <li class="has-sub"><a href="service-list.html" title="Service List">Nhóm Tour</a>
                                     <ul>
-                                        <li><a href="service-list.html" title="Service List">Chức Năngt</a></li>
-                                        <li><a href="service-detail.html" title="Service Detail">Chức Năng</a></li>
+                                        <asp:Repeater ID="rptNhomTour" runat="server">
+                                            <ItemTemplate>
+                                                <li><a href="xemTourTheoNhom.aspx?id=<%# Eval("imanhomtour") %>" title=""><%# Eval("sTenNhomTour") %></a></li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        
+                                        
                                     </ul>
                                 </li>
-                                <li class="has-sub"><a href="blog-default.html" title="Blog ">Chức Năng</a>
+                               <!-- <li class="has-sub"><a href="blog-default.html" title="Blog ">Chức Năng</a>
                                     <ul>
                                         <li><a href="blog-default.html" title="Blog">Blog Default</a></li>
                                         <li><a href="XemChiTietTour.aspx" title="Blog Single ">Xem Chi Tiet TOur</a></li>

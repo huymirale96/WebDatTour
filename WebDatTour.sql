@@ -1695,4 +1695,9 @@ create proc kiemTraNgayKhoiHanh
  @ngay date
  as
  select  * from tblThoiGianKhoiHanh where iMaTour = @id and dThoiGian = @ngay
+
+alter proc layTenNhomTour
+@id int
+as
+select sTenNhomTour from tblNhomTour where imanhomtour = @id
  

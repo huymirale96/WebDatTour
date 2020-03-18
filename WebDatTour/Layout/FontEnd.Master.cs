@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebDatTour.Model;
 
 namespace WebDatTour.Layout
 {
@@ -12,8 +15,9 @@ namespace WebDatTour.Layout
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            hienNhomTOur();
             //Debug.WriteLine(Session["tenTK"].ToString());
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 if (HttpContext.Current.Session["tenKH"].ToString().Equals(""))
                 {
@@ -29,7 +33,30 @@ namespace WebDatTour.Layout
             }
 
         }
+        public void hienNhomTOur()
+        {
+            Connector cn = new Connector();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from tblnhomtour", cn.connect());
+                cmd.CommandType = CommandType.Text;
+                
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                rptNhomTour.DataSource = table;
+                rptNhomTour.DataBind();
 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error " + ex.Message);
+
+               
+            }
+           
+        }
         protected void btndk_Click(object sender, EventArgs e)
         {
 

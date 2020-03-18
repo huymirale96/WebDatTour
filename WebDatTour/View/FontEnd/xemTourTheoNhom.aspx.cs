@@ -6,12 +6,14 @@ using WebDatTour.Model;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
+using WebDatTour.Controllers;
 
 namespace WebDatTour.View.FontEnd
 {
     public partial class xemNhomTour : System.Web.UI.Page
     {
         TourModel tourModel = new TourModel();
+        NhomTourController nhomTourModel = new NhomTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Request.QueryString["id"] != null)
@@ -25,6 +27,8 @@ namespace WebDatTour.View.FontEnd
         {
             rptTour.DataSource = tourModel.layTourTheoNhom(id);
             rptTour.DataBind();
+            txtTieuDe.InnerHtml = "DANH SÁCH TOUR: " + nhomTourModel.layTenNhomTour(id.ToString());
+            
         }
         private void Paging(int id)
         {
@@ -37,7 +41,7 @@ namespace WebDatTour.View.FontEnd
             pds.DataSource = dt;
             pds.AllowPaging = true;
             // Show number of product in one page.
-            pds.PageSize = 5;
+            pds.PageSize = 8;
             // Specify sum of page.
             int numPage = pds.PageCount;
             int currentPage;

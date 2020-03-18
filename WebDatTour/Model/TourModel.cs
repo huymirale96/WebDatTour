@@ -103,6 +103,22 @@ namespace WebDatTour.Model
            
             }
         }
+
+        public String layTenNhomTour(string id)
+        {
+
+            {
+                SqlCommand cmd = new SqlCommand("layTenNhomTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table.Rows[0]["stennhomtour"].ToString();
+
+            }
+        }
         public Boolean kiemTraNgayKhoiHanh(string idtour, string ngay)
         {
            try

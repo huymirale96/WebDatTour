@@ -10,6 +10,7 @@ namespace WebDatTour.Controllers
     public class NhomTourController
     {
         NhomTourModel nhomTourModel = new NhomTourModel();
+        TourModel tourModel = new TourModel();
         public DataTable danhSachNT()
         {
             return nhomTourModel.danhSachNT();
@@ -17,6 +18,10 @@ namespace WebDatTour.Controllers
         public Boolean themNT(String ten)
         {
             return nhomTourModel.themNhomTour(ten);
+        }
+        public String layTenNhomTour(string id)
+        {
+            return tourModel.layTenNhomTour(id);
         }
     }
 }

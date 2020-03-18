@@ -13,6 +13,15 @@ namespace WebDatTour.Layout {
     public partial class FontEnd {
         
         /// <summary>
+        /// rptNhomTour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptNhomTour;
+        
+        /// <summary>
         /// tendn control.
         /// </summary>
         /// <remarks>
