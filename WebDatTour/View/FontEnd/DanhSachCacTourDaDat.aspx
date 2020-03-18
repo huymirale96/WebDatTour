@@ -38,8 +38,8 @@
                                             <ItemTemplate>
                                                 <tr>
 										            <td class="text-center"><%# Container.ItemIndex+1 %></td>
-                                                     <td class="text-center"><a href="xemdondattour.aspx?id=<%# Eval("iMaDonDatTour") %>"><%# Eval("iMaDonDatTour") %></a></td>
-										            <td class="text-center"><%# Eval("stieude") %></td>
+                                                     <td class="text-center"><a href=""><%# Eval("iMaDonDatTour") %></a></td>
+										            <td class="text-center"><a href="xemchitiettour.aspx?id=<%# Eval("iMaTour") %>"><%# Eval("stieude") %></a></td>
                                                     <td class="text-center"><%# Eval("dngaydattour", "{0:dd/MM/yyyy}") %></td>
                                                     <td class="text-center"><%# Eval("sTenKhachHang") %></td>
 										            <td class="text-center"><%# toCurruncy(Convert.ToInt32(Eval("doanhthu").ToString())) %>&nbspVND</td>

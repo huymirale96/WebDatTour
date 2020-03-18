@@ -116,5 +116,17 @@ namespace WebDatTour.View.FontEnd
             }
             return urlAnh1[0];
         }
+
+        public String hienSoSao(String soSao)
+        {
+            if (soSao.Equals("0"))
+            {
+                return "";
+            }
+            else
+            {
+                return " <strong>Đánh Giá: <b>" + soSao + " </b><i class='fa fa-star' style='font - size: 18px; color: #ffca08;'></i></strong></div>";
+            }
+        }
     }
 }

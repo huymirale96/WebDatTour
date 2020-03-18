@@ -23,7 +23,7 @@
                                             <th class="text-center">Số Điện Thoại</th>
                                             <th class="text-center">Tên Đăng Nhập</th>
                                             <th class="text-center">Quyền</th>
-                                            <th class="text-center">Thao Tác</th>
+                                          <!--  <th class="text-center">Thao Tác</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,10 +40,10 @@
 										            <td class="text-center">
                                                         <%# Eval("iMaQuyen").ToString().Equals("2") ? "ADMIN" : "MEMBER" %>
 										            </td>
-											        <td class="text-center">
+											     <!--   <td class="text-center">
                                                        
 												       <input type="checkbox" hidden="hidden" id="trangThaiNV" data-id="" checked="checked">
-                                                        <label class="switch_btn" for="trangThaiNV"></label>
+                                                        <label class="switch_btn" for="trangThaiNV"></label>  -->
 											        </td>
 									            </tr>
                                             </ItemTemplate>

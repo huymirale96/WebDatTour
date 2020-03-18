@@ -13,6 +13,42 @@ namespace WebDatTour.View.FontEnd {
     public partial class XemChiTietTour {
         
         /// <summary>
+        /// lableGia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lableGia;
+        
+        /// <summary>
+        /// gia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gia;
+        
+        /// <summary>
+        /// ngaydi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ngaydi;
+        
+        /// <summary>
+        /// hiddenIdTour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hiddenIdTour;
+        
+        /// <summary>
         /// txtTieuDe control.
         /// </summary>
         /// <remarks>
@@ -94,6 +130,15 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell txtTE;
         
         /// <summary>
+        /// txtDanhGia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell txtDanhGia;
+        
+        /// <summary>
         /// txtNoiDung control.
         /// </summary>
         /// <remarks>
@@ -101,6 +146,15 @@ namespace WebDatTour.View.FontEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label txtNoiDung;
+        
+        /// <summary>
+        /// rptTourLienQuan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptTourLienQuan;
         
         /// <summary>
         /// rptBinhLuan control.
@@ -146,41 +200,5 @@ namespace WebDatTour.View.FontEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button binhLuan;
-        
-        /// <summary>
-        /// lableGia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lableGia;
-        
-        /// <summary>
-        /// gia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gia;
-        
-        /// <summary>
-        /// ngaydi control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ngaydi;
-        
-        /// <summary>
-        /// hiddenIdTour control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hiddenIdTour;
     }
 }

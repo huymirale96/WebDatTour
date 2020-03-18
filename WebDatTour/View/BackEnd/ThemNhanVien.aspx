@@ -20,16 +20,18 @@
                         <div class="form-group">
                             <label>Tên Đăng Nhập</label>
                             <asp:TextBox ID="txtTenDangNhap" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator52"  ControlToValidate="txtTenDangNhap" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
                            <asp:TextBox ID="txtMK" runat="server" CssClass="form-control" placeholder="" TextMode="Password" ></asp:TextBox>
                               <asp:RequiredFieldValidator ID="RequiredFieldValidator4"  ControlToValidate="txtMK" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
-                        </div>
+                                 <asp:RegularExpressionValidator ID="regex" runat="server" ControlToValidate="txtMK" ErrorMessage="Mật Khẩu Ít Nhất 8 Ký Tự Bao Gồm 1 Chữ Và 1 Số." ForeColor="Red"  ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"></asp:RegularExpressionValidator>
+                            </div>
                         <div class="form-group">
                             <label>Quê Quán</label>
                             <asp:TextBox ID="queQuan" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
-                               <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="txtMK" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="queQuan" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>User Level</label>
@@ -43,6 +45,8 @@
                         </div>
                         <asp:button ID="btnDangKi" runat="server" OnClick="btnDangKi_Click" CssClass="btn btn-default btn-md" Text="Đăng Kí"></asp:button>
                         <button type="reset" class="btn btn-default">Reset</button>
+                        <br />
+                        <asp:Label runat="server" ID="noti" CssClass="text-info" Text=""></asp:Label>
                     </div>
                     <div class="col-md-5 col-md-offset-0">
                         <div class="form-group">

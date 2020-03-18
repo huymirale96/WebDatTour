@@ -119,20 +119,17 @@
                            
                             
                              </div>
-                        <div class="col-md-3">
-                            <label for="txtNgayDiThem">Hạn Đặt Vé: </label>
-                             <input type="date" class="form-control" id="txtHanDat" style="display: inline; margin-right:20px;"  value="2020-03-04"/>
-                        </div>
+                        
                         <div class="col-md-3">
                             <br />
                               <label class="label label-default" id="btnThemNgay">Thêm Ngày </label>
                             <div id="thongBaoNgay"></div>
                         </div>
-                        
+                        <div class="col-md-12">
                         <table class="table table-hover" style="margin-top:25px">
                             <thead>
                                 <tr>
-                                    <th>STT</th><th>Thời Gian Khởi Hành</th><th>Hạn Đặt Tour</th><th>Trạng Thái</th>
+                                    <th class="text-center">STT</th><th class="text-center">Thời Gian Khởi Hành</th><th class="text-center">Trạng Thái</th>
                                 </tr>
                             </thead>
                             <tbody id="bodyThoiGian">
@@ -142,13 +139,13 @@
                                             
                                             <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                             <td class="text-center"><%# Eval("dThoiGian","{0:dd-MM-yyyy}") %></td>
-                                            <td class="text-center"><%# Eval("dHanDatTour","{0:dd-MM-yyyy}") %></td>
                                             <td class="text-center"><a href="SuaTour.aspx/?chucNang=cn1&tg=<%# Eval("iMaThoiGian") %>&tour=<%# Eval("iMaTour") %>"></a><label onclick="anhienthoigian(<%# Eval("iMaThoiGian") %>,<%# Eval("iMaTour") %>)" class="label label-<%# Eval("trangThai").ToString().Equals("True") ? "success" : "warning" %>"><%# anHien(Eval("trangThai").ToString())%></label></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </tbody>
                         </table>
+                            </div>
                          
                     </div>
                </div>

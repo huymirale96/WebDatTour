@@ -37,7 +37,7 @@
                                              <div class="form-group">
                                         <asp:DropDownList ID="phanTramDat" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="none" Text="Không chọn"></asp:ListItem>
-                                            <asp:ListItem value="0.1" Text="Đặt 10%" ></asp:ListItem>
+                                          
                                             <asp:ListItem value="0.5" Text="Đặt 50%" ></asp:ListItem>
                                             <asp:ListItem value="1" Text="Trả 100%" ></asp:ListItem>
                                         </asp:DropDownList>
@@ -91,7 +91,7 @@
                                         </asp:TextBox>
                                   
                                     <asp:Button ID="btnDatVe" runat="server" Text="Thanh Toán" CssClass="btn btn-info" OnClick="btnDatVe_Click"/>
-                               <asp:Button ID="btnDatChuaThanhToan" runat="server" Text="Đặt Vé_" OnClick="btnDatChuaThanhToan_Click"/>
+                               <asp:Button ID="btnDatChuaThanhToan" Visible="false" runat="server" Text="Đặt Vé_" OnClick="btnDatChuaThanhToan_Click"/>
                                 </div>
                                 </div>
                             </div>

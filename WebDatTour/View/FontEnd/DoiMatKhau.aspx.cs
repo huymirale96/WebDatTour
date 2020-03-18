@@ -15,6 +15,10 @@ namespace WebDatTour.View.FontEnd
         KhachHangController khachHangController = new KhachHangController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["maKH"].ToString().Equals(""))
+            {
+                Response.Redirect("index.aspx");
+            }
             if (!HttpContext.Current.Session["tenKH"].ToString().Equals(""))
             {
                 if (!IsPostBack)

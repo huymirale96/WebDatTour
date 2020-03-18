@@ -116,15 +116,8 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i>Quản Lý Khách Hàng<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="DanhSachKhachHang.aspx">Danh Sách Khách Hàng</a>
-                                </li>
-                                <li>
-                                    <a href="#">Thêm Khách Hàng</a>
-                                </li>
-                            </ul>
+                            <a href="DanhSachKhachHang.aspx"><i class="fa fa-users fa-fw"></i>Quản Lý Khách Hàng<span class="fa arrow"></span></a>
+                          
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
@@ -145,7 +138,7 @@
                                 <li>
                                     <a href="DanhSachDatTour">Danh Sách Đơn Đặt Tour</a>
                                 </li>
-                                <li>
+                                <li  style="display: none;">
                                     <a href="#">Add User</a>
                                 </li>
                             </ul>
@@ -164,12 +157,12 @@
                                     <a href="ThongKeDoanhSoTheoTour.aspx">Thống Kê Doanh Thu - Tour</a>
                                 </li>
                                 <li>
-                                    <a href="ThongKe.aspx">Thống Kê Tour 4</a>
+                                    <a href="ThongKeTaiKhoan.aspx">Thống Kê Số Lượng Tài Khoản</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <li style="display: none;">
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nhóm Tour<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -181,7 +174,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <li  style="display: none;">
                             <a href="#"><i class="fa fa-cube fa-fw"></i>  Chức Năng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -193,7 +186,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <li  style="display: none;">
                             <a href="#"><i class="fa fa-users fa-fw"></i>  Chức Năng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

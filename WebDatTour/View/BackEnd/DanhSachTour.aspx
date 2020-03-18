@@ -45,7 +45,7 @@
 											        <td class="left">
                                                    <asp:LinkButton ID="btnTrangThai" CssClass="btn btn-xs btn-default" ToolTip="TrangThai" onClick="btnTrangThai_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><%# Eval("btrangthai").ToString().Equals("True") ? "Hiện" : "Ẩn"  %></asp:LinkButton>
 												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-info" ToolTip="Sửa" onClick="btnFix_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDelete" CssClass="btn btn-xs btn-danger" ToolTip="Xóa" runat="server" OnClick="btnDelete_Click" OnClientClick="return confirm('Bạn có chắc chắn xoá tour?')" CommandArgument='<%# Eval("iMaTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+                                                      
 											        </td>
 									            </tr>
                                             </ItemTemplate>

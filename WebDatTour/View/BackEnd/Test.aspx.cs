@@ -97,10 +97,11 @@ namespace WebDatTour.View.BackEnd
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("okk1");
-            TourController tourController = new TourController();
-            tourController.upDateTrangThaiThoiGian(1);
-            Debug.WriteLine("okk2");
+            DateTime x = DateTime.Parse("2020-03-20");
+            Debug.WriteLine("okk1 " + x);
+           // TourController tourController = new TourController();
+            //tourController.upDateTrangThaiThoiGian(1);
+            //Debug.WriteLine("okk2");
         }
         public string ToAlphaNumericOnly(string str)
 

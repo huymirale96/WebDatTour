@@ -270,6 +270,7 @@
     <Content Include="View\BackEnd\ThongKeDoanhSoTheoTour.aspx" />
     <Content Include="View\BackEnd\ThongKeDoanhThuTheoNgay.aspx" />
     <Content Include="View\BackEnd\ThongKeSoCho.aspx" />
+    <Content Include="View\BackEnd\ThongKeTaiKhoan.aspx" />
     <Content Include="View\BackEnd\ThongTinNhanVien.aspx" />
     <Content Include="View\BackEnd\XemDonDatCuaKhachHang.aspx" />
     <Content Include="View\FontEnd\loi.aspx" />
@@ -515,6 +516,13 @@
     </Compile>
     <Compile Include="View\BackEnd\ThongKeSoCho.aspx.designer.cs">
       <DependentUpon>ThongKeSoCho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongKeTaiKhoan.aspx.cs">
+      <DependentUpon>ThongKeTaiKhoan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\ThongKeTaiKhoan.aspx.designer.cs">
+      <DependentUpon>ThongKeTaiKhoan.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\ThongTinNhanVien.aspx.cs">
       <DependentUpon>ThongTinNhanVien.aspx</DependentUpon>

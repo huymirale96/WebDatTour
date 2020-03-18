@@ -366,13 +366,14 @@ namespace WebDatTour.Model
 
         public Boolean nhanVienthanhToan(string madon, string tien)
         {
-            //  Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
+            // Debug.WriteLine("vnpay " + idvnpay + "  id" + id + "  tt" + tt);
+            Debug.WriteLine("ma nhan vien : " + HttpContext.Current.Session["maNV"]);
             try
             {
                 SqlCommand cmd = new SqlCommand("nhanVienthanhToan", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@madon", madon);
-                cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["manv"]);
+                cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["maNV"]);
                 cmd.Parameters.AddWithValue("@trangthai", 1);
                 cmd.Parameters.AddWithValue("@tien", tien);
                 cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
@@ -448,7 +449,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@madon", madon);
                 cmd.Parameters.AddWithValue("@ghichu", ghichu);
                 cmd.Parameters.AddWithValue("@trangthai", tt);
-               // cmd.Parameters.AddWithValue("@tien", tien);
+                cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["maNV"].ToString());
                 cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
 
                 //cnn.Open();

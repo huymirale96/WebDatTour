@@ -24,7 +24,7 @@ namespace WebDatTour.View.FontEnd
         ///BinhLuanModel binhLuanModel = new BinhLuanModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-           if(HttpContext.Current.Session["maKH"].ToString().Equals(""))
+            if (HttpContext.Current.Session["maKH"].ToString().Equals(""))
             {
                 txtBinhLuan.Visible = false;
                 binhLuan.Visible = false;
@@ -33,25 +33,31 @@ namespace WebDatTour.View.FontEnd
             if (Request.QueryString["id"] != null)
             {
                 System.Diagnostics.Debug.WriteLine("id khong null");
-            
-                    
-                    layNgayDiTour(Convert.ToInt32(Request.QueryString["id"]));
+
+
+                layNgayDiTour(Convert.ToInt32(Request.QueryString["id"]));
                 xemTour(Request.QueryString["id"]);
                 laybinhluan(Convert.ToInt32(Request.QueryString["id"]));
-                }
-                else
-                {
-                    xemTour("18");
-                  //  laybinhluan(18);
+                layTourLienQuan(Request.QueryString["id"].ToString());
+            }
+            else
+            {
+                xemTour("18");
+                //  laybinhluan(18);
 
-                }
-            
+            }
+
         }
         public void laybinhluan(int id)
         {
             //Debug.WriteLine(JsonConvert.SerializeObject(binhLuanController.layBinhLuan(id)));
             rptBinhLuan.DataSource = danhGiaController.layDanhGia(id);
             rptBinhLuan.DataBind();
+        }
+        public void layTourLienQuan(string idTour)
+            {
+            rptTourLienQuan.DataSource = tourController.layTourLienQuan(idTour);
+            rptTourLienQuan.DataBind();
         }
         public string hienSao(string sosao)
         {
@@ -99,7 +105,7 @@ namespace WebDatTour.View.FontEnd
                 {
                     while (rd.Read())
                     {
-
+                    txtDanhGia.InnerHtml = "" +  rd["soSao"] + "<i class='fa fa-star' style='font - size: 18px; color: #ffca08;'></i>";
                     txtNKH.InnerHtml = rd["sNoiKhoiHanh"]+ "";
                     txtTG.InnerHtml = rd["stongthoigian"] + "";
                     txtTE.InnerHtml = "<strike style='color: red; display: inline;'>"+Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";

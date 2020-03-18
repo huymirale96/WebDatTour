@@ -53,7 +53,12 @@ namespace WebDatTour.Controllers
             return nvModel.layDSNV();
         }
         
-               public DataTable layThongTinNhanVienM(string id)
+               public DataTable thongKeTaiKhoan()
+        {
+            return nvModel.thongKeTaiKhoan();
+        }
+
+        public DataTable layThongTinNhanVienM(string id)
         {
             return nvModel.layThongTinNhanVienM(id);
         }
@@ -65,8 +70,12 @@ namespace WebDatTour.Controllers
         {
             return nvModel.dangNhap(tk, mk);
         }
-        
-             public Boolean kiemTraDangNhap(NhanVien nhanVien)
+        public Boolean kiemTraTen(string ten)
+        {
+            return nvModel.kiemTraTenDangNhap(ten);
+        }
+
+        public Boolean kiemTraDangNhap(NhanVien nhanVien)
         {
             return nvModel.kiemTraDangNhap(nhanVien);
         }

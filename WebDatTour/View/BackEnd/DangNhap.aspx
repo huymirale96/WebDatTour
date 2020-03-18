@@ -47,13 +47,16 @@
                                          <asp:RequiredFieldValidator ID="txtMatKhaus"  ControlToValidate="txtMatKhau" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="regex" runat="server" ControlToValidate="txtMatKhau" ErrorMessage="*" ForeColor="Red"  ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"></asp:RegularExpressionValidator>
                                     </div>   
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 text-center" style="margin-bottom: 15px;">
                                         <asp:Label ID="lblNoti" runat="server" Text="" CssClass="text-danger"></asp:Label>
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
                                     <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" OnClick="btnLogin_Click" CssClass="btn btn-lg btn-success btn-block" />
                                 </fieldset>
                             </form>
+                            <div class="text-center" style="margin-top: 15px;">
+                            <a href="../FontEnd/index.aspx"> Chuyển Tới Trang Chủ</a>
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -49,9 +49,9 @@
 										            <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                                      <td class="text-center"><a href="../FontEnd/XemChiTietTour?id=<%# Eval("iMaTour") %>"><%# Eval("sTieuDe") %></a></td>									            
                                                     <td class="text-center"><%# Eval("thoigiandi", "{0:dd/MM/yyyy}") %></td>
-                                                    <td class="text-center"><%# Eval("doanhthu") %></td>
-                                                    <td class="text-center"><%# Eval("thucthu") %></td>
-										            <td class="text-center"><%# Eval("conlai") %></td>
+                                                    <td class="text-center"><%# toCurruncy(Eval("doanhthu").ToString()) %></td>
+                                                    <td class="text-center"><%# toCurruncy(Eval("thucthu").ToString()) %></td>
+										            <td class="text-center"><%# toCurruncy(Eval("conlai").ToString()) %></td>
 
 											        
 									            </tr>

@@ -32,7 +32,7 @@ namespace WebDatTour.View.FontEnd
             {
                 if (Request.QueryString["ite"] != null && Request.QueryString["inl"] != null && Request.QueryString["idTour"] != null)
                 {
-                    Debug.WriteLine("load1");
+                  //  Debug.WriteLine("load1");
                     hienThongTin(Request.QueryString["idTour"].ToString(), Convert.ToInt32(Request.QueryString["ite"]), Convert.ToInt32(Request.QueryString["inl"]));
                     maTG.Value = Request.QueryString["mangaydi"].ToString();
                 }
@@ -164,7 +164,7 @@ namespace WebDatTour.View.FontEnd
             else
 
             {
-                Debug.WriteLine("NO ROW");
+              //  Debug.WriteLine("NO ROW");
                 return tientt;
             }
             return tientt;
@@ -200,7 +200,7 @@ namespace WebDatTour.View.FontEnd
                         donDatTour.TienDaThanhToan = Convert.ToInt32(tien_tt.Value);//tienThanhToan_(tour.Value.ToString(), Convert.ToInt32(iTE.Value), Convert.ToInt32(iNL.Value));
                         donDatTour.MaNgaydi = Convert.ToInt32(maTG.Value);
                         donDatTour.TrangThai = 0;
-                        donDatTour.MaKH = 1;
+                        donDatTour.MaKH = Convert.ToInt32(Session["maKH"].ToString());
                         float phantram = (float)Convert.ToDouble(phanTramDat.SelectedValue);
                         float tien_1 = Convert.ToInt32(tien_tt.Value) * phantram;
                         int tien_ = Convert.ToInt32(tien_1);

@@ -45,6 +45,7 @@
                        <asp:Repeater ID="rpt1" runat="server">
                         <ItemTemplate>
                         <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
+                            <%# hienSoSao(Eval("soSao").ToString()) %>
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">
@@ -65,6 +66,7 @@
                         <br>
                         <i class="fa fa-calendar-check-o" style="font-size: 20px;"></i>
                         <p style=" color: black; display: inline-block;">Ngày đi:<%# Eval("dngaykhoihanh", "{0:dd/MM/yyyy}") %></p>
+                     
                         
                         </div>
                         </div>
@@ -94,6 +96,7 @@
                        <asp:Repeater ID="rpt2" runat="server">
                         <ItemTemplate>
                         <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
+                              <%# hienSoSao(Eval("soSao").ToString()) %>
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">
@@ -142,6 +145,7 @@
                        <asp:Repeater ID="rpt3" runat="server">
                         <ItemTemplate>
                         <div class="col-md-4 col-lg-4 border border-warning" style=" padding: 5px;">
+                              <%# hienSoSao(Eval("soSao").ToString()) %>
                         <div style="padding: 10px; background-color: #fff; border-radius:10px;" class="text-left" >
                            
                              <a href="../FontEnd/XemChiTietTour?id=<%# Eval("imatour") %>" class="">

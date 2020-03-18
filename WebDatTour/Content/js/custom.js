@@ -6,7 +6,6 @@
     $temp.remove();
 }
 
-
 function kiemTraDangNhap() {
     
     $.ajax({
@@ -77,6 +76,9 @@ function danhGiaBTN(id) {
         });
     }
     
+}
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 function hienThiSao(soSao)
 {
@@ -504,7 +506,7 @@ $(document).ready(function () {
         var phanTram = $("#ContentPlaceHolder1_phanTramDat").val();
         if (phanTram != "none")
         {
-            $("#tienDC").text("Số TIền Sẽ Thanh Toán ONLINE: "+tien * phanTram + "VND");
+            $("#tienDC").text("Số TIền Sẽ Thanh Toán ONLINE: " +  formatNumber(tien * phanTram) + " VND");
         }
     });
 

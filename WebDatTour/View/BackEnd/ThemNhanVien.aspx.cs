@@ -13,7 +13,11 @@ namespace WebDatTour.View.BackEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
+            if (!HttpContext.Current.Session["quyen"].ToString().Equals("2"))
+            {
+                Response.Redirect("admin.aspx");
+            }
         }
 
         protected void btnDangKi_Click(object sender, EventArgs e)
@@ -27,11 +31,11 @@ namespace WebDatTour.View.BackEnd
             nhanVien.SoDienThoai = txtSDT.Text;
             if(rdoMember.Checked == true)
             {
-                nhanVien.Quyen = 2;
+                nhanVien.Quyen = 1;
             }
             else
             {
-                nhanVien.Quyen = 1;
+                nhanVien.Quyen = 2;
             }
             if (rdoNam.Checked == true)
             {
@@ -42,13 +46,22 @@ namespace WebDatTour.View.BackEnd
                 nhanVien.GioiTinh = false;                
             }
             NhanVienController nhanVienController = new NhanVienController();
-            if(nhanVienController.ThemNhanVien(nhanVien))
+            if (nhanVienController.kiemTraTen(txtTenDangNhap.Text))
             {
-                Response.Write("<script language=javascript>alert('OKK');</script>");
+                if (nhanVienController.ThemNhanVien(nhanVien))
+                {
+                    noti.Text = "Thêm Nhân Viên Thành Công";
+                    // Response.Write("<script language=javascript>alert('OKK');</script>");
+                }
+                else
+                {
+                    noti.Text = "Thêm Nhân Viên Thất Bại";
+                    //  Response.Write("<script language=javascript>alert('ERROR');</script>");
+                }
             }
             else
             {
-                Response.Write("<script language=javascript>alert('ERROR');</script>");
+                noti.Text = "Tên Đăng Nhập Đã Được Sử Dụng.";
             }
             
         }

@@ -21,6 +21,10 @@ namespace WebDatTour.View.FontEnd
         DanhGiaController danhGiaController = new DanhGiaController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["maKH"].ToString().Equals(""))
+            {
+                Response.Redirect("index.aspx");
+            }
             if (Request.Form["cn"] != null && Request.Form["id"] != null)
             {
                 Debug.WriteLine("mk : " + Request.Form["id"] +" - " +Request.Form["pw"]);

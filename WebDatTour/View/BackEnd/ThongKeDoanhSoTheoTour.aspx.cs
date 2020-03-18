@@ -135,5 +135,10 @@ namespace WebDatTour.View.BackEnd
             rptTour.DataBind();
 
         }
+        protected String toCurruncy(string x)
+        {
+
+            return Convert.ToInt32(x).ToString("#,##0");
+        }
     }
 }

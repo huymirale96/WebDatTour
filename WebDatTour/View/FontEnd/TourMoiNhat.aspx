@@ -21,7 +21,8 @@
                                      <strong>Thời gian:&nbsp;</strong><%# Eval("sTongThoiGian") %><br>
                                      <strong>Giá Người Lớn:&nbsp;</strong><strike style="color:forestgreen;"><%# Convert.ToInt32(Eval("igianlgiam")) == 0 ? "" :  toCurruncy(Convert.ToInt32(Eval("igianlgiam"))) %></strike>&nbsp;<strong><span style="color: #ff0000;"><strong><strong><%# toCurruncy(Convert.ToInt32(Eval("igianl"))) %> &nbsp;VNĐ/khách</strong></strong></span><br>
                                      <strong>Giá Trẻ Em:&nbsp;</strong><strike style="color:forestgreen;"><%# Convert.ToInt32(Eval("igiategiam")) == 0 ? "" :  toCurruncy(Convert.ToInt32(Eval("igiategiam"))) %></strike>&nbsp;<strong><strong><strong><span style="color: #ff0000;"><%# toCurruncy(Convert.ToInt32(Eval("igiate"))) %> &nbsp;VNĐ/khách</strong></strong></span><br>
-                                     <strong>Ngày Khởi hành: </strong><%# Eval("thoigiandi", "{0:dd/MM/yyyy}") %></p>
+                                     <strong>Ngày Khởi hành: </strong><%# Eval("thoigiandi", "{0:dd/MM/yyyy}") %>
+                                           <br />  <%# hienSoSao(Eval("soSao").ToString()) %></p>
                                 
                                      
                                 </div>

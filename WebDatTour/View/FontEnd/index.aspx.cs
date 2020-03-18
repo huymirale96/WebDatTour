@@ -172,5 +172,16 @@ namespace WebDatTour.View.FontEnd
         {
             return x.ToString("#,##0");
         }
+        public String hienSoSao(String soSao)
+        {
+            if(soSao.Equals("0"))
+            {
+                return "";
+            }
+            else
+            {
+                return "<div style='position: absolute;background-color: #fff;  border-radius: 50%; width: 60px; height: 60px; margin: 0px; '><p style='top: 15px; position: absolute; left: 13px;'><b>"+soSao+" </b><i class='fa fa-star' style='font - size: 18px; color: #ffca08;'></i></p></div>";
+            }
+        }
     }
 }

@@ -17,7 +17,11 @@ namespace WebDatTour.View.BackEnd
         NhanVienController nhanVienController = new NhanVienController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            System.Diagnostics.Debug.WriteLine("quyen " + Session["quyen"].ToString());
+            if (!Session["quyen"].ToString().Equals("2"))
+            {
+                Response.Redirect("admin.aspx");
+            }
             danhSachNhanVien();
             Paging();
             
@@ -71,7 +75,7 @@ namespace WebDatTour.View.BackEnd
             pds.DataSource = dt;
             pds.AllowPaging = true;
             // Show number of product in one page.
-            pds.PageSize = 8;
+            pds.PageSize = 15;
             // Specify sum of page.
             int numPage = pds.PageCount;
             int currentPage;

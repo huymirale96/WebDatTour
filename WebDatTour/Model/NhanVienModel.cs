@@ -189,7 +189,36 @@ namespace WebDatTour.Model
             }
         }
         
-             public Boolean doiMatKhau(NhanVien nhanVien)
+              public Boolean kiemTraTenDangNhap(string tenDangNhap)
+        {
+            // Debug.WriteLine("kiem tra nhan vien " + nhanVien.MatKhau );
+            try
+            {
+                SqlCommand cmd = new SqlCommand("kiemTraTenDangNhap", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ten", tenDangNhap);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                cn.disconnect();
+                if (table.Rows.Count > 0)
+                {
+
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Loi " + ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean doiMatKhau(NhanVien nhanVien)
         {
             Debug.WriteLine("dang nhap nhan vien ");
             try
@@ -217,6 +246,27 @@ namespace WebDatTour.Model
             {
                 Debug.WriteLine("Loi " + ex.Message);
                 return false;
+            }
+        }
+        
+             public DataTable thongKeTaiKhoan()
+        {
+            try
+            {
+              
+
+                SqlCommand cmd = new SqlCommand("sp_ThongKeTaiKhoan", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable ds = new DataTable();
+
+                da.Fill(ds);
+                cn.disconnect();
+                return ds;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
             }
         }
 

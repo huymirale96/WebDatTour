@@ -45,7 +45,7 @@
                                 <li class="active"><a href="index.aspx" title="Home">Trang Chủ</a></li>
                                 <li class="active"><a href="../../View/BackEnd/admin.aspx" title="Home">ADMIN</a></li>
                                 
-                                <li class="has-sub"><a href="service-list.html" title="Service List">Chức Năng</a>
+                               <!-- <li class="has-sub"><a href="service-list.html" title="Service List">Chức Năng</a>
                                     <ul>
                                         <li><a href="service-list.html" title="Service List">Chức Năngt</a></li>
                                         <li><a href="service-detail.html" title="Service Detail">Chức Năng</a></li>
@@ -58,7 +58,7 @@
                                     </ul>
                                 </li>
                                
-                                <li><a href="contact.html" title="Contact Us">liên Hệ</a> </li>
+                                <li><a href="contact.html" title="Contact Us">liên Hệ</a> </li> -->
                                 <li id="daDangNhap"><a href="#" title="Features" runat="server" id="tendn"></a>
                                     <ul  runat="server" id="dangNhap">                       
    

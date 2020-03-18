@@ -223,13 +223,16 @@ namespace WebDatTour.View.BackEnd
         }
 
         [WebMethod]
-        public static String themThoiGianKhoiHanh(string id, string date, string hanDat)
+        public static String themThoiGianKhoiHanh(string id, string date)
         {
-            //Debug.WriteLine("id ajax : " + id + " date " + date);
-            if (id != null && date != null && hanDat != null)
+            Debug.WriteLine("id ajax : " + id + " date " + date);
+            if (id != null && date != null)
             {
+                ///DateTime x = DateTime.Parse(date.ToString());
                 TourController tourController1 = new TourController();
-                if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), DateTime.Parse(date), DateTime.Parse(hanDat)))
+                if(tourController1.kiemTraNgayKhoiHanh(id, date))
+                { 
+                if (tourController1.themThoiGianKhoiHanh(Convert.ToInt32(id), date))
                 {
                     DataTable table = tourController1.dsThoiGianKhoiHanh(Convert.ToInt32(id));
                     // Debug.WriteLine(JsonConvert.SerializeObject(table));
@@ -239,6 +242,13 @@ namespace WebDatTour.View.BackEnd
                 {
                     return null;
                 }
+                }
+                else
+                {
+                    return null;
+                }
+
+
             }
             else
             {
