@@ -111,10 +111,10 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("layTenNhomTour", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
+
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
-                DataTable table = new DataTable();
-                dap.Fill(table);
+                DataTable table = new DataTable();                dap.Fill(table);
                 return table.Rows[0]["stennhomtour"].ToString();
 
             }

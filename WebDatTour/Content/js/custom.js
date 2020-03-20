@@ -271,13 +271,33 @@ $("#formdk").submit(function (e) {
     var hoTen = $('#txtHTDK').val();
     var tendk = $('#txtTenDK').val();
     var mail = $('#txtEmalDK').val();
+    var mk = $('#txtMKDK').val();
+   // var txtSDTDK = $('#txtSDTDK').val();
     if ($.trim(hoTen) == '') {
         alert('Bạn chưa nhập họ tên.');
         return true;
     }
 
+    if ($('#txtSDTDK').val().length < 10 && $('#txtSDTDK').val().length > 14) {
+        alert('Số Điện Thoại Không Đúng');
+        return false;
+    } 
+
+    if (/^[\w&.\-]+$/i.test(mk)) {
+        //  alert(mk+'Mật Khẩu Phải Từ 8 Kí Tự Bao Gồm Ít Nhất 1 Chữ Và 1 Số 1');
+        //return false;
+    }
+    else {
+        alert('Số Điện Thoại Không Được Chứa Ký Tự Đặc Biệt');
+        return false;
+    }
+
     if ($.trim(tendk) == '') {
         alert('Bạn chưa nhập tên đăng kí.');
+        return false;
+    }
+    if ($.trim(tendk).length > 30) {
+        alert('Tên Đăng Ký Không Quá 30 Ký Tự.');
         return false;
     }
     
@@ -292,6 +312,15 @@ $("#formdk").submit(function (e) {
     }
     else {
         alert('Bạn nhập sai email.');
+        return false;
+    }
+  
+    if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(mk)) {
+      //  alert(mk+'Mật Khẩu Phải Từ 8 Kí Tự Bao Gồm Ít Nhất 1 Chữ Và 1 Số 1');
+        //return false;
+    }
+    else {
+        alert(' Mật Khẩu Phải Từ 8 Kí Tự Bao Gồm Ít Nhất 1 Chữ Và 1 Số.');
         return false;
     }
     var self = this;
@@ -312,13 +341,13 @@ $("#formdk").submit(function (e) {
                 success: function (result) {
                   //  alert("We returned: " + result.d);
                     if (result.d == true) {
-                        alert("We true: ");
+                       // alert("We true: ");
                         $("#noTi").html("Tên Đăng Nhập đúng.");
                         self.submit();
                         //return true;
                     }
                     else {
-                        alert("We fasle: ");
+                       // alert("We fasle: ");
                         $("#noTi").html("Tên Đăng Nhập Đã Trùng.");
                         return false;
                     }
@@ -461,7 +490,7 @@ $(document).ready(function () {
             txtTenDK: "required",
             txtSDTDK: {
                 required: true,
-                minlength: 2
+                minlength: 11
             },
             txtMKDK: "required",
                // : "required",

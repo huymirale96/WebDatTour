@@ -279,3 +279,6 @@
 </div>
                            </div>
 </asp:Content>
+<asp:Content ID="con2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <div id="script" runat="server"></div>
+</asp:Content>

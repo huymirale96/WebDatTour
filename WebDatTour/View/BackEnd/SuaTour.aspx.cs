@@ -27,6 +27,7 @@ namespace WebDatTour.View.BackEnd
         protected void Page_Load(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("đâs");
+            txtTieuDe.Focus();
 
             if (Request.QueryString["id"] != null ) 
             {

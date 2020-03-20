@@ -51,7 +51,10 @@ namespace WebDatTour.View.FontEnd
                         khachHang.NgaySinh = DateTime.Parse(Request.QueryString["txtNS"]);
                         if (khachHangController.dangKy(khachHang))
                         {
-
+                            string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
+                            myScript += "toastr.success(\"Đăng Ký Thành Công\",\"Thông Báo\");";
+                            myScript += "\n\n </script>";
+                            script.InnerHtml = myScript;
                         }
                     }
                     else

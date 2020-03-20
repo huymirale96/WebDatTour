@@ -1701,3 +1701,72 @@ alter proc layTenNhomTour
 as
 select sTenNhomTour from tblNhomTour where imanhomtour = @id
  
+
+
+alter proc sp_dsnhomtourbyid
+@id int
+as
+select top 6 ISNULL(b5.soSao,0) as soSao,a.iMaTour,a.sTieuDe,d.dngaykhoihanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian,b3.sUrlAnh , b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+from
+(
+select * from tblTour where tblTour.iMaNhomTour = @id) as a
+JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a.iMaTour
+  join
+ (select imatour, min(dthoigian) as dngaykhoihanh from tblThoiGianKhoiHanh where --iMaTour = 36 and 
+ getdate() < dthoigian and trangThai = 1
+ group by iMaTour) as d on d.iMaTour= a.iMaTour 
+ join
+ (SELECT iMaHinhAnh, imatour,sDuongDan as surlanh
+FROM   (SELECT  iMaHinhAnh, imatour, sDuongDan,
+               RANK() OVER (PARTITION BY imatour ORDER BY iMaHinhAnh asc) AS rk
+        FROM   tblhinhanh) t
+WHERE  rk = 1 ) b3 on b3.imatour =a.iMaTour 
+left join
+(select iMaTour, ISNULL( avg(Cast(b.isosao as Float)) , 0 ) soSao from
+ (select iMaTour, iMaDonDatTour from tblDonDatTour ) a
+ left join 
+( select iMaDonDatTour,isosao from tblDanhGia) b
+on a.imadondattour = b.iMaDonDatTour group by iMaTour ) b5
+on b5.iMaTour =  a.iMaTour 
+
+
+alter proc sp_kiemTraQuyenDanhGia===
+@id int
+as
+select bang1.imadondattour, bang2.conLai, bang1.dThoiGian, bang1.dNgayDatTour from
+(select iMaDonDatTour, dThoiGian,dNgayDatTour from tblDonDatTour, tblThoiGianKhoiHanh
+where tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian
+and tbldondattour.iMaDonDatTour in (SELECT iMaDon
+FROM   (SELECT iMaDon, iTrangThai,
+               RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
+        FROM   tblTrangThaiDonDatTour ) t
+WHERE  rk = 1 and t.iTrangThai = 1
+   )  and tblThoiGianKhoiHanh.dThoiGian < GETDATE()-- and tbldondattour.iMaDonDatTour = @id
+   ) as bang1
+join
+(select (b1.doanhThu-b2.tien) as conLai,b2.imadontour, b1.iMaDonDatTour, b1.iMaTour,
+b1.sTenKhachHang, b1.iMaKhachHang ,b3.iTrangThai , b3.iMaNhanVien , b1.dNgayDatTour , b1.sghichu , b3.dthoigian, b1.stieude
+from
+(select b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang,b.dNgayDatTour, b.sghichu,
+ e.stieude ,e.iMaTour,--sum(e.tien)/2 as thucThu, 
+sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b, tblkhachhang d , tbltour e --, tblGiaoDich e
+where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
+and a.iMaDonDatTour = b.iMaDonDatTour and d.iMaKhachHang = b.imakhachhang and e.iMaTour = b.iMaTour --and b.iMaDonDatTour = @id
+group by  b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang, b.dNgayDatTour, b.sghichu,e.stieude,
+ e.iMaTour) b1 join
+(
+select Sum(tien) as tien, imadontour  from tblGiaoDich where trangThai = 1 group by imadontour
+) b2 on b1.imadondattour = b2.imadontour
+join
+(SELECT iMaDon, iTrangThai, dthoigian, imatrangthai, sghichu, imanhanvien
+FROM   (SELECT iMaDon, iTrangThai, dthoigian, imatrangthai, sghichu,imanhanvien,
+               RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
+        FROM   tblTrangThaiDonDatTour) t
+WHERE  rk = 1) b3
+on b3.iMaDon = b2.iMaDonTour) as bang2 on bang2.imadondattour = bang1.imadondattour where bang2.conLai <= 0

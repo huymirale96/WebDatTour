@@ -218,7 +218,7 @@
   <div class="related-post col-md-5">
                                                     <!-- related post -->
                                                     <div class="related-post-img">
-                                                        <a href="#"><img src="../../Upload/<%# Eval("surlanh") %>" alt="" class="img-responsive"></a>
+                                                        <a href="#"><img src="../../Upload/<%# Eval("surlanh") %>" alt="" style=" height: 163px;" class="img-responsive"></a>
                                                     </div>
                                                     <div class="related-post-content">
                                                         <h3 class="related-title"><a href="xemchitiettour.aspx?id=<%# Eval("imatour") %>" class="title"><%# Eval("stieude") %></a></h3>

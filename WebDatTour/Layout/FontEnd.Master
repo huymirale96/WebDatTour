@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
-                            <input type="text" class="form-control" name="txtMKDK" />
+                            <input type="text" class="form-control" name="txtMKDK" id="txtMKDK"/>
                         </div>
                         <div class="form-group">
                             <label></label>
@@ -164,11 +164,11 @@
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
-                            <input type="text" class="form-control" name="txtSDTDK" required/>
+                            <input type="text" class="form-control" name="txtSDTDK" id="txtSDTDK" required/>
                         </div>
                          <div class="form-group">
                             <label>Ngày Sinh</label>
-                            <input type="date" class="form-control" name="txtNS" />
+                            <input type="date" class="form-control" name="txtNS" value="1995-04-04" />
                         </div>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
     <script src="../../Content/js/jquery.sticky.js"></script>
     <script src="../../Content/js/sticky-header.js"></script>
     <script src="../../Content/js/custom.js"></script>
-    
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
      <script src="../../Content/js/jquery.validate.min.js"></script>
 </body>
 

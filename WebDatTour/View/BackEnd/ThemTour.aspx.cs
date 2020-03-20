@@ -21,9 +21,12 @@ namespace WebDatTour.View.BackEnd
         TourController tourController = new TourController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtTieuDe.Focus();
+
             if (!IsPostBack)
             {
                 layNhomTour();
+                ddlNhomTour.Text = "Chọn Nhóm Tour";
             }
         }
         protected void Button1_Click(object sender, EventArgs e)

@@ -22,6 +22,24 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtTieuDe;
         
         /// <summary>
+        /// R1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator R1;
+        
+        /// <summary>
+        /// req control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator req;
+        
+        /// <summary>
         /// txtSoNgayDi control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtnoiKhoiHanh;
         
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
         /// ddlNhomTour control.
         /// </summary>
         /// <remarks>
@@ -85,13 +112,13 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtGIaNL;
         
         /// <summary>
-        /// Rangevalidator1 control.
+        /// tGiaNLgidam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator Rangevalidator1;
+        protected global::System.Web.UI.WebControls.RangeValidator tGiaNLgidam;
         
         /// <summary>
         /// txtGiaNLgiam control.
@@ -103,22 +130,13 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtGiaNLgiam;
         
         /// <summary>
-        /// tGiaNLgidam control.
+        /// CompareValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator tGiaNLgidam;
-        
-        /// <summary>
-        /// txtGiaTE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGiaTE;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
         
         /// <summary>
         /// txtGiaTsE control.
@@ -130,6 +148,42 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.RangeValidator txtGiaTsE;
         
         /// <summary>
+        /// txtGiaTE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGiaTE;
+        
+        /// <summary>
+        /// txssaatGiaTEgiams control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator txssaatGiaTEgiams;
+        
+        /// <summary>
+        /// txtGiaTEgiam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGiaTEgiam;
+        
+        /// <summary>
+        /// re34 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator re34;
+        
+        /// <summary>
         /// txtNKH1 control.
         /// </summary>
         /// <remarks>
@@ -137,6 +191,15 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNKH1;
+        
+        /// <summary>
+        /// r3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator r3;
         
         /// <summary>
         /// txtNKH2 control.
@@ -184,24 +247,6 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.TextBox txtNKH6;
         
         /// <summary>
-        /// txtGiaTEgiam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGiaTEgiam;
-        
-        /// <summary>
-        /// txssaatGiaTEgiams control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator txssaatGiaTEgiams;
-        
-        /// <summary>
         /// txtMoTaTour control.
         /// </summary>
         /// <remarks>
@@ -209,6 +254,15 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::CKEditor.NET.CKEditorControl txtMoTaTour;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// btnDangKi control.
