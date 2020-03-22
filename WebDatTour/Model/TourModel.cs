@@ -50,10 +50,28 @@ namespace WebDatTour.Model
                 // rptTour.DataBind();
             }
         }
-        
+
+        public DataTable layTourtt1()
+        {
+            {
+                SqlCommand cmd = new SqlCommand("select * from tbltour where bTrangThai = 1", cn.connect());
+                cmd.CommandType = CommandType.Text;
+               // cmd.Parameters.AddWithValue("@id", id);
+                //cnn.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+                
+            }
+        }
 
 
-            public DataTable timKiemTour_tieuDe(string tieuDe)
+
+
+
+
+        public DataTable timKiemTour_tieuDe(string tieuDe)
         {
         try
             {
@@ -193,6 +211,27 @@ namespace WebDatTour.Model
                 SqlDataReader rd = cmd.ExecuteReader();
                 /// cn.disconnect();
                 return rd;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public DataTable xemTour2(String id)
+        {
+            Debug.WriteLine("Xem tourr");
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_xemTourId_", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idTour", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
 
             }
             catch (Exception ex)

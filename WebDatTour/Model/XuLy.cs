@@ -23,5 +23,20 @@ namespace WebDatTour.Model
 
             return str_md5;
         }
+        public string locKiTu(string str)
+
+        {
+
+            string[] chars = new string[] { "/", "!", "`", "#", "$", "%", "^", ">", "<", "'", "\"", ";", "_", "|", "[", "]", "=","select","delete","update","create","union","where" };
+            //Iterate the number of times based on the String array length.
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (str.Contains(chars[i]))
+                {
+                    str = str.Replace(chars[i], "");
+                }
+            }
+            return str;
+        }
     }
 }

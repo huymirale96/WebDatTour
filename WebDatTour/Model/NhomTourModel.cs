@@ -14,6 +14,7 @@ namespace WebDatTour.Model
     public class NhomTourModel
     {
         Connector cn = new Connector();
+        XuLy xuLy = new XuLy();
         public DataTable danhSachNT()
         {
             try

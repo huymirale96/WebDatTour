@@ -15,6 +15,7 @@ namespace WebDatTour.Model
     public class DanhGiaModel
     {
         Connector cn = new Connector();
+        XuLy xuLy = new XuLy();
         public DataTable layDanhGia(int id)
         {
 
@@ -64,7 +65,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@iddontour", danhGia.MaDonDatTour);
                 cmd.Parameters.AddWithValue("@isosao", danhGia.SoSao);
                 cmd.Parameters.AddWithValue("@thoigian", danhGia.ThoiGian);
-                cmd.Parameters.AddWithValue("@noidung", danhGia.NoiDung);
+                cmd.Parameters.AddWithValue("@noidung", xuLy.locKiTu(danhGia.NoiDung));
 
                 //cnn.Open();
                 int i = cmd.ExecuteNonQuery();
@@ -246,7 +247,7 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("suaDanhGia", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
-                cmd.Parameters.AddWithValue("@nd", nd);
+                cmd.Parameters.AddWithValue("@nd", xuLy.locKiTu(nd));
                 cmd.Parameters.AddWithValue("@sosao", sosao);
                 int i = cmd.ExecuteNonQuery();
 

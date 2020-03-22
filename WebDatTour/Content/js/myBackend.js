@@ -32,6 +32,8 @@
     $("#nkt").attr("value", today);
 
     ////////////rating bar
+    $('.isNumberic').keypress(validateNumber);
+
     $(".btnrating").on('click', (function (e) {
 
         var previous_value = $("#selected_rating").val();
@@ -220,7 +222,42 @@
     
 });
 
- 
+$("#listTour").change(function () {
+    //alert("Handler for .change() called." + $("#listTour").val());
+    var id = $("#listTour").val();
+    $.ajax({
+
+        type: 'post',
+        url: 'taodondattour.aspx/layThongTinTour',
+        data: "{ 'id' : '" + id + "' }",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (data) {
+            alert(data.d);
+            var tour = data.d.ThongTinTour;
+            alert(tour);
+          //  $("#anhTour").html("<img src='"+tour.urlAnh+"' ");
+            
+
+           // $('#bodyThoiGian').html(xx);
+        }
+    });
+});
+
+function validateNumber(event) {
+    var key = window.event ? event.keyCode : event.which;
+    if (event.keyCode === 8 || event.keyCode === 46) {
+        return true;
+    } else if (key < 48 || key > 57) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
 function anhienthoigian(id, idtour)
 {
     $.ajax({

@@ -13,5 +13,6 @@ namespace WebDatTour.Model
     public class ChiTietDonDatTourModel
     {
         Connector cn = new Connector();
+        XuLy xuLy = new XuLy();
     }
 }

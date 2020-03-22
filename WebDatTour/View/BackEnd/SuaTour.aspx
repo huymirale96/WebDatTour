@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label>Số Chỗ</label>
-                           <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control" placeholder="" TextMode="number" ></asp:TextBox>
+                           <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="number" ></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  ControlToValidate="txtSoCho" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                        <asp:RangeValidator ID="da" runat="server" MaximumValue="999999999"  MinimumValue="1"  Type="Integer" ControlToValidate="txtSoCho" ErrorMessage="*"></asp:RangeValidator>
                             </div>
@@ -54,23 +54,23 @@
                         
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá vé Người Lớn</label>
-                            <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="txtGIaNL" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                             <asp:RangeValidator ID="RangeValidator1" runat="server" MaximumValue="999999999"  MinimumValue="2"  Type="Integer" ControlToValidate="txtGIaNL" ErrorMessage="*"></asp:RangeValidator>            
                             </div>
                         <div class="form-group"  style="width: 180px; float: right">
                             <label>Giá vé Giảm</label>
-                            <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                         <asp:RangeValidator ID="RangeValidator2" runat="server" MaximumValue="999999999"  MinimumValue="2"  Type="Integer" ControlToValidate="txtGiaNLgiam" ErrorMessage="*"></asp:RangeValidator>
                             </div>
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá Vé Trẻ Em</label>
-                            <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator4"  ControlToValidate="txtGiaTE" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group" style="width: 180px; float: right">
                             <label>Giá Vé Trẻ Em Giảm</label>
-                            <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control" placeholder="" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator5"  ControlToValidate="txtGiaTEgiam" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
                     </div>

@@ -49,7 +49,7 @@ namespace WebDatTour.Model
         {
             SqlCommand cmd = new SqlCommand("sp_login_kh", cn.connect());
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@user", khach.TenDangNhap);
+            cmd.Parameters.AddWithValue("@user", xuLy.locKiTu(khach.TenDangNhap));
             cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(khach.MatKhau));
             //cnn.Open();
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
@@ -100,12 +100,12 @@ namespace WebDatTour.Model
         {
             SqlCommand cmd = new SqlCommand("sp_dangki", cn.connect());
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@tenkh", khachHang.TenKhachHang);
+            cmd.Parameters.AddWithValue("@tenkh", xuLy.locKiTu(khachHang.TenKhachHang));
             cmd.Parameters.AddWithValue("@ns", khachHang.NgaySinh);
-            cmd.Parameters.AddWithValue("@diachi", khachHang.DiaChi);
-            cmd.Parameters.AddWithValue("@sdt", khachHang.SoDienThoai);
-            cmd.Parameters.AddWithValue("@email", khachHang.Email);
-            cmd.Parameters.AddWithValue("@user", khachHang.TenDangNhap);
+            cmd.Parameters.AddWithValue("@diachi", xuLy.locKiTu(khachHang.DiaChi));
+            cmd.Parameters.AddWithValue("@sdt", xuLy.locKiTu(khachHang.SoDienThoai));
+            cmd.Parameters.AddWithValue("@email", xuLy.locKiTu(khachHang.Email));
+            cmd.Parameters.AddWithValue("@user", xuLy.locKiTu(khachHang.TenDangNhap));
             cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(khachHang.MatKhau));
             //cnn.Open();
             int i = cmd.ExecuteNonQuery();
@@ -252,11 +252,11 @@ namespace WebDatTour.Model
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", khach.MaKH);
-                cmd.Parameters.AddWithValue("@ten", khach.TenKhachHang);
+                cmd.Parameters.AddWithValue("@ten", xuLy.locKiTu(khach.TenKhachHang));
                 cmd.Parameters.AddWithValue("@ngay", khach.NgaySinh);
-                cmd.Parameters.AddWithValue("@dicchi", khach.DiaChi);
-                cmd.Parameters.AddWithValue("@sdt", khach.SoDienThoai);
-                cmd.Parameters.AddWithValue("@mail", khach.Email);
+                cmd.Parameters.AddWithValue("@dicchi", xuLy.locKiTu(khach.DiaChi));
+                cmd.Parameters.AddWithValue("@sdt", xuLy.locKiTu(khach.SoDienThoai));
+                cmd.Parameters.AddWithValue("@mail", xuLy.locKiTu(khach.Email));
                 //cnn.Open();
                 int i = cmd.ExecuteNonQuery();
                 if (i > 0)

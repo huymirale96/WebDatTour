@@ -16,6 +16,7 @@ namespace WebDatTour.Model
     public class DonDatTourModel
     {
         Connector cn = new Connector();
+        XuLy xuLy = new XuLy();
         public int ThemDonDatTour(DonDatTour donDatTour, int tien)
         {
 //Debug.WriteLine("ma ngay di ___ " + donDatTour.MaNgaydi);
@@ -28,7 +29,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@idkh", donDatTour.MaKH);
                // cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
               //  cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
-                cmd.Parameters.AddWithValue("@ghichu", donDatTour.GhiChu);
+                cmd.Parameters.AddWithValue("@ghichu", xuLy.locKiTu(donDatTour.GhiChu));
                 cmd.Parameters.AddWithValue("@maThoiGian", donDatTour.MaNgaydi);
                 
                 cmd.Parameters.AddWithValue("@iMaDonDatTour", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -85,7 +86,7 @@ namespace WebDatTour.Model
                 cmd.Parameters.AddWithValue("@idkh", donDatTour.MaKH);
                // cmd.Parameters.AddWithValue("@tien", donDatTour.TienDaThanhToan);
                 //  cmd.Parameters.AddWithValue("@tt", donDatTour.TrangThai);
-                cmd.Parameters.AddWithValue("@ghichu", donDatTour.GhiChu);
+                cmd.Parameters.AddWithValue("@ghichu", xuLy.locKiTu(donDatTour.GhiChu));
                 cmd.Parameters.AddWithValue("@maThoiGian", donDatTour.MaNgaydi);
 
                 cmd.Parameters.AddWithValue("@iMaDonDatTour", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -229,7 +230,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("timDonDatTour_", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@tuKhoa", id);
+                cmd.Parameters.AddWithValue("@tuKhoa", xuLy.locKiTu(id));
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 dap.Fill(table);
@@ -247,7 +248,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("timDonDatTourKH", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@tuKhoa", id);
+                cmd.Parameters.AddWithValue("@tuKhoa", xuLy.locKiTu(id));
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 dap.Fill(table);
@@ -447,7 +448,7 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("sp_capNhatTrangThaiDonHang", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@madon", madon);
-                cmd.Parameters.AddWithValue("@ghichu", ghichu);
+                cmd.Parameters.AddWithValue("@ghichu", xuLy.locKiTu(ghichu));
                 cmd.Parameters.AddWithValue("@trangthai", tt);
                 cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["maNV"].ToString());
                 cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);
@@ -480,7 +481,7 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("sp_capNhatTrangThaiDonHangNV", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@madon", madon);
-                cmd.Parameters.AddWithValue("@ghichu", ghichu);
+                cmd.Parameters.AddWithValue("@ghichu", xuLy.locKiTu(ghichu));
                 cmd.Parameters.AddWithValue("@trangthai", tt);
                 cmd.Parameters.AddWithValue("@manv", HttpContext.Current.Session["manv"]);
                 cmd.Parameters.AddWithValue("@thoigian", DateTime.Now);

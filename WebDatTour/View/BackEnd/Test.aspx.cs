@@ -98,16 +98,16 @@ namespace WebDatTour.View.BackEnd
         protected void Button2_Click(object sender, EventArgs e)
         {
             DateTime x = DateTime.Parse("2020-03-20");
-            Debug.WriteLine("okk1 " + x);
+            Debug.WriteLine("okk1 " + locKiTu("loc ki tu dac biet select * from tbl where 123 = 6 adn ''=!?#$%^&*((}[]"));
            // TourController tourController = new TourController();
             //tourController.upDateTrangThaiThoiGian(1);
             //Debug.WriteLine("okk2");
         }
-        public string ToAlphaNumericOnly(string str)
+        public string locKiTu(string str)
 
         {
 
-            string[] chars = new string[] { ",", ".", "/", "!", "@", "#", "$", "%", "^", "&", "*", "'", "\"", ";", "_", "|", "[", "]", "?", "=", "+", "-" };
+            string[] chars = new string[] { "/", "!", "@", "#", "$", "%", "^", ">", "<", "'", "\"", ";", "_", "|", "[", "]", "=", "+", "-" };
             //Iterate the number of times based on the String array length.
             for (int i = 0; i < chars.Length; i++)
             {

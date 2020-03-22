@@ -91,7 +91,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("sp_login_nv", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@user", user);
+                cmd.Parameters.AddWithValue("@user", xuLy.locKiTu(user));
                 cmd.Parameters.AddWithValue("@pw", xuLy.GetMD5(pw));
                 //cnn.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
@@ -132,10 +132,10 @@ namespace WebDatTour.Model
                 SqlCommand cmd = new SqlCommand("updateNhanVien", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id",  HttpContext.Current.Session["maNV"].ToString());
-                cmd.Parameters.AddWithValue("@dc", nhanVien.QueQuan);
+                cmd.Parameters.AddWithValue("@dc", xuLy.locKiTu(nhanVien.QueQuan));
                 cmd.Parameters.AddWithValue("@ns",  nhanVien.NgaySinh);
-                cmd.Parameters.AddWithValue("@dt",nhanVien.SoDienThoai);
-                cmd.Parameters.AddWithValue("@ten", nhanVien.TenNhanVien);
+                cmd.Parameters.AddWithValue("@dt", xuLy.locKiTu(nhanVien.SoDienThoai));
+                cmd.Parameters.AddWithValue("@ten", xuLy.locKiTu(nhanVien.TenNhanVien));
                 cmd.Parameters.AddWithValue("@gt", nhanVien.GioiTinh);
                 //cnn.Open();
                 int i = cmd.ExecuteNonQuery();
@@ -196,7 +196,7 @@ namespace WebDatTour.Model
             {
                 SqlCommand cmd = new SqlCommand("kiemTraTenDangNhap", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@ten", tenDangNhap);
+                cmd.Parameters.AddWithValue("@ten", xuLy.locKiTu(tenDangNhap));
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 dap.Fill(table);

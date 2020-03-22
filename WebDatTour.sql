@@ -1571,6 +1571,33 @@ iSoSao int
 
 alter table tblDanhGia add constraint FK_DonTour_BinhLuan foreign key (iMaDonDatTour) references tbldondattour(iMaDonDatTour);
 
+create proc sp_xemTourId_
+@idtour int
+as
+select  b4.surlanh,a.iMaTour,a.sTieuDe,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sTongThoiGian, b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+from
+(
+select * from tblTour where tblTour.iMaTour = @idtour) as a
+JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 1) as b
+  ON b.imatour = a.imatour
+  JOIN
+(select * from tblNhomVeGia where tblNhomVeGia.iMaNhomVe = 2) as c
+  ON c.imatour = a.iMaTour
+   join
+ (SELECT iMaHinhAnh, imatour,sDuongDan as surlanh
+FROM   (SELECT  iMaHinhAnh, imatour, sDuongDan,
+               RANK() OVER (PARTITION BY imatour ORDER BY iMaHinhAnh asc) AS rk
+        FROM   tblhinhanh) t
+WHERE  rk = 1 ) b4 on b4.imatour =a.iMaTour 
+ join
+(select iMaTour, ISNULL( avg(Cast(b.isosao as Float)) , 0 ) soSao from
+ (select iMaTour, iMaDonDatTour from tblDonDatTour ) a
+ left join 
+( select iMaDonDatTour,isosao from tblDanhGia) b
+on a.imadondattour = b.iMaDonDatTour group by iMaTour ) b5
+on b5.iMaTour =  a.iMaTour 
+
 
 alter proc sp_kiemTraQuyenDanhGia
 @id int

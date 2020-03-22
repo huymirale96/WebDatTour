@@ -28,12 +28,14 @@
                         <div class="form-group">
                             <label>Số Ngày Đi:</label>
                             <asp:TextBox ID="txtSoNgayDi" runat="server" CssClass="form-control" placeholder="" ></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqsnd" runat="server" ControlToValidate="txtSoNgayDi"  ErrorMessage="*" ForeColor="#ff3300"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <label>Số Chỗ</label>
-                           <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control" placeholder="" TextMode="number"   value="0"></asp:TextBox>
+                           <asp:TextBox ID="txtSoCho" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="number"   value="0"></asp:TextBox>
                              <asp:rangevalidator Type="Integer" ID="Rangevalidator2" errormessage="*" forecolor="Red" controltovalidate="txtSoCho" minimumvalue="0" maximumvalue="99999999" runat="server">
             </asp:rangevalidator>
+                           
                         </div>
                         <div class="form-group">
                             <label>Hình Ảnh Bìa</label>
@@ -62,14 +64,14 @@
                         <div class="form-group" style="width: 180px; float: left">
                             <label>Giá vé Người Lớn</label>
 
-                            <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control" placeholder="" TextMode="Number" Type="Integer"  value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number" Type="Integer"  value="0"></asp:TextBox>
                           
                             
                         <div class="form-group"  style="width: 180px; float: right">
                             <label>Giá vé Người Lớn Giảm</label>
                             <asp:rangevalidator ID="tGiaNLgidam" errormessage="*" forecolor="Red" ControlToValidate="txtGIaNL" minimumvalue="0"  maximumvalue="99999999" runat="server" >
             </asp:rangevalidator>
-                            <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control " placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                              <asp:CompareValidator  ID="CompareValidator1" runat="server" forecolor="Red"  ControlToValidate="txtGiaNLgiam" ControlToCompare="txtGIaNL" ErrorMessage="Giá GIảm Phải Nhở Hơn." Operator="LessThan" Type="Integer"></asp:CompareValidator>
                             
                             </div>
@@ -78,13 +80,13 @@
                             <label>Giá Vé Trẻ Em</label>
                              <asp:rangevalidator ID="txtGiaTsE" errormessage="*" forecolor="Red" controltovalidate="txtGiaTE" minimumvalue="0"  maximumvalue="99999999" runat="server" >
             </asp:rangevalidator>
-                            <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control marginL" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control marginL isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                            
                             <div class="form-group" style="width: 180px; float: right">
                             <label>Giá Vé Trẻ Em Giảm</label>
                                  <asp:rangevalidator ID="txssaatGiaTEgiams" errormessage="*" forecolor="Red" controltovalidate="txtGiaTEgiam" minimumvalue="0"  maximumvalue="99999999" runat="server">
             </asp:rangevalidator>
-                            <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control marginL" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control marginL isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                             <asp:CompareValidator  ID="re34" runat="server" forecolor="Red"  ControlToValidate="txtGiaTEgiam" ControlToCompare="txtGiaTE" ErrorMessage="Giá GIảm Phải Nhở Hơn." Operator="LessThan" Type="Integer"></asp:CompareValidator>
                                    </div>
                             <div class="form-group" style="width: 180px; float: right">
@@ -110,7 +112,7 @@
                   <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtMoTaTour" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
 
-                        <asp:button ID="btnDangKi" runat="server" CssClass="btn btn-default btn-md" Text="Đăng Kí" OnClick="btnDangKi_Click"></asp:button>
+                        <asp:button ID="btnDangKi" runat="server" CssClass="btn btn-default btn-md" Text="Thêm Tour" OnClick="btnDangKi_Click"></asp:button>
                       
                          <a href="themtour.aspx" class="btn btn-default">RESET</a>
                     </div>

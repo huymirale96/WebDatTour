@@ -263,6 +263,7 @@
     <Content Include="View\BackEnd\GetUrl.aspx" />
     <Content Include="View\BackEnd\khongCoQuyen.aspx" />
     <Content Include="View\BackEnd\SuaTour.aspx" />
+    <Content Include="View\BackEnd\TaoDonDatTour.aspx" />
     <Content Include="View\BackEnd\Test.aspx" />
     <Content Include="View\BackEnd\ThemNhanVien.aspx" />
     <Content Include="View\BackEnd\ThemTour.aspx" />
@@ -361,6 +362,7 @@
     <Compile Include="Object\anh.cs" />
     <Compile Include="Object\ChiTietDonHang.cs" />
     <Compile Include="Object\DanhGia.cs" />
+    <Compile Include="Object\Data.cs" />
     <Compile Include="Object\DonDatTour.cs" />
     <Compile Include="Object\DonDatVe.cs" />
     <Compile Include="Object\KhachHang.cs" />
@@ -467,6 +469,13 @@
     </Compile>
     <Compile Include="View\BackEnd\SuaTour.aspx.designer.cs">
       <DependentUpon>SuaTour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\TaoDonDatTour.aspx.cs">
+      <DependentUpon>TaoDonDatTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\TaoDonDatTour.aspx.designer.cs">
+      <DependentUpon>TaoDonDatTour.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>

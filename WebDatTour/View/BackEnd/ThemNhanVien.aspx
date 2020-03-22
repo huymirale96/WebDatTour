@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="ThemNhanVien.aspx.cs" Inherits="WebDatTour.View.BackEnd.ThemNhanVien" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Layout/BackEnd.Master"  ValidateRequest="false" AutoEventWireup="true" CodeBehind="ThemNhanVien.aspx.cs" Inherits="WebDatTour.View.BackEnd.ThemNhanVien" %>
 <asp:Content ID="cotent1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
     <div class="col-md-12">
@@ -57,6 +57,9 @@
                         <div class="form-group">
                             <label>Ngày Sinh</label>
                             <asp:TextBox ID="txtNgaySinh" runat="server" CssClass="form-control" placeholder="" TextMode="Date"></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5"  ControlToValidate="txtNgaySinh" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                        <asp:CompareValidator ID="Comparevalidator1" runat="server" ErrorMessage="Tuổi Phải Từ 15 Trở Lên."
+            Operator="LessThanEqual" ControlToValidate="txtNgaySinh" Type="date" Display="Dynamic" />
                         </div>
                         <div class="form-group">
                             <label>Giới Tính</label>
@@ -68,11 +71,15 @@
                                 <asp:RadioButton ID="rdoNu" runat="server" GroupName="quyen1" /> Nữ
                             </label>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-</div>
+</asp:Content>
+<asp:Content ID="cnt2" ContentPlaceHolderID="script" runat="server" >
+    <div id="notification" runat="server"></div>
 </asp:Content>
