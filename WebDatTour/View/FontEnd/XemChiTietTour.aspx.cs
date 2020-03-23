@@ -51,7 +51,14 @@ namespace WebDatTour.View.FontEnd
         public void laybinhluan(int id)
         {
             //Debug.WriteLine(JsonConvert.SerializeObject(binhLuanController.layBinhLuan(id)));
-            rptBinhLuan.DataSource = danhGiaController.layDanhGia(id);
+            if (Session["maNV"].ToString().Equals(""))
+            {
+                rptBinhLuan.DataSource = danhGiaController.laydanhgiaChoKH(id);
+            }
+            else
+            {
+                rptBinhLuan.DataSource = danhGiaController.layDanhGia(id); 
+            }
             rptBinhLuan.DataBind();
         }
         public void layTourLienQuan(string idTour)

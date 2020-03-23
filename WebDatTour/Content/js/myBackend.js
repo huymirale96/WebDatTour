@@ -16,6 +16,13 @@
         'hideMethod': 'fadeOut',
     }
 
+    $("#txtSoChoNL").attr('disabled', 'disabled');
+    $("#txtSoChoTE").attr('disabled', 'disabled');
+    $("#thanhToanDDT").attr('disabled', 'disabled');
+    $("#tenKH").attr('disabled', 'disabled');
+    
+    
+
 
     //   alert("đas");
     var date = new Date();
@@ -33,6 +40,25 @@
 
     ////////////rating bar
     $('.isNumberic').keypress(validateNumber);
+    $('.isNumberic').change(function () {
+        var nl = parseInt($("#txtSoChoNL").val());
+        var te = parseInt($("#txtSoChoTE").val());
+        var con_ = parseInt($('#soChoConh').val());
+        //alert(con_)
+        $('#thongBao').html();
+        if (con_ < (te + nl)) {
+            $('#thongBao').html("Số Chỗ Chỉ Còn " + $("#soChoConh").val() + " chỗ.");
+            $("#thanhToanDDT").attr('disabled', 'disabled');
+        }
+        else {
+            var tongTien = (parseInt($("#giaNLh").val()) * parseInt($("#txtSoChoNL").val()) + parseInt($("#giaTEh").val()) * parseInt($("#txtSoChoTE").val())) * parseFloat($("#txtPtThanhToan").val());     
+            $('#thongBao').html("Tổng Tiền Là: " + tongTien.toLocaleString() + "VND");
+            $('#tienTTh').val(tongTien);
+            $("#thanhToanDDT").removeAttr('disabled');
+            
+        }
+        
+    });
 
     $(".btnrating").on('click', (function (e) {
 
@@ -148,7 +174,51 @@
         $("#contentAddInventory").hide();
         // $("HTML, BODY").animate({scrollTop: $("#contentAddInventory").offset().top - 100}, 1000);
     });
-  
+
+
+    
+
+    $("#thanhToanDDT").click(function () {
+        var x = confirm('Bạn Muốn Đặt Tour?');
+        if (x) {
+            //alert("tien: " + $("#tienTTh").val() + "id tour " + $("#idtourh").val() + " nl " + $("#txtSoChoNL").val() + " te " + $("#txtSoChoTE").val() + " id ngay " + $("#txtThoiGian").val() + " id khach " + $("#idkhh").val()); 
+            $.ajax({
+                type: 'post',
+                url: 'taodondattour.aspx/taodondattour',  // (string idTour, string idNgay, string idKH, string soTE, string soNL, string tien
+                data: "{ 'idTour' : '" + $("#idtourh").val() + "', 'idNgay' : '" + $("#txtThoiGian").val() + "', 'idKH' : '" + $("#idkhh").val() + "', 'soTE' : '" + $("#txtSoChoTE").val() + "', 'soNL' : '" + $("#txtSoChoNL").val() + "', 'tien' : '" + $("#tienTTh").val() + "' }",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+                },
+                success: function (data) {
+                    if (data.d == "true") {
+                        toastr.info("Tạo Đơn Đặt Tour Thành Công.", "Thông Báo.");
+                        setTimeout(function () {
+                            window.location.href = "DanhSachDatTour.aspx";
+                        }, 2000);
+                    }
+                    else {
+                        toastr.warning("Tạo Đơn Đặt Tour Không Thành Công.", "Thông Báo.");
+                    }
+                }
+
+
+
+
+
+            });
+        }
+        //var ngay = $("#txtNgayDiThem").val();
+        //  var hanDat = $("#txtHanDat").val(); 
+       // alert($("#matour_").val() + "   " + $("#txtNgayDiThem").val());
+       
+        
+           
+        
+        
+    });
+
     $("#btnThemNgay").click(function () {
         var ngay = $("#txtNgayDiThem").val();
       //  var hanDat = $("#txtHanDat").val(); 
@@ -225,26 +295,102 @@
 $("#listTour").change(function () {
     //alert("Handler for .change() called." + $("#listTour").val());
     var id = $("#listTour").val();
-    $.ajax({
+    if (this.value != 'none') {
 
-        type: 'post',
-        url: 'taodondattour.aspx/layThongTinTour',
-        data: "{ 'id' : '" + id + "' }",
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
-        },
-        success: function (data) {
-            alert(data.d);
-            var tour = data.d.ThongTinTour;
-            alert(tour);
-          //  $("#anhTour").html("<img src='"+tour.urlAnh+"' ");
-            
+        $("#txtSoChoNL").attr('disabled', 'disabled');
+        $("#txtSoChoTE").attr('disabled', 'disabled');
+        $("#thanhToanDDT").attr('disabled', 'disabled');
 
-           // $('#bodyThoiGian').html(xx);
-        }
-    });
+        $.ajax({
+
+            type: 'post',
+            url: 'taodondattour.aspx/layThongTinTour',
+            data: "{ 'id' : '" + id + "' }",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (data) {
+                //  alert(data.d);
+                var tour = JSON.parse(data.d).ThongTinTour[0];
+                // alert("tour " + tour.sTieuDe);
+                $('#txtTieuDe').html(tour.sTieuDe);
+                $('#txtNoiKhoiHanh').html(tour.sNoiKhoiHanh);
+                $('#txtTongThoiGian').html(tour.sTongThoiGian);
+                $('#txtGiaNL').html(tour.igianlgiam);
+                $('#txtGiaTE').html(tour.igiategiam);
+                $('#txtSoCho').html(tour.iSoCho);
+
+                $('#anhTour').html("<img src='../../Upload/" + tour.surlanh + "'>");
+                $('#giaNL').val(tour.igianlgiam);
+
+                $('#idtourh').val(tour.iMaTour);
+                $('#giaNLh').val(tour.igianlgiam);
+                $('#giaTEh').val(tour.igiategiam);
+              //  alert(tour.iMaTour + "  " + $('#idtourh').val());
+                var ngayKhoiHanh = "<option value='none'>Chọn Ngày</option>";
+                $.each(JSON.parse(data.d).NgayDi, function (index, item) {
+                    // alert(moment(item.dThoiGian).format('DD-MM-YYYY'));
+                    ngayKhoiHanh += "<option value='" + item.iMaThoiGian + "'>" + moment(item.dThoiGian).format('DD-MM-YYYY') + "</option>";
+
+
+                });
+                //  alert("nkh: " + ngayKhoiHanh);
+                $('#txtThoiGian').html(ngayKhoiHanh + "");
+                $("#divThongTinTour").removeClass("classAn");
+                /*$.each(JSON.parse(data.d.NgayDi), function (index, item) {
+                    alert(item.dThoiGian);
+    
+                });*/
+                //  $("#anhTour").html("<img src='"+tour.urlAnh+"' ");
+
+
+                // $('#bodyThoiGian').html(xx);
+            }
+        });
+}
+});
+
+
+$('#txtThoiGian').on('change', function () {
+  //  alert(this.value + "ma tour " + $('#idtourh').val());
+     $('#iMaTour').val();
+    //$('#id2').val("0");
+
+    if (this.value != "none") {
+
+        $("#txtSoChoNL").attr('disabled', 'disabled');
+        $("#txtSoChoTE").attr('disabled', 'disabled');
+        $("#thanhToanDDT").attr('disabled', 'disabled');
+
+        $.ajax({
+            type: 'post',
+            url: '../FontEnd/xemchitiettour.aspx/kiemTraSoChoCon',
+            data: "{ 'idtour' : '" + $("#idtourh").val() + "', 'idthoigian' : '" + this.value + "' }",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+             //   alert("We returned: " + result.d);
+                
+                $("#txtSoChoCon").html(result.d);
+                $("#soChoConh").val(result.d);
+                if (parseInt(result.d) > 0) {
+                    $("#txtSoChoNL").removeAttr('disabled');
+                    $("#txtSoChoTE").removeAttr('disabled');
+                }
+                // alert("dnag nhap " + result.d);thongBaoSoCho
+               // $("#thongBaoSoCho").html("Số Chỗ Còn Là: " + result.d);
+              //  $("#soChoToiDa").val(result.d);
+                // $("#btnUpDow").removeProp("disabled", true);
+
+
+            }
+        });
+    }
 });
 
 function validateNumber(event) {

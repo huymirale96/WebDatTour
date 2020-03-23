@@ -28,6 +28,7 @@
                                             <th class="text-center">Số Điện Thoại</th>
                                             <th class="text-center">Email</th>
                                            <th class="text-center">Tên Đăng Nhập</th>
+                                              <th class="text-center"></th>
                                             
                                         </tr>
                                     </thead>
@@ -43,6 +44,7 @@
                                                     <td class="left"><%# Eval("sSDT") %></td>
                                                     <td class="text-center"><%# Eval("sEmail") %></td>
                                                     <td class="left"><%# Eval("susername") %></td>
+                                                    <td class="text-center"><a class="btn btn-outline-primary" href="TaoDonDatTour.aspx?id=<%# Eval("imakhachhang") %>">Tạo Đơn Đặt Tour</a></td>
                                                     
                                                     
                                                     

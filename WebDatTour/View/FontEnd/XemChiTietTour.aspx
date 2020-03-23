@@ -43,64 +43,7 @@
                         
                         </div>
                     </div>
-                   <!-- <div class="widget widget-recent-post">
-                       
-                        
-                        <h3 class="widget-title">TOUR</h3>
-                        <ul class="listnone widget-recent-post">
-                            <li>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="recent-post-img">
-                                            <a href="#"><img src="../../Content/images/ngu-hanh-son2-ivivu.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="recent-post-content">
-                                            <h3 class="recent-title"><a href="#" class="title">bootstrap responsive design templates free download</a></h3>
-                                            <i class="fa fa-calendar-check-o" style="font-size: 20px;"></i>
-                                            <div class="meta" style="display: inline-block;">
-                                                <span class="meta-date" >22 Jan, 2020</span>
-                                            </div>
-                                            <br>
-                                                 <i class="fa fa-cart-plus" style="font-size: 24px;"></i>
-                                            <div class="meta" style="display: inline-block;">
-                                                <span class="meta-date" style="display: inline-block;"><strike>449.000k</strike></span>
-                                                <span class="meta-date"><p style="color: green;">449.000k</p></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                             <li> <!--
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="recent-post-img">
-                                            <a href="#"><img src="../../Content/images/ngau-hanh-son-ivivu.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="recent-post-content">
-                                            <h3 class="recent-title"><a href="#" class="title">bootstrap responsive design templates free download</a></h3>
-                                            <i class="fa fa-calendar-check-o" style="font-size: 20px;"></i>
-                                            <div class="meta" style="display: inline-block;">
-                                                <span class="meta-date" >22 Jan, 2020</span>
-                                            </div>
-                                            <br>
-                                                 <i class="fa fa-cart-plus" style="font-size: 24px;"></i>
-                                            <div class="meta" style="display: inline-block;">
-                                                <span class="meta-date" style="display: inline-block;"><strike>449.000k</strike></span>
-                                                <span class="meta-date"><p style="color: green;">449.000k</p></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            
-                        </ul>
-                    </div> -->
-                    <!-- /.widget recent post -->
+                   
                  
                     
                 </div>
@@ -243,44 +186,8 @@
                                    
                                     <!-- /.post author -->
                                     <div class="comments-area">
-                                        <h2 class="comments-title"> Đánh Giá_</h2>
-                                      <!--  <ul class="comment-list">
-                                            <li class="comment">
-                                                <div class="comment-body">
-                                                    <div class="comment-author"><img src="../../Content/images/user-pic-1.jpg" alt="" class="img-circle"> </div>
-                                                    <div class="comment-info">
-                                                        <div class="comment-header">
-                                                            <div class="comment-meta"><span class="comment-meta-date pull-right">25  2020 </span></div>
-                                                            <h4 class="user-title">Mr X/h4>
-                                                        </div>
-                                                        <div class="comment-content">
-                                                            <p>Comment...</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul class="childern">
-                                                    <li class="comment">
-                                                        <div class="comment-body">
-                                                            <div class="">
-                                                                <div class="comment-author"><img src="../../Content/images/user-pic-2.jpg" alt="" class="img-circle"> </div>
-                                                                <div class="comment-info">
-                                                                    <div class="comment-header">
-                                                                        <div class="comment-meta"><span class="comment-meta-date pull-right">25 2020 </span></div>
-                                                                        <h4 class="user-title">XXYZ</h4>
-                                                                    </div>
-                                                                    <div class="comment-content">
-                                                                        <p>Comment...</p>
-                                                                    </div>
-                                                                    <div class="reply"><a href="#" class="btn-link">Trả Lời</a></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>-->
-                                       
-                                         <!-- Modal -->
+                                        <h2 class="comments-title"> Đánh Giá</h2>
+                                     
   <div class="modal fade" id="modalSuaBinhLuan" role="dialog">
     <div class="modal-dialog">
     
@@ -328,7 +235,7 @@
                                                         <div class="comment-info">
                                                             <div class="comment-header">
                                                                 <div class="comment-meta"><span class="comment-meta-date pull-right"><%# Eval("dThoiGian", "{0:dd/MM/yyyy HH:mm:ss}") %> </span></div>
-                                                                <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anDanhGia(<%# Eval("iMaDanhGia") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("btrangthai").ToString().Equals("False") ? "success" : "warning" %> "><%# Eval("btrangthai").ToString().Equals("True") ? "Ẩn" : "Hiện" %></label> 
+                                                                <h4 class="user-title" style="display: inline;"><%# Eval("sTenKhachHang") %></h4><label onclick="anDanhGia(<%# Eval("iMaDanhGia") %>)" style="display: <%# HttpContext.Current.Session["maNV"].ToString().Equals("") ? "none" : ""%>" class="label label-<%# Eval("btrangthai").ToString().Equals("True") ? "success" : "warning" %> "><%# Eval("btrangthai").ToString().Equals("False") ? "Ẩn" : "Hiện" %></label> 
                                                             </div>
                                                             <div class="comment-content">
                                                                 <%# hienSao(Eval("isosao").ToString()) %>

@@ -540,7 +540,19 @@ JOIN
 return @iMaGiaoDich;
    
 
-
+ create proc themGiaoDichNV
+  @iMaDonTOur int,
+  @thoigian date,
+  @tien int,
+  @trangThai int,
+  @nv int,
+  @imagiaodich int out
+  as
+  insert into tblGiaoDich (iMaDonTour, thoigian, tien , trangThai, imaNhanVien)
+   OUTPUT INSERTED.iMaGiaoDich as id
+   values (@iMaDonTOur, @thoigian, @tien, @trangThai,@nv) 
+   set @iMaGiaoDich = SCOPE_IDENTITY()
+return @iMaGiaoDich;
 
   
   create table tblGiaoDich

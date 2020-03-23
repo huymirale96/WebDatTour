@@ -42,7 +42,10 @@ namespace WebDatTour.Controllers
         {
             return danhGiaModel.kiemTraQuyenDanhGia(id);
         }
-        
+        public DataTable laydanhgiaChoKH(int id)
+        {
+            return danhGiaModel.laydanhgiaChoKH(id);
+        }
              public Boolean kiemTraDanhGiaKH(string makh, string idDond)
         {
             return danhGiaModel.kiemTraDanhGiaKH(makh, idDond);

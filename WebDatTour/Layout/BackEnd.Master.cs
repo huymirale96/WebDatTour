@@ -11,10 +11,10 @@ namespace WebDatTour.Layout
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          /*  if (Session["maNV"].ToString().Equals(""))
+            if (Session["maNV"].ToString().Equals(""))
             {
-              //  Response.Redirect("dangnhap.aspx");
-            }*/
+               Response.Redirect("dangnhap.aspx");
+            }
             if(Request.QueryString["chucnang"] != null)
             {
                 if(Request.QueryString["chucnang"].ToString().Equals("dangxuat"))

@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
-                            <input type="text" class="form-control" name="txtMKDK" id="txtMKDK"/>
+                            <input type="password" class="form-control" name="txtMKDK" id="txtMKDK"/>
                         </div>
                         <div class="form-group">
                             <label></label>

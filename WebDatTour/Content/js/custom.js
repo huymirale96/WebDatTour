@@ -246,7 +246,7 @@ function anDanhGia(id) {
                         var cmt = "";
                         $.each(JSON.parse(result.d), function (index, item) {
                             cmt += "<li class='comment'><div class='comment-body'><div class=''><div class='comment-author'><img src='../../Content/images/user-pic-3.jpg' alt='' class='img-circle'></div><div class='comment-info'><div class='comment-header'><div class='comment-meta'><span class='comment-meta-date pull-right'>" + item.dThoiGian + "</span></div><h4 style='display:inline;' class='user-title'>" + item.sTenKhachHang + "</h4><label onclick='anDanhGia(" + item.iMaDanhGia + ")' style='display: ' class='label label-";
-                            if (item.btrangthai == false) {
+                            if (item.btrangthai == true) {
                                 cmt += "success '>Hiện</label></div><div class='comment-content'>" + hienThiSao(item.iSoSao) + "<br><p>" + item.sNoiDung + "</p></div><!--<div class='reply'><a href='#' class='btn-link'>TrảLời</a></div>--></div></div></div></li>";
                             }
                             else {

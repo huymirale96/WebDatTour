@@ -42,7 +42,7 @@
 										            <td class="text-center"><%# Eval("snoikhoihanh") %></td>
 										            <td class="text-center"><%# Eval("iSoCho") %></td>
                                                   
-											        <td class="left">
+											        <td class="text-center">
                                                    <asp:LinkButton ID="btnTrangThai" CssClass="btn btn-xs btn-default" ToolTip="TrangThai" onClick="btnTrangThai_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><%# Eval("btrangthai").ToString().Equals("True") ? "Hiện" : "Ẩn"  %></asp:LinkButton>
 												        <asp:LinkButton ID="btnFix" CssClass="btn btn-xs btn-info" ToolTip="Sửa" onClick="btnFix_Click" runat="server" CommandArgument='<%# Eval("iMaTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
                                                       
@@ -53,15 +53,18 @@
                                             
                                     </tbody>
                                 </table>
-                                <div class="text-center">
+                                <div class="text-center" style="display: none">
                                     <asp:HyperLink ID="lnkPre" runat="server" CssClass="pre_next">Trang trước</asp:HyperLink>
                                     <asp:HyperLink ID="lnkStart" runat="server" CssClass="index">1</asp:HyperLink>
                                     <asp:Label ID="Labelnv" runat="server" Text="Label"></asp:Label>
                                    
                                     <asp:HyperLink ID="lnkEnd" runat="server" CssClass="index">11</asp:HyperLink>
                                     <asp:HyperLink ID="lnkNext" runat="server" CssClass="pre_next">Trang sau</asp:HyperLink>
-                                     <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
+                                     
                                  </div>  
+                                <div class="text-center">
+                                     <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
+                                    </div>
                             </div>
                         </div>
                     </div>

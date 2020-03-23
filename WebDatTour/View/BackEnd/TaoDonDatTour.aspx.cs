@@ -20,8 +20,16 @@ namespace WebDatTour.View.BackEnd
         TourModel tourModel = new TourModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-            layTour();
+            if (Request.QueryString["id"] != null)
+            {
+                layTour(Request.QueryString["id"].ToString());
+            }
+            else
+            {
+                Response.Redirect("danhsachkhachhang.aspx");
+            }
             //Debug.WriteLine("laytour+++ ");
+            
         }
         [WebMethod]
         public static string layThongTinTour(string id)
@@ -32,8 +40,41 @@ namespace WebDatTour.View.BackEnd
             Data data = new Data(data1, data2);
             return JsonConvert.SerializeObject(data);
              }
-       public void layTour()
+
+
+        [WebMethod]
+        public static string taoDonDatTour(string idTour, string idNgay, string idKH, string soTE, string soNL, string tien)
         {
+            Debug.WriteLine(idTour + "  "+ idNgay + "  "+ idKH + "  "+ soTE + "  "+ soNL + "  "+ tien + "  ");
+             DonDatTour donDatTour = new DonDatTour();
+             donDatTour.ChoNL = Convert.ToInt32(soNL);
+             donDatTour.ChoTE = Convert.ToInt32(soTE);
+             donDatTour.MaTour = Convert.ToInt32(idTour);
+             donDatTour.NgayDat = DateTime.Now; //DateTime.UtcNow.Date;
+             donDatTour.TienDaThanhToan = Convert.ToInt32(tien);
+             donDatTour.MaNgaydi = Convert.ToInt32(idNgay);
+             donDatTour.TrangThai = 0;
+             donDatTour.MaKH = Convert.ToInt32(idKH);
+             DonDatTourModel donDatTourModel = new DonDatTourModel();
+            if (donDatTourModel.taoDonDatTour_NV(donDatTour))
+            {
+                // Response.Redirect("toanthanhthanhtoan.aspx?id=1");
+                return "true";
+
+            }
+            else
+            {
+                return "false";
+            }
+           // return "ok";
+
+           
+        }
+        public void layTour(string id)
+        {
+            idkhhidden.InnerHtml = "<input type='hidden' id='idkhh' value='"+ id +"'>";
+            KhachHangModel khachHangModel = new KhachHangModel();
+            tenKhachHAng.InnerHtml = "Khách Hàng: "+ khachHangModel.layTenKhachHang(id);
             rptour.DataSource = tourModel.layTourtt1();
             rptour.DataBind();
         }

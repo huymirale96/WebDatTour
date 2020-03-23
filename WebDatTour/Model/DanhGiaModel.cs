@@ -36,7 +36,27 @@ namespace WebDatTour.Model
             }
         }
         
-             public DataTable layDanhGia_DanhGIa(int id)
+            public DataTable laydanhgiaChoKH(int id)
+        {
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand("laydanhgiaChoKH", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable ds = new DataTable();
+                da.Fill(ds);
+                cn.disconnect();
+                return ds;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable layDanhGia_DanhGIa(int id)
         {
 
             try

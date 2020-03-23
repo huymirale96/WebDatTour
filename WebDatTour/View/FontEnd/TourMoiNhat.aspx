@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/FontEnd.Master" AutoEventWireup="true" CodeFile="TourMoiNhat.aspx.cs" Inherits="WebDatTour.View.FontEnd.TourMoiNhat" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div class="row">
-        <div  style="margin: 10px;" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">  
-            <h2 style="margin:12px;">DANH SÁCH TOUR MỚI NHẤT</h2>
+  <div class="container-fluid">
+    <div class="row">
+        <div  style="margin: 0px;" class="col-lg-9 col-md-9"> 
+            <h2 style="margin:12px;">DANH SÁCH TOUR MUA NHIỀU TRONG THÁNG</h2>
         <asp:Repeater ID="rptTour" runat="server">
             <ItemTemplate>
             
@@ -32,10 +33,10 @@
                 
                  </ItemTemplate>
         </asp:Repeater>
-        <div class="text-center">
+        <div class="text-center col-md-8">
             <asp:Label ID="url" runat="server" Text="Label"></asp:Label>
         </div>
         </div>
     </div>
-
+      </div>
 </asp:Content>

@@ -14,8 +14,10 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4" for="TenDeTai">Tên Đăng Nhâp:</label>
                                     <div class="col-md-8">
+                                        <form runat="server">
                                          <asp:TextBox ID="tenDangNhap" CssClass="form-control" runat="server"  ReadOnly="true"></asp:TextBox>
-                                    </div>
+                                    </form>
+                                            </div>
                                        
                                     </div>
                                     <div class="form-group">

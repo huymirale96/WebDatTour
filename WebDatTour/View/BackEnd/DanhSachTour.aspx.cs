@@ -62,7 +62,7 @@ namespace WebDatTour.View.FontEnd
             pds.DataSource = dt;
             pds.AllowPaging = true;
             // Show number of product in one page.
-            pds.PageSize = 5;
+            pds.PageSize = 12;
             // Specify sum of page.
             int numPage = pds.PageCount;
             int currentPage;

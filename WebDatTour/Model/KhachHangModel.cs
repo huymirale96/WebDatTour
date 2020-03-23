@@ -164,6 +164,26 @@ namespace WebDatTour.Model
             }
         }
 
+        public string layTenKhachHang(string id)
+        {
+            try
+            {
+                string sqlStr = "select stenkhachhang from tblkhachhang where iMaKhachHang = "+id;
+
+                SqlCommand cmd = new SqlCommand(sqlStr, cn.connect());
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable ds = new DataTable();
+
+                da.Fill(ds);
+                return ds.Rows[0]["stenkhachhang"].ToString();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public DataTable timKhachHang(string tuKhoa)
         {
