@@ -50,6 +50,10 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.capNhatTrangThaiTour(id, tt, nv);
         }
+        public DataTable kiemTraHoanTien(string id)
+        {
+            return donDatTourModel.kiemTraHoanTien(id);
+        }
         public DataTable thongKeDoanhThu(string batdau, string ketthuc)
         {
             return donDatTourModel.thongKeDoanhThu(batdau, ketthuc);

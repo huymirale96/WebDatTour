@@ -79,6 +79,38 @@ namespace WebDatTour.View.BackEnd
             rptdondattour.DataBind();
 
         }
+
+        public string kiemTraHoanTien(string id)
+        {
+            if (donDatTourController.kiemTraHoanTien(id).Rows.Count > 0)
+            {
+                return "";
+            }
+            else
+            {
+                return "style='display: none;'";
+               
+            }
+            
+        }
+        public string tienHoan(string id)
+        {
+            DataTable dataTable = donDatTourController.kiemTraHoanTien(id);
+            if (dataTable.Rows.Count > 0)
+            {
+
+                int tongTien = Convert.ToInt32(dataTable.Rows[0]["doanhthu"]);
+                int daThanhThoan = Convert.ToInt32(dataTable.Rows[0]["tien"]);
+                return (daThanhThoan -(tongTien*0.4)).ToString("#,##0");
+            }
+            else
+            {
+                return "";
+
+            }
+
+        }
+        
         protected String toCurruncy(int x)
         {
             return x.ToString("#,##0");
@@ -111,6 +143,7 @@ namespace WebDatTour.View.BackEnd
                 case 1: return "<label class='label label-success'>Đã Xác Nhận</label>";
                 case 2: return  "<label class='label label-danger'>KH Đã Hủy</label>";
                 case 3: return  "<label class='label label-danger'>NV Đã Hủy</label>";
+                case 4: return "<label class='label label-info'>ĐÃ Hoàn Tiền</label>";
                 default: return "";
 
             }
@@ -183,5 +216,34 @@ namespace WebDatTour.View.BackEnd
                 }
             }
         }
+
+        protected void btnHoanTien_Click(object sender, EventArgs e)
+        {
+
+            LinkButton linkButton = (LinkButton)sender;
+            string id = linkButton.CommandArgument.ToString();
+            DataTable dataTable = donDatTourController.kiemTraHoanTien(id);
+            string ghiChu = "Hoàn Tiền : ";
+            if (dataTable.Rows.Count > 0)
+            {
+
+                int tongTien = Convert.ToInt32(dataTable.Rows[0]["doanhthu"]);
+                int daThanhThoan = Convert.ToInt32(dataTable.Rows[0]["tien"]);
+                ghiChu  += (daThanhThoan - (tongTien * 0.4)).ToString("#,##0") + " VND";
+            }
+            if (donDatTourController.sp_capNhatTrangThaiDonHangNV(id, ghiChu, 4))
+            {
+                lblnoti.CssClass = "text-success";
+                lblnoti.Text = "Hoàn Tiền Thành Công.";
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+            else
+            {
+                lblnoti.CssClass = "text-danger";
+                lblnoti.Text = "Hoàn Tiền Thất Bại.";
+                Response.Redirect("danhsachdattour.aspx?page=" + pageid.Value);
+            }
+        }
+    
     }
 }

@@ -24,8 +24,11 @@ namespace WebDatTour.Controllers
         {
             return khachHangModel.kiemTraDangNhap(khachHang);
         }
-        
 
+        public Boolean capNhapHoSoKhachHang(string id, List<string> ds_)
+        {
+            return khachHangModel.capNhapHoSoKhachHang(id, ds_);
+        }
           public Boolean doiMatKhau(Object.KhachHang khachHang)
         {
             return khachHangModel.doiMatKhau(khachHang);

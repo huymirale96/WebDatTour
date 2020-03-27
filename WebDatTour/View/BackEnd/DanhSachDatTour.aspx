@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="DanhSachDatTour.aspx.cs" Inherits="WebDatTour.View.BackEnd.DanhSachDatTour" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeFile="DanhSachDatTour.aspx.cs" Inherits="WebDatTour.View.BackEnd.DanhSachDatTour" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
      <div class="col-md-12">
@@ -57,7 +57,8 @@
 												        <asp:LinkButton ID="btnXacNhan" CssClass="btn btn-xs btn-success" Onclick="btnXacNhan_Click" ToolTip="Xác Nhận" runat="server" OnClientClick="return confirm('Bạn có chắc chắn Xác Nhận Đơn Đặt Tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-pencil-square-o" aria-hidden="false"></i></asp:LinkButton>
                                                         <asp:LinkButton ID="btnHuy" CssClass="btn btn-xs btn-danger" ToolTip="Hủy" runat="server" Onclick="btnHuy_Click" OnClientClick="return confirm('Bạn có chắc chắn hủy đơn đặt tour?')" CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
 											    <%# anThanhToan(Convert.ToInt32(Eval("itrangthai").ToString())) == 0 ? "<div style='display: none;'>" : ""%>        <%# Convert.ToInt32(Eval("conLai")) == 0 ? "<div style='display: none;'>" : ""%> <asp:LinkButton ID="btnThanhToan"  CssClass="btn btn-xs btn-info" Onclick="btnThanhToan_Click" ToolTip="Thanh Toán Tiền Còn Lại" runat="server" OnClientClick='<%# Eval("conLai", "return confirm(\"Bạn Có Muốn Thanh Toán Nốt {0} VND?\");") %>'   CommandArgument='<%# Eval("iMaDonDatTour")  + ";" + Eval("conLai")   %>'><i class="fa fa-credit-card" aria-hidden="true"></i></asp:LinkButton> <%# Convert.ToInt32(Eval("conLai")) == 0 ? "</div>" : ""%>  <%# anThanhToan(Convert.ToInt32(Eval("itrangthai").ToString())) == 0 ? "</div>" : ""%>
-                                                      
+                                                    <div <%# kiemTraHoanTien(Eval("iMaDonDatTour").ToString()) %> onclick="return confirm('Bạn Có Chắc Chắn Hoàn <%# tienHoan(Eval("iMaDonDatTour").ToString()) %> VND Cho TOUR Này?')"><asp:LinkButton ID="btnHoanTien" OnClick="btnHoanTien_Click" CssClass="btn btn-xs btn-warning" ToolTip="Hoàn Tiền" runat="server"  CommandArgument='<%# Eval("iMaDonDatTour") %>'><i class="fa fa-undo" aria-hidden="true"></i></asp:LinkButton></div>
+                                                  
                                                         </td>
 									            </tr>
                                             </ItemTemplate>

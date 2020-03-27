@@ -17,6 +17,33 @@
                 <h3 runat="server" id="txtNS">NGÀY SINH: Ngo Dang huy</h3>
 
             </div>
+            <div class="col-md-offset-1 col-md-7" style="padding:20px;" id="divtepkh" runat="server">
+               <h4><u>Các Tệp Của Khách Hàng:</u></h4>
+                <table class="table table-boder">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>TỆP</th>
+                    </tr>
+                        </thead>
+                    <tbody>
+                        <asp:Repeater ID="rptTep" runat="server">
+                            <ItemTemplate>
+
+                        <tr>
+                            <td>
+                                <%# Container.ItemIndex+1 %>
+                            </td>
+                            <td>
+                                <a href="../../upload/<%# Eval("sDuongDan") %>"><%# Eval("sDuongDan") %></a>
+                            </td>
+                        </tr>
+                        
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <br />
         <div class="row" style="margin-bottom: 100px;">
@@ -51,6 +78,10 @@
                                                 <label>Số Điện Thoại</label>
                                                  <asp:TextBox ID="txtSDT_" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
+                                             <div class="form-group">
+                                                <label>Tải Lên Hồ Sơ: </label>
+                                                <asp:FileUpload ID="fileKH" runat="server" AllowMultiple="true"/>
+                                            </div>
                                             <div class="form-group">
                                                  <asp:button ID="btnCapNhat" runat="server" Text="Cập Nhật" OnClick="btnCapNhat_Click"/>
                                                  <button id="cannelAddInventory" type="button" class="">Hủy</button>
@@ -70,6 +101,7 @@
                                                 <label>Ngày Sinh</label>
                                                 <asp:TextBox ID="txtNgaySinh_" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                             </div>
+                                            
                                             
                                         </div>
                                     </div>

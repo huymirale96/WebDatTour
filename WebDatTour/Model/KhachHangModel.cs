@@ -184,6 +184,46 @@ namespace WebDatTour.Model
             }
         }
 
+        public Boolean capNhapHoSoKhachHang(string id, List<string> ds_)
+        {
+            try
+            {
+                string script = "insert into tblTepThongTinKhachHang (imakhachhang, sduongdan) values ";
+                for (int ii = 0; ii < ds_.Count; ii++)
+                {
+                    if (ii != (ds_.Count - 1))
+                    {
+                        script += "(" + id + ",'" + ds_[ii]+"'),";
+                    }
+                    else
+                    {
+                        script += "(" + id + ",'" + ds_[ii] + "')";
+                    }
+                }
+                Debug.WriteLine("script: " + script);
+               // string sqlStr = "select stenkhachhang from tblkhachhang where iMaKhachHang = " + id;
+
+               SqlCommand cmd = new SqlCommand(script, cn.connect());
+                cmd.CommandType = CommandType.Text;
+                int i = cmd.ExecuteNonQuery();
+                if(i > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+               
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+               
+            }
+        }
+
 
         public DataTable timKhachHang(string tuKhoa)
         {

@@ -272,6 +272,7 @@ namespace WebDatTour.View.FontEnd
                 case "1": return "<label class='label label-success'>Đã Xác Nhận</label>";
                 case "2": return "<label class='label label-danger'> Đã Hủy</label>";
                 case "3": return "<label class='label label-danger'> Đã Bị Hủy</label>";
+                case "4": return "<label class='label label-info'> Đã Hoàn Tiền</label>";
                 default: return "";
 
             }
@@ -285,6 +286,7 @@ namespace WebDatTour.View.FontEnd
                 case "1": return "";
                 case "2": return "style='display: none'";
                 case "3": return "style='display: none'";
+                case "4": return "style='display: none'";
                 default: return "";
 
             }

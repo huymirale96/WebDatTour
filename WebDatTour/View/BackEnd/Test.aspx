@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeFile="Test.aspx.cs" Inherits="WebDatTour.View.BackEnd.Test" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="Test.aspx.cs" Inherits="WebDatTour.View.BackEnd.Test" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- row  -->
     <script>
@@ -45,6 +45,23 @@
         <asp:Button ID="Button2" runat="server" Text="BTN" OnClick="Button2_Click" />
         <asp:Button ID="mail" runat="server" Text="Mail" OnClick="mail_Click" />
          <input type="file" name="File2" id="File2" runat="server" />
+        <h2>DS KHACH HANG</h2>
+        <asp:Repeater ID="rpt1" runat="server">
+            <ItemTemplate>
+                <asp:CheckBox ID="CategoryID" runat="server" Text='<%# Eval("iMaNhanVien") %>' />
+                <%# Eval("stenNhanvien") %>
+                
+                <%# Eval("iMaNhanVien") %>
+                <br />
+            </ItemTemplate>
+        </asp:Repeater>
+        <asp:Button ID="Button3" runat="server" Text="Test RPT" OnClick="Button3_Click" />
+        <asp:CheckBox runat="server" ID="ck1" />
+        <asp:DropDownList runat="server" ID="ddl1" OnSelectedIndexChanged="ddl1_SelectedIndexChanged" AutoPostBack="true">
+            <asp:ListItem Value="1">12</asp:ListItem>
+            <asp:ListItem  Value="2">2</asp:ListItem>
+            <asp:ListItem  Value="3">3</asp:ListItem>
+        </asp:DropDownList>
 
 </form>
     

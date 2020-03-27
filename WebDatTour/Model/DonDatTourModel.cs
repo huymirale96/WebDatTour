@@ -288,6 +288,25 @@ namespace WebDatTour.Model
                 return null;
             }
         }
+        
+             public DataTable kiemTraHoanTien(string id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("kiemTraHoanTien", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
 
         public DataTable timDonDatTour(string id)
         {

@@ -67,6 +67,24 @@ namespace WebDatTour.View.FontEnd {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtNS;
         
         /// <summary>
+        /// divtepkh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divtepkh;
+        
+        /// <summary>
+        /// rptTep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptTep;
+        
+        /// <summary>
         /// noti control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,15 @@ namespace WebDatTour.View.FontEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSDT_;
+        
+        /// <summary>
+        /// fileKH control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileKH;
         
         /// <summary>
         /// btnCapNhat control.

@@ -135,6 +135,7 @@ namespace WebDatTour.View.FontEnd
         {
             LinkButton btn = (LinkButton)(sender);
             string id = btn.CommandArgument;
+            System.Diagnostics.Debug.WriteLine("id tour: " + id);
             Response.Redirect("SuaTour.aspx?id=" + id);
         }
 
@@ -206,6 +207,7 @@ namespace WebDatTour.View.FontEnd
 
         protected void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine("ds: " + tourController.timKiemTour_tieuDe(txtTuKhoa.Text));
             rptDanhSachTour.DataSource = tourController.timKiemTour_tieuDe(txtTuKhoa.Text);
             rptDanhSachTour.DataBind();
         }

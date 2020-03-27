@@ -71,6 +71,7 @@ namespace WebDatTour.View.BackEnd
                 case "1": return "<label class='label label-success'>Đã Xác Nhận</label>";
                 case "2": return "<label class='label label-danger'>KH Đã Hủy</label>";
                 case "3": return "<label class='label label-danger'> Đã Bị Hủy</label>";
+                case "4": return "<label class='label label-info'> Đã Hoàn Tiền</label>";
                 default: return "";
 
             }

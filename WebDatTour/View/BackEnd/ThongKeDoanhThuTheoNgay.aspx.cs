@@ -18,8 +18,12 @@ namespace WebDatTour.View.BackEnd
         DonDatTourController datTourController = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
-           // Debug.WriteLine("ngay " + batDau_.Value);
-           if(!IsPostBack)
+            if (!Session["quyen"].ToString().Equals("2"))
+            {
+                Response.Redirect("admin.aspx");
+            }
+            // Debug.WriteLine("ngay " + batDau_.Value);
+            if (!IsPostBack)
             {
                 //  batDau_.Value = DateTime.Now.ToString("yyyy-MM-yy");  MainContent_
                 // ketThuc_.Value = DateTime.Now.ToString("yyyy-MM-yy");

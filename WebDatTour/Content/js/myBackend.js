@@ -222,13 +222,15 @@
     $("#btnThemNgay").click(function () {
         var ngay = $("#txtNgayDiThem").val();
       //  var hanDat = $("#txtHanDat").val(); 
-        alert( $("#matour_").val() + "   " + $("#txtNgayDiThem").val());
+       //alert( $("#matour_").val() + "   " + $("#txtNgayDiThem").val());
         // console.log("ngay: " + ngay);
        // var d1 = Date.parse(ngay);
        // var d2 = Date.parse(hanDat);
-        // console.log("ngay: " + ngay);
-      
-        if (ngay != null) {
+        // console.log("ngay: " + ngay);  var d1 = Date.parse($("#nbd").val());
+        var ngayThem = Date.parse(ngay);
+        var ngayHienTai = Date.parse("2020-03-24");
+
+        if (ngay != null && ngayThem > ngayHienTai) {
             $.ajax({
                 type: 'post',
                 url: 'suatour.aspx/themThoiGianKhoiHanh',

@@ -14,6 +14,10 @@ namespace WebDatTour.View.BackEnd
         NhanVienController nhanVienController = new NhanVienController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Session["quyen"].ToString().Equals("2"))
+            {
+                Response.Redirect("admin.aspx");
+            }
             DataTable data = nhanVienController.thongKeTaiKhoan();
             tkad.InnerHtml = data.Rows[0]["soadmin"].ToString();
             tknv.InnerHtml = data.Rows[0]["sonv"].ToString();

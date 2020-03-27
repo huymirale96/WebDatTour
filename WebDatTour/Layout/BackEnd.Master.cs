@@ -13,7 +13,7 @@ namespace WebDatTour.Layout
         {
             if (Session["maNV"].ToString().Equals(""))
             {
-               Response.Redirect("dangnhap.aspx");
+               //Response.Redirect("dangnhap.aspx");
             }
             if(Request.QueryString["chucnang"] != null)
             {

@@ -15,6 +15,10 @@ namespace WebDatTour.View.BackEnd
         DonDatTourController donDatTourController_ = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Session["quyen"].ToString().Equals("2"))
+            {
+                Response.Redirect("admin.aspx");
+            }
             layDuLieu();
             Paging();
         }

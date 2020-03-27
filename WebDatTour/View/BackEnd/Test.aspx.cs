@@ -13,6 +13,9 @@ using WebDatTour.Object;
 using System.Net.Mail;
 using System.Web.UI.HtmlControls;
 using Newtonsoft.Json;
+using WebDatTour.Model;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -20,44 +23,70 @@ namespace WebDatTour.View.BackEnd
     {
         string x1 = "dasd";
         NhanVienController nhanVienController = new NhanVienController();
+        Connector connector = new Connector();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            test2();
-            /*
-            //// Label lab11 = (Label)FindControl("lab1") as Label;
-            // lab11.Text = "1111";
-            Label Label1 = FindControlRecursive(Page, "lab1") as Label;
-            Label1.Text = "huydasd";
-            FileUpload file = FindControlRecursive(Page, "FileAnh_") as FileUpload;
-            if(file != null)
+            if (!IsPostBack)
             {
-                Debug.WriteLine("name: " + file.FileName);
+                test2();
+
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("select * from tblnhanvien", connector.connect());
+                    cmd.CommandType = CommandType.Text;
+                    // cmd.Parameters.AddWithValue("@ten", tieuDe);
+                    //cnn.Open();
+                    SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                    DataTable table = new DataTable();
+                    dap.Fill(table);
+                    rpt1.DataSource = table;
+                    rpt1.DataBind();
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Error " + ex.Message);
+
+                    // return null;
+                }
+                /*
+                //// Label lab11 = (Label)FindControl("lab1") as Label;
+                // lab11.Text = "1111";
+                Label Label1 = FindControlRecursive(Page, "lab1") as Label;
+                Label1.Text = "huydasd";
+                FileUpload file = FindControlRecursive(Page, "FileAnh_") as FileUpload;
+                if(file != null)
+                {
+                    Debug.WriteLine("name: " + file.FileName);
+                }
+                String x = "00b0e98455c00a36507707ea638b2d7e.jpg/4d06fda30454472551758157b65dc6dd.jpg";
+                string[] tokens = x.Split('/');
+                //Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>"  ;//;;tokens[0] + tokens.Length.ToString();
+                // Label2.Text = tokens[0];
+                int dec = 4912323;
+                string uk = dec.ToString("#,##0");//ToString("C", new System.Globalization.CultureInfo("vi-VN"));
+                                                  //Label2.Text = ToAlphaNumericOnly("a  Z./,+=$#**bc=+-123?/");
+                DateTime now = DateTime.Now;
+               //now.ToString()+"huy";  DateTime.Now.ToString("MM/dd/yyyy H:mm")   DateTime.Now.ToString()
+                OrderInfo order = new OrderInfo();
+                order.Amount = 8;
+                Label2.Text = DateTime.Now.ToString("dd/MM/yyyy H:mm");
+                FileUpload tb = new FileUpload();
+                tb.ID = "name" + 2;
+                // HtmlControl anhh = (HtmlControl)Page.FindControl("anh");
+                 Control anhh = (Control)FindControl("anh");
+                ///Control anhh = Page.FindControl("anh");  Control myDiv = (Control)FindControl("myDiv");
+                //anhh.Controls.Add(tb);
+                if (anh != null)
+                {
+
+
+                }*/
+
             }
-            String x = "00b0e98455c00a36507707ea638b2d7e.jpg/4d06fda30454472551758157b65dc6dd.jpg";
-            string[] tokens = x.Split('/');
-            //Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>"  ;//;;tokens[0] + tokens.Length.ToString();
-            // Label2.Text = tokens[0];
-            int dec = 4912323;
-            string uk = dec.ToString("#,##0");//ToString("C", new System.Globalization.CultureInfo("vi-VN"));
-                                              //Label2.Text = ToAlphaNumericOnly("a  Z./,+=$#**bc=+-123?/");
-            DateTime now = DateTime.Now;
-           //now.ToString()+"huy";  DateTime.Now.ToString("MM/dd/yyyy H:mm")   DateTime.Now.ToString()
-            OrderInfo order = new OrderInfo();
-            order.Amount = 8;
-            Label2.Text = DateTime.Now.ToString("dd/MM/yyyy H:mm");
-            FileUpload tb = new FileUpload();
-            tb.ID = "name" + 2;
-            // HtmlControl anhh = (HtmlControl)Page.FindControl("anh");
-             Control anhh = (Control)FindControl("anh");
-            ///Control anhh = Page.FindControl("anh");  Control myDiv = (Control)FindControl("myDiv");
-            //anhh.Controls.Add(tb);
-            if (anh != null)
-            {
-               
-
-            }*/
-
-
 
         }
 
@@ -94,16 +123,17 @@ namespace WebDatTour.View.BackEnd
         {
             return "< button type = 'button' class='btn btn-primary'>Primary</button>";
         }
+        
 
         protected void Button2_Click(object sender, EventArgs e)
         {
             DateTime x = DateTime.Parse("2020-03-20");
-            Debug.WriteLine("okk1 " + locKiTu("loc ki tu dac biet select * from tbl where 123 = 6 adn ''=!?#$%^&*((}[]"));
+        //    Debug.WriteLine("okk1 " + locKiTu("loc ki tu dac biet select * from tbl where 123 = 6 adn ''=!?#$%^&*((}[]"));
            // TourController tourController = new TourController();
             //tourController.upDateTrangThaiThoiGian(1);
             //Debug.WriteLine("okk2");
         }
-        public string locKiTu(string str)
+        /*public string locKiTu(string str)
 
         {
 
@@ -117,7 +147,7 @@ namespace WebDatTour.View.BackEnd
                 }
             }
             return str;
-        }
+        }*/
 
         protected void mail_Click(object sender, EventArgs e)
         {
@@ -148,7 +178,27 @@ namespace WebDatTour.View.BackEnd
             thongKe.DoanhThu = "123";
             thongKe.ThucThu = "123";
             thongKe.SoDon = "123";
-            Debug.WriteLine("josn: " + JsonConvert.SerializeObject(thongKe));
+          //  Debug.WriteLine("josn: " + JsonConvert.SerializeObject(thongKe));
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("count rpt: " + rpt1.Items.Count + "  "+ck1.Checked);
+            for (int i = 0; i < rpt1.Items.Count; i++)
+            {
+                CheckBox chk = (CheckBox)rpt1.Items[i].FindControl("CategoryID");
+                Debug.WriteLine("id: " + chk.Text+ chk.Checked);
+                if (chk.Checked)
+                {
+                    Debug.WriteLine("ids: " + chk.Text);
+                   // Rpt += (chk.Text + "<br />");
+                }
+            }
+        }
+
+        protected void ddl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Debug.WriteLine("ddl: "+ddl1.Text);
         }
     }
 }

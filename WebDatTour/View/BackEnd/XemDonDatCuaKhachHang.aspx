@@ -1,14 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeFile="XemDonDatCuaKhachHang.aspx.cs" Inherits="WebDatTour.View.BackEnd.XemDonDatCuaKhachHang" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">\
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/BackEnd.Master" AutoEventWireup="true" CodeBehind="XemDonDatCuaKhachHang.aspx.cs" Inherits="WebDatTour.View.BackEnd.XemDonDatCuaKhachHang" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <div class="row">
+         <div class="col-md-12" style="margin: 20px;" >
+        <h3 class="page-header">Danh Sách Các Tệp Của Khách Hàng
+        </h3>
+             <table class="table table-boder">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>TỆP</th>
+                    </tr>
+                        </thead>
+                    <tbody>
+                        <asp:Repeater ID="rptTep" runat="server">
+                            <ItemTemplate>
+
+                        <tr>
+                            <td>
+                                <%# Container.ItemIndex+1 %>
+                            </td>
+                            <td>
+                                <a href="../../upload/<%# Eval("sDuongDan") %>"><%# Eval("sDuongDan") %></a>
+                            </td>
+                        </tr>
+                        
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+    </div>
      <div class="col-md-12">
-        <h1 class="page-header">Danh Sách Đơn Đặt Tour
-                            <small>---</small>
-        </h1>
+        <h3 class="page-header">Danh Sách Đơn Đặt Tour
+                           
+        </h3>
     </div>
     <br />
    
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin: 20px;" >
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Danh Sách Đơn Đặt Tour

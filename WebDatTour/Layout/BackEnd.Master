@@ -141,6 +141,12 @@
                                 <li  style="display: none;">
                                     <a href="#">Add User</a>
                                 </li>
+                                 <li>
+                                    <a href="goptour.aspx">Gộp Tour</a>
+                                </li>
+                                <li  style="display: none;">
+                                    <a href="#">Add User</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

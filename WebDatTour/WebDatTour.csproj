@@ -261,6 +261,7 @@
     <Content Include="View\BackEnd\DanhSachNhomTour.aspx" />
     <Content Include="View\BackEnd\DoiMatKhau.aspx" />
     <Content Include="View\BackEnd\GetUrl.aspx" />
+    <Content Include="View\BackEnd\GopTour.aspx" />
     <Content Include="View\BackEnd\khongCoQuyen.aspx" />
     <Content Include="View\BackEnd\SuaTour.aspx" />
     <Content Include="View\BackEnd\TaoDonDatTour.aspx" />
@@ -455,6 +456,13 @@
     </Compile>
     <Compile Include="View\BackEnd\GetUrl.aspx.designer.cs">
       <DependentUpon>GetUrl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BackEnd\GopTour.aspx.cs">
+      <DependentUpon>GopTour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\BackEnd\GopTour.aspx.designer.cs">
+      <DependentUpon>GopTour.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\BackEnd\khongCoQuyen.aspx.cs">
       <DependentUpon>khongCoQuyen.aspx</DependentUpon>

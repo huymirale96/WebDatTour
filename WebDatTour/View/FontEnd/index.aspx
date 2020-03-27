@@ -58,8 +58,8 @@
                                 </div>
                         <div class="text-left" style="line-height:0px;"> 
                         <i class="fa fa-cart-plus" style="font-size: 20px;"></i> 
-                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianlgiam"))) %></strike>
-                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianl"))) %>đ</b></p>
+                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianl"))) %></strike>
+                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianlgiam"))) %>đ</b></p>
                         <br>
                         <i class="fa fa-clock-o" style="font-size:20px; color: black;"></i>
                         <p style=" color: black; display: inline-block;"><%# Eval("stongthoigian") %></p>
@@ -109,8 +109,8 @@
                                 </div>
                         <div class="text-left" style="line-height:0px;"> 
                         <i class="fa fa-cart-plus" style="font-size: 20px;"></i> 
-                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianlgiam"))) %></strike>
-                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianl"))) %>đ</b></p>
+                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianl"))) %></strike>
+                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianlgiam"))) %>đ</b></p>
                         <br>
                         <i class="fa fa-clock-o" style="font-size:20px; color: black;"></i>
                         <p style=" color: black; display: inline-block;"><%# Eval("stongthoigian") %></p>
@@ -152,14 +152,14 @@
                             <div class="zoom">                       
                                 <img src="../../Upload/<%# anhDaiDien(Eval("sUrlAnh").ToString()) %>" width="320px" height="200px" >
                                 </div>
-                                  <div style="height:45px; margin-top: 5x;">
+                                  <div style="height:45px; margin-top: 5px;">
                         <p class="text-left" style="font-family: 'Roboto', sans-serif; line-height:20px; color: #18150d"><b><%# Eval("sTieuDe").ToString() %></b></p>
                             </a>
                                 </div>
                         <div class="text-left" style="line-height:0px;"> 
                         <i class="fa fa-cart-plus" style="font-size: 20px;"></i> 
-                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianlgiam"))) %></strike>
-                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianl"))) %>đ</b></p>
+                        <strike style="color: orangered; display:inline-block;"><%# giave(Convert.ToInt32(Eval("igianl"))) %></strike>
+                        <p style="color: green; display:inline-block; font-size: 26px;"><b><%# toCurruncy(Convert.ToInt32(Eval("igianlgiam"))) %>đ</b></p>
                         <br>
                         <i class="fa fa-clock-o" style="font-size:20px; color: black;"></i>
                         <p style=" color: black; display: inline-block;"><%# Eval("stongthoigian") %></p>

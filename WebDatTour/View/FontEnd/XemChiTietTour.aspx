@@ -91,13 +91,13 @@
 
                                 <div class="post-content">
                                     <!-- post content -->
-                                    <div class="post-header">
+                                    <div class="post-header text-center">
                                         <h1>-----------------------------</h1>
                                        
                                     </div>
                                    
                                     <p> </p>
-                                    <div id="anhDD" runat="server" style="margin-bottom:15px; margin-top:15px;"></div>
+                                    <div id="anhDD" runat="server" class="text-center"></div>
                                     <div class="row">
                                         <div class="col-md-10">
                                             <label>Thông Tin Tour</label>
