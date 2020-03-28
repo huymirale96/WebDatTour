@@ -293,7 +293,7 @@ namespace WebDatTour.Model
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("kiemTraHoanTien", cn.connect());
+                SqlCommand cmd = new SqlCommand("kiemTraHoanTien_", cn.connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);

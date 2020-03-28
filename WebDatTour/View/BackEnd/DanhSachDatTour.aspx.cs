@@ -96,12 +96,21 @@ namespace WebDatTour.View.BackEnd
         public string tienHoan(string id)
         {
             DataTable dataTable = donDatTourController.kiemTraHoanTien(id);
-            if (dataTable.Rows.Count > 0)
+            if (dataTable.Rows.Count > 0 )
             {
+                if (Convert.ToInt32(dataTable.Rows[0]["itrangthai"]) == 2)
+                {
 
-                int tongTien = Convert.ToInt32(dataTable.Rows[0]["doanhthu"]);
-                int daThanhThoan = Convert.ToInt32(dataTable.Rows[0]["tien"]);
-                return (daThanhThoan -(tongTien*0.4)).ToString("#,##0");
+                    int tongTien = Convert.ToInt32(dataTable.Rows[0]["doanhthu"]);
+                    int daThanhThoan = Convert.ToInt32(dataTable.Rows[0]["tien"]);
+                    return (daThanhThoan - (tongTien * 0.4)).ToString("#,##0");
+                }
+                else
+                {
+                    int tongTien = Convert.ToInt32(dataTable.Rows[0]["doanhthu"]);
+                    int daThanhThoan = Convert.ToInt32(dataTable.Rows[0]["tien"]);
+                    return daThanhThoan.ToString("#,##0");
+                }
             }
             else
             {

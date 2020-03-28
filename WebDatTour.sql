@@ -1155,12 +1155,16 @@ FROM   (SELECT iMaDon, iTrangThai, dthoigian,
         FROM   tblTrangThaiDonDatTour) t
 WHERE  rk = 1
 
-alter proc xemTrangThaiNV
+ alter proc xemTrangThaiNV
 @id int
 as
-select a.stennhanvien, b.dthoigian, b.sghichu, b.itrangThai, b.imadon from
- tblNhanVien a, tblTrangThaiDonDatTour b where a.iMaNhanVien = b.imanhanvien
-and b.iMaDon = @id
+select a.imanhanvien, a.dthoigian, a.sghichu, a.itrangthai, a.imadon, isnull(b.stennhanvien,'Khach Hang') as stennhanvien from
+(select iMaNhanVien,max(dthoigian) as dthoigian, sghichu, itrangThai, imadon from
+  tblTrangThaiDonDatTour b where b.iMaDon = 124
+ group by imanhanvien, sghichu, itrangthai, imadon  )  a
+ left join
+(select stennhanvien, iMaNhanVien from tblNhanVien ) b
+on a.imanhanvien = b.imanhanvien
 
 alter table tblbinhluan drop column itrangthai bit default 0
 
@@ -1881,3 +1885,5 @@ FROM   (SELECT iMaDon, iTrangThai, dthoigian,imatrangthai, sghichu, imanhanvien,
         FROM   tblTrangThaiDonDatTour where iTrangThai = 2) t
 WHERE  rk = 1) b3 on b3.iMaDon = b2.iMaDonTour
 order by b1.dNgayDatTour DESC
+
+bát chánh đạo, phẩm trở đạo
