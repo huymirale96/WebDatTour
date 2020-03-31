@@ -16,6 +16,7 @@ namespace WebDatTour.View.BackEnd
     {
         Connector connector = new Connector();
         TourController tourcontroller = new TourController();
+        DonDatTourController datTourController = new DonDatTourController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -151,11 +152,15 @@ namespace WebDatTour.View.BackEnd
 
         protected void btnGopTour_Click(object sender, EventArgs e)
         {
+            int soLuongVeCanChuyen = 0;
+            int soLuongVeCon = 0;
+            soLuongVeCon = Convert.ToInt32(datTourController.kiemTraChoConCuaMaThoiGian(ddlTourChuyen.SelectedValue));
+             Debug.WriteLine("so luon ve con la: " + soLuongVeCon);
             List<string> dsMaDon = new List<string>();
             for (int i = 0; i < rptDondattour.Items.Count; i++)
             {
                 CheckBox chk = (CheckBox)rptDondattour.Items[i].FindControl("ck_");
-                Debug.WriteLine("id: " + chk.Text + chk.Checked);
+               // Debug.WriteLine("id: " + chk.Text + chk.Checked);
                 if (chk.Checked)
                 {
                    
@@ -165,42 +170,70 @@ namespace WebDatTour.View.BackEnd
                     // Rpt += (chk.Text + "<br />");
                 }
             }
+
             //Debug.WriteLine("ds: " + dsMaDon[0]+"  "+ddlTourChuyen.SelectedValue);
             string script = "update tblDonDatTour set imathoigian = " + ddlTourChuyen.SelectedValue + " where ";
+            string scriptSoChoCon = "select  SUM(soluongve) as tongSoVe from tblChiTietDonDatTour where ";
             for (int i = 0; i < dsMaDon.Count; i++)
             {
                 if (i != (dsMaDon.Count - 1))
                 {
                     script += "imadondattour = " + dsMaDon[i]+" or ";
+                    scriptSoChoCon += "imadondattour = " + dsMaDon[i] + " or ";
                 }
                 else
                 {
                     script += "imadondattour = " + dsMaDon[i];
+                    scriptSoChoCon += "imadondattour = " + dsMaDon[i] ;
                 }
             }
-            Debug.WriteLine("scripr: " + script);
+            //Debug.WriteLine("scripr: " + script);
+            //Debug.WriteLine("scripr2: " + scriptSoChoCon);
             try
             {
-                SqlCommand cmd = new SqlCommand(script, connector.connect());
+                SqlCommand cmd = new SqlCommand(scriptSoChoCon, connector.connect());
                 cmd.CommandType = CommandType.Text;
-                int i = cmd.ExecuteNonQuery();
-               if(i > 0)
-                {
-                    divThongTin.Visible = false;
-                    //scriptMain = "";
-                    string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
-                    myScript += "toastr.success(\"Thao Tác Thành Công\",\"Thông Báo\");";
-                    myScript += "\n\n </script>";
-                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "myKey", myScript, false);
-                    script_.InnerHtml = myScript;
-                }
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                soLuongVeCanChuyen = Convert.ToInt32(table.Rows[0]["tongSoVe"].ToString());
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error " + ex.Message);
-
-                // return null;
+               
             }
+            if(soLuongVeCanChuyen <= soLuongVeCon)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(script, connector.connect());
+                    cmd.CommandType = CommandType.Text;
+                    int i = cmd.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        divThongTin.Visible = false;
+                        //scriptMain = "";
+                        string myScript = "\n<script type=\"text/javascript\" language=\"Javascript\" id=\"EventScriptBlock\">\n";
+                        myScript += "toastr.success(\"Thao Tác Thành Công\",\"Thông Báo\");";
+                        myScript += "\n\n </script>";
+                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "myKey", myScript, false);
+                        script_.InnerHtml = myScript;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Error " + ex.Message);
+
+                    // return null;
+                }
+            }
+            else
+            {
+                lblnoti.Text = "<strong>Thông Báo!</strong> Ngày Cần Chuyển Chỉ Còn "+ soLuongVeCon +"Chỗ.";
+                lblnoti.Visible = true;
+            }
+            
         }
 
         protected void rptDondattour_ItemDataBound(object sender, RepeaterItemEventArgs e)

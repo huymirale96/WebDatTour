@@ -1887,3 +1887,20 @@ WHERE  rk = 1) b3 on b3.iMaDon = b2.iMaDonTour
 order by b1.dNgayDatTour DESC
 
 bát chánh đạo, phẩm trở đạo
+
+create proc kiemTraChoConCuaMaThoiGian
+@id int
+as
+select b1.iMaTour, b1.sTieuDe, b1.dThoiGian, b1.iSoCho,b3.veNguoiLon as veNguoiLon,b2.veTreEm as veTreEm,b1.iMaThoiGian, ( b1.iSoCho - b2.veTreEm -b3.veNguoiLon ) as veConLai from 
+(select a.iMaTour, a.sTieuDe, b.dThoiGian, b.imathoigian, a.iSoCho from tblTour a, tblThoiGianKhoiHanh b where a.iMaTour = b.iMaTour) b1
+join
+(select sum(soluongve) as veNguoiLon,tblThoiGianKhoiHanh.imathoigian from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh
+ where iMaNhomVe = 1 and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian  and tblThoiGianKhoiHanh.iMaThoiGian = @id
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour and tblThoiGianKhoiHanh.iMaThoiGian = tblDonDatTour.imathoigian
+group by  tblThoiGianKhoiHanh.imathoigian) b3 on b1.iMaThoiGian = b3.imathoigian
+join
+(select sum(soluongve) as veTreEm,tblThoiGianKhoiHanh.imathoigian
+ from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh where tblChiTietDonDatTour.iMaNhomVe = 2
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour 
+and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian group by  tblThoiGianKhoiHanh.imathoigian) b2 
+on b2.iMaThoiGian = b3.iMaThoiGian

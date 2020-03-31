@@ -63,8 +63,12 @@ namespace WebDatTour.Controllers
         {
             return donDatTourModel.nhanVienthanhToan(madon, tien);
         }
+        public string kiemTraChoConCuaMaThoiGian(string id)
+        {
+            return donDatTourModel.kiemTraChoConCuaMaThoiGian(id);
+        }
 
-        public DataTable xemgiaodich(string id)
+            public DataTable xemgiaodich(string id)
         {
             return donDatTourModel.xemgiaodich(id);
         }

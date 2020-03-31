@@ -524,6 +524,27 @@ namespace WebDatTour.Model
                 return null;
             }
         }
+        public string kiemTraChoConCuaMaThoiGian(string id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("kiemTraChoConCuaMaThoiGian", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+               
+                return table.Rows[0]["veconlai"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return "";
+            }
+        }
+        
 
         public Boolean sp_capNhatTrangThaiDonHang(string madon, string ghichu, int tt)
         {
