@@ -53,7 +53,7 @@
                                                         <label class="label label-success" <%# (Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu"))) == 0 ? "style='display: none;'" : "" %> onclick ="thanhToan(<%# Eval("iMaDonDatTour") %>,<%# Convert.ToInt32(Eval("doanhthu").ToString()) - Convert.ToInt32(Eval("thucthu")) %>)">Thanh Toán Nốt</label>
                                                          <br />
                                                         <label class="label label-warning"  <%# hienHuyTour(Eval("itrangthai").ToString()) %> onclick="huyTour(<%# Eval("iMaDonDatTour") %>)">Hủy Tour</label>
-												        
+												      <!--  <label class="label label-danger" onclick="huyTungVe(<%# Eval("iMaDonDatTour") %>)" ><i class="fa fa-pencil-square-o" aria-hidden="false"></i></label>-->
 											        </td>
 									            </tr>
                                             </ItemTemplate>
@@ -73,6 +73,38 @@
                     </div>
                 </div>
            
+          <!-- Modal HUY TOUR-->
+  <div class="modal fade" id="modalHuyTungVe" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Hủy Đặt Tour</h4>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="DanhSachCacTourDaDat.aspx">  
+           
+                <input type="hidden" value="huytv" name ="cn" />
+                
+             <div id="modalHuyTungVe_">
+                 
+              
+             </div>
+                
+                <input type="submit" value="Hủy" class="btn btn-default" onclick="return confirm'(Bạn Có Chắc Muốn Hủy?')"/>
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+          <!-- Modal HUY TOUR-->
+
                 <!-- Modal HUY TOUR-->
   <div class="modal fade" id="modalHuy" role="dialog">
     <div class="modal-dialog">

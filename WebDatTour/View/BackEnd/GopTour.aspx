@@ -11,18 +11,18 @@
                 <asp:DropDownList ID="ddlTour" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTour_SelectedIndexChanged">
                     <asp:ListItem>2</asp:ListItem>
                 </asp:DropDownList>
-            <button>Chọn</button>
+            <asp:Button ID="id1" runat="server" CssClass="btn btn-default" Text="Chọn" OnClick="id1_Click" />
             </div>
       
         <div id="divThongTin" runat="server">
-        <div class="col-md-12" style="margin: 20px; width:70%" >
+        <div class="col-md-12" style="margin: 20px; width:70%; display: inline;" >
             <div>
                 <label>Chọn Ngày Đi:</label>
                 <br />
                 <asp:DropDownList ID="ddlNgayDi" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNgayDi_SelectedIndexChanged">
                     <asp:ListItem>2</asp:ListItem>
                 </asp:DropDownList>
-                 <button>Chọn</button>
+                <asp:Button ID="id2" OnClick="id2_Click" runat="server" CssClass="btn btn-default" Text="Chọn" />
             </div>
         </div>
         <div>
@@ -96,7 +96,7 @@
                 <br />
            
             <asp:DropDownList runat="server"  ID="ddlTourChuyen" CssClass="form-control"   ><asp:ListItem></asp:ListItem></asp:DropDownList>
-             <button>Chọn</button>
+             
         <br />
              <asp:Button runat="server" ID="btnGopTour" OnClick="btnGopTour_Click" Text="Chuyển Tour" CssClass="btn btn-success"/>
         </div>

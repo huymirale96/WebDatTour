@@ -5,7 +5,26 @@
     document.execCommand("copy");
     $temp.remove();
 }
-
+function huyTungVe(id) {
+    $.ajax({
+        type: 'post',
+        url: 'danhsachcactourdadat.aspx/layVeTheoDon',
+        data: "{ 'maDon' : '" + id +  "'}",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+        },
+        success: function (result) {
+           // alert(result.d);
+            var x = JSON.parse(result.d)[0];
+            //alert(x.te);
+            var html = "<input type='hidden' value='" + x.madon + "' name ='madon' /><label>Số Lượng Vé Người Lớn Hủy:</label><input type='number' class='form-control' name='sovenl' value='" + x.nl + "' min='0' max='" + x.nl + "'/><label>Số Lượng Vé Trẻ Em Hủy:</label><input type='number' class='form-control' name='sovete' value='" + x.te + "' min='0' max='" + x.te +"'/>"
+            $("#modalHuyTungVe_").html(html);
+            $("#modalHuyTungVe").modal();
+        }
+    });
+}
 function kiemTraDangNhap() {
     
     $.ajax({

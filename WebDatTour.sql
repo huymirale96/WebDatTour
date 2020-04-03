@@ -1904,3 +1904,46 @@ join
 and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour 
 and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian group by  tblThoiGianKhoiHanh.imathoigian) b2 
 on b2.iMaThoiGian = b3.iMaThoiGian
+
+create proc laySoVeTheoDon
+@id int 
+as
+select a.soluongve as nl, a.imadondattour as madon, b.soluongve as te from
+(select iMaDonDatTour, soLuongVe from tblChiTietDonDatTour where iMaDonDatTour = @id and iMaNhomVe = 1) a
+join
+(select iMaDonDatTour, soLuongVe from tblChiTietDonDatTour where iMaDonDatTour = @id and iMaNhomVe = 1) b
+on a.imadondattour = b.imadondattour
+
+create proc capnhatdondattour
+@id int,
+@nl int, 
+@te int
+as
+update tblChiTietDonDatTour set soLuongVe = soLuongVe - @nl where iMaDonDatTour = @id and iMaNhomVe = 1
+update tblChiTietDonDatTour set soLuongVe = soLuongVe - @te where iMaDonDatTour = @id and iMaNhomVe = 2
+
+
+create proc layNgayChuyen
+@id int 
+as
+select a.iMaThoiGian, a.dThoiGian, a.iMaTour, b.conlai from
+(select * from tblThoiGianKhoiHanh where trangThai = 1 and dthoigian > getdate() and iMaTour = @id) a
+join
+(select b1.iMaTour, b1.sTieuDe, b1.dThoiGian, (b1.iSoCho -  ISNULL(b3.veNguoiLon,0) - ISNULL(b2.veTreEm,0)) as conlai ,b1.iMaThoiGian from 
+(select a.iMaTour, a.sTieuDe, b.dThoiGian, b.imathoigian, a.iSoCho from tblTour a, tblThoiGianKhoiHanh b where a.iMaTour = b.iMaTour
+and b.dThoiGian > GETDATE() ) b1
+left join
+(  select  ISNULL(sum(soluongve),0) as veNguoiLon,tblThoiGianKhoiHanh.imathoigian, tblThoiGianKhoiHanh.dThoiGian from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh
+ where iMaNhomVe = 1 and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian 
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour and tblThoiGianKhoiHanh.iMaThoiGian = tblDonDatTour.imathoigian
+and tblThoiGianKhoiHanh.dThoiGian > GETDATE() 
+group by  tblThoiGianKhoiHanh.imathoigian , tblThoiGianKhoiHanh.dThoiGian   ) b3 on b1.iMaThoiGian = b3.imathoigian
+left join
+(  select  ISNULL(sum(soluongve),0) as veTreEm,tblThoiGianKhoiHanh.imathoigian
+ from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh where tblChiTietDonDatTour.iMaNhomVe = 2
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour 
+and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian and tblThoiGianKhoiHanh.dThoiGian > GETDATE() 
+group by  tblThoiGianKhoiHanh.imathoigian    ) b2 
+on b2.iMaThoiGian = b3.iMaThoiGian) b on a.imathoigian = b.imathoigian order by a.dthoigian ASC 
+
+

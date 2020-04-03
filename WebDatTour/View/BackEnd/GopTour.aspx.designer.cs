@@ -31,6 +31,15 @@ namespace WebDatTour.View.BackEnd {
         protected global::System.Web.UI.WebControls.DropDownList ddlTour;
         
         /// <summary>
+        /// id1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button id1;
+        
+        /// <summary>
         /// divThongTin control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace WebDatTour.View.BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNgayDi;
+        
+        /// <summary>
+        /// id2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button id2;
         
         /// <summary>
         /// divDonDatTour control.

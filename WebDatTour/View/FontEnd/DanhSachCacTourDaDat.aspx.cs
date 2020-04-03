@@ -11,6 +11,8 @@ using WebDatTour.Object;
 using System.Configuration;
 using WebDatTour.Model;
 using System.Web.Services;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
 
 namespace WebDatTour.View.FontEnd
 {
@@ -19,13 +21,19 @@ namespace WebDatTour.View.FontEnd
         DonDatTourController donDatTourController = new DonDatTourController();
         KhachHangController khachHangController = new KhachHangController();
         DanhGiaController danhGiaController = new DanhGiaController();
+        Connector cn = new Connector();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["maKH"].ToString().Equals(""))
             {
                 Response.Redirect("index.aspx");
             }
-            if (Request.Form["cn"] != null && Request.Form["id"] != null)
+            
+            //     if (Request.Form["cn"] != null && Request.Form["sovenl"] != null && Request.Form["sovete"] != null && Request.Form["madon"] != null)  //huytv
+            //{
+            //    Debug.WriteLine("mk : " + Request.Form["madon"] + " - " + Request.Form["sovete"]);
+            //}
+                if (Request.Form["cn"] != null && Request.Form["id"] != null)
             {
                 Debug.WriteLine("mk : " + Request.Form["id"] +" - " +Request.Form["pw"]);
                 if (Request.Form["cn"].ToString().Equals("huy"))
@@ -176,7 +184,30 @@ namespace WebDatTour.View.FontEnd
             }
         }
 
-
+        
+            [WebMethod]
+        public static string layVeTheoDon(string maDon)
+        {
+            Debug.WriteLine("madon  " + maDon);
+            Connector cn = new Connector();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("laySoVeTheoDon", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", maDon);
+                SqlDataAdapter dap = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                dap.Fill(table);
+                return JsonConvert.SerializeObject(table);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+           
+        }
+        
         [WebMethod]
         public static Boolean danhgiatour(string maDon, string soSao, string noiDung)
         {

@@ -393,7 +393,9 @@ namespace WebDatTour.Model
             {
                 string sqlStr = "select * from tblThoiGianKhoiHanh where trangThai = 1 and dthoigian > getdate() and imatour = " + id + " order by dthoigian ASC ";
 
-                SqlCommand cmd2 = new SqlCommand(sqlStr, cn.connect());
+                SqlCommand cmd2 = new SqlCommand("layNgayChuyen", cn.connect());
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@id", id);
                 SqlDataAdapter da = new SqlDataAdapter(cmd2);
                 //SqlDataReader rd2 = cmd2.ExecuteReader();
                 DataTable dataTable = new DataTable();

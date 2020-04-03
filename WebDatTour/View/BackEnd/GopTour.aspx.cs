@@ -128,7 +128,7 @@ namespace WebDatTour.View.BackEnd
             foreach (DataRow row in table.Rows)
             {
                 // DataColumn col = new DataColumn();
-                row["dthoigian_"] = DateTime.Parse(row["dthoigian"].ToString()).ToString("dd-MM-yyyy");
+                row["dthoigian_"] = DateTime.Parse(row["dthoigian"].ToString()).ToString("dd-MM-yyyy")+" - Còn "+ row["conlai"].ToString()+" chỗ";
             }
 
             ddlNgayDi.DataSource = table;
@@ -239,6 +239,19 @@ namespace WebDatTour.View.BackEnd
         protected void rptDondattour_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
            
+        }
+
+        protected void id1_Click(object sender, EventArgs e)
+        {
+            layThoiGian(ddlTour.SelectedValue);
+            divThongTin.Visible = true;
+            divDonDatTour.Visible = false;
+        }
+
+        protected void id2_Click(object sender, EventArgs e)
+        {
+            layDonDatTour(ddlNgayDi.SelectedValue);
+            divDonDatTour.Visible = true;
         }
     }
 }
