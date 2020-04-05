@@ -174,9 +174,7 @@
                                 <li>
                                     <a href="danhsachnhomtour.aspx">Danh Sách Nhóm TOur</a>
                                 </li>
-                                <li>
-                                    <a href="#">Add Category</a>
-                                </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

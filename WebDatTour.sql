@@ -1413,6 +1413,19 @@ begin
 update tblTour set btrangthai = 1 where iMaTour = @id
 end
 
+create proc sp_trangThaiNhomTourTour
+@id bit
+as
+DECLARE @tt SMALLINT
+set @tt = (select btrangthai from tblnhomtour where iMaNhomTour = @id)
+if(@tt = 1)
+begin
+update tblnhomtour set btrangthai = 0 where iMaNhomTour = @id
+end
+else
+begin
+update tblnhomtour set btrangthai = 1 where iMaNhomTour = @id
+end
 
 create proc sp_thongkedoanhsotheotour
 @tour nvarchar(80)
@@ -1834,22 +1847,23 @@ WHERE  rk = 1) b3
 on b3.iMaDon = b2.iMaDonTour) as bang2 on bang2.imadondattour = bang1.imadondattour where bang2.conLai <= 0
 
 
+
 alter proc layThongTinTour_gopTour
 @id int
 as
-select a.sTenKhachHang, a.iMaDonDatTour, a.sEmail, a.sSDT, b.nl, c.te, a.dNgayDatTour, a.iMaDonDatTour from
-(select c.sTenKhachHang, c.sSDT, c.sEmail, a.iMaDonDatTour, a.dNgayDatTour from tblDonDatTour a, tblThoiGianKhoiHanh b, tblkhachhang c 
-where a.imathoigian = b.iMaThoiGian and a.iMaKhachHang = c.iMaKhachHang and b.iMaThoiGian = @id) a
-join 
-(select iMaDonDatTour,isnull( soLuongVe, 0 ) as nl from tblChiTietDonDatTour where iMaNhomVe = 1) b  on a.iMaDonDatTour = b.iMaDonDatTour
-join
-(select iMaDonDatTour,isnull( soLuongVe, 0 ) as te from tblChiTietDonDatTour where iMaNhomVe = 2)  c  on a.iMaDonDatTour = c.iMaDonDatTour
-join
-(SELECT iMaDon, iTrangThai, dthoigian, imatrangthai, sghichu,imanhanvien
-FROM   (SELECT iMaDon, iTrangThai, dthoigian,imatrangthai, sghichu, imanhanvien,
-               RANK() OVER (PARTITION BY iMaDon ORDER BY dthoigian DESC) AS rk
-        FROM   tblTrangThaiDonDatTour where iTrangThai = 1) t
-WHERE  rk = 1) d on d.iMaDon = a.iMaDonDatTour
+select b1.iMaTour, b1.sTieuDe, b1.dThoiGian, b1.iSoCho, isnull(b3.veNguoiLon,0) as veNguoiLon, isnull(b2.veTreEm ,0) as veTreEm,b1.iMaThoiGian, ( b1.iSoCho - isnull(b2.veTreEm,0) -isnull(b3.veNguoiLon,0) ) as veConLai, b3.iMaDonDatTour from 
+(select a.iMaTour, a.sTieuDe, b.dThoiGian, b.imathoigian, a.iSoCho from tblTour a, tblThoiGianKhoiHanh b where a.iMaTour = b.iMaTour) b1
+left join
+(select isnull(sum(soluongve), 0 ) as veNguoiLon,tblThoiGianKhoiHanh.imathoigian, tblDonDatTour.iMaDonDatTour from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh
+ where iMaNhomVe = 1 and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian -- and tblThoiGianKhoiHanh.iMaThoiGian = @id
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour and tblThoiGianKhoiHanh.iMaThoiGian = tblDonDatTour.imathoigian
+group by  tblThoiGianKhoiHanh.imathoigian, tblDonDatTour.iMaDonDatTour) b3 on b1.iMaThoiGian = b3.imathoigian
+left join
+(select  isnull(sum(soluongve), 0) as veTreEm,tblThoiGianKhoiHanh.imathoigian
+ from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh where tblChiTietDonDatTour.iMaNhomVe = 2
+and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour 
+and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian group by  tblThoiGianKhoiHanh.imathoigian) b2 
+on b2.iMaThoiGian = b3.iMaThoiGian
 
 create proc layngaydi_
 @id int
@@ -1888,17 +1902,18 @@ order by b1.dNgayDatTour DESC
 
 bát chánh đạo, phẩm trở đạo
 
-create proc kiemTraChoConCuaMaThoiGian
+
+alter proc kiemTraChoConCuaMaThoiGian
 @id int
 as
-select b1.iMaTour, b1.sTieuDe, b1.dThoiGian, b1.iSoCho,b3.veNguoiLon as veNguoiLon,b2.veTreEm as veTreEm,b1.iMaThoiGian, ( b1.iSoCho - b2.veTreEm -b3.veNguoiLon ) as veConLai from 
+select b1.iMaTour, b1.sTieuDe, b1.dThoiGian, b1.iSoCho,isnull(b3.veNguoiLon, 0 ) as veNguoiLon,isnull(b2.veTreEm, 0 ) as veTreEm,b1.iMaThoiGian, ( b1.iSoCho - isnull(b2.veTreEm , 0 )-isnull(b3.veNguoiLon, 0 ) ) as veConLai from 
 (select a.iMaTour, a.sTieuDe, b.dThoiGian, b.imathoigian, a.iSoCho from tblTour a, tblThoiGianKhoiHanh b where a.iMaTour = b.iMaTour) b1
-join
+left join
 (select sum(soluongve) as veNguoiLon,tblThoiGianKhoiHanh.imathoigian from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh
  where iMaNhomVe = 1 and tblDonDatTour.imathoigian = tblThoiGianKhoiHanh.iMaThoiGian  and tblThoiGianKhoiHanh.iMaThoiGian = @id
 and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour and tblThoiGianKhoiHanh.iMaThoiGian = tblDonDatTour.imathoigian
 group by  tblThoiGianKhoiHanh.imathoigian) b3 on b1.iMaThoiGian = b3.imathoigian
-join
+left join
 (select sum(soluongve) as veTreEm,tblThoiGianKhoiHanh.imathoigian
  from tblChiTietDonDatTour, tblDonDatTour,tblThoiGianKhoiHanh where tblChiTietDonDatTour.iMaNhomVe = 2
 and tblChiTietDonDatTour.iMaDonDatTour = tblDonDatTour.iMaDonDatTour 

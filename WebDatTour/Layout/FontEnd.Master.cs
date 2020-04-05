@@ -38,7 +38,7 @@ namespace WebDatTour.Layout
             Connector cn = new Connector();
             try
             {
-                SqlCommand cmd = new SqlCommand("select * from tblnhomtour", cn.connect());
+                SqlCommand cmd = new SqlCommand("select * from tblnhomtour where btrangthai = 1 or imanhomtour = 18 or imanhomtour = 19 or imanhomtour = 20", cn.connect());
                 cmd.CommandType = CommandType.Text;
                 
                 //cnn.Open();

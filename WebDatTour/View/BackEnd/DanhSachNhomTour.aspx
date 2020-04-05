@@ -4,6 +4,7 @@
 
 
     <br />
+    <form method="post" runat="server">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -29,11 +30,12 @@
                                                 <tr>
                                                     <td class="text-center"><%# Container.ItemIndex+1 %></td>
                                                     <td class="left"><%# Eval("sTenNhomTour") %></td>
-                                                   
+                              
                                                     
                                                     <td class="left">
+                                                        <asp:LinkButton ID="btnFix" CssClass="btn btn-default" ToolTip="Sửa" runat="server" CommandArgument='<%# Eval("iMaNhomTour") %>' OnClick="btnFix_Click"><%# Eval("bTrangThai").ToString().Equals("True") ? "Hiện" : "Ẩn" %></asp:LinkButton>
                                                         <a id="MainContent_rptLyLich_btnFix_0" title="Sửa lý lịch" class="btn btn-xs btn-warning" href="javascript:__doPostBack('ctl00$MainContent$rptLyLich$ctl00$btnFix','')"><i class="fa fa-pencil-square-o" aria-hidden="false"></i></a>
-                                                        <a onclick="return confirm('Bạn có chắc chắn xoá lý lịch?');" id="MainContent_rptLyLich_btnDelete_0" title="Xoá lý lịch" class="btn btn-xs btn-danger" href="javascript:__doPostBack('ctl00$MainContent$rptLyLich$ctl00$btnDelete','')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                        
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
@@ -81,6 +83,6 @@
   </div>
             
                 <!-- /.row -->
-
+    </form>
 
 </asp:Content>

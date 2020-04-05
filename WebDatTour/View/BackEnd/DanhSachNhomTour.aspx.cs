@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +10,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebDatTour.Controllers;
+using WebDatTour.Model;
 
 namespace WebDatTour.View.BackEnd
 {
@@ -15,7 +18,7 @@ namespace WebDatTour.View.BackEnd
     public partial class DanhSachNhomTour : System.Web.UI.Page
     {
         NhomTourController nhomTourController = new NhomTourController();
-
+        Connector cn = new Connector();
         protected void Page_Load(object sender, EventArgs e)
         {
            rptds.DataSource =  nhomTourController.danhSachNT();
@@ -55,6 +58,30 @@ namespace WebDatTour.View.BackEnd
             //}
         }
 
+      public string View(string x)
+        {
+            return x.Equals("1") ? "success" : "warning";
+        }
 
+        protected void btnFix_Click(object sender, EventArgs e)
+        {
+
+            LinkButton linkButton = (LinkButton)sender;
+            string id = linkButton.CommandArgument.ToString();
+            try
+            {
+               
+                SqlCommand cmd = new SqlCommand("sp_trangThaiNhomTourTour", cn.connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                int i = cmd.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine(i+ "id: " + id);
+                Response.Redirect("danhsachnhomtour.aspx");
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -154,6 +154,7 @@ namespace WebDatTour.View.BackEnd
         {
             int soLuongVeCanChuyen = 0;
             int soLuongVeCon = 0;
+            Debug.WriteLine("id " + datTourController.kiemTraChoConCuaMaThoiGian(ddlTourChuyen.SelectedValue) + "  " + ddlTourChuyen.SelectedValue);
             soLuongVeCon = Convert.ToInt32(datTourController.kiemTraChoConCuaMaThoiGian(ddlTourChuyen.SelectedValue));
              Debug.WriteLine("so luon ve con la: " + soLuongVeCon);
             List<string> dsMaDon = new List<string>();
