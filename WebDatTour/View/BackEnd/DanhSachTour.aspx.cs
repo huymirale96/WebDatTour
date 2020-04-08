@@ -208,8 +208,15 @@ namespace WebDatTour.View.FontEnd
         protected void btnTimKiem_Click(object sender, EventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("ds: " + tourController.timKiemTour_tieuDe(txtTuKhoa.Text));
-            rptDanhSachTour.DataSource = tourController.timKiemTour_tieuDe(txtTuKhoa.Text);
-            rptDanhSachTour.DataBind();
+            DataTable data = tourController.timKiemTour_tieuDe(txtTuKhoa.Text);
+            if (data.Rows.Count == 0)
+            {
+                notification.Text = "Không Có Dữ Liệu Về Tour Cần Tìm.";
+            }
+           
+                rptDanhSachTour.DataSource = data;
+                rptDanhSachTour.DataBind();
+            
         }
     }
 }

@@ -9,6 +9,7 @@
         <h1 class="page-header">Thêm Tour
                             <small>Add</small>
         </h1>
+         <div id="notification_" runat="server"></div>
     </div>
     <!-- /.col-lg-12 -->
     <div class="col-md-12">

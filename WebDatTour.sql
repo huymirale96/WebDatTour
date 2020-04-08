@@ -1414,7 +1414,7 @@ update tblTour set btrangthai = 1 where iMaTour = @id
 end
 
 create proc sp_trangThaiNhomTourTour
-@id bit
+@id int
 as
 DECLARE @tt SMALLINT
 set @tt = (select btrangthai from tblnhomtour where iMaNhomTour = @id)

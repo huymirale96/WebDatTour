@@ -14,6 +14,7 @@
                                 <div class="col-md-offset-1 col-md-4"><asp:TextBox ID="txtTuKhoa" Text="." runat="server" CssClass="form-control" Placeholder="Tim Kiem"></asp:TextBox></div>
                                 <asp:RequiredFieldValidator ID="reqyiretxt" runat="server" ControlToValidate="txtTuKhoa" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <div class="col-md-2" style="margin-left:50px; margin-bottom:15px;"><asp:Button ID="btnTimKiem" runat="server" Text="Tìm Kiếm" CssClass="btn btn-default" onclick="btnTimKiem_Click"/></div>
+                                <asp:Label ID="notification" runat="server" CssClass="text-info"></asp:Label>
                             </div>
                             <br />
                             <div class="col-md-12">

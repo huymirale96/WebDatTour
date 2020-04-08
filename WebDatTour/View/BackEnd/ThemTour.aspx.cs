@@ -85,16 +85,32 @@ namespace WebDatTour.View.BackEnd
                     urlanh += fAnhBia.FileName;
                     dsAnh.Add(fAnhBia.FileName);
                 }
+                else
+                {//<p style="color: #ff6e00; margin-left: 109px; font-size: 20px"> adsadsad</p>
+                    notification_.InnerHtml = "<p style='color: #ff6e00; margin-left: 109px; font-size: 20px;'>Thông Báo: Tệp " + Path.GetFileName(fAnhBia.FileName) + " Không Đúng Định Dạng</p>";
+                    return;
+                }
             }
-
             for (int i = 1; i < Request.Files.Count; i++)
             {
                 HttpPostedFile file = Request.Files[i];
-                if (file.ContentLength > 0)
+                if (!(file.FileName.EndsWith(".jpeg") || file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png")))
+                {
+                    notification_.InnerHtml = "<p style='color: #ff6e00; margin-left: 109px; font-size: 20px;'>Thông Báo: Tệp " + Path.GetFileName(file.FileName) + " Không Đúng Định Dạng</p>";
+                    return;
+
+                } 
+            }
+
+
+                for (int i = 1; i < Request.Files.Count; i++)
+            {
+                HttpPostedFile file = Request.Files[i];
+                if (file.ContentLength > 0 )
                 {
                     string fname = Path.GetFileName(file.FileName);
                     file.SaveAs(Server.MapPath(Path.Combine("~/Upload/", fname)));
-                    urlanh += "/" + fname;
+                    urlanh += "/" + fname; 
                     dsAnh.Add(fname);
                 }
             }

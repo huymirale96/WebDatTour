@@ -13,6 +13,15 @@ namespace WebDatTour.View.BackEnd {
     public partial class ThemTour {
         
         /// <summary>
+        /// notification_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl notification_;
+        
+        /// <summary>
         /// txtTieuDe control.
         /// </summary>
         /// <remarks>
