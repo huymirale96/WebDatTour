@@ -16,7 +16,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8" >
-                                <div class="post-content--" style="margin-left: 30px;">
+                                <div class="post-content--" style="margin-left: 62px;">
                                     <h3><a href="XemChiTietTour.aspx?id=<%# Eval("iMatour") %>" title="" rel=""><%# Eval("sTieuDe") %></a></h3>  
                                     <p style="margin-top: 0px; line-height: 1.7;"><strong>Địa Điểm Khởi Hành: </strong><%# Eval("sNoiKhoiHanh") %><br>
                                      <strong>Thời gian:&nbsp;</strong><%# Eval("sTongThoiGian") %><br>
