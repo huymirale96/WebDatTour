@@ -292,16 +292,17 @@ create proc sp_themThoiGianKhoiHanh
 as
 insert into tblThoiGianKhoiHanh (iMaTour, dThoiGian) values (@imatour, @ngay)
 
-
 alter proc sp_themGiave
 @matour int,
 @gianl int,
 @giagiamnl int,
+@hangiamnl date,
 @giate int,
-@giagiamte int
+@giagiamte int,
+@hangiamte date
 as
-insert into tblNhomVeGia(iMaTour,iMaNhomVe,iGiaVe,iGiaVeGiam) 
-values (@matour,1,@gianl,@giagiamnl),(@matour,2,@giate,@giagiamte);
+insert into tblNhomVeGia(iMaTour,iMaNhomVe,iGiaVe,iGiaVeGiam, dHanGiamGia) 
+values (@matour,1,@gianl,@giagiamnl, @hangiamnl),(@matour,2,@giate,@giagiamte,@hangiamte);
 
 
   
@@ -319,15 +320,17 @@ as
 update tblTour set stieude = @tieude, sMoTa = @mota, sTongThoiGian = @thoigian,iSoCho = @socho, iMaNhomTour = @nhomtour, snoikhoihanh = @noikhoihanh
 where iMaTour = @imatour
 
-create proc sp_updateGiaVe
+alter proc sp_updateGiaVe
 @matour int,
 @gianl int,
 @giagiamnl int,
+@hangiamnl date,
 @giate int,
-@giagiamte int
+@giagiamte int,
+@hangiamte date
 as
-update tblNhomVeGia set iGiaVe = @gianl, igiavegiam = @giagiamnl where imatour = @matour and  iMaNhomVe = 1
-update tblNhomVeGia set iGiaVe = @giate, igiavegiam = @giagiamte where imatour = @matour and  iMaNhomVe = 2
+update tblNhomVeGia set iGiaVe = @gianl, igiavegiam = @giagiamnl, dHanGiamGia = @hangiamnl where imatour = @matour and  iMaNhomVe = 1
+update tblNhomVeGia set iGiaVe = @giate, igiavegiam = @giagiamte, dHanGiamGia = @hangiamte where imatour = @matour and  iMaNhomVe = 2
 
 
 create proc sp_xoaNhanVien
@@ -674,14 +677,15 @@ group by b.iMaDonDatTour
 
 
 
- alter proc donDatTour_
+ 
+alter proc donDatTour_
 as
 select (b1.doanhThu-b2.tien) as conLai,b1.doanhthu , b2.tien as thucthu, b2.imadontour, b1.iMaDonDatTour, b1.iMaTour,b3.sGhiChu,b3.dthoigian,
 b1.sTenKhachHang, b1.iMaKhachHang , b3.itrangthai, b3.iMaNhanVien , b1.dNgayDatTour , b1.sghichu , b1.stieude
 from
 (select b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang,b.dNgayDatTour, b.sghichu,
 e.stieude ,e.iMaTour,--sum(e.tien)/2 as thucThu, 
-sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 or dHanGiamGia < b.dNgayDatTour  THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
 from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b, tblkhachhang d , tbltour e --, tblGiaoDich e
 where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour
 and a.iMaDonDatTour = b.iMaDonDatTour and d.iMaKhachHang = b.imakhachhang and e.iMaTour = b.iMaTour
@@ -697,6 +701,7 @@ FROM   (SELECT iMaDon, iTrangThai, dthoigian,imatrangthai, sghichu, imanhanvien,
         FROM   tblTrangThaiDonDatTour) t
 WHERE  rk = 1) b3 on b3.iMaDon = b2.iMaDonTour
 order by b1.dNgayDatTour DESC
+
 
 
 create proc thongKeDoanhThuTheoNgay
@@ -853,7 +858,7 @@ join
  order by b1.dNgayDatTour DESC
 
 
-alter proc layDanhSachDonDatTourByIDkh
+ alter proc layDanhSachDonDatTourByIDkh
 @id int
 as
  select b3.itrangthai,b1.doanhthu , b2.tien as thucthu, b2.imadontour, b1.iMaDonDatTour, 
@@ -861,7 +866,7 @@ b1.sTenKhachHang, b1.iMaKhachHang ,  b1.dNgayDatTour , b1.sghichu , b1.stieude, 
 from
 (select  b.iMaTour,b.iMaDonDatTour,d.sTenKhachHang, d.iMaKhachHang, b.dNgayDatTour, b.sghichu,
  e.stieude ,--sum(e.tien)/2 as thucThu, 
-sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
+sum(a.soLuongVe * (CASE WHEN iGiaVeGiam = 0 or c.dHanGiamGia < b.dNgayDatTour THEN iGiaVe ELSE iGiaVeGiam END)) as doanhThu  -- b.iMaTour ,  sum(a.soLuongVe * c.iGiaVe) 'tong doanh thu2'
 from tblChiTietDonDatTour a, tblNhomVeGia c , tblDonDatTour b, tblkhachhang d , tbltour e --, tblGiaoDich e
 where  a.iMaNhomVe = c.iMaNhomVe and c.iMaTour = b.iMaTour and d.iMaKhachHang = @id
 and a.iMaDonDatTour = b.iMaDonDatTour and d.iMaKhachHang = b.imakhachhang and e.iMaTour = b.iMaTour
@@ -1155,17 +1160,17 @@ FROM   (SELECT iMaDon, iTrangThai, dthoigian,
         FROM   tblTrangThaiDonDatTour) t
 WHERE  rk = 1
 
- alter proc xemTrangThaiNV
+
+alter proc xemTrangThaiNV
 @id int
 as
 select a.imanhanvien, a.dthoigian, a.sghichu, a.itrangthai, a.imadon, isnull(b.stennhanvien,'Khach Hang') as stennhanvien from
 (select iMaNhanVien,max(dthoigian) as dthoigian, sghichu, itrangThai, imadon from
-  tblTrangThaiDonDatTour b where b.iMaDon = 124
+  tblTrangThaiDonDatTour b where b.iMaDon = @id
  group by imanhanvien, sghichu, itrangthai, imadon  )  a
  left join
 (select stennhanvien, iMaNhanVien from tblNhanVien ) b
 on a.imanhanvien = b.imanhanvien
-
 alter table tblbinhluan drop column itrangthai bit default 0
 
 create proc capNhatTrangThaiBinhLuan
@@ -1566,10 +1571,10 @@ FROM   (SELECT  iMaHinhAnh, imatour, sDuongDan,
         FROM   tblhinhanh) t
 WHERE  rk = 1 ) b4 on b4.imatour =a.iMaTour 
   
-alter proc sp_xemTourId
+alter proc [dbo].[sp_xemTourId]
 @idtour int
 as
-select b5.soSao, b4.surlanh,a.iMaTour,a.sTieuDe,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sMoTa,a.sTongThoiGian, a.imanhomtour,b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+select b5.soSao, b4.surlanh,a.iMaTour,a.sTieuDe,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,b.dHanGiamGia as hanGiamNL, c.dHanGiamGia as hanGiamTE,a.sMoTa,a.sTongThoiGian, a.imanhomtour,b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
 from
 (
 select * from tblTour where tblTour.iMaTour = @idtour) as a
@@ -1585,7 +1590,7 @@ FROM   (SELECT  iMaHinhAnh, imatour, sDuongDan,
                RANK() OVER (PARTITION BY imatour ORDER BY iMaHinhAnh asc) AS rk
         FROM   tblhinhanh) t
 WHERE  rk = 1 ) b4 on b4.imatour =a.iMaTour 
- join
+ left join
 (select iMaTour, ISNULL( avg(Cast(b.isosao as Float)) , 0 ) soSao from
  (select iMaTour, iMaDonDatTour from tblDonDatTour ) a
  left join 
@@ -1619,10 +1624,10 @@ iSoSao int
 
 alter table tblDanhGia add constraint FK_DonTour_BinhLuan foreign key (iMaDonDatTour) references tbldondattour(iMaDonDatTour);
 
-create proc sp_xemTourId_
+alter proc sp_xemTourId_
 @idtour int
-as
-select  b4.surlanh,a.iMaTour,a.sTieuDe,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sTongThoiGian, b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
+as 
+select  b4.surlanh,a.iMaTour,a.sTieuDe,b.dHanGiamGia as hanGiamNL, c.dHanGiamGia as hanGiamTE,a.sNoiKhoiHanh,a.iMaNhanVien,a.iSoCho,a.sTongThoiGian, b.imatour, b.iGiaVe as igianl, b.iGiaVeGiam as igianlgiam, c.iGiaVe as igiate, c.iGiaVeGiam as igiategiam 
 from
 (
 select * from tblTour where tblTour.iMaTour = @idtour) as a
@@ -1638,7 +1643,7 @@ FROM   (SELECT  iMaHinhAnh, imatour, sDuongDan,
                RANK() OVER (PARTITION BY imatour ORDER BY iMaHinhAnh asc) AS rk
         FROM   tblhinhanh) t
 WHERE  rk = 1 ) b4 on b4.imatour =a.iMaTour 
- join
+ left join
 (select iMaTour, ISNULL( avg(Cast(b.isosao as Float)) , 0 ) soSao from
  (select iMaTour, iMaDonDatTour from tblDonDatTour ) a
  left join 

@@ -115,9 +115,28 @@ namespace WebDatTour.View.FontEnd
                     txtDanhGia.InnerHtml = "" +  rd["soSao"] + "<i class='fa fa-star' style='font - size: 18px; color: #ffca08;'></i>";
                     txtNKH.InnerHtml = rd["sNoiKhoiHanh"]+ "";
                     txtTG.InnerHtml = rd["stongthoigian"] + "";
-                    txtTE.InnerHtml = "<strike style='color: red; display: inline;'>"+Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
-                    txtNL.InnerHtml = "<strike style='color: red;display: inline;'>" + Convert.ToInt32(rd["igianl"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
-                  
+                 //   txtTE.InnerHtml = "<strike style='color: red; display: inline;'>"+Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
+                   
+                   // Debug.WriteLine("ss " + (DateTime.Parse(rd["hangiamte"].ToString()) > DateTime.Now) );
+
+                    if ( DateTime.Parse(rd["hangiamte"].ToString()) > DateTime.Now)         //Convert.ToInt32(rd["igiategiam"].ToString()) == 0 &&
+                    {
+                        txtTE.InnerHtml = "<strike style='color: red; display: inline;'>" + Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igiategiam"].ToString()).ToString("#,##0") + "</b>VND";
+                    }
+                    else
+                    {
+                        txtTE.InnerHtml = "<p style='color: green;display: inline;'>" + Convert.ToInt32(rd["igiate"].ToString()).ToString("#,##0") + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + "</b>VND";
+                    }
+
+                    if (DateTime.Parse(rd["hangiamnl"].ToString()) > DateTime.Now)         //Convert.ToInt32(rd["igiategiam"].ToString()) == 0 &&
+                    {
+                        txtNL.InnerHtml = "<strike style='color: red;display: inline;'>" + Convert.ToInt32(rd["igianl"].ToString()).ToString("#,##0") + "</strike>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + Convert.ToInt32(rd["igianlgiam"].ToString()).ToString("#,##0") + "</b>VND";
+                    }
+                    else
+                    {
+                        txtNL.InnerHtml = "<p style='color: green;display: inline;'>" + Convert.ToInt32(rd["igianl"].ToString()).ToString("#,##0") + "</p>&nbsp&nbsp&nbsp<b style='color: green; display: inline;'>" + "</b>VND";
+                    }
+
                     DataTable dataTable = tourController.layHinhAnh(id);
                     anhDD.InnerHtml = "<img src='../../Upload/" + dataTable.Rows[0]["sDuongDan"] + "' alt=' 'class='alignleft img-responsive'>";
 
@@ -137,7 +156,7 @@ namespace WebDatTour.View.FontEnd
                     
                     
                     string htmlGia = "<input type='hidden' id='giaNL' value ='";
-                    if (giaNLgiam == 0)
+                    if (giaNLgiam == 0 || (DateTime.Parse(rd["hangiamnl"].ToString()) < DateTime.Now) )
                     {
                         htmlGia += giaNL;
                     }
@@ -146,7 +165,7 @@ namespace WebDatTour.View.FontEnd
                         htmlGia += giaNLgiam;
                     }
 
-                    if (giaTEgiam == 0)
+                    if (giaTEgiam == 0 || (DateTime.Parse(rd["hangiamte"].ToString()) < DateTime.Now ))
                     {
                         htmlGia += "' /><input type='hidden' id ='giaTE' value = '" + giaTE;
                     }

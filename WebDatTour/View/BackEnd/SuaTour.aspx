@@ -57,6 +57,7 @@
                             <asp:TextBox ID="txtGIaNL" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="txtGIaNL" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                             <asp:RangeValidator ID="RangeValidator1" runat="server" MaximumValue="999999999"  MinimumValue="2"  Type="Integer" ControlToValidate="txtGIaNL" ErrorMessage="*"></asp:RangeValidator>            
+                           
                             </div>
                         <div class="form-group"  style="width: 180px; float: right">
                             <label>Giá vé Giảm</label>
@@ -73,6 +74,18 @@
                             <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number"></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator5"  ControlToValidate="txtGiaTEgiam" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
                         </div>
+                        <div class="form-group" style="width: 180px; float: left">
+                             <label class="">Hạn Giảm Giá Người Lớn</label>
+
+                            <asp:TextBox ID="txtHanGiamNL" runat="server" CssClass="form-control marginL" placeholder="" TextMode="Date" Type="Integer"  value="0"></asp:TextBox>     
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6"  ControlToValidate="txtHanGiamNL" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="form-group" style="width: 180px; float: right">
+                             <label class="">Hạn Giảm Giá Trẻ Em</label>
+
+                            <asp:TextBox ID="txtHanGiamTE" runat="server" CssClass="form-control marginL" placeholder="" TextMode="Date" Type="Integer"  value="0"></asp:TextBox>     
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7"  ControlToValidate="txtHanGiamTE" ErrorMessage="*" ForeColor="Red" runat="server" CssClass="valerror" ></asp:RequiredFieldValidator>                   
+                            </div>
                     </div>
                 </div>
                 <div class="row">

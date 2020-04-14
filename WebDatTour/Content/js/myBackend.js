@@ -44,7 +44,7 @@
         var nl = parseInt($("#txtSoChoNL").val());
         var te = parseInt($("#txtSoChoTE").val());
         var con_ = parseInt($('#soChoConh').val());
-        //alert(con_)
+       // alert(con_ + "  " + $("#giaNLh").val() + "  " + $("#giaTEh").val());
         $('#thongBao').html();
         if (con_ < (te + nl)) {
             $('#thongBao').html("Số Chỗ Chỉ Còn " + $("#soChoConh").val() + " chỗ.");
@@ -314,22 +314,40 @@ $("#listTour").change(function () {
                 alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
             },
             success: function (data) {
-                //  alert(data.d);
+                  //alert(data.d);// bgiamNL
                 var tour = JSON.parse(data.d).ThongTinTour[0];
                 // alert("tour " + tour.sTieuDe);
                 $('#txtTieuDe').html(tour.sTieuDe);
                 $('#txtNoiKhoiHanh').html(tour.sNoiKhoiHanh);
                 $('#txtTongThoiGian').html(tour.sTongThoiGian);
-                $('#txtGiaNL').html(tour.igianlgiam);
-                $('#txtGiaTE').html(tour.igiategiam);
+               
                 $('#txtSoCho').html(tour.iSoCho);
 
                 $('#anhTour').html("<img src='../../Upload/" + tour.surlanh + "'>");
                 $('#giaNL').val(tour.igianlgiam);
 
                 $('#idtourh').val(tour.iMaTour);
-                $('#giaNLh').val(tour.igianlgiam);
-                $('#giaTEh').val(tour.igiategiam);
+                if (tour.bgiamNL == '1') {
+                    $('#giaNLh').val(tour.igianlgiam);
+                    $('#txtGiaNL').html(tour.igianlgiam.toLocaleString());
+                }
+                else {
+                    $('#giaNLh').val(tour.igianl);
+                    $('#txtGiaNL').html(tour.igianl.toLocaleString());
+                }
+
+                if (tour.bgiamTE == '1') {      
+                    $('#giaTEh').val(tour.igiategiam);
+
+                    $('#txtGiaTE').html(tour.igiategiam.toLocaleString());
+                }
+                else {
+                    $('#giaTEh').val(tour.igiate);
+
+                    $('#txtGiaTE').html(tour.igiate.toLocaleString());
+                }
+               
+                //$('#giaTEh').val(tour.igiategiam);
               //  alert(tour.iMaTour + "  " + $('#idtourh').val());
                 var ngayKhoiHanh = "<option value='none'>Chọn Ngày</option>";
                 $.each(JSON.parse(data.d).NgayDi, function (index, item) {

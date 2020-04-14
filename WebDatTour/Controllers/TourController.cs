@@ -28,9 +28,9 @@ namespace WebDatTour.Controllers
         {
             return tourModel.layDanhSachDonDatTour();
         }
-        public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, int giaTE, int giaTEgiam)
+        public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, string hanGiamNL,  int giaTE, int giaTEgiam, string hanGiamTE)
         {
-            return tourModel.themTour(tour, giaNL, giaNLgiam, giaTE, giaTEgiam);
+            return tourModel.themTour(tour, giaNL, giaNLgiam,hanGiamNL, giaTE, giaTEgiam, hanGiamTE);
         }
         
              public DataTable timKiemTour_tieuDe(string id)

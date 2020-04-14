@@ -75,21 +75,31 @@
                             <asp:TextBox ID="txtGiaNLgiam" runat="server" CssClass="form-control isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                              <asp:CompareValidator  ID="CompareValidator1" runat="server" forecolor="Red"  ControlToValidate="txtGiaNLgiam" ControlToCompare="txtGIaNL" ErrorMessage="Giá GIảm Phải Nhở Hơn." Operator="LessThan" Type="Integer"></asp:CompareValidator>
                             
+
+                            <label >Hạn Giảm Giá Người Lớn</label>
+
+                            <asp:TextBox ID="txtHanGiamNL" runat="server" CssClass="form-control" placeholder="" TextMode="Date"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group" style="width: 180px; float: left">
-                            <label>Giá Vé Trẻ Em</label>
+                            <label  class="marginL">Giá Vé Trẻ Em</label>
                              <asp:rangevalidator ID="txtGiaTsE" errormessage="*" forecolor="Red" controltovalidate="txtGiaTE" minimumvalue="0"  maximumvalue="99999999" runat="server" >
             </asp:rangevalidator>
                             <asp:TextBox ID="txtGiaTE" runat="server" CssClass="form-control marginL isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                            
                             <div class="form-group" style="width: 180px; float: right">
-                            <label>Giá Vé Trẻ Em Giảm</label>
+                            <label  class="marginL">Giá Vé Trẻ Em Giảm</label>
                                  <asp:rangevalidator ID="txssaatGiaTEgiams" errormessage="*" forecolor="Red" controltovalidate="txtGiaTEgiam" minimumvalue="0"  maximumvalue="99999999" runat="server">
             </asp:rangevalidator>
                             <asp:TextBox ID="txtGiaTEgiam" runat="server" CssClass="form-control marginL isNumberic" placeholder="" TextMode="Number" Type="Integer" value="0"></asp:TextBox>
                             <asp:CompareValidator  ID="re34" runat="server" forecolor="Red"  ControlToValidate="txtGiaTEgiam" ControlToCompare="txtGiaTE" ErrorMessage="Giá GIảm Phải Nhở Hơn." Operator="LessThan" Type="Integer"></asp:CompareValidator>
-                                   </div>
+                            <label class="marginL">Hạn Giảm Giá Trẻ Em</label>
+
+                            <asp:TextBox ID="txtHanGiamTE" runat="server" CssClass="form-control marginL" placeholder="" TextMode="Date" Type="Integer"  value="0"></asp:TextBox>     
+                                <asp:CompareValidator  ID="CompareValidator2" runat="server" forecolor="Red"  ControlToValidate="txtHanGiamTE"  ErrorMessage="*" Operator="GreaterThanEqual" Type="Date">
+
+                                </asp:CompareValidator>
+                            </div>
                             <div class="form-group" style="width: 180px; float: right">
                             <label>Ngày Khởi Hành</label>
                             <asp:TextBox ID="txtNKH1" runat="server" CssClass="form-control margin4px" placeholder="" TextMode="Date" ></asp:TextBox>

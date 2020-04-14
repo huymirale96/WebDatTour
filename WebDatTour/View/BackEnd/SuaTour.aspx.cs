@@ -108,8 +108,10 @@ namespace WebDatTour.View.BackEnd
                 cmd2.Parameters.AddWithValue("@matour", Convert.ToInt32(txtMaTour.Value));
                 cmd2.Parameters.AddWithValue("@gianl", Convert.ToInt32(txtGIaNL.Text));
                 cmd2.Parameters.AddWithValue("@giagiamnl", Convert.ToInt32(txtGiaNLgiam.Text));
-                cmd2.Parameters.AddWithValue("@giate", Convert.ToInt32(txtGiaTE.Text));
+                cmd2.Parameters.AddWithValue("@hangiamnl", txtHanGiamNL.Text);
+                cmd2.Parameters.AddWithValue("@giate", txtGiaTE.Text);
                 cmd2.Parameters.AddWithValue("@giagiamte", Convert.ToInt32(txtGiaTEgiam.Text));
+                cmd2.Parameters.AddWithValue("@hangiamte", txtHanGiamTE.Text);
 
                 int i = cmd2.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("cmd 2 " + txtMaTour.Value + "  " + txtGIaNL.Text + "  " + txtGiaNLgiam.Text + "  " + txtGiaTE.Text + "  " + txtGiaTEgiam.Text);
@@ -179,13 +181,15 @@ namespace WebDatTour.View.BackEnd
                         txtGiaTEgiam.Text = rd["igiategiam"].ToString();
                         txtNoiKhoiHanh.Text = rd["snoikhoihanh"].ToString();
                         ddlNhomtour.SelectedValue = rd["iMaNhomTour"].ToString();
+                        txtHanGiamNL.Text = DateTime.Parse(rd["hanGiamNL"].ToString()).ToString("yyyy-MM-dd");
+                        txtHanGiamTE.Text = DateTime.Parse(rd["hanGiamTE"].ToString()).ToString("yyyy-MM-dd");
 
-                       // anhtour.Value = rd["sUrlAnh"].ToString();
+                        // anhtour.Value = rd["sUrlAnh"].ToString();
                         /*string[] tokens = rd["sUrlAnh"].ToString().Split('/');
                         // Label2.Text = "< button type = 'button' class='btn btn-primary'>Primary</button>";//;;tokens[0] + tokens.Length.ToString();
                         // Label2.Text = tokens[0];
                         //soAnh.Value = tokens.Length.ToString();
-                       
+
                         DataTable dt = new DataTable();
                         dt.Clear();
                         dt.Columns.Add("url");

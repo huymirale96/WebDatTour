@@ -261,7 +261,7 @@ namespace WebDatTour.Model
             }
         }
 
-        public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, int giaTE, int GiaTEgiam)
+        public Boolean themTour(Object.Tour tour, int giaNL, int giaNLgiam, string hanGiamNL,  int giaTE, int GiaTEgiam, string hanGiamTE)
         {
             Debug.WriteLine("them tour: ");
             try
@@ -286,8 +286,10 @@ namespace WebDatTour.Model
                 cmd2.Parameters.AddWithValue("@matour", idMaTour);
                 cmd2.Parameters.AddWithValue("@gianl", giaNL);
                 cmd2.Parameters.AddWithValue("@giagiamnl", giaNLgiam);
+                cmd2.Parameters.AddWithValue("@hanGiamNL", hanGiamNL);
                 cmd2.Parameters.AddWithValue("@giate", giaTE);
                 cmd2.Parameters.AddWithValue("@giagiamte", GiaTEgiam);
+                cmd2.Parameters.AddWithValue("@hanGiamTE", hanGiamTE);
                 int k1 = cmd2.ExecuteNonQuery();
 
                 for (int i = 0; i < tour.DsNgayKhoiHanh.Count(); i++)

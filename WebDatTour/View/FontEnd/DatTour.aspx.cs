@@ -95,7 +95,7 @@ namespace WebDatTour.View.FontEnd
                     int giaNLgiam = Convert.ToInt32(rd["igianlgiam"]);
                     int giaNL_ = 0;
                     int giaTE_ = 0;
-                    if (giaNLgiam == 0)
+                    if (giaNLgiam == 0 || (DateTime.Parse(rd["hangiamnl"].ToString()) < DateTime.Now))
                     {
                         giaNL_ = giaNL;
                     }
@@ -104,7 +104,7 @@ namespace WebDatTour.View.FontEnd
                         giaNL_ = giaNLgiam;
                     }
 
-                    if (giaTEgiam == 0)
+                    if (giaTEgiam == 0 || (DateTime.Parse(rd["hangiamte"].ToString()) < DateTime.Now) )
                     {
                         giaTE_ = giaTE;
                     }

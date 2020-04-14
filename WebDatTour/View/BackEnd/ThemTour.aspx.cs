@@ -25,6 +25,9 @@ namespace WebDatTour.View.BackEnd
 
             if (!IsPostBack)
             {
+                txtHanGiamTE.Text = "2020-04-20";
+                txtHanGiamNL.Text = "2020-04-20";
+                CompareValidator2.ValueToCompare = "2020-04-15";
                 layNhomTour();
                 ddlNhomTour.Text = "Chọn Nhóm Tour";
             }
@@ -154,7 +157,7 @@ namespace WebDatTour.View.BackEnd
             tour.NgayTao = DateTime.Now;
             tour.DsNgayKhoiHanh = ngayKhoihanh;
             tour.DsAnh = dsAnh;
-            if (tourController.themTour(tour, Convert.ToInt32(txtGIaNL.Text), Convert.ToInt32(txtGiaNLgiam.Text), Convert.ToInt32(txtGiaTE.Text), Convert.ToInt32(txtGiaTEgiam.Text)))
+            if (tourController.themTour(tour, Convert.ToInt32(txtGIaNL.Text), Convert.ToInt32(txtGiaNLgiam.Text), txtHanGiamNL.Text, Convert.ToInt32(txtGiaTE.Text), Convert.ToInt32(txtGiaTEgiam.Text), txtHanGiamTE.Text))
                 {
                 // Response.Write("<script language=javascript>alert('OKK');</script>");
                 Debug.WriteLine("Them Tour Thanh Cong");

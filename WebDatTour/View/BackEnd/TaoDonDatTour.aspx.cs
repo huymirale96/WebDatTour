@@ -36,6 +36,35 @@ namespace WebDatTour.View.BackEnd
         {
             TourModel tourModel = new TourModel();
             DataTable data1 = tourModel.xemTour2(id);
+            DataColumn newCol = new DataColumn("bgiamNL", typeof(string));
+            newCol.AllowDBNull = true;
+            data1.Columns.Add(newCol);
+            DataColumn newCol2 = new DataColumn("bgiamTE", typeof(string));
+            newCol.AllowDBNull = true;
+            data1.Columns.Add(newCol2);
+           // foreach (DataRow row in data1.Rows)
+           // {
+                // DataColumn col = new DataColumn();
+                if( DateTime.Parse(data1.Rows[0]["hangiamNL"].ToString()) > DateTime.Now)
+                {
+                    Debug.WriteLine("");
+                data1.Rows[0]["bgiamNL"] = 1;
+                }
+                else
+                {
+                data1.Rows[0]["bgiamNL"] = 0;
+                }
+
+                if (DateTime.Parse(data1.Rows[0]["hangiamTE"].ToString()) > DateTime.Now)
+                {
+                data1.Rows[0]["bgiamTE"] = 1;
+                }
+                else
+                {
+                data1.Rows[0]["bgiamTE"] = 0;
+                }
+          //  }
+
             DataTable data2 = tourModel.dsThoiGianKhoiHanh(Convert.ToInt32(id));
             Data data = new Data(data1, data2);
             return JsonConvert.SerializeObject(data);

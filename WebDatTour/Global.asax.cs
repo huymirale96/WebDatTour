@@ -25,9 +25,9 @@ namespace WebDatTour
             Session["tenTK"] = "";
             Session["maKH"] = "";
             Session["tenKH"] = "";
-            Session["maNV"] = "";
-            Session["tenNV"] = "";
-            Session["quyen"] = "";
+            Session["maNV"] = "28";
+            Session["tenNV"] = "Ngo Dang Huy";
+            Session["quyen"] = "2";
             Session["type"] = "";
             Session["mess"] = "";
             Session["sessId"] = Session.SessionID;
